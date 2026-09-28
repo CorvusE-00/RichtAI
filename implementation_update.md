@@ -290,6 +290,7 @@ Expected implementation files, after approval:
 - [x] L3 Translate the hero, workflow, sections, FAQ, CTA, footer, and contact modal copy.
 - [x] L4 Verify switching to English and restoring Turkish in the local browser preview.
 - [x] L5 Refresh the reveal observer after language changes so reflowed sections remain visible immediately.
+- [x] L6 Keep the language switcher visible in the mobile navbar without opening the menu.
 
 ### Final QA
 
@@ -346,6 +347,7 @@ Notes: Copy decision or remaining approval
 | 2026-09-28 | Codex | B9 | Increased the exact mermaid mask to 104%, strengthened the fill to pure black, and added subtle contrast for clearer small-size visibility. |
 | 2026-09-28 | Codex | L1–L4 | Added persistent Turkish/English support with a navbar switcher, translated all visible landing-page and contact-modal copy, kept Turkish as the default, and verified both languages in a fresh local browser preview. `pnpm typecheck`, `pnpm lint`, and `pnpm build` pass. |
 | 2026-09-28 | Codex | L5 | Re-synchronize the reveal observer whenever the language changes, preventing sections from staying hidden after English text reflows the page. Verified the English statistics strip remains visible in the local browser preview. |
+| 2026-09-28 | Codex | L6 | Moved the mobile `EN/TR` control beside the menu button so language switching is always available at mobile widths. Verified with responsive navbar markup and a clean build. |
 
 ## 10. Definition of done
 
