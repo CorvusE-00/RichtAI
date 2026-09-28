@@ -16,7 +16,8 @@
   body {
     @apply bg-navy-950 text-snow-100 font-body antialiased;
     font-feature-settings: 'cv11', 'ss01';
-    letter-spacing: -0.01em;
+    letter-spacing: -0.012em;
+    line-height: 1.65;
   }
 
   ::selection {
@@ -47,6 +48,80 @@
     @apply opacity-100;
   }
 
+  .card-lift {
+    @apply transition-transform duration-500 ease-out;
+  }
+
+  .card-lift:hover {
+    transform: translateY(-6px);
+  }
+
+  .reveal {
+    --reveal-delay: 0ms;
+    --reveal-distance: 24px;
+  }
+
+  .motion-ready .reveal {
+    opacity: 0;
+    transform: translate3d(0, var(--reveal-distance), 0);
+    transition:
+      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay);
+  }
+
+  .motion-ready .reveal.reveal-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .reveal-visible .process-line-fill {
+    transform: scaleX(1);
+  }
+
+  .hero-noise {
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(20, 184, 166, 0.06) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 80% 70%, rgba(103, 232, 249, 0.045) 0 1px, transparent 1.5px);
+    background-size: 17px 19px, 23px 21px;
+    opacity: 0.4;
+    mix-blend-mode: screen;
+  }
+
+  .input-premium {
+    @apply relative w-full bg-navy-900/60 border border-navy-600 text-snow-100 placeholder:text-snow-500;
+    transition: border-color 300ms ease, box-shadow 300ms ease, background-color 300ms ease;
+  }
+
+  .input-premium:focus {
+    @apply border-teal-400/70 bg-navy-900/80 outline-none;
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1), 0 8px 24px rgba(6, 182, 212, 0.08);
+  }
+
+  .success-check {
+    animation: success-pop 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes success-pop {
+    0% { opacity: 0; transform: scale(0.65); }
+    70% { opacity: 1; transform: scale(1.08); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .faq-answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .faq-answer[data-open='true'] {
+    grid-template-rows: 1fr;
+  }
+
+  .faq-answer > div {
+    overflow: hidden;
+  }
+
   .grid-bg {
     background-image:
       linear-gradient(rgba(30, 45, 74, 0.4) 1px, transparent 1px),
@@ -56,6 +131,118 @@
 
   .radial-glow {
     background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(20, 184, 166, 0.12), transparent 70%);
+  }
+
+  .mermaid-mark {
+    @apply relative block overflow-hidden bg-gradient-to-br from-teal-500 to-cyan-500;
+  }
+
+  .mermaid-mark__silhouette {
+    @apply absolute inset-0 block;
+    background: #000;
+    -webkit-mask-image: url('/images/mermaid-mark.png');
+    mask-image: url('/images/mermaid-mark.png');
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 104% 104%;
+    mask-size: 104% 104%;
+    -webkit-mask-mode: luminance;
+    mask-mode: luminance;
+    filter: contrast(1.2) drop-shadow(0.55px 0 #000) drop-shadow(-0.55px 0 #000);
+  }
+
+  .workflow-shell {
+    @apply relative rounded-2xl border border-navy-600/70 bg-navy-900/55 backdrop-blur-sm;
+    box-shadow: 0 20px 70px rgba(3, 12, 26, 0.28), inset 0 1px 0 rgba(148, 163, 184, 0.05);
+  }
+
+  .workflow-grid {
+    @apply grid items-center gap-2 sm:grid-cols-[1fr_auto_1fr_auto_1fr] sm:gap-3;
+  }
+
+  .workflow-node {
+    @apply relative flex min-w-0 items-center gap-2 rounded-xl border border-navy-600/70 bg-navy-800/70 px-3 py-3 text-left sm:gap-3 sm:px-4;
+    animation: workflow-node-in 700ms cubic-bezier(0.22, 1, 0.36, 1) var(--workflow-delay) both;
+  }
+
+  .workflow-node::after {
+    content: '';
+    @apply pointer-events-none absolute inset-0 rounded-xl border border-teal-400/0;
+    animation: workflow-node-pulse 4.8s ease-in-out var(--workflow-delay) infinite;
+  }
+
+  .workflow-icon {
+    @apply flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-teal-500/10 text-teal-300 sm:h-9 sm:w-9;
+  }
+
+  .workflow-connector {
+    @apply relative flex items-center justify-center text-teal-400/80;
+  }
+
+  .workflow-connector::before,
+  .workflow-connector::after {
+    content: '';
+    @apply absolute rounded-full bg-teal-400/30;
+  }
+
+  .workflow-connector::before {
+    @apply h-px w-full sm:w-8;
+  }
+
+  .workflow-connector::after {
+    @apply h-1 w-1 bg-cyan-300;
+    animation: workflow-signal 2.6s ease-in-out infinite;
+  }
+
+  @media (min-width: 640px) {
+    .workflow-connector {
+      min-height: 1.5rem;
+    }
+
+    .workflow-connector::before {
+      width: 2rem;
+      height: 1px;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .workflow-connector {
+      min-height: 0.75rem;
+    }
+
+    .workflow-connector::before {
+      width: 1px;
+      height: 100%;
+    }
+
+    .workflow-connector::after {
+      animation-name: workflow-signal-mobile;
+    }
+  }
+
+  @keyframes workflow-node-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes workflow-node-pulse {
+    0%, 100% { opacity: 0; box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
+    35% { opacity: 1; box-shadow: 0 0 0 4px rgba(45, 212, 191, 0.04); }
+    55% { opacity: 0; box-shadow: 0 0 0 8px rgba(45, 212, 191, 0); }
+  }
+
+  @keyframes workflow-signal {
+    0%, 15% { opacity: 0; transform: translateX(-10px); }
+    35%, 65% { opacity: 1; transform: translateX(10px); }
+    85%, 100% { opacity: 0; transform: translateX(15px); }
+  }
+
+  @keyframes workflow-signal-mobile {
+    0%, 15% { opacity: 0; transform: translateY(-5px); }
+    35%, 65% { opacity: 1; transform: translateY(5px); }
+    85%, 100% { opacity: 0; transform: translateY(8px); }
   }
 
   .btn-primary {
@@ -102,5 +289,37 @@
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .motion-ready .reveal,
+  .motion-ready .reveal.reveal-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .workflow-node,
+  .workflow-node::after,
+  .workflow-connector::after {
+    animation: none;
+  }
+
+  .workflow-node {
+    opacity: 1;
+    transform: none;
   }
 }

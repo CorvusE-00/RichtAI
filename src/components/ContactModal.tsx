@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Sparkles, X } from 'lucide-react';
+import { Check, Sparkles, X } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
 interface ContactModalProps {
@@ -47,6 +47,10 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     const message = formData.get('message') as string;
 
     try {
+      if (!supabase) {
+        throw new Error('Supabase is not configured for this local preview.');
+      }
+
       const { error } = await supabase.from('leads').insert({
         name,
         email,
@@ -76,7 +80,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
         onClick={onClose}
       />
 
-      <div className="relative w-full max-w-lg rounded-2xl bg-navy-850 border border-navy-600/60 shadow-[0_0_60px_rgba(10,22,40,0.8)] animate-fade-in-up max-h-[90vh] overflow-y-auto scrollbar-hide">
+      <div className="relative w-full max-w-lg rounded-2xl bg-navy-850 border border-navy-600/60 shadow-[0_0_80px_rgba(10,22,40,0.85),0_0_30px_rgba(20,184,166,0.08)] animate-fade-in-up max-h-[90vh] overflow-y-auto scrollbar-hide">
         {/* Glow accent */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-40 bg-teal-500/15 rounded-full blur-3xl pointer-events-none" />
 
@@ -91,18 +95,14 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
           {state === 'success' ? (
             <div className="text-center py-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-teal-500/15 border border-teal-500/30 mb-6">
-                <Sparkles className="w-8 h-8 text-teal-400" />
+              <div className="success-check inline-flex items-center justify-center w-16 h-16 rounded-full bg-teal-500/15 border border-teal-500/30 mb-6">
+                <Check className="w-8 h-8 text-teal-300" strokeWidth={2.5} />
               </div>
               <h3 className="font-display text-2xl font-semibold text-snow-50 mb-3">
                 Teşekkürler!
               </h3>
               <p className="text-snow-400 text-sm leading-relaxed max-w-sm mx-auto">
                 Mesajınız bana ulaştı. En kısa sürede sizinle iletişime geçeceğim.
-                <br />
-                <span className="text-snow-300 mt-2 inline-block">
-                  — Emre Kocaaliler
-                </span>
               </p>
               <button
                 onClick={onClose}
@@ -116,17 +116,16 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               <div className="mb-6">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-medium font-display mb-4">
                   <Sparkles className="w-3.5 h-3.5" />
-                  Ücretsiz Tanışma Konuşması
+                  Ücretsiz tanışma görüşmesi
                 </div>
                 <h2
                   id="contact-modal-title"
                   className="font-display text-2xl sm:text-3xl font-semibold text-snow-50 leading-tight"
                 >
-                  Hadi sakin bir konuşma yapalım
+                  İşletmeniz için doğru başlangıcı birlikte bulalım
                 </h2>
                 <p className="mt-3 text-snow-400 text-sm leading-relaxed">
-                  Bir söz vermeden, bir satış baskısı olmadan. İşletmeniz için
-                  neler yapabileceğimizi birlikte değerlendirelim.
+                  Herhangi bir taahhüt olmadan, işletmeniz için hangi adımın doğru olduğunu birlikte değerlendirelim.
                 </p>
               </div>
 
@@ -144,7 +143,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     name="email"
                     type="email"
                     required
-                    placeholder="ornek@email.com"
+                    placeholder="ornek@eposta.com"
                   />
                 </div>
 
@@ -171,7 +170,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     name="message"
                     rows={3}
                     placeholder="İhtiyacınızdan kısaca bahsedin..."
-                    className="w-full px-4 py-3 rounded-xl bg-navy-900/60 border border-navy-600 text-snow-100 placeholder:text-snow-500 text-sm focus:outline-none focus:border-teal-500/50 focus:ring-1 focus:ring-teal-500/30 transition-all duration-200 resize-none"
+                    className="input-premium px-4 py-3 rounded-xl text-sm resize-none"
                   />
                 </div>
 
@@ -199,6 +198,9 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 <p className="text-center text-snow-500 text-xs">
                   Bilgileriniz gizli tutulur ve yalnızca sizinle iletişim için
                   kullanılır.
+                </p>
+                <p className="text-center text-teal-300/80 text-xs font-display">
+                  Mesajınız doğrudan bana ulaşır.
                 </p>
               </form>
             </>
@@ -232,7 +234,7 @@ function Field({
         name={name}
         required={required}
         placeholder={placeholder}
-        className="w-full px-4 py-3 rounded-xl bg-navy-900/60 border border-navy-600 text-snow-100 placeholder:text-snow-500 text-sm focus:outline-none focus:border-teal-500/50 focus:ring-1 focus:ring-teal-500/30 transition-all duration-200"
+        className="input-premium px-4 py-3 rounded-xl text-sm"
       />
     </div>
   );
