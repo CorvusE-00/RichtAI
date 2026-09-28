@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, Clock3, MessageCircle, Sparkles } from 'lucide-react';
+import { useLanguage } from '@/lib/i18n';
 
-const metrics = [
-  { value: 7, suffix: '/24', label: 'Otomatik yanıt', icon: MessageCircle },
-  { display: '1:1', label: 'Doğrudan destek', icon: Sparkles },
-  { display: 'Akıllı', label: 'Randevu akışı', icon: ArrowUpRight },
-  { display: 'Tek', label: 'İletişim noktası', icon: Clock3 },
+const metricValues = [
+  { value: 7, suffix: '/24', icon: MessageCircle },
+  { display: '1:1', icon: Sparkles },
+  { icon: ArrowUpRight },
+  { icon: Clock3 },
 ];
 
 function Counter({ value, suffix, active }: { value: number; suffix: string; active: boolean }) {
@@ -38,6 +39,11 @@ function Counter({ value, suffix, active }: { value: number; suffix: string; act
 }
 
 export function StatisticsStrip() {
+  const { copy } = useLanguage();
+  const metrics = metricValues.map((metric, index) => ({
+    ...metric,
+    ...copy.stats.metrics[index],
+  }));
   const ref = useRef<HTMLElement>(null);
   const [active, setActive] = useState(false);
 
@@ -66,7 +72,7 @@ export function StatisticsStrip() {
     <section
       ref={ref}
       id="istatistik"
-      aria-label="Richt Ai istatistikleri"
+      aria-label={copy.stats.aria}
       className="relative border-y border-navy-700/60 bg-navy-900/70"
     >
       <div className="absolute inset-0 bg-gradient-to-r from-teal-500/[0.04] via-transparent to-cyan-500/[0.04]" />
@@ -84,7 +90,7 @@ export function StatisticsStrip() {
                 <Icon className="hidden sm:block w-4 h-4 text-teal-400/80 shrink-0" aria-hidden="true" />
                 <div>
                   <div className="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-snow-50">
-                    {'display' in metric ? metric.display : <Counter value={metric.value} suffix={metric.suffix} active={active} />}
+                    {'display' in metric && metric.display ? metric.display : <Counter value={metric.value ?? 0} suffix={metric.suffix ?? ''} active={active} />}
                   </div>
                   <div className="mt-1 text-[11px] sm:text-xs text-snow-500 font-display tracking-wide">
                     {metric.label}

@@ -1,35 +1,10 @@
 import { useState } from 'react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
-
-const questions = [
-  {
-    question: 'Bütçemi aşar mı?',
-    answer:
-      'İhtiyacınıza göre küçük ve net bir başlangıç kapsamı belirliyoruz. Gereksiz özellikler eklemeden, işletmenize en çok fayda sağlayacak adımlardan başlıyoruz.',
-  },
-  {
-    question: 'Tek kişiyle çalışmak yeterli olur mu?',
-    answer:
-      'Evet. Tasarım, geliştirme ve otomasyon tarafını doğrudan ben yürütüyorum. Böylece arada kaybolan mesajlar yerine tek bir iletişim noktası ve daha hızlı kararlar oluyor.',
-  },
-  {
-    question: 'Ne kadar sürede hazır olur?',
-    answer:
-      'İhtiyaca göre değişir; sade bir başlangıç sitesi genellikle birkaç hafta içinde yayına alınabilir. İlk görüşmede kapsamı ve gerçekçi takvimi birlikte netleştiriyoruz.',
-  },
-  {
-    question: 'Mevcut web sitemi değiştirmem gerekir mi?',
-    answer:
-      'Hayır. Mevcut yapınızı koruyup sadece ihtiyaç duyduğunuz bölümü iyileştirebiliriz. Yeni bir site gerekip gerekmediğine birlikte, veriye ve hedefinize göre karar veririz.',
-  },
-  {
-    question: 'Şehir dışındaki işletmelerle de çalışıyor musunuz?',
-    answer:
-      'Kesinlikle. Görüşmeler ve proje süreci çevrim içi yürüyebilir. Farklı şehirlerdeki işletmelerle de aynı doğrudan iletişim modeliyle çalışıyorum.',
-  },
-];
+import { useLanguage } from '@/lib/i18n';
 
 export function FAQ() {
+  const { copy } = useLanguage();
+  const questions = copy.faq.questions;
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
@@ -41,15 +16,15 @@ export function FAQ() {
         <div data-reveal className="reveal text-center max-w-2xl mx-auto mb-10 sm:mb-12">
           <span className="section-label">
             <HelpCircle className="w-4 h-4" aria-hidden="true" />
-            S.S.S.
+            {copy.faq.label}
           </span>
           <h2 className="mt-6 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-snow-50 leading-tight tracking-tight">
-            Aklınızdaki sorulara
+            {copy.faq.headline}
             <br />
-            <span className="text-snow-400">sakin cevaplar</span>
+            <span className="text-snow-400">{copy.faq.headlineAccent}</span>
           </h2>
           <p className="mt-5 text-snow-400 text-base sm:text-lg leading-relaxed">
-            Karar vermeden önce merak etmeniz çok normal. En sık duyduğum soruları açıkça yanıtladım.
+            {copy.faq.description}
           </p>
         </div>
 

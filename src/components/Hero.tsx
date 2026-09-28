@@ -1,11 +1,14 @@
 import { ArrowRight, ShieldCheck, UserRound } from 'lucide-react';
 import { AIWorkflow } from './AIWorkflow';
+import { useLanguage } from '@/lib/i18n';
 
 interface HeroProps {
   onCTAClick: () => void;
 }
 
 export function Hero({ onCTAClick }: HeroProps) {
+  const { copy } = useLanguage();
+
   return (
     <section id="anasayfa" className="relative flex items-center justify-center overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24">
       {/* Background layers */}
@@ -26,15 +29,15 @@ export function Hero({ onCTAClick }: HeroProps) {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500" />
           </span>
           <span className="text-snow-300 text-xs sm:text-sm font-display tracking-wide">
-            İşletmeler için modern web ve yapay zekâ çözümleri
+            {copy.hero.badge}
           </span>
         </div>
 
         {/* Headline */}
         <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-semibold leading-[1.08] tracking-[-0.04em] text-snow-50 animate-fade-in-up animate-delay-100">
-          İşletmenizin dijital iletişimini
+          {copy.hero.headline}
           <br />
-          <span className="text-gradient-teal">daha akıllı hâle getirin.</span>
+          <span className="text-gradient-teal">{copy.hero.headlineAccent}</span>
         </h1>
 
         {/* AI workflow */}
@@ -42,28 +45,28 @@ export function Hero({ onCTAClick }: HeroProps) {
 
         {/* Subheadline */}
         <p className="mt-8 max-w-2xl mx-auto text-base sm:text-lg text-snow-400 leading-relaxed animate-fade-in-up animate-delay-300">
-          Web sitenizi ve müşteri iletişiminizi daha düzenli, hızlı ve anlaşılır hâle getirin.
+          {copy.hero.subheadline}
         </p>
 
         {/* CTA */}
         <div className="mt-10 flex flex-col items-center gap-4 animate-fade-in-up animate-delay-500">
           <button onClick={onCTAClick} className="btn-primary group min-w-[18rem] sm:min-w-[20rem]">
-            <span>Ücretsiz tanışma görüşmesi</span>
+            <span>{copy.hero.cta}</span>
             <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
           </button>
 
-          <span className="text-snow-500 text-xs sm:text-sm">İlk görüşme yaklaşık 30 dakika sürer.</span>
+          <span className="text-snow-500 text-xs sm:text-sm">{copy.hero.duration}</span>
 
           {/* Trust indicator */}
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-snow-500 text-xs sm:text-sm">
             <div className="flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-teal-400" />
-              <span>Herhangi bir taahhüt yok</span>
+              <span>{copy.hero.noCommitment}</span>
             </div>
             <div className="w-1 h-1 rounded-full bg-navy-500" />
             <div className="flex items-center gap-1.5">
               <UserRound className="w-4 h-4 text-teal-400" />
-              <span>Doğrudan Emre Kocaaliler ile</span>
+              <span>{copy.hero.direct}</span>
             </div>
           </div>
         </div>

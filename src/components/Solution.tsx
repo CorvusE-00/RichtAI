@@ -1,30 +1,8 @@
 import { useState } from 'react';
 import { Bot, Check, Globe, ShieldCheck } from 'lucide-react';
+import { useLanguage } from '@/lib/i18n';
 
-const solutions = [
-  {
-    icon: Globe,
-    eyebrow: 'Güven veren web siteleri',
-    title: 'İlk izlenimi güvene dönüştüren bir web sitesi',
-    description:
-      'İşletmenizi doğru anlatan, mobilde rahat kullanılan ve ziyaretçiyi bir sonraki adıma yönlendiren sade bir dijital yüz.',
-    features: [
-      ['Mobil öncelikli tasarım', 'Her ekranda sakin ve net bir deneyim.'],
-      ['Arama motorları için sağlam temel', 'İnsanların sizi bulmasını kolaylaştıran yapı.'],
-    ],
-  },
-  {
-    icon: Bot,
-    eyebrow: 'Akıllı otomasyon sistemleri',
-    title: 'Tekrarlayan iletişimi sizin için düzenleyen otomasyon',
-    description:
-      'Soruları yanıtlayan, randevuya yönlendiren ve ekibinizin üzerindeki tekrar eden işleri azaltan anlaşılır bir sistem.',
-    features: [
-      ['Hızlı ilk yanıt', 'İlk soruyu cevapsız bırakmayan bir asistan.'],
-      ['Randevu ve takip akışı', 'Hatırlatma ve yönlendirmeyi düzenli hâle getirir.'],
-    ],
-  },
-];
+const icons = [Globe, Bot];
 
 function TiltCard({ children, index }: { children: React.ReactNode; index: number }) {
   const [transform, setTransform] = useState('perspective(1100px) rotateX(0deg) rotateY(0deg)');
@@ -53,6 +31,9 @@ function TiltCard({ children, index }: { children: React.ReactNode; index: numbe
 }
 
 export function Solution() {
+  const { copy } = useLanguage();
+  const solutions = copy.solution.cards.map((solution, index) => ({ ...solution, icon: icons[index] }));
+
   return (
     <section id="cozum" className="relative py-20 sm:py-24 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-navy-900 via-navy-950 to-navy-900" />
@@ -60,14 +41,14 @@ export function Solution() {
 
       <div className="relative max-w-6xl mx-auto px-5 sm:px-6">
         <div data-reveal className="reveal text-center max-w-2xl mx-auto mb-12">
-          <span className="section-label">Çözüm</span>
+          <span className="section-label">{copy.solution.label}</span>
           <h2 className="mt-6 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-snow-50 leading-tight tracking-tight">
-            İşletmeniz için güven veren bir web sitesi
+            {copy.solution.headline}
             <br />
-            <span className="text-gradient-teal">ve akıllı otomasyon</span>
+            <span className="text-gradient-teal">{copy.solution.headlineAccent}</span>
           </h2>
           <p className="mt-5 text-snow-400 text-base sm:text-lg leading-relaxed">
-            Önce ihtiyacınızı dinliyor, sonra gerçekten işinize yarayacak iki temel alanı birlikte kuruyoruz: dijital görünürlük ve düzenli iletişim.
+            {copy.solution.description}
           </p>
         </div>
 

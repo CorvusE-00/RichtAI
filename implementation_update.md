@@ -283,6 +283,13 @@ Expected implementation files, after approval:
 - [x] V3 Use one consistent primary CTA across the page.
 - [x] V4 Keep the contact flow short and understandable.
 
+### Language support
+
+- [x] L1 Add a persistent Turkish/English language state with Turkish as the default.
+- [x] L2 Add desktop and mobile language controls to the navbar.
+- [x] L3 Translate the hero, workflow, sections, FAQ, CTA, footer, and contact modal copy.
+- [x] L4 Verify switching to English and restoring Turkish in the local browser preview.
+
 ### Final QA
 
 - [x] Q1 Check 320px mobile layout.
@@ -336,6 +343,7 @@ Notes: Copy decision or remaining approval
 | 2026-09-28 | Codex | B7 reference correction | Replaced the custom mermaid SVG with the exact user-supplied mermaid figure asset in the navbar and footer; no new interpretation added. |
 | 2026-09-28 | Codex | B8 | Kept the exact supplied mermaid figure and rendered it as a bold black luminance mask over the same teal/cyan blue gradient used by the original brain logo. |
 | 2026-09-28 | Codex | B9 | Increased the exact mermaid mask to 104%, strengthened the fill to pure black, and added subtle contrast for clearer small-size visibility. |
+| 2026-09-28 | Codex | L1–L4 | Added persistent Turkish/English support with a navbar switcher, translated all visible landing-page and contact-modal copy, kept Turkish as the default, and verified both languages in a fresh local browser preview. `pnpm typecheck`, `pnpm lint`, and `pnpm build` pass. |
 
 ## 10. Definition of done
 
@@ -343,6 +351,7 @@ Notes: Copy decision or remaining approval
 - The scroll indicator is removed.
 - The hero-to-statistics transition feels intentional at desktop and mobile widths.
 - All visible Turkish copy has been rewritten and proofread as natural Turkish.
+- The landing page supports Turkish and English with a persistent language switcher.
 - Unsupported claims and placeholder proof are clearly handled.
 - The page remains accessible, responsive, and visually consistent.
 - Typecheck, lint, build, and browser QA are complete.

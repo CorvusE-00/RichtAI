@@ -1,20 +1,15 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { MermaidMark } from './MermaidMark';
+import { useLanguage } from '@/lib/i18n';
 
 interface NavbarProps {
   onCTAClick: () => void;
 }
 
-const navLinks = [
-  { label: 'Sorunlar', id: 'sorun' },
-  { label: 'Çözüm', id: 'cozum' },
-  { label: 'Nasıl çalışır?', id: 'nasil-calisir' },
-  { label: 'Güven', id: 'guven' },
-  { label: 'S.S.S.', id: 'sss' },
-];
-
 export function Navbar({ onCTAClick }: NavbarProps) {
+  const { copy, language, toggleLanguage } = useLanguage();
+  const navLinks = copy.nav.links;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('sorun');
@@ -53,7 +48,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
       window.removeEventListener('scroll', handleScroll);
       observer.disconnect();
     };
-  }, []);
+  }, [navLinks]);
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${isScrolled ? 'py-1' : 'py-2'}`}>
@@ -89,10 +84,17 @@ export function Navbar({ onCTAClick }: NavbarProps) {
             </button>
           ))}
           <button
+            onClick={toggleLanguage}
+            className="ml-2 inline-flex min-w-11 items-center justify-center rounded-lg border border-navy-600/70 px-2.5 py-2 text-xs font-semibold tracking-wide text-snow-300 transition-colors hover:border-teal-400/50 hover:text-teal-200"
+            aria-label={copy.nav.switchLanguage}
+          >
+            {language === 'tr' ? 'EN' : 'TR'}
+          </button>
+          <button
             onClick={handleCTA}
             className="ml-3 inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-gradient-to-r from-teal-500 to-cyan-500 text-navy-950 font-display font-semibold text-sm transition-all duration-300 hover:from-teal-400 hover:to-cyan-400 hover:shadow-[0_0_20px_rgba(20,184,166,0.35)] hover:-translate-y-0.5"
           >
-            Ücretsiz tanışma görüşmesi
+            {copy.nav.cta}
           </button>
         </div>
 
@@ -100,7 +102,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
         <button
           onClick={() => setIsMenuOpen((prev) => !prev)}
           className="md:hidden p-2 rounded-lg text-snow-300 hover:text-snow-100 hover:bg-navy-700/60 transition-colors duration-200"
-          aria-label="Menü"
+          aria-label={copy.nav.menu}
         >
           {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -120,10 +122,17 @@ export function Navbar({ onCTAClick }: NavbarProps) {
               </button>
             ))}
             <button
+              onClick={toggleLanguage}
+              className="w-full mt-2 inline-flex items-center justify-center rounded-lg border border-navy-600/70 px-5 py-3 text-sm font-semibold tracking-wide text-snow-300 transition-colors hover:border-teal-400/50 hover:text-teal-200"
+              aria-label={copy.nav.switchLanguage}
+            >
+              {language === 'tr' ? 'English' : 'Türkçe'}
+            </button>
+            <button
               onClick={handleCTA}
               className="w-full mt-2 inline-flex items-center justify-center px-5 py-3 rounded-lg bg-gradient-to-r from-teal-500 to-cyan-500 text-navy-950 font-display font-semibold text-sm"
             >
-              Ücretsiz tanışma görüşmesi
+              {copy.nav.cta}
             </button>
           </div>
       </div>

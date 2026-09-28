@@ -1,50 +1,29 @@
 import { Clock, Globe, MessageSquareOff, TrendingDown } from 'lucide-react';
+import { useLanguage } from '@/lib/i18n';
 
-const problems = [
-  {
-    icon: Clock,
-    title: 'Randevu trafiği ekibinizi yoruyor',
-    description:
-      'Telefonlar, mesajlar ve takvim arasında kaybolmak hem ekibinizi yoruyor hem de gün içinde önemli işlere ayıracağınız zamanı azaltıyor.',
-  },
-  {
-    icon: Globe,
-    title: 'Web siteniz güven vermekte zorlanıyor',
-    description:
-      'Yavaş, güncel olmayan veya mobilde iyi görünmeyen bir site, ziyaretçinin sizi tercih etmeden önce karar değiştirmesine neden olabiliyor.',
-  },
-  {
-    icon: MessageSquareOff,
-    title: 'Sorular mesai dışında cevapsız kalıyor',
-    description:
-      'İlk mesajı zamanında yanıtlayamadığınızda potansiyel müşteriler beklemek yerine başka bir işletmeye yönelebiliyor.',
-  },
-  {
-    icon: TrendingDown,
-    title: 'Dijitalde rakipleriniz öne geçiyor',
-    description:
-      'Daha düzenli iletişim kuran ve daha kolay ulaşılabilen işletmeler, müşterinin aklında daha uzun süre kalıyor.',
-  },
-];
+const icons = [Clock, Globe, MessageSquareOff, TrendingDown];
 
 export function Problem() {
+  const { copy } = useLanguage();
+  const problems = copy.problem.cards.map((problem, index) => ({ ...problem, icon: icons[index] }));
+
   return (
     <section id="sorun" className="relative py-20 sm:py-24 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-navy-950 to-navy-900" />
 
       <div className="relative max-w-6xl mx-auto px-5 sm:px-6">
         <div data-reveal className="reveal text-center max-w-2xl mx-auto mb-12">
-          <span className="section-label">Sorunlar</span>
+          <span className="section-label">{copy.problem.label}</span>
           <h2 className="mt-6 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-snow-50 leading-tight tracking-tight">
-            İşletmenizin dijital tarafı neden
+            {copy.problem.headline}
             <br />
-            <span className="text-snow-400">hâlâ bu kadar yorucu?</span>
+            <span className="text-snow-400">{copy.problem.headlineAccent}</span>
           </h2>
           <p className="mt-5 text-snow-400 text-base sm:text-lg leading-relaxed">
-            Küçük bir klinik veya işletme yönetirken teknoloji işleri kolaylaştırmalı. Peki günlük işlerinizi zorlaştıran noktalar neler?
+            {copy.problem.description}
           </p>
           <p className="mt-6 text-teal-300/90 text-sm sm:text-base font-display">
-            Bu durumlardan biri size de tanıdık geliyor mu?
+            {copy.problem.prompt}
           </p>
         </div>
 

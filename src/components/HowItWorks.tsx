@@ -1,47 +1,26 @@
 import { MessageCircle, Settings, Headset } from 'lucide-react';
+import { useLanguage } from '@/lib/i18n';
 
-const steps = [
-  {
-    icon: MessageCircle,
-    number: '01',
-    title: 'Tanışma görüşmesi',
-    duration: '30 dakika',
-    description:
-      'İşletmenizin ihtiyaçlarını dinlerim. Kısa, samimi ve doğrudan bir görüşmeyle nereden başlayacağımızı birlikte netleştiririz.',
-  },
-  {
-    icon: Settings,
-    number: '02',
-    title: 'Tasarım ve kurulum',
-    duration: '1–2 hafta',
-    description:
-      'Size özel web sitesi ve otomasyon sistemini hazırlarım. Markanıza ve günlük işleyişinize uygun bir çözüm kurarız.',
-  },
-  {
-    icon: Headset,
-    number: '03',
-    title: 'Sürekli destek ve gelişim',
-    duration: 'Süresiz',
-    description:
-      'Sistem yayına girdikten sonra da ulaşabileceğiniz kişi aynı kalır. Sorularınızı yanıtlar, ihtiyaç oldukça birlikte geliştiririz.',
-  },
-];
+const icons = [MessageCircle, Settings, Headset];
 
 export function HowItWorks() {
+  const { copy, language } = useLanguage();
+  const steps = copy.how.steps.map((step, index) => ({ ...step, icon: icons[index], number: `0${index + 1}` }));
+
   return (
     <section id="nasil-calisir" className="relative py-20 sm:py-24 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-navy-900 to-navy-950" />
 
       <div className="relative max-w-5xl mx-auto px-5 sm:px-6">
         <div data-reveal className="reveal text-center max-w-2xl mx-auto mb-12">
-          <span className="section-label">Nasıl çalışır?</span>
+          <span className="section-label">{copy.how.label}</span>
           <h2 className="mt-6 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-snow-50 leading-tight tracking-tight">
-            Üç adımda net
+            {copy.how.headline}
             <br />
-            <span className="text-snow-400">ve sakin bir süreç</span>
+            <span className="text-snow-400">{copy.how.headlineAccent}</span>
           </h2>
           <p className="mt-5 text-snow-400 text-base sm:text-lg leading-relaxed">
-            Karmaşık süreçler veya arada kaybolan iletişim yok. Birlikte çalışmaya başlamak bu kadar net.
+            {copy.how.description}
           </p>
         </div>
 
@@ -76,7 +55,7 @@ export function HowItWorks() {
                     {step.title}
                   </h3>
                   <span className="mb-3 rounded-full border border-teal-500/20 bg-teal-500/10 px-3 py-1 text-xs font-display text-teal-300">
-                    {index === 2 ? 'İhtiyaç oldukça' : step.duration}
+                    {index === 2 ? copy.how.needsBased : language === 'tr' ? step.duration : step.durationAlt}
                   </span>
                   <p className="text-snow-400 text-sm leading-relaxed max-w-xs">
                     {step.description}

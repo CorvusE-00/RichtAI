@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Check, Sparkles, X } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+import { useLanguage } from '@/lib/i18n';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -10,6 +11,7 @@ interface ContactModalProps {
 type SubmitState = 'idle' | 'submitting' | 'success' | 'error';
 
 export function ContactModal({ isOpen, onClose }: ContactModalProps) {
+  const { copy } = useLanguage();
   const [state, setState] = useState<SubmitState>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -64,7 +66,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
       setState('success');
     } catch {
       setState('error');
-      setErrorMessage('Bir sorun oluştu. Lütfen daha sonra tekrar deneyin.');
+      setErrorMessage(copy.contact.error);
     }
   };
 
@@ -88,7 +90,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           <button
             onClick={onClose}
             className="absolute top-4 right-4 p-2 rounded-lg text-snow-400 hover:text-snow-100 hover:bg-navy-700/60 transition-colors duration-200"
-            aria-label="Kapat"
+            aria-label={copy.contact.close}
           >
             <X className="w-5 h-5" />
           </button>
@@ -99,16 +101,16 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 <Check className="w-8 h-8 text-teal-300" strokeWidth={2.5} />
               </div>
               <h3 className="font-display text-2xl font-semibold text-snow-50 mb-3">
-                Teşekkürler!
+                {copy.contact.successTitle}
               </h3>
               <p className="text-snow-400 text-sm leading-relaxed max-w-sm mx-auto">
-                Mesajınız bana ulaştı. En kısa sürede sizinle iletişime geçeceğim.
+                {copy.contact.successDescription}
               </p>
               <button
                 onClick={onClose}
                 className="mt-8 inline-flex items-center justify-center px-6 py-3 rounded-xl bg-navy-700/60 border border-navy-600 text-snow-200 font-display text-sm hover:bg-navy-700 transition-colors duration-200"
               >
-                Kapat
+                {copy.contact.close}
               </button>
             </div>
           ) : (
@@ -116,60 +118,60 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               <div className="mb-6">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-300 text-xs font-medium font-display mb-4">
                   <Sparkles className="w-3.5 h-3.5" />
-                  Ücretsiz tanışma görüşmesi
+                  {copy.contact.badge}
                 </div>
                 <h2
                   id="contact-modal-title"
                   className="font-display text-2xl sm:text-3xl font-semibold text-snow-50 leading-tight"
                 >
-                  İşletmeniz için doğru başlangıcı birlikte bulalım
+                  {copy.contact.title}
                 </h2>
                 <p className="mt-3 text-snow-400 text-sm leading-relaxed">
-                  Herhangi bir taahhüt olmadan, işletmeniz için hangi adımın doğru olduğunu birlikte değerlendirelim.
+                  {copy.contact.description}
                 </p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Field
-                    label="Ad Soyad"
+                    label={copy.contact.name}
                     name="name"
                     type="text"
                     required
-                    placeholder="Adınız Soyadınız"
+                    placeholder={copy.contact.namePlaceholder}
                   />
                   <Field
-                    label="E-posta"
+                    label={copy.contact.email}
                     name="email"
                     type="email"
                     required
-                    placeholder="ornek@eposta.com"
+                    placeholder={copy.contact.emailPlaceholder}
                   />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Field
-                    label="Telefon"
+                    label={copy.contact.phone}
                     name="phone"
                     type="tel"
-                    placeholder="05XX XXX XX XX"
+                    placeholder={copy.contact.phonePlaceholder}
                   />
                   <Field
-                    label="İşletme / Klinik Adı"
+                    label={copy.contact.business}
                     name="businessName"
                     type="text"
-                    placeholder="Opsiyonel"
+                    placeholder={copy.contact.optional}
                   />
                 </div>
 
                 <div>
                   <label className="block text-snow-300 text-sm font-medium mb-2 font-display">
-                    Mesajınız
+                    {copy.contact.message}
                   </label>
                   <textarea
                     name="message"
                     rows={3}
-                    placeholder="İhtiyacınızdan kısaca bahsedin..."
+                    placeholder={copy.contact.messagePlaceholder}
                     className="input-premium px-4 py-3 rounded-xl text-sm resize-none"
                   />
                 </div>
@@ -188,19 +190,18 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   {state === 'submitting' ? (
                     <>
                       <span className="w-5 h-5 border-2 border-navy-950/30 border-t-navy-950 rounded-full animate-spin" />
-                      Gönderiliyor...
+                      {copy.contact.submitting}
                     </>
                   ) : (
-                    'Gönder'
+                    copy.contact.submit
                   )}
                 </button>
 
                 <p className="text-center text-snow-500 text-xs">
-                  Bilgileriniz gizli tutulur ve yalnızca sizinle iletişim için
-                  kullanılır.
+                  {copy.contact.privacy}
                 </p>
                 <p className="text-center text-teal-300/80 text-xs font-display">
-                  Mesajınız doğrudan bana ulaşır.
+                  {copy.contact.direct}
                 </p>
               </form>
             </>

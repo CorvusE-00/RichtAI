@@ -1,16 +1,16 @@
 import { ArrowRight, CalendarCheck, MessageCircle, Sparkles } from 'lucide-react';
+import { useLanguage } from '@/lib/i18n';
 
-const steps = [
-  { label: 'Ziyaretçi', detail: 'İlk mesaj', icon: MessageCircle },
-  { label: 'Akıllı yanıt', detail: 'Anında yönlendirme', icon: Sparkles },
-  { label: 'Randevu', detail: 'Net sonraki adım', icon: CalendarCheck },
-];
+const icons = [MessageCircle, Sparkles, CalendarCheck];
 
 export function AIWorkflow() {
+  const { copy } = useLanguage();
+  const steps = copy.workflow.steps.map((step, index) => ({ ...step, icon: icons[index] }));
+
   return (
     <div
       className="workflow-shell mx-auto mt-9 max-w-3xl p-3 sm:p-4 animate-fade-in-up animate-delay-200"
-      aria-label="Ziyaretçiden randevuya akıllı iletişim akışı"
+      aria-label={copy.workflow.aria}
     >
       <div className="workflow-grid">
         {steps.map((step, index) => {
