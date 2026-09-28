@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export function useRevealObserver() {
+export function useRevealObserver(refreshKey?: string) {
   useEffect(() => {
     const root = document.documentElement;
     root.classList.add('motion-ready');
@@ -46,5 +46,5 @@ export function useRevealObserver() {
       window.removeEventListener('scroll', revealInViewport);
       root.classList.remove('motion-ready');
     };
-  }, []);
+  }, [refreshKey]);
 }

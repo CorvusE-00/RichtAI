@@ -11,11 +11,13 @@ import { ContactModal } from '@/components/ContactModal';
 import { StatisticsStrip } from '@/components/StatisticsStrip';
 import { FAQ } from '@/components/FAQ';
 import { useRevealObserver } from '@/hooks/useRevealObserver';
+import { useLanguage } from '@/lib/i18n';
 
 function App() {
+  const { language } = useLanguage();
   const [isContactOpen, setIsContactOpen] = useState(false);
 
-  useRevealObserver();
+  useRevealObserver(language);
 
   const openContact = useCallback(() => setIsContactOpen(true), []);
   const closeContact = useCallback(() => setIsContactOpen(false), []);
