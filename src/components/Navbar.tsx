@@ -98,14 +98,23 @@ export function Navbar({ onCTAClick }: NavbarProps) {
           </button>
         </div>
 
-        {/* Mobile Toggle */}
-        <button
-          onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="md:hidden p-2 rounded-lg text-snow-300 hover:text-snow-100 hover:bg-navy-700/60 transition-colors duration-200"
-          aria-label={copy.nav.menu}
-        >
-          {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        {/* Mobile Controls */}
+        <div className="md:hidden flex items-center gap-2">
+          <button
+            onClick={toggleLanguage}
+            className="inline-flex min-w-11 items-center justify-center rounded-lg border border-navy-600/70 px-2.5 py-2 text-xs font-semibold tracking-wide text-snow-300 transition-colors hover:border-teal-400/50 hover:text-teal-200"
+            aria-label={copy.nav.switchLanguage}
+          >
+            {language === 'tr' ? 'EN' : 'TR'}
+          </button>
+          <button
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            className="p-2 rounded-lg text-snow-300 hover:text-snow-100 hover:bg-navy-700/60 transition-colors duration-200"
+            aria-label={copy.nav.menu}
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile Menu */}
@@ -121,13 +130,6 @@ export function Navbar({ onCTAClick }: NavbarProps) {
                 {link.label}
               </button>
             ))}
-            <button
-              onClick={toggleLanguage}
-              className="w-full mt-2 inline-flex items-center justify-center rounded-lg border border-navy-600/70 px-5 py-3 text-sm font-semibold tracking-wide text-snow-300 transition-colors hover:border-teal-400/50 hover:text-teal-200"
-              aria-label={copy.nav.switchLanguage}
-            >
-              {language === 'tr' ? 'English' : 'Türkçe'}
-            </button>
             <button
               onClick={handleCTA}
               className="w-full mt-2 inline-flex items-center justify-center px-5 py-3 rounded-lg bg-gradient-to-r from-teal-500 to-cyan-500 text-navy-950 font-display font-semibold text-sm"
