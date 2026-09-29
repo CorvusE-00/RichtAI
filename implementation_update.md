@@ -1,10 +1,144 @@
-# Richt Ai — Design Cleanup & Turkish Copy Plan
+# Richt Ai — Design, Language & Metadata Implementation Plan
 
-Status: **Hero refinement implemented — broader QA pending**  
-Last updated: 2026-09-28  
+Status: **Metadata implementation in progress — canonical domain pending**
+Last updated: 2026-09-29
 Project: `C:\Users\Emre\Desktop\RichtAI`
 
 > This plan replaces the previous implementation plan and is the shared checklist for the active implementation.
+
+## 0. Metadata and social preview update
+
+The next update will replace Bolt’s default preview metadata with Richt Ai’s own website snapshot and a complete, production-ready metadata system. This phase is plan-only until implementation is explicitly approved.
+
+### Current metadata audit
+
+- `index.html` still points `og:image` and `twitter:image` to `https://bolt.new/static/og_default.png`.
+- Open Graph title, description, URL, site name, type, and locale are not fully defined.
+- X/Twitter title and description are not explicitly defined, even though a large-image card is requested.
+- The current page has a Turkish default title and description; the in-app language switch already updates the document language, title, and description, but social metadata needs the same treatment.
+- The favicon still references the Vite starter asset instead of the Richt Ai brand.
+- There is no checked-in canonical URL, `robots.txt`, `sitemap.xml`, web manifest, or structured organization/service data.
+- Production-domain-dependent values must not be guessed. The canonical origin should be confirmed before implementation.
+
+### Metadata goals
+
+1. Replace all Bolt preview references with a Richt Ai-owned social image.
+2. Make the website identify itself consistently across browser tabs, search engines, LinkedIn, Facebook, WhatsApp, Telegram, Discord, and X/Twitter.
+3. Support the existing Turkish/English switch without creating contradictory title, description, or locale values.
+4. Add structured data that describes Richt Ai accurately without inventing reviews, awards, addresses, phone numbers, or social handles.
+5. Add the crawler and installable-site basics expected from a finished production website.
+6. Verify the final preview image, metadata values, image dimensions, loading behavior, and canonical-domain setup before publishing.
+
+### Website snapshot / social image plan
+
+Create a purpose-built `1200 × 630` social preview asset rather than using Bolt’s generic image or a raw full-page screenshot.
+
+- Base the composition on the finished Richt Ai hero: navy background, teal/cyan glow, mermaid brand mark, headline, and restrained AI workflow.
+- Keep the focal content inside the central safe area so LinkedIn, Facebook, WhatsApp, Discord, and X/Twitter crops do not remove the brand or headline.
+- Use a high-contrast, readable headline at thumbnail size; avoid tiny navigation text, long paragraphs, browser chrome, or transient animation frames.
+- Keep the visual truthful: no unsupported metrics, fake client logos, placeholder testimonials, or claims that are not present in the approved site copy.
+- Export a broadly compatible PNG or optimized WebP fallback under a practical file size; use an absolute production URL in the final metadata.
+- Consider a separate English image only if the site will later expose crawlable language-specific URLs. Until then, use the Turkish-default/brand-safe image for the canonical page and update in-browser metadata for the selected language.
+
+### Metadata matrix
+
+#### Base document metadata
+
+- Set the final production `<title>` and concise `<meta name="description">` in Turkish as the canonical default.
+- Keep `html[lang]` synchronized with the selected language and update the client-side title/description when the visitor switches language.
+- Add `meta[name="author"]`, `meta[name="theme-color"]`, and a canonical link using the confirmed production origin.
+- Keep the viewport and font preconnect tags, but remove starter-specific or irrelevant metadata.
+- Do not add keyword stuffing; prioritize a clear title, useful description, and accurate structured data.
+
+#### Open Graph metadata
+
+Add and keep synchronized:
+
+- `og:type=website`
+- `og:site_name=Richt Ai`
+- `og:title`
+- `og:description`
+- `og:url`
+- `og:image`
+- `og:image:secure_url`
+- `og:image:type`
+- `og:image:width=1200`
+- `og:image:height=630`
+- `og:locale=tr_TR`
+- `og:locale:alternate=en_US`
+
+The initial static values must work for crawlers that do not execute JavaScript. Client-side language switching may update the visible page and corresponding metadata for human visitors, but it must not replace the stable Turkish-default metadata used by social crawlers.
+
+#### X/Twitter metadata
+
+Add:
+
+- `twitter:card=summary_large_image`
+- `twitter:title`
+- `twitter:description`
+- `twitter:image`
+- `twitter:image:alt`
+
+Only add `twitter:site` or `twitter:creator` after an actual Richt Ai handle is confirmed. Do not invent one.
+
+#### Structured data
+
+Add JSON-LD for an accurate `Organization` or `ProfessionalService` and `WebSite` entry:
+
+- Brand name: `Richt Ai`.
+- Founder: `Emre Kocaaliler`, only where already approved for public display.
+- Services: modern web design/development and AI automation.
+- Available languages: Turkish and English.
+- Service availability: online / Türkiye and worldwide, matching the approved footer copy.
+- Canonical URL and logo/social URLs only after they are confirmed.
+
+Do not add `AggregateRating`, `Review`, `PostalAddress`, `telephone`, `sameAs`, or social profile URLs until real, approved values exist.
+
+#### Brand and crawler assets
+
+- Replace the Vite favicon with a Richt Ai favicon derived from the approved mermaid/brand mark.
+- Add an Apple touch icon and a minimal `site.webmanifest` with the Richt Ai name, theme color, and icon references.
+- Add `public/robots.txt` pointing crawlers to the confirmed sitemap.
+- Add `public/sitemap.xml` for the canonical landing-page URL; do not create fake language routes for the current single-page app.
+- Ensure all referenced assets resolve correctly from the production root and remain compatible with the selected hosting provider.
+
+### Metadata implementation phases
+
+#### M0 — Domain and content approval
+
+- Confirm the exact production domain, preferred canonical form (`https://domain` vs `https://www.domain`), and redirect direction.
+- Confirm the final Turkish and English title/description wording.
+- Confirm whether the social preview should be Turkish-default, language-neutral, or accompanied by future locale-specific images.
+- Confirm any official social handles and profile URLs before adding them to metadata.
+
+#### M1 — Create and verify the website snapshot
+
+- Capture the finished local website at a stable desktop state with animations settled.
+- Compose the 1200 × 630 social card around the hero and brand mark.
+- Inspect the image at thumbnail size and on dark/light social surfaces.
+- Store the approved asset under `public/images/` and remove all Bolt image references.
+
+#### M2 — Implement base, Open Graph, X/Twitter, and language-aware metadata
+
+- Centralize site metadata constants so title, description, canonical URL, image URL, and locale values cannot drift between tags.
+- Update static HTML metadata for crawler compatibility.
+- Extend the language switch behavior to update only the metadata that should change at runtime.
+- Add image dimensions, alt text, secure URL, canonical URL, and locale alternates.
+
+#### M3 — Add structured data and crawler assets
+
+- Add accurate JSON-LD for the organization/service and website.
+- Add favicon, Apple touch icon, manifest, `robots.txt`, and `sitemap.xml`.
+- Confirm no sensitive data, unpublished contact details, or placeholder social URLs are exposed.
+
+#### M4 — Preview and search QA
+
+- Test the canonical page source with JavaScript disabled or before hydration to confirm the default metadata is complete.
+- Validate the JSON-LD with a structured-data validator.
+- Check the social card with LinkedIn/Facebook sharing preview tools and an X/Twitter-compatible card preview tool where available.
+- Confirm the image loads over HTTPS, is not blocked by robots rules, and has no Bolt URL remaining.
+- Test Turkish and English browser switching, browser-tab title changes, and mobile layout after metadata changes.
+- Re-run `pnpm typecheck`, `pnpm lint`, `pnpm build`, and the local browser smoke test.
 
 ## 1. New direction
 
@@ -213,6 +347,16 @@ Expected implementation files, after approval:
 - `src/components/ContactModal.tsx` — rewrite form labels, status messages, and note.
 - `src/components/Footer.tsx` — rewrite footer copy and navigation labels.
 - `src/index.css` — only if hero spacing or responsive typography requires a style adjustment.
+- `index.html` — replace Bolt preview tags and add complete static default metadata.
+- `src/lib/i18n.tsx` — extend runtime language switching to social metadata where appropriate.
+- `src/lib/siteMetadata.ts` — centralize canonical URL, titles, descriptions, image URLs, locale, and structured-data values.
+- `public/images/og-richtai.png` — approved 1200 × 630 Richt Ai social preview snapshot.
+- `scripts/create-og-card.ps1` — reproducible deterministic generator for the approved social snapshot.
+- `scripts/generate-crawler-files.mjs` — generates absolute `robots.txt` sitemap references and `sitemap.xml` when `VITE_SITE_URL` is configured.
+- `public/favicon.svg` / `public/apple-touch-icon.png` — replace the Vite starter favicon with the approved brand mark.
+- `public/site.webmanifest` — define the installable-site name, theme color, and icons.
+- `public/robots.txt` — permit indexing and point to the production sitemap.
+- `public/sitemap.xml` — describe the canonical landing-page URL.
 - `public/images/emre-kocaaliler-portrait.png` — edited founder portrait for the Güven section.
 - `implementation_update.md` — update this checklist as each phase is implemented and verified.
 
@@ -292,6 +436,29 @@ Expected implementation files, after approval:
 - [x] L5 Refresh the reveal observer after language changes so reflowed sections remain visible immediately.
 - [x] L6 Keep the language switcher visible in the mobile navbar without opening the menu.
 
+### Metadata and social preview
+
+- [ ] M0.1 Confirm the production domain, canonical host, and redirect direction.
+- [x] M0.2 Approve the final Turkish and English title/description wording.
+- [x] M0.3 Use a Turkish-default, brand-safe canonical social image for the current single-page URL.
+- [ ] M0.4 Confirm official social handles and profile URLs, if any.
+- [x] M1.1 Create a stable hero-based website snapshot composition from the approved visual system.
+- [x] M1.2 Create the 1200 × 630 Richt Ai social preview image.
+- [x] M1.3 Replace all Bolt preview references with the approved local asset.
+- [x] M1.4 Check the image at thumbnail size and against the dark brand surface.
+- [x] M2.1 Add static title, description, relative canonical placeholder, theme, and author metadata.
+- [x] M2.2 Add Open Graph title, description, URL, locale, image, dimensions, secure URL, and alt tags.
+- [x] M2.3 Add X/Twitter large-image card metadata and image alt text.
+- [x] M2.4 Keep runtime Turkish/English metadata synchronized and resolve absolute URLs from `VITE_SITE_URL` or the current origin.
+- [x] M3.1 Add accurate Organization, WebSite, and Service JSON-LD without invented proof or social profiles.
+- [x] M3.2 Replace the Vite favicon and add the Apple touch icon using the approved mermaid mark.
+- [x] M3.3 Add the Richt Ai web manifest with theme colors and icon references.
+- [x] M3.4 Add `robots.txt` and an environment-generated `sitemap.xml` for the configured canonical URL.
+- [x] M4.1 Verify metadata before hydration in `index.html` and after runtime language switching in the metadata helper.
+- [ ] M4.2 Validate structured data and social previews with platform validators.
+- [ ] M4.3 Confirm the preview image is HTTPS-accessible and no Bolt URL remains.
+- [x] M4.4 Re-run typecheck, lint, build, and local asset validation; responsive browser QA remains part of final domain QA.
+
 ### Final QA
 
 - [x] Q1 Check 320px mobile layout.
@@ -348,6 +515,8 @@ Notes: Copy decision or remaining approval
 | 2026-09-28 | Codex | L1–L4 | Added persistent Turkish/English support with a navbar switcher, translated all visible landing-page and contact-modal copy, kept Turkish as the default, and verified both languages in a fresh local browser preview. `pnpm typecheck`, `pnpm lint`, and `pnpm build` pass. |
 | 2026-09-28 | Codex | L5 | Re-synchronize the reveal observer whenever the language changes, preventing sections from staying hidden after English text reflows the page. Verified the English statistics strip remains visible in the local browser preview. |
 | 2026-09-28 | Codex | L6 | Moved the mobile `EN/TR` control beside the menu button so language switching is always available at mobile widths. Verified with responsive navbar markup and a clean build. |
+| 2026-09-29 | Codex | M0–M4 plan | Audited the current metadata, documented the Bolt preview-image replacement, planned a 1200 × 630 website snapshot, added complete Open Graph/X metadata, language-aware defaults, structured data, favicon/manifest/crawler assets, domain approval gates, and validation steps. No site code or image assets changed. |
+| 2026-09-29 | Codex | M0.2–M4.4 implementation | Replaced Bolt metadata with Richt Ai Open Graph/X tags, created and inspected `public/images/og-richtai.png` at 1200 × 630, added runtime language-aware metadata, JSON-LD, favicon/Apple icon, manifest, robots handling, and environment-generated sitemap support. Added `VITE_SITE_URL` configuration without guessing the production domain. Verified `pnpm typecheck`, `pnpm lint`, `pnpm build`, and asset dimensions. M0.1, M0.4, M4.2, and M4.3 remain pending until the real domain/social handles are confirmed and external preview validators can reach the deployed asset. |
 
 ## 10. Definition of done
 
@@ -356,6 +525,8 @@ Notes: Copy decision or remaining approval
 - The hero-to-statistics transition feels intentional at desktop and mobile widths.
 - All visible Turkish copy has been rewritten and proofread as natural Turkish.
 - The landing page supports Turkish and English with a persistent language switcher.
+- Bolt’s default social preview has been replaced with an approved Richt Ai website snapshot.
+- Browser, Open Graph, X/Twitter, canonical, structured-data, favicon, manifest, robots, and sitemap metadata are complete and validated.
 - Unsupported claims and placeholder proof are clearly handled.
 - The page remains accessible, responsive, and visually consistent.
 - Typecheck, lint, build, and browser QA are complete.

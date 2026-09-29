@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { applyLanguageMetadata } from './siteMetadata';
 
 export type Language = 'tr' | 'en';
 
@@ -381,9 +382,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const toggleLanguage = () => setLanguageState((current) => (current === 'tr' ? 'en' : 'tr'));
 
   useEffect(() => {
-    document.documentElement.lang = language;
-    document.title = translations[language].seo.title;
-    document.querySelector('meta[name="description"]')?.setAttribute('content', translations[language].seo.description);
+    applyLanguageMetadata({
+      language,
+      title: translations[language].seo.title,
+      description: translations[language].seo.description,
+    });
     window.localStorage.setItem('richtai-language', language);
   }, [language]);
 

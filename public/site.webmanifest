@@ -1,0 +1,23 @@
+{
+  "name": "Richt Ai",
+  "short_name": "Richt Ai",
+  "description": "Modern web ve yapay zekâ çözümleri.",
+  "lang": "tr",
+  "dir": "ltr",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050d1a",
+  "theme_color": "#050d1a",
+  "icons": [
+    {
+      "src": "/images/mermaid-mark.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/mermaid-mark.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
