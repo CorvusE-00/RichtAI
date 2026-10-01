@@ -10,64 +10,59 @@ export function Hero({ onCTAClick }: HeroProps) {
   const { copy } = useLanguage();
 
   return (
-    <section id="anasayfa" className="relative flex items-center justify-center overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24">
-      {/* Background layers */}
-      <div className="absolute inset-0 grid-bg opacity-30 animate-grid-move" />
-      <div className="absolute inset-0 radial-glow" />
-      <div className="absolute inset-0 hero-noise pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-950/50 via-navy-950/80 to-navy-950" />
+    <section id="anasayfa" className="relative overflow-hidden pt-28 pb-12 sm:pt-32 sm:pb-16 lg:pt-36 lg:pb-20">
+      {/* One restrained atmospheric layer; the visual system carries the hero's detail. */}
+      <div className="absolute inset-0 radial-glow opacity-70 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-navy-950/45 via-navy-950/80 to-navy-950 pointer-events-none" />
 
-      {/* Floating glow orbs */}
-      <div className="absolute top-1/4 left-10 w-72 h-72 bg-teal-500/8 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-cyan-500/6 rounded-full blur-3xl animate-float [animation-delay:2s]" />
-
-      <div data-reveal className="reveal relative z-10 max-w-5xl mx-auto px-5 sm:px-6 text-center py-16 sm:py-20">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-navy-800/60 border border-navy-600/60 backdrop-blur-sm animate-fade-in-up mb-8">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500" />
-          </span>
-          <span className="text-snow-300 text-xs sm:text-sm font-display tracking-wide">
-            {copy.hero.badge}
-          </span>
-        </div>
-
-        {/* Headline */}
-        <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-semibold leading-[1.08] tracking-[-0.04em] text-snow-50 animate-fade-in-up animate-delay-100">
-          {copy.hero.headline}
-          <br />
-          <span className="text-gradient-teal">{copy.hero.headlineAccent}</span>
-        </h1>
-
-        {/* AI workflow */}
-        <AIWorkflow />
-
-        {/* Subheadline */}
-        <p className="mt-8 max-w-2xl mx-auto text-base sm:text-lg text-snow-400 leading-relaxed animate-fade-in-up animate-delay-300">
-          {copy.hero.subheadline}
-        </p>
-
-        {/* CTA */}
-        <div className="mt-10 flex flex-col items-center gap-4 animate-fade-in-up animate-delay-500">
-          <button onClick={onCTAClick} className="btn-primary group min-w-[18rem] sm:min-w-[20rem]">
-            <span>{copy.hero.cta}</span>
-            <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
-          </button>
-
-          <span className="text-snow-500 text-xs sm:text-sm">{copy.hero.duration}</span>
-
-          {/* Trust indicator */}
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-snow-500 text-xs sm:text-sm">
-            <div className="flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-teal-400" />
-              <span>{copy.hero.noCommitment}</span>
+      <div data-reveal className="reveal relative z-10 max-w-6xl mx-auto px-5 sm:px-6">
+        <div className="grid items-center gap-10 md:gap-14 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16">
+          <div className="text-center lg:text-left">
+            {/* Quiet category marker */}
+            <div className="hero-eyebrow animate-fade-in-up">
+              <span className="hero-eyebrow__mark" aria-hidden="true" />
+              <span>{copy.hero.badge}</span>
             </div>
-            <div className="w-1 h-1 rounded-full bg-navy-500" />
-            <div className="flex items-center gap-1.5">
-              <UserRound className="w-4 h-4 text-teal-400" />
-              <span>{copy.hero.direct}</span>
+
+            {/* Headline */}
+            <h1 className="hero-heading mt-6 max-w-[44rem] font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-[1.06] tracking-[-0.04em] text-snow-50 animate-fade-in-up animate-delay-100">
+              <span className="block">{copy.hero.headline}</span>
+              <span className="mt-1 block text-gradient-teal">{copy.hero.headlineAccent}</span>
+            </h1>
+
+            {/* Supporting copy */}
+            <p className="mt-6 max-w-xl text-base sm:text-lg text-snow-400 leading-relaxed animate-fade-in-up animate-delay-300">
+              {copy.hero.subheadline}
+            </p>
+
+            {/* Primary action */}
+            <div className="mt-8 flex flex-col items-center gap-4 sm:items-start animate-fade-in-up animate-delay-500">
+              <button onClick={onCTAClick} className="btn-primary group w-full sm:w-auto">
+                <span>{copy.hero.cta}</span>
+                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
             </div>
+
+            {/* Quiet reassurance and trust information */}
+            <div className="hero-meta mt-7 text-center lg:text-left">
+              <span className="text-snow-500 text-xs sm:text-sm">{copy.hero.duration}</span>
+              <div className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-snow-500 text-xs sm:text-sm lg:justify-start">
+                <div className="flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-teal-400/85" />
+                  <span>{copy.hero.noCommitment}</span>
+                </div>
+                <span className="hidden h-1 w-1 rounded-full bg-navy-500 sm:block" aria-hidden="true" />
+                <div className="flex items-center gap-1.5">
+                  <UserRound className="w-4 h-4 text-teal-400/85" />
+                  <span>{copy.hero.direct}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Stable V2 replacement region; AIWorkflow remains unchanged in V1. */}
+          <div className="hero-visual-region" aria-label={copy.workflow.aria}>
+            <AIWorkflow />
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 # Richt Ai — Design, Language & Metadata Implementation Plan
 
-Status: **V0 complete — V1 not started; metadata validation remains pending domain/social confirmation**
+Status: **V1 complete — V2/V3 not started; metadata validation remains pending domain/social confirmation**
 Last updated: 2026-10-01
 Project: `C:\Users\Emre\Desktop\RichtAI`
 
@@ -142,7 +142,7 @@ Do not add `AggregateRating`, `Review`, `PostalAddress`, `telephone`, `sameAs`, 
 
 # Visual Refinement Phase — Removing the Generic AI/SaaS Look
 
-Status: **V0 complete — V1 not started**
+Status: **V1 complete — V2/V3 not started**
 
 This is the next project phase after the completed metadata work. It is a careful visual evolution of the existing Richt Ai landing page, not a full rebuild. Each phase below is intentionally small enough to be implemented and verified independently by another coding agent without broadening into unrelated sections.
 
@@ -377,6 +377,18 @@ Each phase below is a separate implementation task. An agent should claim the ph
 - **Acceptance criteria:** Desktop presents copy and a reserved visual area with clear hierarchy; mobile uses a purposeful stacked layout; no blank tail or layout shift; both languages remain readable; CTA opens the existing modal.
 - **Regression risks:** Asymmetric layout may create overflow, cause translated heading collisions, or push the first CTA below an unreasonable mobile viewport.
 
+#### V1 implementation record
+
+- **Desktop decision:** Replaced the centered hero composition with a max-width two-column grid using a slightly dominant left copy column and a stable right visual region. The visual region is separated by a restrained vertical signal line rather than an outer dashboard/card shell.
+- **Mobile decision:** Uses an intentional single-column order: eyebrow, headline, supporting copy, CTA, reassurance/trust, then the existing workflow. The CTA is full-width on small screens so it remains easy to reach before the visual.
+- **Tablet decision:** Keeps the composition stacked below the `lg` breakpoint so the copy and temporary workflow do not become compressed. The two-column composition begins only when there is enough room for readable hierarchy.
+- **Hero layers removed:** Removed hero-specific `grid-bg`, animated grid movement, `hero-noise`, and both floating glow orbs from `Hero.tsx`.
+- **Hero layer retained:** Kept one subdued `radial-glow` layer and the structural navy gradient. The shared utilities remain available to other sections and were not globally deleted.
+- **Temporary visual boundary:** `AIWorkflow.tsx` was not changed. It remains inside `.hero-visual-region` as the stable V2 replacement area.
+- **Copy/functionality:** Existing Turkish and English copy, CTA behavior, modal/contact architecture, navbar, metadata, mermaid mark, founder section, and all other sections were preserved.
+- **Verification:** `pnpm typecheck`, `pnpm lint`, and `pnpm build` passed. The local browser preview was inspected in Turkish and English at the available narrow/mobile viewport, including text-first hero order, CTA placement, workflow placement, language switching, contact modal opening/closing, and the unchanged downstream sections. No new horizontal overflow was observed.
+- **Deferred to V2/V3:** Operational interface redesign, workflow internals, hero-specific animation refinement, full 320px/tablet screenshot QA, and any hero copy or service changes.
+
 ### V2 — Hero automation visual
 
 - **Scope:** Replace the generic three-node workflow treatment with a believable compact operational interface showing enquiry, qualification, CRM/appointment, and completion states.
@@ -461,7 +473,7 @@ Each phase below is a separate implementation task. An agent should claim the ph
 
 - [x] V0.1 Audit current tokens, effects, icon roles, spacing, and motion.
 - [x] V0.2 Approve the restrained Richt-specific design-system direction.
-- [ ] V1.1 Implement the asymmetric hero structure.
+- [x] V1.1 Implement the asymmetric hero structure.
 - [ ] V2.1 Implement the operational hero automation visual.
 - [ ] V3.1 Complete hero responsive and reduced-motion QA.
 - [ ] V4.1 Reframe the problem section around business situations.
@@ -902,6 +914,7 @@ Notes: Copy decision or remaining approval
 | 2026-09-29 | Codex | M0.2–M4.4 implementation | Replaced Bolt metadata with Richt Ai Open Graph/X tags, created and inspected `public/images/og-richtai.png` at 1200 × 630, added runtime language-aware metadata, JSON-LD, favicon/Apple icon, manifest, robots handling, and environment-generated sitemap support. Added `VITE_SITE_URL` configuration without guessing the production domain. Verified `pnpm typecheck`, `pnpm lint`, `pnpm build`, and asset dimensions. M0.1, M0.4, M4.2, and M4.3 remain pending until the real domain/social handles are confirmed and external preview validators can reach the deployed asset. |
 | 2026-10-01 | Codex | Visual Refinement Phase plan | Audited the current application structure, components, CSS effects, language system, assets, and metadata. Added the next V0–V11 visual refinement roadmap, design principles, generic-pattern reduction rules, proof/founder/chatbot guidance, responsive/accessibility constraints, contradictions, approval gates, and a phase checklist. No production code changed. |
 | 2026-10-01 | Codex | V0.1 / V0.2 | Refined shared CSS primitives only: quieter card glow, reduced lift/noise/grid/radial effects, controlled card radius, border-first surfaces, teal-primary CTA emphasis, and lower workflow depth/pulse intensity. Removed the unused `.text-gradient-snow` utility. Preserved all section structures, copy, metadata, contact architecture, mermaid mark, founder portrait, language switching, and reduced-motion support. Verified typecheck, lint, build, Turkish/English browser smoke, mobile language control, contact modal, and responsive preview. V1+ remains deferred. |
+| 2026-10-01 | Codex | V1.1 | Replaced the centered hero composition with a responsive copy-first structure and stable right-side V2 visual region. Preserved the existing `AIWorkflow` as temporary content, moved the CTA and trust information ahead of the workflow on mobile, removed hero-only grid/noise/floating-orb decoration, and retained one subdued radial layer. Verified typecheck, lint, build, Turkish/English switching, narrow/mobile hero order, CTA/contact modal behavior, downstream section visibility, and no new horizontal overflow. V2/V3 remain deferred. |
 
 ## 10. Definition of done
 

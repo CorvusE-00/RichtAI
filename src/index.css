@@ -85,6 +85,52 @@
     mix-blend-mode: screen;
   }
 
+  .hero-heading {
+    text-wrap: balance;
+  }
+
+  .hero-eyebrow {
+    @apply inline-flex items-center gap-2 border-l border-teal-400/60 pl-3 text-snow-400 text-xs sm:text-sm font-display tracking-wide;
+  }
+
+  .hero-eyebrow__mark {
+    @apply h-1.5 w-1.5 rounded-full bg-teal-400;
+  }
+
+  .hero-meta {
+    @apply border-t border-navy-700/70 pt-4;
+  }
+
+  /* Stable V2 replacement region without adding another decorative card. */
+  .hero-visual-region {
+    @apply relative flex min-h-[20rem] items-center;
+  }
+
+  .hero-visual-region > .workflow-shell {
+    margin-top: 0;
+    width: 100%;
+    max-width: none;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-visual-region {
+      min-height: 24rem;
+      padding-left: 2rem;
+    }
+
+    .hero-visual-region::before {
+      content: '';
+      @apply absolute left-0 top-[12%] bottom-[12%] w-px;
+      background: linear-gradient(to bottom, transparent, rgba(45, 212, 209, 0.32), transparent);
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .hero-visual-region {
+      min-height: 0;
+    }
+  }
+
   .input-premium {
     @apply relative w-full bg-navy-900/60 border border-navy-600 text-snow-100 placeholder:text-snow-500;
     transition: border-color 300ms ease, box-shadow 300ms ease, background-color 300ms ease;
