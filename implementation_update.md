@@ -1,7 +1,7 @@
 # Richt Ai — Design, Language & Metadata Implementation Plan
 
-Status: **Metadata implementation in progress — canonical domain pending**
-Last updated: 2026-09-29
+Status: **V0 complete — V1 not started; metadata validation remains pending domain/social confirmation**
+Last updated: 2026-10-01
 Project: `C:\Users\Emre\Desktop\RichtAI`
 
 > This plan replaces the previous implementation plan and is the shared checklist for the active implementation.
@@ -140,7 +140,390 @@ Do not add `AggregateRating`, `Review`, `PostalAddress`, `telephone`, `sameAs`, 
 - Test Turkish and English browser switching, browser-tab title changes, and mobile layout after metadata changes.
 - Re-run `pnpm typecheck`, `pnpm lint`, `pnpm build`, and the local browser smoke test.
 
-## 1. New direction
+# Visual Refinement Phase — Removing the Generic AI/SaaS Look
+
+Status: **V0 complete — V1 not started**
+
+This is the next project phase after the completed metadata work. It is a careful visual evolution of the existing Richt Ai landing page, not a full rebuild. Each phase below is intentionally small enough to be implemented and verified independently by another coding agent without broadening into unrelated sections.
+
+## 1.1 Design principles
+
+The site should feel like a small, technically capable, founder-led digital systems studio rather than a generic AI automation or SaaS template.
+
+1. **Show the system, not the category.** Use believable workflow states, operational fragments, and clear transitions to demonstrate what Richt Ai builds.
+2. **Give the page a point of view.** Prefer a restrained Richt-specific visual language over familiar AI tropes or a collection of fashionable effects.
+3. **Make clarity the premium signal.** Use hierarchy, spacing, typography, and plain language to communicate competence.
+4. **Keep the founder visible without making the page personality-dependent.** Direct communication and accountability are differentiators, while the service should still feel like a durable system.
+5. **Use evidence before decoration.** Working flows, diagrams, interfaces, and honest process details are stronger than unsupported metrics or invented social proof.
+6. **Vary the rhythm.** Avoid repeating centered label → centered heading → identical cards in every section.
+7. **Refine incrementally.** Preserve the working contact flow, language support, SEO/metadata, responsive behavior, and accessibility while changing one visual area at a time.
+
+## 1.2 Current audit snapshot
+
+The existing implementation is organized and functional, but its visual vocabulary still leans toward common AI/SaaS conventions:
+
+- `src/components/Hero.tsx` combines grid motion, radial glow, floating blurred orbs, a centered hero, and a three-node workflow. The workflow communicates the idea, but its repeated rounded nodes and Lucide icons still read as a marketing card treatment rather than a believable operational interface.
+- `src/components/AIWorkflow.tsx` is the main candidate for a later product-like system visual. It currently uses `MessageCircle`, `Sparkles`, `CalendarCheck`, rounded nodes, animated pulses, and directional connectors.
+- `src/components/Problem.tsx`, `src/components/Solution.tsx`, and `src/components/Trust.tsx` repeat the card-glow/card-lift/card-base pattern. `Solution.tsx` also uses pointer tilt, which should not become the visual identity.
+- `src/index.css` contains several reusable effects that need an audit before reuse: `card-glow`, `grid-bg`, `radial-glow`, `hero-noise`, floating/glow animations, and the workflow pulse system.
+- `src/components/Trust.tsx` still renders testimonial-style entries and a client-name strip. These must not be presented as genuine proof unless approved real evidence exists.
+- `src/lib/i18n.tsx` is the source of all Turkish and English visible copy. Turkish remains the default and both languages must stay complete as the visual structure changes.
+- `src/lib/siteMetadata.ts`, `index.html`, `public/images/og-richtai.png`, crawler assets, and the existing structured data are completed metadata work and must remain stable during visual phases.
+- `src/components/ContactModal.tsx` and `src/lib/supabase.ts` form the working contact path. They are protected surfaces during the visual refinement.
+
+## 1.3 Patterns to reduce
+
+Reduce gradually and intentionally rather than deleting every existing effect at once:
+
+- glowing cards and gradient borders as the default treatment;
+- floating blurred orbs, animated grids, and decorative noise as the main source of atmosphere;
+- identical rounded cards with a number, icon, title, and paragraph repeated across sections;
+- centered heading-plus-card-grid composition in every section;
+- Lucide icons as the primary visual content in marketing sections;
+- cyan/teal accents applied uniformly instead of carrying meaning;
+- hover tilt, lift, pulse, and looping motion that do not explain the service;
+- fake terminal, code, bot, brain, particle, and generic futuristic imagery;
+- placeholder company names, testimonials, logos, or implied client outcomes.
+
+## 1.4 Existing elements to preserve
+
+- Turkish as the primary/default language and the persistent Turkish/English switch;
+- the Richt Ai name, logo treatment, and supplied mermaid brand mark;
+- the founder section and real Emre Kocaaliler portrait;
+- the direct, founder-led contact experience and working Supabase lead submission;
+- the dark navy foundation, provided it is refined into a more controlled palette;
+- responsive behavior at 320px, 375px, tablet, and desktop widths;
+- semantic HTML, keyboard focus states, readable contrast, and `prefers-reduced-motion` behavior;
+- the existing metadata, social preview asset, canonical-domain gates, manifest, robots handling, and structured-data safeguards;
+- the current section anchors and navigation behavior unless a future phase explicitly updates them.
+
+## 1.5 Future hero direction
+
+The hero should become asymmetric on desktop: strong outcome-led copy and CTA on the left, with a custom live automation/system visual on the right. On mobile, it should become a deliberate stacked composition rather than a compressed desktop layout.
+
+The system visual should show a believable business workflow such as:
+
+`Incoming enquiry → qualification → CRM update → appointment → follow-up`
+
+It should feel like a compact operational interface with a few meaningful states, for example a customer message, lead details, qualification status, automation status, calendar appointment, and completed action. It must not become five glowing boxes connected by decorative arrows. The visual should explain the work Richt Ai performs without relying on the phrase “AI automation.”
+
+The animation should be calm and sequential: a signal arrives, one state updates, and the next action becomes available. No infinite spectacle is required.
+
+## 1.6 Future section rhythm
+
+Use varied compositions and information density:
+
+1. Navbar
+2. Hero — asymmetric copy plus operational system visual
+3. Compact capability/proof transition
+4. Problem section — scenario-based/editorial, not four generic icon cards
+5. Capabilities / solutions — visual-system driven and expandable beyond two cards
+6. How it works — clear process with an intentional diagram or timeline
+7. Founder / trust — editorial founder story and honest proof
+8. FAQ — calm, compact answers
+9. Final CTA
+10. Footer
+
+The sequence is a target rhythm, not authorization to rewrite every section in one task. Each phase must keep the page coherent if later phases have not yet shipped.
+
+## 1.7 Icon usage rules
+
+- Keep Lucide icons for buttons, navigation, form controls, status indicators, and small supporting details.
+- Do not use an icon as the only visual explanation of a major service or problem.
+- Prefer custom CSS/SVG diagrams, interface fragments, labeled states, and directional paths when the content describes a system.
+- If a new custom SVG is introduced, keep it simple, accessible where meaningful, and consistent with the mermaid mark rather than imitating a third-party illustration style.
+- Avoid adding an icon dependency or replacing the current icon system without a concrete accessibility and visual rationale.
+
+## 1.8 Imagery rules
+
+Preferred hierarchy:
+
+1. Custom product/system interfaces
+2. Custom Richt-specific diagrams and graphics
+3. Real founder photography
+4. Carefully selected real-world imagery only when it clarifies context
+
+Do not add stock office teams, robot imagery, AI brains, random laptop photos, generic futuristic renders, or decorative images that compete with the workflow visual. Existing `public/images/og-richtai.png` is a metadata asset and should not automatically become an in-page hero image. The existing founder portrait remains the real-person anchor.
+
+## 1.9 Motion rules
+
+- Motion should clarify sequence, state, or hierarchy; it should never be the primary reason a section feels designed.
+- Prefer one-shot entrance/reveal or short state transitions over continuous looping effects.
+- Keep timing calm and avoid simultaneous animations competing for attention.
+- Avoid layout shift: reserve space for workflow states and translated copy before animation begins.
+- Make the static state complete and understandable without motion.
+- Honor `prefers-reduced-motion` by disabling pulses, tilt, parallax, auto-advancing states, and decorative loops while preserving content and hierarchy.
+- Validate touch and keyboard interaction independently from pointer hover effects.
+
+## 1.10 Color-system principles
+
+- Retain dark navy as the structural foundation, but use tonal layers and borders to create hierarchy before reaching for glow.
+- Treat teal/cyan as a functional accent for action, active state, connection, or status—not as a background wash for every component.
+- Establish one primary accent and one supporting signal accent per component or visual system; avoid full-spectrum gradients by default.
+- Use snow/neutral text tones to carry hierarchy, with accent color reserved for meaning.
+- Ensure the mermaid brand mark remains legible and visually distinct from interface status color.
+- Check contrast in both static and animated states, including muted labels, borders, and workflow details.
+
+## 1.11 Proof and trust rules
+
+- Remove placeholder company names, testimonial-style quotes, client strips, and implied outcomes unless they are genuine and explicitly approved.
+- Never replace placeholders with fake logos, fake testimonials, invented metrics, or invented case studies.
+- Until real social proof exists, use honest proof: working demos, system diagrams, real project concepts, implementation process, founder credibility, and observable interactions.
+- If an example is necessary, label it clearly as an example or concept in both languages.
+- Do not add `AggregateRating`, `Review`, `sameAs`, social handles, addresses, phone numbers, or other metadata claims without approved real values.
+- Keep proof close to the relevant service or workflow so it explains how Richt Ai works rather than acting as a decorative trust badge.
+
+## 1.12 Founder-section principles
+
+- Keep the Emre Kocaaliler section and supplied portrait.
+- Make the section more editorial: a concise founder point of view, role, working model, and what remains true after launch.
+- Emphasize direct communication, accountability, and continuity without repeating the full name throughout the page.
+- Connect the founder story to the system-building process: the person who maps the workflow is also responsible for designing and building it.
+- Avoid turning the section into an unsupported personal résumé, inflated authority claim, or testimonial substitute.
+- Keep the founder image real and recognizable; do not apply an artificial AI portrait treatment.
+
+## 1.13 Future chatbot direction
+
+The chatbot is intentionally deferred until the main visual refinement is stable. Future work may use it as interactive proof of the service, not as a generic chat bubble.
+
+Potential first prompt: `What are you trying to improve?`
+
+Potential options:
+
+- Customer support
+- Lead follow-up
+- Appointments
+- Internal workflows
+- I’m not sure
+
+This phase defines only the design-system requirement: leave room for a future conversational entry point, make its states compatible with the workflow language, and do not implement chatbot behavior now.
+
+## 1.14 Responsive principles
+
+- Design desktop and mobile compositions intentionally, with mobile treated as a first-class information hierarchy.
+- At narrow widths, prioritize the outcome, primary CTA, and one understandable workflow path; do not stack every desktop decoration.
+- Ensure custom diagrams have a readable compact state and do not depend on horizontal scrolling.
+- Re-test Turkish and English line lengths because the two languages produce different heading and button widths.
+- Keep the language switcher visible on mobile as it is today.
+- Reserve stable dimensions for images and interactive visual states to prevent layout shift.
+- Verify the page at approximately 320px, 375px, 768px, and desktop widths after every phase that changes layout.
+
+## 1.15 Accessibility constraints
+
+- Preserve semantic headings, landmark structure, accessible button labels, and the current modal/FAQ keyboard behavior.
+- Use `aria-label` or visible labels for custom workflow diagrams where the visual sequence is not otherwise available to assistive technology.
+- Do not encode essential meaning through color, glow, motion, or icon shape alone.
+- Keep visible focus indicators and sufficient touch-target sizes.
+- Maintain readable contrast for muted text, borders, active states, and the dark mermaid mark.
+- Test keyboard navigation, screen-reader-friendly state changes, modal focus/escape behavior, and `prefers-reduced-motion`.
+- Never hide essential content only because an animation has not completed.
+
+## 1.16 Phased implementation roadmap
+
+Each phase below is a separate implementation task. An agent should claim the phase, change only the listed scope, verify the acceptance criteria, and record evidence in the checklist and implementation notes.
+
+### V0 — Design-system audit/refinement
+
+- **Scope:** Inventory existing colors, type scale, spacing, radii, borders, shadows, effects, icon usage, and motion. Define a restrained Richt-specific token direction and decide which existing utilities remain available.
+- **Files likely involved:** `src/index.css`; `tailwind.config.js`; selected component class names; `implementation_update.md`.
+- **Explicitly out of scope:** No section redesign, no copy rewrite, no new dependencies, no hero implementation, no removal of working contact or metadata behavior.
+- **Acceptance criteria:** A documented token/effect decision exists; accent usage has a clear purpose; the current page still renders unchanged in Turkish and English; typecheck, lint, build, and responsive smoke tests pass.
+- **Regression risks:** Broad CSS utility changes can alter every section, reduce contrast, break reduced-motion behavior, or change modal/input styling unexpectedly.
+
+#### V0 implementation record
+
+- **Audit completed:** Reviewed `tailwind.config.js`, `src/index.css`, every active landing-page component, language/i18n behavior, metadata boundaries, workflow styles, modal styles, responsive classes, and motion utilities before editing.
+- **Color roles:** Navy remains structural; teal is the primary action/active/status accent; cyan remains available as a secondary workflow signal instead of pairing with teal everywhere.
+- **Surface hierarchy:** Borders and navy tonal contrast now do more separation work. Generic card glow, radial glow, grid contrast, hero noise, and workflow shadow/pulse intensity were reduced without removing active component dependencies.
+- **Radius hierarchy:** Marketing card primitives use a controlled `1.25rem` radius; pills remain reserved for semantic labels/statuses; modal, input, workflow, and brand-mark shapes were not globally rewritten.
+- **Depth and motion:** Card lift is limited to a subtle 2px movement. State/reveal motion remains. Decorative primitives remain available for existing sections but are documented as future-phase candidates rather than new design defaults. Reduced-motion rules remain intact.
+- **Icon rule:** Lucide remains in place for navigation, controls, forms, status indicators, and current section support. Major section illustration changes remain deferred to V4/V5/V2.
+- **Protected surfaces:** No component structure, marketing copy, navbar behavior, mermaid source/mask/proportions, founder portrait/content, metadata, crawler assets, or Supabase/contact architecture was changed.
+
+#### V0 utility decisions
+
+| Utility | Decision | Rationale |
+| --- | --- | --- |
+| `.text-gradient-teal` | **REFINE** | Keeps branded emphasis while removing the default teal-to-cyan sweep from every highlighted heading. |
+| `.text-gradient-snow` | **REMOVE — unused** | No active component referenced it; removing dead CSS is safe and keeps the primitive set intentional. |
+| `.card-base` | **REFINE** | Uses a controlled radius and navy border hover state so cards do not glow by default. |
+| `.card-glow` | **REFINE / DEPRECATE FOR FUTURE PHASE** | Retained for current Problem/Solution compatibility, but its border treatment is much quieter and new sections should not adopt it automatically. |
+| `.card-lift` | **REFINE / DEPRECATE FOR FUTURE PHASE** | Retained for existing interaction continuity, reduced from 6px to 2px, and should not define future section behavior. |
+| `.section-label` | **REFINE** | Remains a semantic pill, but uses a navy surface/border with teal text rather than a teal-filled badge. |
+| `.btn-primary` | **REFINE** | Teal is now the primary action surface with restrained shadow; cyan is no longer required in every primary CTA. |
+| `.input-premium` | **REFINE** | Keeps focus visibility while reducing the cyan/teal shadow intensity for the protected contact modal. |
+| `.grid-bg` | **REFINE / DEPRECATE FOR FUTURE PHASE** | Retained for the current hero/final CTA, reduced in contrast and enlarged in scale; V1/V9 may remove or replace it. |
+| `.radial-glow` | **REFINE / DEPRECATE FOR FUTURE PHASE** | Retained for the current hero, reduced to a quieter background layer; it should not be the future system visual. |
+| `.hero-noise` | **REFINE / DEPRECATE FOR FUTURE PHASE** | Retained for compatibility, reduced substantially, and not approved as a future decorative default. |
+| `.workflow-shell` / workflow primitives | **REFINE** | Kept intact for V2 evolution; shell depth and pulse intensity were reduced without changing the workflow structure. |
+| `.reveal` and reduced-motion rules | **KEEP** | These explain section hierarchy and preserve accessibility; no behavior was removed. |
+| `fade-in`, `fade-in-up`, `glow-pulse`, `grid-move`, `float`, `blink`, `gradient-shift` | **KEEP FOR COMPATIBILITY / DEPRECATE DECORATIVE USE** | Existing active components still rely on some of these; future phases should avoid adding new looping decorative motion. |
+
+#### V0 verification record
+
+- `pnpm typecheck` — passed.
+- `pnpm lint` — passed.
+- `pnpm build` — passed; crawler generation still correctly warns that `VITE_SITE_URL` is unset for local builds.
+- Local browser smoke test — passed in the in-app browser: Turkish default, English switch, mobile language control visibility, hero/workflow, contact modal, problem/solution/trust/founder content, FAQ accessibility tree, and footer were inspected.
+- Responsive preview — inspected at the available narrow/mobile viewport and desktop viewport; no new horizontal overflow was observed.
+- Reduced-motion CSS — preserved and verified by source audit; no V0 rule removes the existing reduced-motion overrides.
+- Deliberately deferred — all V1–V11 structural redesign work, placeholder-proof removal, copy changes, navbar redesign, hero workflow replacement, metadata/domain work, and chatbot work.
+
+### V1 — Hero structure
+
+- **Scope:** Introduce the future asymmetric hero layout, preserve the current outcome-led copy and CTA, and establish a stable desktop/mobile content hierarchy.
+- **Files likely involved:** `src/components/Hero.tsx`; `src/index.css`; possibly `src/lib/i18n.tsx` only for approved copy adjustments.
+- **Explicitly out of scope:** No new operational workflow visual yet; no chatbot; no metadata changes; no changes to contact submission.
+- **Acceptance criteria:** Desktop presents copy and a reserved visual area with clear hierarchy; mobile uses a purposeful stacked layout; no blank tail or layout shift; both languages remain readable; CTA opens the existing modal.
+- **Regression risks:** Asymmetric layout may create overflow, cause translated heading collisions, or push the first CTA below an unreasonable mobile viewport.
+
+### V2 — Hero automation visual
+
+- **Scope:** Replace the generic three-node workflow treatment with a believable compact operational interface showing enquiry, qualification, CRM/appointment, and completion states.
+- **Files likely involved:** `src/components/AIWorkflow.tsx`; `src/components/Hero.tsx`; `src/index.css`; `src/lib/i18n.tsx` for labels and accessible descriptions.
+- **Explicitly out of scope:** No fake analytics, client data, unsupported outcomes, chatbot behavior, or full dashboard product build.
+- **Acceptance criteria:** The visual explains a real workflow without relying on decorative arrows; its static state is understandable; motion is subtle and reduced-motion-safe; it fits desktop and mobile without clipping; accessible text describes the sequence.
+- **Regression risks:** Overly complex state logic can cause hydration/layout issues, introduce visual noise, or make the hero look like a fake product demo.
+
+### V3 — Hero responsive/motion QA
+
+- **Scope:** Tune hero spacing, typography, workflow scaling, animation timing, pointer/touch behavior, and reduced-motion behavior across target widths and languages.
+- **Files likely involved:** `src/components/Hero.tsx`; `src/components/AIWorkflow.tsx`; `src/index.css`; `src/hooks/useRevealObserver.ts` only if reveal timing needs a targeted fix.
+- **Explicitly out of scope:** No changes to the problem, solution, trust, footer, or metadata systems.
+- **Acceptance criteria:** 320px, 375px, tablet, and desktop screenshots show no clipping, dead zones, or unexpected horizontal scroll; switching TR/EN preserves visibility; reduced-motion renders a complete static hero.
+- **Regression risks:** Breakpoint-specific fixes can diverge between languages or reintroduce hidden-section issues after copy reflow.
+
+### V4 — Problem section
+
+- **Scope:** Reframe the problem area around believable business situations and micro-interface fragments: unanswered enquiries, repetitive questions, fragmented handoffs, and appointment friction.
+- **Files likely involved:** `src/components/Problem.tsx`; `src/lib/i18n.tsx`; `src/index.css`; new local visual subcomponents only if needed.
+- **Explicitly out of scope:** No placeholder testimonials, no capability taxonomy expansion, no changes to the founder or contact sections.
+- **Acceptance criteria:** The section tells a short operational story rather than presenting four interchangeable icon cards; the content works in TR/EN; icons are supporting elements only; keyboard and reveal behavior remain intact.
+- **Regression risks:** Editorial layouts can become too dense on mobile or make the section less scannable if hierarchy is not tested.
+
+### V5 — Capabilities/Solution section
+
+- **Scope:** Evolve the two-card solution area toward a scalable digital-systems structure covering customer-facing AI, operational automation, and digital experience while retaining clear entry points.
+- **Files likely involved:** `src/components/Solution.tsx`; `src/lib/i18n.tsx`; `src/index.css`; potentially small custom visual components.
+- **Explicitly out of scope:** No unsupported service promises, pricing, case studies, integrations, or backend feature implementation.
+- **Acceptance criteria:** Visitors can understand what Richt Ai can build in one scan; each capability is benefit-led and visually distinct; the structure can grow without another repeated card grid; TR/EN and mobile layouts remain coherent.
+- **Regression risks:** Adding categories can dilute the offer, create excessive page length, or repeat the same language across solution and hero sections.
+
+### V6 — Remove placeholder proof and restructure Trust
+
+- **Scope:** Remove unapproved testimonial-style content and placeholder client names/logos; replace the proof area with honest process evidence, a working-demo explanation, system diagrams, or clearly labeled project concepts.
+- **Files likely involved:** `src/components/Trust.tsx`; `src/lib/i18n.tsx`; `src/index.css`; `implementation_update.md`.
+- **Explicitly out of scope:** No invented customer stories, logos, numbers, ratings, social handles, or metadata changes.
+- **Acceptance criteria:** No visitor could reasonably mistake sample names, quotes, or metrics for approved customer proof; the section still communicates why a visitor should trust the process; founder content remains visible and accessible in both languages.
+- **Regression risks:** Removing the existing strip may leave a perceived trust gap or alter page rhythm; any replacement must be evidence-based and not become decorative filler.
+
+### V7 — Founder section refinement
+
+- **Scope:** Strengthen the founder section as an editorial explanation of direct communication, accountability, and continuity; use the existing real portrait with a stable responsive crop.
+- **Files likely involved:** `src/components/Trust.tsx`; `src/lib/i18n.tsx`; `src/index.css`; `public/images/emre-kocaaliler-portrait.png` only if a non-destructive crop/export is required.
+- **Explicitly out of scope:** No new biography claims, résumé, testimonial substitution, or portrait re-generation.
+- **Acceptance criteria:** The founder story is concise, credible, and not repetitive; the image remains recognizable on mobile; the section supports the studio positioning without making unsupported claims; alt text remains accurate.
+- **Regression risks:** Overemphasis on the founder can make the business feel informal or dependent on one person; crop changes can reduce face clarity or load performance.
+
+### V8 — How It Works / FAQ polish
+
+- **Scope:** Refine the process section into a calm, visually clear sequence and tighten FAQ presentation so answers support decision-making without generic filler.
+- **Files likely involved:** `src/components/HowItWorks.tsx`; `src/components/FAQ.tsx`; `src/lib/i18n.tsx`; `src/index.css`.
+- **Explicitly out of scope:** No new service commitments, guarantees, pricing, or chatbot implementation.
+- **Acceptance criteria:** Process steps show what happens and what the visitor can expect; FAQ remains keyboard accessible with correct expanded/collapsed states; Turkish and English answers remain natural and do not cause layout jumps.
+- **Regression risks:** Timeline/diagram changes can break connector alignment, focus states, or section height; longer English/Turkish answers may expose mobile overflow.
+
+### V9 — Global rhythm and responsive QA
+
+- **Scope:** Rebalance vertical spacing, section transitions, typography, visual density, and repeated treatments after V1–V8 are complete.
+- **Files likely involved:** `src/index.css`; `tailwind.config.js`; all changed visual components; `src/hooks/useRevealObserver.ts` if needed for final reveal timing.
+- **Explicitly out of scope:** No new content category, no new animation concept, no metadata or backend changes.
+- **Acceptance criteria:** The page has a deliberate rhythm with no dead zones or repetitive card walls; all breakpoints and both languages are checked; no horizontal scroll or cumulative layout shift appears; reduced-motion and keyboard paths remain complete.
+- **Regression risks:** Global spacing changes can undo carefully tuned hero or modal layouts and can make the long page feel either cramped or unfinished.
+
+### V10 — Chatbot frontend
+
+- **Scope:** Add only the approved chatbot front-end shell and first interaction as interactive proof, using the established workflow language and visual tokens.
+- **Files likely involved:** New `src/components/Chatbot.tsx` or similarly scoped component; `src/App.tsx`; `src/lib/i18n.tsx`; `src/index.css`.
+- **Explicitly out of scope:** No AI provider, backend, lead capture, production conversation logic, or unapproved floating chat behavior.
+- **Acceptance criteria:** The entry point is optional, accessible, responsive, dismissible, and understandable; it does not obscure the CTA or contact flow; TR/EN and reduced-motion states are complete; no claims imply a live AI service before it exists.
+- **Regression risks:** A floating widget can dominate the page, conflict with the contact modal, trap focus, or create mobile viewport problems.
+
+### V11 — Final accessibility/performance/design QA
+
+- **Scope:** Run the complete visual, content, responsive, accessibility, motion, performance, and metadata regression pass after the visual phases are approved.
+- **Files likely involved:** All changed files; `index.html`; `src/lib/siteMetadata.ts`; `implementation_update.md`; test/build configuration only if a real issue is found.
+- **Explicitly out of scope:** No new redesign direction, unapproved copy, new proof, domain guess, or feature expansion during QA.
+- **Acceptance criteria:** Typecheck, lint, build, local browser smoke test, keyboard/focus test, reduced-motion test, TR/EN test, target-width test, image/loading check, metadata regression check, and contact-flow check all pass; checklist evidence is recorded.
+- **Regression risks:** Late “polish” changes can reintroduce generic effects, alter SEO metadata, break language synchronization, or hide issues behind a desktop-only review.
+
+## 1.17 Visual refinement checklist
+
+- [x] V0.1 Audit current tokens, effects, icon roles, spacing, and motion.
+- [x] V0.2 Approve the restrained Richt-specific design-system direction.
+- [ ] V1.1 Implement the asymmetric hero structure.
+- [ ] V2.1 Implement the operational hero automation visual.
+- [ ] V3.1 Complete hero responsive and reduced-motion QA.
+- [ ] V4.1 Reframe the problem section around business situations.
+- [ ] V5.1 Restructure capabilities without creating another generic card grid.
+- [ ] V6.1 Remove unapproved placeholder proof and add honest proof mechanisms.
+- [ ] V7.1 Refine the founder-led editorial section.
+- [ ] V8.1 Polish How It Works and FAQ presentation/accessibility.
+- [ ] V9.1 Complete global rhythm and responsive QA.
+- [ ] V10.1 Add only the approved chatbot frontend shell.
+- [ ] V11.1 Complete final accessibility, performance, design, and metadata QA.
+
+## 1.18 Contradictions and decisions to resolve
+
+The existing plan contains useful implementation history, but the current code and earlier direction conflict with this new phase in several places:
+
+- The earlier plan treats the current glow/grid/card system as a strong visual direction; this phase makes those treatments secondary and asks for a more restrained system language.
+- The earlier plan allows visibly labeled placeholder testimonials and client names; this phase says unapproved proof should be removed rather than displayed as placeholder social proof.
+- The current `Trust.tsx` still renders invented-looking names, locations, testimonial quotes, and client labels. These are not safe to present as genuine proof and are scheduled for V6.
+- The earlier solution structure focuses on websites and automation as two cards; this phase expands the information architecture toward customer-facing AI, operational automation, and digital experience without requiring all three to ship at once.
+- The current `AIWorkflow.tsx` is a useful first implementation, but its three rounded icon nodes are not the final hero direction. V1–V3 should evolve it into an operational interface rather than adding more decorative nodes.
+- The current CSS includes `card-glow`, `grid-bg`, `radial-glow`, floating orbs, and multiple loop animations. They are not necessarily broken, but they should not all remain active by default after V0.
+- The current implementation map references `src/components/Typewriter.tsx`, but that file is no longer present. This is historical context and should not be treated as a required future file.
+- Existing metadata work is intentionally independent. Visual phases must not change canonical URL handling, social preview, structured data, crawler assets, or approved brand assets without a separate metadata reason.
+
+## 1.19 Recommendations requiring human approval before implementation
+
+1. Approve the shift from generic AI/SaaS visual language toward a founder-led digital systems studio.
+2. Approve removal of all current testimonial and client-name placeholders unless real, approved proof is supplied.
+3. Choose whether the hero workflow should display a compact operational interface, a signal-pulse variant, or a living-interface variant before V2 begins.
+4. Approve the capability taxonomy: customer-facing AI, operational automation, and digital experience.
+5. Confirm which service claims are currently deliverable and which must remain conceptual or be removed.
+6. Confirm whether the existing dark navy/teal palette should be refined only or whether a materially different accent system is desired.
+7. Approve any custom SVG/diagram work before it becomes a reusable brand asset.
+8. Confirm that no chatbot backend or live AI promise should be introduced during V10.
+9. Confirm the evidence allowed in the Trust section: working demos, process diagrams, concepts, founder credibility, or real approved case studies.
+10. After final visual copy is approved, run a separate human review of Turkish and English wording before V11 is marked complete.
+
+## 1.20 Phase handoff protocol
+
+For every V-phase implementation:
+
+1. Read this visual refinement section and the earlier implementation history before editing.
+2. Claim one V checklist item in the current chat or implementation notes.
+3. Touch only the files in the claimed phase unless a regression requires a narrowly documented adjacent change.
+4. Preserve Turkish-default behavior, English switching, metadata, contact submission, accessibility, and reduced motion.
+5. Update the checklist only after code and verification are complete.
+6. Record changed files, screenshots or browser evidence, and test commands in the implementation notes.
+7. Mark content, proof, and brand decisions as `Needs approval` instead of guessing.
+
+## 1.21 Definition of done for the visual refinement phase
+
+- The page no longer relies on generic AI/SaaS decoration as its primary identity.
+- The hero explains a believable Richt Ai workflow through a custom operational visual.
+- The page rhythm varies across sections and avoids repeated centered card grids.
+- Placeholder proof is removed or replaced only with honest, approved evidence.
+- The founder section remains real, concise, and clearly connected to the service model.
+- The current mermaid brand mark, metadata, contact flow, language switch, responsive behavior, and accessibility support remain intact.
+- Motion is calm, meaningful, and reduced-motion-safe.
+- Turkish and English layouts are checked at mobile, tablet, and desktop widths.
+- All V0–V11 checklist items are either verified complete or explicitly marked as blocked by an approval decision.
+
+## 2. New direction
 
 The current visual direction is strong, but the next update should make the experience feel tighter, more credible, and more natural in Turkish.
 
@@ -517,6 +900,8 @@ Notes: Copy decision or remaining approval
 | 2026-09-28 | Codex | L6 | Moved the mobile `EN/TR` control beside the menu button so language switching is always available at mobile widths. Verified with responsive navbar markup and a clean build. |
 | 2026-09-29 | Codex | M0–M4 plan | Audited the current metadata, documented the Bolt preview-image replacement, planned a 1200 × 630 website snapshot, added complete Open Graph/X metadata, language-aware defaults, structured data, favicon/manifest/crawler assets, domain approval gates, and validation steps. No site code or image assets changed. |
 | 2026-09-29 | Codex | M0.2–M4.4 implementation | Replaced Bolt metadata with Richt Ai Open Graph/X tags, created and inspected `public/images/og-richtai.png` at 1200 × 630, added runtime language-aware metadata, JSON-LD, favicon/Apple icon, manifest, robots handling, and environment-generated sitemap support. Added `VITE_SITE_URL` configuration without guessing the production domain. Verified `pnpm typecheck`, `pnpm lint`, `pnpm build`, and asset dimensions. M0.1, M0.4, M4.2, and M4.3 remain pending until the real domain/social handles are confirmed and external preview validators can reach the deployed asset. |
+| 2026-10-01 | Codex | Visual Refinement Phase plan | Audited the current application structure, components, CSS effects, language system, assets, and metadata. Added the next V0–V11 visual refinement roadmap, design principles, generic-pattern reduction rules, proof/founder/chatbot guidance, responsive/accessibility constraints, contradictions, approval gates, and a phase checklist. No production code changed. |
+| 2026-10-01 | Codex | V0.1 / V0.2 | Refined shared CSS primitives only: quieter card glow, reduced lift/noise/grid/radial effects, controlled card radius, border-first surfaces, teal-primary CTA emphasis, and lower workflow depth/pulse intensity. Removed the unused `.text-gradient-snow` utility. Preserved all section structures, copy, metadata, contact architecture, mermaid mark, founder portrait, language switching, and reduced-motion support. Verified typecheck, lint, build, Turkish/English browser smoke, mobile language control, contact modal, and responsive preview. V1+ remains deferred. |
 
 ## 10. Definition of done
 

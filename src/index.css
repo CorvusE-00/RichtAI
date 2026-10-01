@@ -26,12 +26,9 @@
 }
 
 @layer components {
+  /* Teal is the primary brand signal; cyan remains available for secondary workflow states. */
   .text-gradient-teal {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-teal-400 via-cyan-400 to-teal-300;
-  }
-
-  .text-gradient-snow {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-snow-50 to-snow-300;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-teal-300 via-teal-400 to-teal-300;
   }
 
   .card-glow {
@@ -40,8 +37,8 @@
 
   .card-glow::before {
     content: '';
-    @apply absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500;
-    background: linear-gradient(135deg, rgba(20, 184, 166, 0.4), rgba(6, 182, 212, 0.2));
+    @apply absolute -inset-px rounded-[1.25rem] opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, rgba(20, 184, 166, 0.14), rgba(6, 182, 212, 0.06));
   }
 
   .card-glow:hover::before {
@@ -49,11 +46,11 @@
   }
 
   .card-lift {
-    @apply transition-transform duration-500 ease-out;
+    @apply transition-transform duration-300 ease-out;
   }
 
   .card-lift:hover {
-    transform: translateY(-6px);
+    transform: translateY(-2px);
   }
 
   .reveal {
@@ -84,7 +81,7 @@
       radial-gradient(circle at 20% 20%, rgba(20, 184, 166, 0.06) 0 1px, transparent 1.5px),
       radial-gradient(circle at 80% 70%, rgba(103, 232, 249, 0.045) 0 1px, transparent 1.5px);
     background-size: 17px 19px, 23px 21px;
-    opacity: 0.4;
+    opacity: 0.18;
     mix-blend-mode: screen;
   }
 
@@ -95,7 +92,7 @@
 
   .input-premium:focus {
     @apply border-teal-400/70 bg-navy-900/80 outline-none;
-    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1), 0 8px 24px rgba(6, 182, 212, 0.08);
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.08), 0 6px 18px rgba(6, 182, 212, 0.05);
   }
 
   .success-check {
@@ -124,13 +121,13 @@
 
   .grid-bg {
     background-image:
-      linear-gradient(rgba(30, 45, 74, 0.4) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(30, 45, 74, 0.4) 1px, transparent 1px);
-    background-size: 40px 40px;
+      linear-gradient(rgba(30, 45, 74, 0.24) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30, 45, 74, 0.24) 1px, transparent 1px);
+    background-size: 48px 48px;
   }
 
   .radial-glow {
-    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(20, 184, 166, 0.12), transparent 70%);
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(20, 184, 166, 0.07), transparent 70%);
   }
 
   .mermaid-mark {
@@ -155,7 +152,7 @@
 
   .workflow-shell {
     @apply relative rounded-2xl border border-navy-600/70 bg-navy-900/55 backdrop-blur-sm;
-    box-shadow: 0 20px 70px rgba(3, 12, 26, 0.28), inset 0 1px 0 rgba(148, 163, 184, 0.05);
+    box-shadow: 0 14px 42px rgba(3, 12, 26, 0.22), inset 0 1px 0 rgba(148, 163, 184, 0.05);
   }
 
   .workflow-grid {
@@ -229,7 +226,7 @@
 
   @keyframes workflow-node-pulse {
     0%, 100% { opacity: 0; box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
-    35% { opacity: 1; box-shadow: 0 0 0 4px rgba(45, 212, 191, 0.04); }
+    35% { opacity: 0.65; box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.025); }
     55% { opacity: 0; box-shadow: 0 0 0 8px rgba(45, 212, 191, 0); }
   }
 
@@ -247,11 +244,11 @@
 
   .btn-primary {
     @apply relative inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl
-           bg-gradient-to-r from-teal-500 to-cyan-500 text-navy-950 font-display font-semibold
+           bg-teal-500 text-navy-950 font-display font-semibold
            text-base tracking-tight
            transition-all duration-300 ease-out
-           hover:from-teal-400 hover:to-cyan-400
-           hover:shadow-[0_0_30px_rgba(20,184,166,0.4)]
+           hover:bg-teal-400
+           hover:shadow-[0_10px_30px_rgba(20,184,166,0.22)]
            hover:-translate-y-0.5
            active:translate-y-0
            focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950;
@@ -259,14 +256,14 @@
 
   .section-label {
     @apply inline-flex items-center gap-2 px-4 py-1.5 rounded-full
-           bg-teal-500/10 border border-teal-500/20
+           bg-navy-800/80 border border-navy-600/70
            text-teal-300 text-sm font-medium font-display tracking-wide;
   }
 
   .card-base {
-    @apply rounded-2xl bg-navy-800/60 border border-navy-600/60 backdrop-blur-sm
+    @apply rounded-[1.25rem] bg-navy-800/60 border border-navy-600/70 backdrop-blur-sm
            transition-all duration-500 ease-out
-           hover:border-teal-500/30 hover:bg-navy-800/80;
+           hover:border-navy-500/80 hover:bg-navy-800/75;
   }
 }
 
