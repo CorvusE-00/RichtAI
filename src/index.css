@@ -445,6 +445,133 @@
     @apply bg-teal-400/80;
   }
 
+  .capability-sequence {
+    @apply border-t border-navy-700/60;
+  }
+
+  .capability-band {
+    @apply grid gap-8 border-b border-navy-700/60 py-9 sm:py-11;
+  }
+
+  .capability-band__copy {
+    @apply max-w-xl;
+  }
+
+  .capability-band__eyebrow {
+    @apply flex items-center gap-3 text-xs font-display uppercase tracking-[0.14em] text-snow-500;
+  }
+
+  .capability-band__index {
+    @apply text-teal-300;
+  }
+
+  .capability-band__title {
+    @apply mt-4 font-display text-xl sm:text-2xl font-medium leading-snug text-snow-100;
+  }
+
+  .capability-band__description {
+    @apply mt-3 max-w-lg text-sm sm:text-base leading-relaxed text-snow-400;
+  }
+
+  .capability-visual {
+    @apply min-w-0 rounded-2xl border border-navy-600/65 bg-navy-900/65 px-4 py-4 sm:px-5 sm:py-5;
+    box-shadow: 0 12px 28px rgba(3, 12, 26, 0.12), inset 0 1px 0 rgba(148, 163, 184, 0.035);
+  }
+
+  .capability-fragment__header {
+    @apply flex items-center justify-between gap-3 border-b border-navy-700/60 pb-3 text-xs font-display tracking-wide text-snow-400;
+  }
+
+  .capability-fragment__signal {
+    @apply h-1.5 w-1.5 rounded-full bg-teal-400;
+    box-shadow: 0 0 0 2px rgba(45, 212, 191, 0.07);
+  }
+
+  .capability-fragment__meta {
+    @apply mt-4 border-t border-navy-700/55 pt-3 text-xs text-snow-500;
+  }
+
+  .capability-interaction__steps {
+    @apply relative mt-4 space-y-3;
+  }
+
+  .capability-interaction__steps::before {
+    content: '';
+    @apply absolute left-[0.625rem] top-3 bottom-3 w-px bg-navy-600;
+  }
+
+  .capability-interaction__step {
+    @apply relative z-10 flex items-center gap-3 text-sm text-snow-200;
+  }
+
+  .capability-interaction__marker {
+    @apply flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-teal-400/45 bg-navy-900 text-[10px] font-display text-teal-300;
+  }
+
+  .capability-automation__steps {
+    @apply mt-4 space-y-2;
+  }
+
+  .capability-automation__step {
+    @apply flex items-center gap-2.5 border-l border-navy-600 pl-3 text-sm text-snow-200;
+  }
+
+  .capability-automation__marker {
+    @apply h-1.5 w-1.5 shrink-0 rounded-full bg-teal-400;
+  }
+
+  .capability-automation__arrow {
+    @apply ml-auto text-teal-300/70;
+  }
+
+  .capability-experience {
+    @apply relative mt-4 flex gap-3;
+  }
+
+  .capability-experience__rail {
+    @apply flex w-1 shrink-0 flex-col items-center gap-2 py-1;
+  }
+
+  .capability-experience__rail span {
+    @apply h-1.5 w-1.5 rounded-full bg-navy-500;
+  }
+
+  .capability-experience__rail span:last-child {
+    @apply bg-teal-400;
+  }
+
+  .capability-experience__items {
+    @apply min-w-0 flex-1 space-y-2;
+  }
+
+  .capability-experience__item {
+    @apply flex items-center justify-between gap-3 border-b border-navy-700/55 pb-2 text-sm text-snow-400 last:border-b-0 last:pb-0;
+  }
+
+  .capability-experience__item.is-active {
+    @apply text-snow-100;
+  }
+
+  .capability-experience__item.is-active span:last-child {
+    @apply text-teal-300;
+  }
+
+  @media (min-width: 768px) {
+    .capability-band {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      align-items: center;
+      column-gap: 4rem;
+    }
+
+    .capability-band:nth-child(even) .capability-band__copy {
+      order: 2;
+    }
+
+    .capability-band:nth-child(even) .capability-visual {
+      order: 1;
+    }
+  }
+
   .btn-primary {
     @apply relative inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl
            bg-teal-500 text-navy-950 font-display font-semibold

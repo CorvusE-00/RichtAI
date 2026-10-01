@@ -1,6 +1,6 @@
 # Richt Ai — Design, Language & Metadata Implementation Plan
 
-Status: **V4 complete — V5 not started; metadata validation remains pending domain/social confirmation**
+Status: **V5 complete — V6 not started; metadata validation remains pending domain/social confirmation**
 Last updated: 2026-10-01
 Project: `C:\Users\Emre\Desktop\RichtAI`
 
@@ -451,6 +451,17 @@ Each phase below is a separate implementation task. An agent should claim the ph
 - **Acceptance criteria:** Visitors can understand what Richt Ai can build in one scan; each capability is benefit-led and visually distinct; the structure can grow without another repeated card grid; TR/EN and mobile layouts remain coherent.
 - **Regression risks:** Adding categories can dilute the offer, create excessive page length, or repeat the same language across solution and hero sections.
 
+#### V5 implementation record
+
+- **Composition chosen:** Replaced the centered two-card section with a left-aligned capability introduction followed by a vertically structured three-band sequence. Desktop bands alternate copy/visual rhythm; mobile normalizes them into a clear copy-first stack.
+- **Final capability taxonomy:** Customer-facing AI / Müşteri iletişimi, Operational automation / Operasyon, and Digital experience / Dijital deneyim. No additional service pillar was introduced.
+- **Copy/i18n changes:** Replaced `solution.cards` with aligned Turkish/English `solution.capabilities`, using calm outcome-led titles, short explanations, illustrative visual labels, and no guarantees, metrics, fake integrations, or inflated technical claims.
+- **Custom visual fragments:** Added a compact intent-understanding path for customer-facing AI, a thin status path for operational automation, and a small visitor-journey fragment for digital experience. Each fragment is text-led and semantically summarized by its surrounding copy.
+- **Old patterns removed:** Deleted the `TiltCard` component, pointer-based tilt state, `Globe`/`Bot`/`ShieldCheck`/`Check` Solution imports, old two-card layout, large service icon blocks, checklist rows, card glow/lift usage, and the section's decorative blur.
+- **Responsive behavior:** The three bands stack naturally below `768px`; alternating order is applied only from `768px` upward. Visual fragments remain readable without desktop-scale four-column diagrams or horizontal scrolling.
+- **Verification:** `pnpm typecheck`, `pnpm lint`, and `pnpm build` passed. The local browser preview was inspected in Turkish and English desktop states; all three capability groups, their distinct visuals, and the transition into How It Works were present. The available desktop viewport reported no horizontal overflow, and the Hero and Problem sections remained unchanged.
+- **Deferred to V9:** Exact 320px/375px screenshot capture and the final whole-site rhythm/performance matrix remain broader QA work. V6 and all later sections remain untouched.
+
 ### V6 — Remove placeholder proof and restructure Trust
 
 - **Scope:** Remove unapproved testimonial-style content and placeholder client names/logos; replace the proof area with honest process evidence, a working-demo explanation, system diagrams, or clearly labeled project concepts.
@@ -507,7 +518,7 @@ Each phase below is a separate implementation task. An agent should claim the ph
 - [x] V2.1 Implement the operational hero automation visual.
 - [x] V3.1 Complete hero responsive and reduced-motion QA.
 - [x] V4.1 Reframe the problem section around business situations.
-- [ ] V5.1 Restructure capabilities without creating another generic card grid.
+- [x] V5.1 Restructure capabilities without creating another generic card grid.
 - [ ] V6.1 Remove unapproved placeholder proof and add honest proof mechanisms.
 - [ ] V7.1 Refine the founder-led editorial section.
 - [ ] V8.1 Polish How It Works and FAQ presentation/accessibility.
@@ -948,6 +959,7 @@ Notes: Copy decision or remaining approval
 | 2026-10-01 | Codex | V2.1 | Replaced the generic three-node workflow with one bilingual operational scene covering a new enquiry, structured interpretation, system actions, and completed appointment. Added calm stage emphasis with a fully resolved reduced-motion-safe state, preserved the V1 hero shell contract, and verified typecheck, lint, build, Turkish/English accessibility trees, and the local narrow/mobile preview. V3 responsive/motion matrix remains pending. |
 | 2026-10-01 | Codex | V3.1 | Tuned hero balance and moved the two-column layout to `xl`, removed tablet visual dead space, softened workflow borders/top bar/separators, compacted hero reassurance spacing, and changed the workflow to a calm five-stage ~14-second cycle with a completed-state pause. Verified typecheck, lint, build, Turkish/English browser states, CTA/contact modal behavior, hero-to-statistics transition, no horizontal overflow in the available narrow viewport, and reduced-motion behavior by source audit. V4 remains untouched; exact target-width screenshot capture is deferred to broader QA. |
 | 2026-10-01 | Codex | V4.1 | Replaced the generic four-card Problem section with an asymmetrical editorial friction board. Added four bilingual operational scenarios, removed the four primary Lucide problem icons, preserved all original problem themes without metrics or proof claims, and verified typecheck, lint, build, Turkish/English browser states, section transitions, and desktop overflow. V5 remains untouched; exact narrow-width screenshot capture is deferred to broader QA. |
+| 2026-10-01 | Codex | V5.1 | Replaced the generic two-card Solution section with three alternating capability bands for customer-facing AI, operational automation, and digital experience. Added distinct text-led interaction, workflow, and visitor-journey fragments; removed tilt state, primary service icons, checklist rows, card treatment, and decorative blur. Verified typecheck, lint, build, Turkish/English browser states, capability-to-How-It-Works transition, and desktop overflow. V6 remains untouched; exact narrow-width screenshot capture is deferred to broader QA. |
 
 ## 10. Definition of done
 
