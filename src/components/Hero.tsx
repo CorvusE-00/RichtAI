@@ -16,8 +16,8 @@ export function Hero({ onCTAClick }: HeroProps) {
       <div className="absolute inset-0 bg-gradient-to-b from-navy-950/45 via-navy-950/80 to-navy-950 pointer-events-none" />
 
       <div data-reveal className="reveal relative z-10 max-w-6xl mx-auto px-5 sm:px-6">
-        <div className="grid items-center gap-10 md:gap-14 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16">
-          <div className="text-center lg:text-left">
+        <div className="grid items-center gap-10 md:gap-14 xl:grid-cols-[1.02fr_0.98fr] xl:gap-16">
+          <div className="text-center xl:text-left">
             {/* Quiet category marker */}
             <div className="hero-eyebrow animate-fade-in-up">
               <span className="hero-eyebrow__mark" aria-hidden="true" />
@@ -25,7 +25,7 @@ export function Hero({ onCTAClick }: HeroProps) {
             </div>
 
             {/* Headline */}
-            <h1 className="hero-heading mt-6 max-w-[44rem] font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-[1.06] tracking-[-0.04em] text-snow-50 animate-fade-in-up animate-delay-100">
+            <h1 className="hero-heading mt-6 max-w-[40rem] font-display text-4xl sm:text-5xl xl:text-6xl 2xl:text-7xl font-semibold leading-[1.04] tracking-[-0.04em] text-snow-50 animate-fade-in-up animate-delay-100">
               <span className="block">{copy.hero.headline}</span>
               <span className="mt-1 block text-gradient-teal">{copy.hero.headlineAccent}</span>
             </h1>
@@ -36,7 +36,7 @@ export function Hero({ onCTAClick }: HeroProps) {
             </p>
 
             {/* Primary action */}
-            <div className="mt-8 flex flex-col items-center gap-4 sm:items-start animate-fade-in-up animate-delay-500">
+            <div className="mt-8 flex flex-col items-center gap-4 xl:items-start animate-fade-in-up animate-delay-500">
               <button onClick={onCTAClick} className="btn-primary group w-full sm:w-auto">
                 <span>{copy.hero.cta}</span>
                 <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -44,9 +44,9 @@ export function Hero({ onCTAClick }: HeroProps) {
             </div>
 
             {/* Quiet reassurance and trust information */}
-            <div className="hero-meta mt-7 text-center lg:text-left">
+            <div className="hero-meta mt-6 text-center xl:text-left">
               <span className="text-snow-500 text-xs sm:text-sm">{copy.hero.duration}</span>
-              <div className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-snow-500 text-xs sm:text-sm lg:justify-start">
+              <div className="mt-2.5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-snow-500 text-xs sm:text-sm xl:justify-start">
                 <div className="flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-teal-400/85" />
                   <span>{copy.hero.noCommitment}</span>
@@ -60,7 +60,7 @@ export function Hero({ onCTAClick }: HeroProps) {
             </div>
           </div>
 
-          {/* Stable V2 replacement region; AIWorkflow remains unchanged in V1. */}
+          {/* Stable operational visual region; the workflow remains a single embedded scene. */}
           <div className="hero-visual-region" aria-label={copy.workflow.aria}>
             <AIWorkflow />
           </div>

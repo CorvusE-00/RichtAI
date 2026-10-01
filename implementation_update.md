@@ -1,6 +1,6 @@
 # Richt Ai — Design, Language & Metadata Implementation Plan
 
-Status: **V2 complete — V3 not started; metadata validation remains pending domain/social confirmation**
+Status: **V3 complete — V4 not started; metadata validation remains pending domain/social confirmation**
 Last updated: 2026-10-01
 Project: `C:\Users\Emre\Desktop\RichtAI`
 
@@ -415,6 +415,16 @@ Each phase below is a separate implementation task. An agent should claim the ph
 - **Acceptance criteria:** 320px, 375px, tablet, and desktop screenshots show no clipping, dead zones, or unexpected horizontal scroll; switching TR/EN preserves visibility; reduced-motion renders a complete static hero.
 - **Regression risks:** Breakpoint-specific fixes can diverge between languages or reintroduce hidden-section issues after copy reflow.
 
+#### V3 implementation record
+
+- **Desktop balance:** Moved the two-column composition to the `xl` breakpoint, changed the desktop ratio to a more even `1.02fr / 0.98fr`, reduced the heading maximum width to `40rem`, and kept the strongest `7xl` scale for `2xl` screens so the operational scene remains a peer to the message.
+- **Tablet/mobile structure:** Below `1280px`, the hero stays stacked and centered, keeping the CTA and reassurance ahead of the workflow. The visual region no longer reserves a minimum height, so the transition into `StatisticsStrip` follows the actual hero content instead of a dead vertical spacer.
+- **Panel refinement:** Lowered the outer border/shadow contrast, softened the top-bar separator and status treatment, reduced the message surface intensity, and removed one internal divider. The message and completed appointment remain the strongest interior moments while the scene reads as an embedded system fragment.
+- **Motion timing:** Reworked the cycle into five stages at `2800ms` each (approximately 14 seconds): enquiry, interpretation, first system action, second system action, and a completed-state pause. The reset is gradual through opacity/state transitions rather than an abrupt empty-panel flash.
+- **Reduced motion:** `AIWorkflow` skips its interval when `prefers-reduced-motion: reduce` is active and starts at stage 4, where all actions are resolved and the appointment is fully emphasized. The global reduced-motion CSS also removes transition/animation dependency and restores dimmed action rows to full opacity.
+- **Verification:** `pnpm typecheck`, `pnpm lint`, and `pnpm build` passed. The local browser preview was inspected in the available narrow/mobile viewport in Turkish and English; the workflow progression, language switch, CTA/contact modal, full semantic workflow summary, hero-to-statistics transition, and no-horizontal-overflow metric were verified. The responsive breakpoint audit confirms stacked behavior through `1024px` and the two-column treatment from `1280px` upward.
+- **Deferred to V9:** Exact screenshot capture at every requested target width and final whole-site rhythm/performance review remain broader QA work; no unrelated section was changed and V4 remains untouched.
+
 ### V4 — Problem section
 
 - **Scope:** Reframe the problem area around believable business situations and micro-interface fragments: unanswered enquiries, repetitive questions, fragmented handoffs, and appointment friction.
@@ -485,7 +495,7 @@ Each phase below is a separate implementation task. An agent should claim the ph
 - [x] V0.2 Approve the restrained Richt-specific design-system direction.
 - [x] V1.1 Implement the asymmetric hero structure.
 - [x] V2.1 Implement the operational hero automation visual.
-- [ ] V3.1 Complete hero responsive and reduced-motion QA.
+- [x] V3.1 Complete hero responsive and reduced-motion QA.
 - [ ] V4.1 Reframe the problem section around business situations.
 - [ ] V5.1 Restructure capabilities without creating another generic card grid.
 - [ ] V6.1 Remove unapproved placeholder proof and add honest proof mechanisms.
@@ -926,6 +936,7 @@ Notes: Copy decision or remaining approval
 | 2026-10-01 | Codex | V0.1 / V0.2 | Refined shared CSS primitives only: quieter card glow, reduced lift/noise/grid/radial effects, controlled card radius, border-first surfaces, teal-primary CTA emphasis, and lower workflow depth/pulse intensity. Removed the unused `.text-gradient-snow` utility. Preserved all section structures, copy, metadata, contact architecture, mermaid mark, founder portrait, language switching, and reduced-motion support. Verified typecheck, lint, build, Turkish/English browser smoke, mobile language control, contact modal, and responsive preview. V1+ remains deferred. |
 | 2026-10-01 | Codex | V1.1 | Replaced the centered hero composition with a responsive copy-first structure and stable right-side V2 visual region. Preserved the existing `AIWorkflow` as temporary content, moved the CTA and trust information ahead of the workflow on mobile, removed hero-only grid/noise/floating-orb decoration, and retained one subdued radial layer. Verified typecheck, lint, build, Turkish/English switching, narrow/mobile hero order, CTA/contact modal behavior, downstream section visibility, and no new horizontal overflow. V2/V3 remain deferred. |
 | 2026-10-01 | Codex | V2.1 | Replaced the generic three-node workflow with one bilingual operational scene covering a new enquiry, structured interpretation, system actions, and completed appointment. Added calm stage emphasis with a fully resolved reduced-motion-safe state, preserved the V1 hero shell contract, and verified typecheck, lint, build, Turkish/English accessibility trees, and the local narrow/mobile preview. V3 responsive/motion matrix remains pending. |
+| 2026-10-01 | Codex | V3.1 | Tuned hero balance and moved the two-column layout to `xl`, removed tablet visual dead space, softened workflow borders/top bar/separators, compacted hero reassurance spacing, and changed the workflow to a calm five-stage ~14-second cycle with a completed-state pause. Verified typecheck, lint, build, Turkish/English browser states, CTA/contact modal behavior, hero-to-statistics transition, no horizontal overflow in the available narrow viewport, and reduced-motion behavior by source audit. V4 remains untouched; exact target-width screenshot capture is deferred to broader QA. |
 
 ## 10. Definition of done
 

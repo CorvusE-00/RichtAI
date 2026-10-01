@@ -98,12 +98,12 @@
   }
 
   .hero-meta {
-    @apply border-t border-navy-700/70 pt-4;
+    @apply border-t border-navy-700/50 pt-3;
   }
 
-  /* Stable V2 replacement region without adding another decorative card. */
+  /* Stable operational region without adding another decorative card. */
   .hero-visual-region {
-    @apply relative flex min-h-[20rem] items-center;
+    @apply relative flex min-h-0 items-center;
   }
 
   .hero-visual-region > .workflow-shell {
@@ -112,22 +112,15 @@
     max-width: none;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
     .hero-visual-region {
-      min-height: 24rem;
-      padding-left: 2rem;
+      padding-left: 1.5rem;
     }
 
     .hero-visual-region::before {
       content: '';
-      @apply absolute left-0 top-[12%] bottom-[12%] w-px;
-      background: linear-gradient(to bottom, transparent, rgba(45, 212, 209, 0.32), transparent);
-    }
-  }
-
-  @media (max-width: 1023px) {
-    .hero-visual-region {
-      min-height: 0;
+      @apply absolute left-0 top-[14%] bottom-[14%] w-px;
+      background: linear-gradient(to bottom, transparent, rgba(45, 212, 209, 0.24), transparent);
     }
   }
 
@@ -197,8 +190,8 @@
   }
 
   .workflow-shell {
-    @apply relative rounded-2xl border border-navy-600/70 bg-navy-900/90;
-    box-shadow: 0 14px 42px rgba(3, 12, 26, 0.22), inset 0 1px 0 rgba(148, 163, 184, 0.05);
+    @apply relative rounded-2xl border border-navy-600/55 bg-navy-900/85;
+    box-shadow: 0 12px 30px rgba(3, 12, 26, 0.18), inset 0 1px 0 rgba(148, 163, 184, 0.04);
   }
 
   .workflow-scene {
@@ -206,39 +199,47 @@
   }
 
   .workflow-scene__top {
-    @apply flex items-center justify-between gap-3 border-b border-navy-700/80 px-4 py-3 sm:px-5;
+    @apply flex items-center justify-between gap-3 border-b border-navy-700/55 px-4 py-2.5 sm:px-5;
   }
 
   .workflow-scene__status {
-    @apply flex items-center gap-2 text-[11px] font-display uppercase tracking-[0.14em] text-snow-400;
+    @apply flex items-center gap-2 text-xs font-display tracking-wide text-snow-500;
   }
 
   .workflow-scene__status-dot {
     @apply h-1.5 w-1.5 rounded-full bg-teal-400;
-    box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.08);
+    box-shadow: 0 0 0 2px rgba(45, 212, 191, 0.07);
   }
 
   .workflow-scene__example {
-    @apply text-[11px] text-snow-500;
+    @apply text-xs text-snow-500;
   }
 
   .workflow-scene__body {
-    @apply p-4 sm:p-5;
+    @apply p-3.5 sm:p-5;
   }
 
-  .workflow-event,
-  .workflow-interpretation,
-  .workflow-actions {
-    @apply border-b border-navy-700/80 pb-4;
+  .workflow-event {
+    @apply border-b border-navy-700/55 pb-4;
   }
 
-  .workflow-interpretation,
-  .workflow-actions {
+  .workflow-interpretation {
     @apply pt-4;
+  }
+
+  .workflow-actions {
+    @apply mt-4 border-t border-navy-700/45 pt-4;
   }
 
   .workflow-section-heading {
     @apply flex items-center justify-between gap-3 text-xs font-display font-semibold uppercase tracking-[0.12em] text-snow-300;
+    transition: color 700ms ease;
+  }
+
+  .workflow-event.is-current .workflow-section-heading,
+  .workflow-interpretation.is-current .workflow-section-heading,
+  .workflow-actions.is-current .workflow-section-heading {
+    @apply text-teal-300;
   }
 
   .workflow-event__meta {
@@ -246,7 +247,7 @@
   }
 
   .workflow-message {
-    @apply mt-3 flex items-start gap-2.5 border-l-2 border-teal-400/70 bg-navy-800/45 px-3 py-3 text-sm leading-relaxed text-snow-300;
+    @apply mt-3 flex items-start gap-2.5 border-l-2 border-teal-400/60 bg-navy-800/35 px-3 py-3 text-sm leading-relaxed text-snow-300;
   }
 
   .workflow-fields {
@@ -294,6 +295,11 @@
 
   .workflow-complete {
     @apply mt-4 flex items-center gap-3 rounded-xl border border-teal-400/25 bg-teal-500/[0.06] px-3 py-3;
+    transition: opacity 700ms ease, border-color 700ms ease, background-color 700ms ease;
+  }
+
+  .workflow-complete:not(.is-current) {
+    opacity: 0.62;
   }
 
   .workflow-complete__icon {
