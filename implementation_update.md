@@ -1,6 +1,6 @@
 # Richt Ai — Design, Language & Metadata Implementation Plan
 
-Status: **V1 complete — V2/V3 not started; metadata validation remains pending domain/social confirmation**
+Status: **V2 complete — V3 not started; metadata validation remains pending domain/social confirmation**
 Last updated: 2026-10-01
 Project: `C:\Users\Emre\Desktop\RichtAI`
 
@@ -397,6 +397,16 @@ Each phase below is a separate implementation task. An agent should claim the ph
 - **Acceptance criteria:** The visual explains a real workflow without relying on decorative arrows; its static state is understandable; motion is subtle and reduced-motion-safe; it fits desktop and mobile without clipping; accessible text describes the sequence.
 - **Regression risks:** Overly complex state logic can cause hydration/layout issues, introduce visual noise, or make the hero look like a fake product demo.
 
+#### V2 implementation record
+
+- **Interface decision:** Replaced the three rounded icon nodes with one compact operational scene: an incoming website enquiry, a structured request summary, two system actions, and a completed appointment. The visual uses one bordered panel with separators rather than a dashboard, floating cards, or decorative arrows.
+- **Content decision:** Added neutral Turkish and English example strings for `Örnek akış` / `Example workflow`, an illustrative enquiry, qualification fields, CRM/action status, and appointment completion. All labels remain visible without depending on the animation.
+- **Motion decision:** Added a calm four-stage emphasis cycle that starts fully resolved and only changes opacity/color emphasis. There is no typing, bounce, spin, layout shift, or required information hidden behind motion. Reduced-motion users receive the fully resolved static state.
+- **Responsive decision:** The scene uses a single-column structure that remains readable on narrow screens, with the request summary changing from three columns to two columns on mobile. The outer `workflow-shell` contract is preserved for the V1 hero region.
+- **Files changed:** `src/components/AIWorkflow.tsx`, `src/index.css`, `src/lib/i18n.tsx`, and this checklist.
+- **Verification:** `pnpm typecheck`, `pnpm lint`, and `pnpm build` passed. The local browser preview was inspected at the available narrow/mobile viewport; the Turkish and English accessibility trees both expose the complete workflow sequence, and the page remained free of new horizontal overflow in the inspected view.
+- **Deferred to V3:** Full 320px/tablet/desktop screenshot matrix, reduced-motion browser toggle, and final spacing/timing polish remain in V3. No V3 checklist item is marked complete.
+
 ### V3 — Hero responsive/motion QA
 
 - **Scope:** Tune hero spacing, typography, workflow scaling, animation timing, pointer/touch behavior, and reduced-motion behavior across target widths and languages.
@@ -474,7 +484,7 @@ Each phase below is a separate implementation task. An agent should claim the ph
 - [x] V0.1 Audit current tokens, effects, icon roles, spacing, and motion.
 - [x] V0.2 Approve the restrained Richt-specific design-system direction.
 - [x] V1.1 Implement the asymmetric hero structure.
-- [ ] V2.1 Implement the operational hero automation visual.
+- [x] V2.1 Implement the operational hero automation visual.
 - [ ] V3.1 Complete hero responsive and reduced-motion QA.
 - [ ] V4.1 Reframe the problem section around business situations.
 - [ ] V5.1 Restructure capabilities without creating another generic card grid.
@@ -915,6 +925,7 @@ Notes: Copy decision or remaining approval
 | 2026-10-01 | Codex | Visual Refinement Phase plan | Audited the current application structure, components, CSS effects, language system, assets, and metadata. Added the next V0–V11 visual refinement roadmap, design principles, generic-pattern reduction rules, proof/founder/chatbot guidance, responsive/accessibility constraints, contradictions, approval gates, and a phase checklist. No production code changed. |
 | 2026-10-01 | Codex | V0.1 / V0.2 | Refined shared CSS primitives only: quieter card glow, reduced lift/noise/grid/radial effects, controlled card radius, border-first surfaces, teal-primary CTA emphasis, and lower workflow depth/pulse intensity. Removed the unused `.text-gradient-snow` utility. Preserved all section structures, copy, metadata, contact architecture, mermaid mark, founder portrait, language switching, and reduced-motion support. Verified typecheck, lint, build, Turkish/English browser smoke, mobile language control, contact modal, and responsive preview. V1+ remains deferred. |
 | 2026-10-01 | Codex | V1.1 | Replaced the centered hero composition with a responsive copy-first structure and stable right-side V2 visual region. Preserved the existing `AIWorkflow` as temporary content, moved the CTA and trust information ahead of the workflow on mobile, removed hero-only grid/noise/floating-orb decoration, and retained one subdued radial layer. Verified typecheck, lint, build, Turkish/English switching, narrow/mobile hero order, CTA/contact modal behavior, downstream section visibility, and no new horizontal overflow. V2/V3 remain deferred. |
+| 2026-10-01 | Codex | V2.1 | Replaced the generic three-node workflow with one bilingual operational scene covering a new enquiry, structured interpretation, system actions, and completed appointment. Added calm stage emphasis with a fully resolved reduced-motion-safe state, preserved the V1 hero shell contract, and verified typecheck, lint, build, Turkish/English accessibility trees, and the local narrow/mobile preview. V3 responsive/motion matrix remains pending. |
 
 ## 10. Definition of done
 

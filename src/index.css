@@ -197,95 +197,120 @@
   }
 
   .workflow-shell {
-    @apply relative rounded-2xl border border-navy-600/70 bg-navy-900/55 backdrop-blur-sm;
+    @apply relative rounded-2xl border border-navy-600/70 bg-navy-900/90;
     box-shadow: 0 14px 42px rgba(3, 12, 26, 0.22), inset 0 1px 0 rgba(148, 163, 184, 0.05);
   }
 
-  .workflow-grid {
-    @apply grid items-center gap-2 sm:grid-cols-[1fr_auto_1fr_auto_1fr] sm:gap-3;
+  .workflow-scene {
+    @apply w-full overflow-hidden;
   }
 
-  .workflow-node {
-    @apply relative flex min-w-0 items-center gap-2 rounded-xl border border-navy-600/70 bg-navy-800/70 px-3 py-3 text-left sm:gap-3 sm:px-4;
-    animation: workflow-node-in 700ms cubic-bezier(0.22, 1, 0.36, 1) var(--workflow-delay) both;
+  .workflow-scene__top {
+    @apply flex items-center justify-between gap-3 border-b border-navy-700/80 px-4 py-3 sm:px-5;
   }
 
-  .workflow-node::after {
+  .workflow-scene__status {
+    @apply flex items-center gap-2 text-[11px] font-display uppercase tracking-[0.14em] text-snow-400;
+  }
+
+  .workflow-scene__status-dot {
+    @apply h-1.5 w-1.5 rounded-full bg-teal-400;
+    box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.08);
+  }
+
+  .workflow-scene__example {
+    @apply text-[11px] text-snow-500;
+  }
+
+  .workflow-scene__body {
+    @apply p-4 sm:p-5;
+  }
+
+  .workflow-event,
+  .workflow-interpretation,
+  .workflow-actions {
+    @apply border-b border-navy-700/80 pb-4;
+  }
+
+  .workflow-interpretation,
+  .workflow-actions {
+    @apply pt-4;
+  }
+
+  .workflow-section-heading {
+    @apply flex items-center justify-between gap-3 text-xs font-display font-semibold uppercase tracking-[0.12em] text-snow-300;
+  }
+
+  .workflow-event__meta {
+    @apply text-[11px] font-normal normal-case tracking-normal text-snow-500;
+  }
+
+  .workflow-message {
+    @apply mt-3 flex items-start gap-2.5 border-l-2 border-teal-400/70 bg-navy-800/45 px-3 py-3 text-sm leading-relaxed text-snow-300;
+  }
+
+  .workflow-fields {
+    @apply mt-3 grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-3;
+  }
+
+  .workflow-fields dt {
+    @apply text-[11px] text-snow-500;
+  }
+
+  .workflow-fields dd {
+    @apply mt-1 text-sm font-medium text-snow-200;
+  }
+
+  .workflow-actions__list {
+    @apply relative mt-3 space-y-2.5 pl-1;
+  }
+
+  .workflow-actions__list::before {
     content: '';
-    @apply pointer-events-none absolute inset-0 rounded-xl border border-teal-400/0;
-    animation: workflow-node-pulse 4.8s ease-in-out var(--workflow-delay) infinite;
+    @apply absolute left-[0.6875rem] top-2 bottom-2 w-px bg-navy-600;
   }
 
-  .workflow-icon {
-    @apply flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-teal-500/10 text-teal-300 sm:h-9 sm:w-9;
+  .workflow-action {
+    @apply relative flex items-center gap-2.5 text-sm text-snow-500;
+    transition: color 500ms ease, opacity 500ms ease;
   }
 
-  .workflow-connector {
-    @apply relative flex items-center justify-center text-teal-400/80;
+  .workflow-action:not(.is-resolved) {
+    opacity: 0.56;
   }
 
-  .workflow-connector::before,
-  .workflow-connector::after {
-    content: '';
-    @apply absolute rounded-full bg-teal-400/30;
+  .workflow-action.is-resolved {
+    @apply text-snow-300;
   }
 
-  .workflow-connector::before {
-    @apply h-px w-full sm:w-8;
+  .workflow-action__marker {
+    @apply z-10 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-navy-500 bg-navy-900 text-snow-500;
+    transition: color 500ms ease, border-color 500ms ease, background-color 500ms ease;
   }
 
-  .workflow-connector::after {
-    @apply h-1 w-1 bg-cyan-300;
-    animation: workflow-signal 2.6s ease-in-out infinite;
+  .workflow-action.is-resolved .workflow-action__marker {
+    @apply border-teal-400/60 bg-teal-500/10 text-teal-300;
   }
 
-  @media (min-width: 640px) {
-    .workflow-connector {
-      min-height: 1.5rem;
-    }
-
-    .workflow-connector::before {
-      width: 2rem;
-      height: 1px;
-    }
+  .workflow-complete {
+    @apply mt-4 flex items-center gap-3 rounded-xl border border-teal-400/25 bg-teal-500/[0.06] px-3 py-3;
   }
 
-  @media (max-width: 639px) {
-    .workflow-connector {
-      min-height: 0.75rem;
-    }
-
-    .workflow-connector::before {
-      width: 1px;
-      height: 100%;
-    }
-
-    .workflow-connector::after {
-      animation-name: workflow-signal-mobile;
-    }
+  .workflow-complete__icon {
+    @apply flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-teal-400/45 bg-teal-400/10 text-teal-300;
   }
 
-  @keyframes workflow-node-in {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+  .workflow-complete strong,
+  .workflow-complete small {
+    @apply block;
   }
 
-  @keyframes workflow-node-pulse {
-    0%, 100% { opacity: 0; box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
-    35% { opacity: 0.65; box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.025); }
-    55% { opacity: 0; box-shadow: 0 0 0 8px rgba(45, 212, 191, 0); }
+  .workflow-complete strong {
+    @apply text-sm font-medium text-snow-100;
   }
 
-  @keyframes workflow-signal {
-    0%, 15% { opacity: 0; transform: translateX(-10px); }
-    35%, 65% { opacity: 1; transform: translateX(10px); }
-    85%, 100% { opacity: 0; transform: translateX(15px); }
-  }
-
-  @keyframes workflow-signal-mobile {
-    0%, 15% { opacity: 0; transform: translateY(-5px); }
-    35%, 65% { opacity: 1; transform: translateY(5px); }
-    85%, 100% { opacity: 0; transform: translateY(8px); }
+  .workflow-complete small {
+    @apply mt-0.5 text-xs text-snow-500;
   }
 
   .btn-primary {
@@ -355,14 +380,12 @@
     transform: none;
   }
 
-  .workflow-node,
-  .workflow-node::after,
-  .workflow-connector::after {
-    animation: none;
+  .workflow-action:not(.is-resolved) {
+    opacity: 1;
   }
 
-  .workflow-node {
-    opacity: 1;
-    transform: none;
+  .workflow-action,
+  .workflow-action__marker {
+    transition: none;
   }
 }

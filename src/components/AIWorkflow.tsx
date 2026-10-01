@@ -1,41 +1,83 @@
-import { ArrowRight, CalendarCheck, MessageCircle, Sparkles } from 'lucide-react';
+import { Check, Clock3, MessageCircle } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useLanguage } from '@/lib/i18n';
-
-const icons = [MessageCircle, Sparkles, CalendarCheck];
 
 export function AIWorkflow() {
   const { copy } = useLanguage();
-  const steps = copy.workflow.steps.map((step, index) => ({ ...step, icon: icons[index] }));
+  const [stage, setStage] = useState(3);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+
+    const timer = window.setInterval(() => {
+      setStage((current) => (current + 1) % 4);
+    }, 3400);
+
+    return () => window.clearInterval(timer);
+  }, []);
 
   return (
-    <div
-      className="workflow-shell mx-auto mt-9 max-w-3xl p-3 sm:p-4 animate-fade-in-up animate-delay-200"
-      aria-label={copy.workflow.aria}
-    >
-      <div className="workflow-grid">
-        {steps.map((step, index) => {
-          const Icon = step.icon;
-
-          return (
-            <div key={step.label} className="contents">
-              <div className="workflow-node" style={{ '--workflow-delay': `${index * 180}ms` } as React.CSSProperties}>
-                <span className="workflow-icon">
-                  <Icon className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
-                </span>
-                <span className="min-w-0">
-                  <span className="block truncate text-xs sm:text-sm font-medium text-snow-100">{step.label}</span>
-                  <span className="mt-0.5 block truncate text-[10px] sm:text-xs text-snow-500">{step.detail}</span>
-                </span>
-              </div>
-              {index < steps.length - 1 && (
-                <div className="workflow-connector" aria-hidden="true">
-                  <ArrowRight className="hidden h-4 w-4 text-teal-400/80 sm:block" />
-                </div>
-              )}
-            </div>
-          );
-        })}
+    <section className="workflow-shell workflow-scene animate-fade-in-up animate-delay-200" aria-label={copy.workflow.aria} data-stage={stage}>
+      <div className="workflow-scene__top">
+        <div className="workflow-scene__status">
+          <span className="workflow-scene__status-dot" aria-hidden="true" />
+          <span>{copy.workflow.status}</span>
+        </div>
+        <span className="workflow-scene__example">{copy.workflow.example}</span>
       </div>
-    </div>
+
+      <div className="workflow-scene__body">
+        <div className="workflow-event">
+          <div className="workflow-section-heading">
+            <span>{copy.workflow.incoming}</span>
+            <span className="workflow-event__meta">{copy.workflow.source} · {copy.workflow.time}</span>
+          </div>
+          <div className="workflow-message">
+            <MessageCircle className="h-4 w-4 shrink-0 text-teal-300" aria-hidden="true" />
+            <p>{copy.workflow.message}</p>
+          </div>
+        </div>
+
+        <div className="workflow-interpretation">
+          <div className="workflow-section-heading">{copy.workflow.interpretation}</div>
+          <dl className="workflow-fields">
+            <div>
+              <dt>{copy.workflow.requestType}</dt>
+              <dd>{copy.workflow.appointment}</dd>
+            </div>
+            <div>
+              <dt>{copy.workflow.topic}</dt>
+              <dd>{copy.workflow.topicValue}</dd>
+            </div>
+            <div>
+              <dt>{copy.workflow.statusLabel}</dt>
+              <dd>{copy.workflow.qualified}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div className="workflow-actions">
+          <div className="workflow-section-heading">{copy.workflow.actionTitle}</div>
+          <ol className="workflow-actions__list">
+            <li className={`workflow-action ${stage >= 1 ? 'is-resolved' : ''}`}>
+              <span className="workflow-action__marker" aria-hidden="true"><Check className="h-3 w-3" /></span>
+              <span>{copy.workflow.actionCreated}</span>
+            </li>
+            <li className={`workflow-action ${stage >= 2 ? 'is-resolved' : ''}`}>
+              <span className="workflow-action__marker" aria-hidden="true"><Clock3 className="h-3 w-3" /></span>
+              <span>{copy.workflow.actionSlot}</span>
+            </li>
+          </ol>
+        </div>
+
+        <div className="workflow-complete">
+          <span className="workflow-complete__icon" aria-hidden="true"><Check className="h-4 w-4" /></span>
+          <span>
+            <strong>{copy.workflow.completed}</strong>
+            <small>{copy.workflow.scheduled}</small>
+          </span>
+        </div>
+      </div>
+    </section>
   );
 }
