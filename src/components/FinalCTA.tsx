@@ -9,12 +9,8 @@ export function FinalCTA({ onCTAClick }: FinalCTAProps) {
   const { copy } = useLanguage();
 
   return (
-    <section id="final-cta" className="relative py-20 sm:py-28 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-950 to-navy-900" />
-
-      {/* Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-teal-500/8 rounded-full blur-3xl animate-glow-pulse" />
-      <div className="absolute inset-0 grid-bg opacity-20" />
+    <section id="final-cta" className="section-tone section-tone--final relative overflow-hidden border-t border-navy-700/55 py-24 sm:py-32">
+      <div className="section-surface section-surface--final absolute inset-0" />
 
       <div data-reveal className="reveal relative max-w-3xl mx-auto px-5 sm:px-6 text-center">
         <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl font-semibold text-snow-50 leading-[1.08] tracking-[-0.04em]">

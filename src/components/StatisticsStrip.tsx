@@ -73,9 +73,9 @@ export function StatisticsStrip() {
       ref={ref}
       id="istatistik"
       aria-label={copy.stats.aria}
-      className="relative border-y border-navy-700/60 bg-navy-900/70"
+      className="section-tone section-tone--stats relative border-y border-navy-700/60"
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-teal-500/[0.04] via-transparent to-cyan-500/[0.04]" />
+      <div className="section-surface section-surface--stats absolute inset-0" />
       <div className="relative max-w-6xl mx-auto px-5 sm:px-6 py-7 sm:py-9">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-7 gap-x-4 sm:gap-x-8">
           {metrics.map((metric, index) => {
@@ -87,7 +87,7 @@ export function StatisticsStrip() {
                 style={{ '--reveal-delay': `${index * 90}ms` } as React.CSSProperties}
                 className="reveal flex items-center justify-center gap-3 sm:gap-4 text-center"
               >
-                <Icon className="hidden sm:block w-4 h-4 text-teal-400/80 shrink-0" aria-hidden="true" />
+                <Icon className="hidden sm:block w-4 h-4 text-teal-400/60 shrink-0" aria-hidden="true" />
                 <div>
                   <div className="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-snow-50">
                     {'display' in metric && metric.display ? metric.display : <Counter value={metric.value ?? 0} suffix={metric.suffix ?? ''} active={active} />}

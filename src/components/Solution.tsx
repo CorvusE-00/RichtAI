@@ -5,8 +5,8 @@ export function Solution() {
   const capabilities = copy.solution.capabilities;
 
   return (
-    <section id="cozum" className="relative py-20 sm:py-24 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-900 via-navy-950 to-navy-900" />
+    <section id="cozum" className="section-tone section-tone--solution relative overflow-hidden py-16 sm:py-20">
+      <div className="section-surface section-surface--solution absolute inset-0" />
 
       <div className="relative max-w-6xl mx-auto px-5 sm:px-6">
         <div data-reveal className="reveal max-w-3xl mb-12 sm:mb-14">

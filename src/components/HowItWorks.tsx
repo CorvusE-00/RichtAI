@@ -4,8 +4,8 @@ export function HowItWorks() {
   const { copy } = useLanguage();
 
   return (
-    <section id="nasil-calisir" className="relative overflow-hidden py-20 sm:py-24">
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-900 to-navy-950" />
+    <section id="nasil-calisir" className="section-tone section-tone--how relative overflow-hidden py-16 sm:py-20">
+      <div className="section-surface section-surface--how absolute inset-0" />
 
       <div className="relative mx-auto max-w-6xl px-5 sm:px-6">
         <div className="how-intro">

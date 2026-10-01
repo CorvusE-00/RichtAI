@@ -1,6 +1,6 @@
 # Richt Ai — Design, Language & Metadata Implementation Plan
 
-Status: **V8 complete — V9 not started; metadata validation remains pending domain/social confirmation**
+Status: **V9A complete — V9.1 not started; metadata validation remains pending domain/social confirmation**
 Last updated: 2026-10-01
 Project: `C:\Users\Emre\Desktop\RichtAI`
 
@@ -142,7 +142,7 @@ Do not add `AggregateRating`, `Review`, `PostalAddress`, `telephone`, `sameAs`, 
 
 # Visual Refinement Phase — Removing the Generic AI/SaaS Look
 
-Status: **V8 complete — V9 not started**
+Status: **V9A complete — V9.1 not started**
 
 This is the next project phase after the completed metadata work. It is a careful visual evolution of the existing Richt Ai landing page, not a full rebuild. Each phase below is intentionally small enough to be implemented and verified independently by another coding agent without broadening into unrelated sections.
 
@@ -526,6 +526,16 @@ Each phase below is a separate implementation task. An agent should claim the ph
 - **Acceptance criteria:** The page has a deliberate rhythm with no dead zones or repetitive card walls; all breakpoints and both languages are checked; no horizontal scroll or cumulative layout shift appears; reduced-motion and keyboard paths remain complete.
 - **Regression risks:** Global spacing changes can undo carefully tuned hero or modal layouts and can make the long page feel either cramped or unfinished.
 
+#### V9A implementation record
+
+- **Section tone changes:** Added shared structural surface classes so the StatisticsStrip reads as a lifted transition rail; Problem, Trust, and FAQ stay deep; Solution and How It Works use a modest raised navy surface; FinalCTA carries the strongest controlled end-state tone; Footer returns to the base navy. No new brand colors or gradients were introduced.
+- **Spacing/rhythm changes:** Restored Problem to its balanced spacing, tightened Solution and How It Works to reduce accumulated transition dead zones, and kept denser Trust/FAQ content more spacious. FinalCTA retains extra breathing room for the final action without a glow wall.
+- **Accent usage changes:** Quieted the global section-label treatment from teal-on-pill to snow-on-muted-navy, reduced secondary stage/capability/trust number emphasis, softened StatisticsStrip icon intensity, and kept teal for CTA, active/system states, markers, and meaningful location/contact signals.
+- **StatisticsStrip:** Preserved all content and counter behavior while reducing the decorative rail gradient and icon emphasis so it functions as a transition between Hero and Problem rather than a SaaS metrics block.
+- **FinalCTA/Footer:** Removed the FinalCTA glow and grid overlay, retained controlled CTA emphasis, and changed the Footer callout from a teal/cyan gradient panel to a quieter elevated navy panel with the same content and action.
+- **Responsive verification:** Turkish desktop and English desktop were inspected in the local browser; all expected section IDs remained present, no horizontal overflow was reported, and mobile/tablet behavior remains governed by the existing responsive classes. Exact 320px, 375px, 768px, and 1024px capture remains deferred to V9.1.
+- **Deferred:** V9.1 remains responsible for the final target-width matrix, whole-page rhythm/performance review, reduced-motion browser pass, and any last global adjustment. No section concept, copy, metadata, imagery, chatbot, or backend changed.
+
 ### V10 — Chatbot frontend
 
 - **Scope:** Add only the approved chatbot front-end shell and first interaction as interactive proof, using the established workflow language and visual tokens.
@@ -554,6 +564,7 @@ Each phase below is a separate implementation task. An agent should claim the ph
 - [x] V6.1 Remove unapproved placeholder proof and add honest proof mechanisms.
 - [x] V7.1 Refine the founder-led editorial section.
 - [x] V8.1 Polish How It Works and FAQ presentation/accessibility.
+- [x] V9A Global rhythm, section tone, and color hierarchy.
 - [ ] V9.1 Complete global rhythm and responsive QA.
 - [ ] V10.1 Add only the approved chatbot frontend shell.
 - [ ] V11.1 Complete final accessibility, performance, design, and metadata QA.
@@ -993,6 +1004,7 @@ Notes: Copy decision or remaining approval
 | 2026-10-01 | Codex | V4.1 | Replaced the generic four-card Problem section with an asymmetrical editorial friction board. Added four bilingual operational scenarios, removed the four primary Lucide problem icons, preserved all original problem themes without metrics or proof claims, and verified typecheck, lint, build, Turkish/English browser states, section transitions, and desktop overflow. V5 remains untouched; exact narrow-width screenshot capture is deferred to broader QA. |
 | 2026-10-01 | Codex | V5.1 | Replaced the generic two-card Solution section with three alternating capability bands for customer-facing AI, operational automation, and digital experience. Added distinct text-led interaction, workflow, and visitor-journey fragments; removed tilt state, primary service icons, checklist rows, card treatment, and decorative blur. Verified typecheck, lint, build, Turkish/English browser states, capability-to-How-It-Works transition, and desktop overflow. V6 remains untouched; exact narrow-width screenshot capture is deferred to broader QA. |
 | 2026-10-01 | Codex | V8.1 | Replaced the legacy How It Works icon-card layout with a three-stage client journey using numbered editorial stages and honest timing metadata. Reworked FAQ into a left-intro/right accordion document layout, removed HelpCircle/orb/card-wall treatment, preserved native keyboard and ARIA behavior, updated aligned TR/EN copy, and verified typecheck, lint, build, bilingual browser states, transitions, FAQ toggling, and desktop overflow. V9 remains untouched; exact 320px/375px capture is deferred to broader QA. |
+| 2026-10-01 | Codex | V9A | Harmonized the whole page with shared navy surface tones, tighter Solution/How It Works transitions, quieter secondary teal usage, a softer StatisticsStrip rail, and controlled FinalCTA/Footer end states. Removed FinalCTA glow/grid decoration without changing content or section concepts. Verified typecheck, lint, build, Turkish/English desktop browser states, section continuity, and no horizontal overflow. V9.1 target-width and whole-page QA remains deferred. |
 
 ## 10. Definition of done
 

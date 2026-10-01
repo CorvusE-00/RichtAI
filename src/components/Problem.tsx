@@ -5,8 +5,8 @@ export function Problem() {
   const incidents = copy.problem.incidents;
 
   return (
-    <section id="sorun" className="relative py-20 sm:py-24 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-950 to-navy-900" />
+    <section id="sorun" className="section-tone section-tone--problem relative overflow-hidden py-20 sm:py-24">
+      <div className="section-surface section-surface--problem absolute inset-0" />
 
       <div className="relative max-w-6xl mx-auto px-5 sm:px-6">
         <div className="grid items-start gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:gap-16">

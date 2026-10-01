@@ -10,9 +10,9 @@ export function Footer({ onCTAClick }: FooterProps) {
   const { copy } = useLanguage();
 
   return (
-    <footer className="relative border-t border-navy-600/40 bg-navy-950">
+    <footer className="section-tone section-tone--footer relative border-t border-navy-700/60">
       <div className="max-w-6xl mx-auto px-5 sm:px-6 py-12 sm:py-16">
-        <div data-reveal className="reveal mb-12 flex flex-col md:flex-row md:items-center md:justify-between gap-5 rounded-2xl border border-teal-500/15 bg-gradient-to-r from-teal-500/[0.08] to-cyan-500/[0.03] px-6 py-6 sm:px-8">
+        <div data-reveal className="reveal mb-12 flex flex-col md:flex-row md:items-center md:justify-between gap-5 rounded-2xl border border-navy-600/70 bg-navy-900/65 px-6 py-6 sm:px-8">
           <div>
             <p className="font-display text-lg text-snow-100">{copy.footer.prompt}</p>
             <p className="mt-1 text-sm text-snow-500">{copy.footer.promptDescription}</p>

@@ -31,6 +31,65 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-teal-300 via-teal-400 to-teal-300;
   }
 
+  .section-tone {
+    background-color: #070f1c;
+  }
+
+  .section-tone--stats {
+    background-color: #0a1628;
+  }
+
+  .section-tone--problem,
+  .section-tone--trust,
+  .section-tone--faq {
+    background-color: #070f1c;
+  }
+
+  .section-tone--solution,
+  .section-tone--how {
+    background-color: #0a1628;
+  }
+
+  .section-tone--final {
+    background-color: #0c1a30;
+  }
+
+  .section-tone--footer {
+    background-color: #070f1c;
+  }
+
+  .section-surface {
+    pointer-events: none;
+  }
+
+  .section-surface--stats {
+    background: linear-gradient(90deg, rgba(20, 184, 166, 0.025), transparent 42%, rgba(34, 211, 238, 0.018));
+  }
+
+  .section-surface--problem {
+    background: linear-gradient(180deg, #070f1c 0%, #091625 100%);
+  }
+
+  .section-surface--solution {
+    background: linear-gradient(180deg, #0a1628 0%, #0c1a30 48%, #0a1628 100%);
+  }
+
+  .section-surface--how {
+    background: linear-gradient(180deg, #0c1a30 0%, #0a1628 100%);
+  }
+
+  .section-surface--trust {
+    background: linear-gradient(180deg, #070f1c 0%, #081221 100%);
+  }
+
+  .section-surface--faq {
+    background: linear-gradient(180deg, #070f1c 0%, #091625 100%);
+  }
+
+  .section-surface--final {
+    background: linear-gradient(180deg, #081a2b 0%, #0c1a30 100%);
+  }
+
   .card-glow {
     @apply relative overflow-hidden;
   }
@@ -179,7 +238,7 @@
   }
 
   .how-stage__number {
-    @apply font-display text-lg tracking-wide text-teal-300 sm:text-xl;
+    @apply font-display text-lg tracking-wide text-snow-300 sm:text-xl;
   }
 
   .how-stage__connector {
@@ -583,7 +642,7 @@
   }
 
   .capability-band__index {
-    @apply text-teal-300;
+    @apply text-snow-400;
   }
 
   .capability-band__title {
@@ -758,7 +817,7 @@
   }
 
   .trust-process__number {
-    @apply pt-0.5 font-display text-sm tracking-wide text-teal-300;
+    @apply pt-0.5 font-display text-sm tracking-wide text-snow-400;
   }
 
   .trust-process__title {
@@ -844,8 +903,8 @@
 
   .section-label {
     @apply inline-flex items-center gap-2 px-4 py-1.5 rounded-full
-           bg-navy-800/80 border border-navy-600/70
-           text-teal-300 text-sm font-medium font-display tracking-wide;
+           bg-navy-800/65 border border-navy-600/70
+           text-snow-300 text-sm font-medium font-display tracking-wide;
   }
 
   .card-base {

@@ -8,8 +8,8 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="sss" className="relative overflow-hidden py-20 sm:py-24">
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-950 to-navy-900" />
+    <section id="sss" className="section-tone section-tone--faq relative overflow-hidden py-20 sm:py-24">
+      <div className="section-surface section-surface--faq absolute inset-0" />
 
       <div className="relative mx-auto max-w-6xl px-5 sm:px-6">
         <div className="faq-layout">

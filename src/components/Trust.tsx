@@ -5,8 +5,8 @@ export function Trust() {
   const { founder, process, systemProof } = copy.trust;
 
   return (
-    <section id="guven" className="relative overflow-hidden py-20 sm:py-24">
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-950 via-navy-900 to-navy-950" />
+    <section id="guven" className="section-tone section-tone--trust relative overflow-hidden py-20 sm:py-28">
+      <div className="section-surface section-surface--trust absolute inset-0" />
 
       <div className="relative mx-auto max-w-6xl px-5 sm:px-6">
         <div className="trust-intro-grid">
