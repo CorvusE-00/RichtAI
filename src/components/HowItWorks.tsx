@@ -1,69 +1,46 @@
-import { MessageCircle, Settings, Headset } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 
-const icons = [MessageCircle, Settings, Headset];
-
 export function HowItWorks() {
-  const { copy, language } = useLanguage();
-  const steps = copy.how.steps.map((step, index) => ({ ...step, icon: icons[index], number: `0${index + 1}` }));
+  const { copy } = useLanguage();
 
   return (
-    <section id="nasil-calisir" className="relative py-20 sm:py-24 overflow-hidden">
+    <section id="nasil-calisir" className="relative overflow-hidden py-20 sm:py-24">
       <div className="absolute inset-0 bg-gradient-to-b from-navy-900 to-navy-950" />
 
-      <div className="relative max-w-5xl mx-auto px-5 sm:px-6">
-        <div data-reveal className="reveal text-center max-w-2xl mx-auto mb-12">
-          <span className="section-label">{copy.how.label}</span>
-          <h2 className="mt-6 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-snow-50 leading-tight tracking-tight">
-            {copy.how.headline}
-            <br />
-            <span className="text-snow-400">{copy.how.headlineAccent}</span>
-          </h2>
-          <p className="mt-5 text-snow-400 text-base sm:text-lg leading-relaxed">
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-6">
+        <div className="how-intro">
+          <div data-reveal className="reveal how-intro__copy">
+            <span className="section-label">{copy.how.label}</span>
+            <h2 className="mt-6 font-display text-3xl font-semibold leading-tight tracking-tight text-snow-50 sm:text-4xl lg:text-5xl">
+              {copy.how.headline}
+              <br />
+              <span className="text-snow-400">{copy.how.headlineAccent}</span>
+            </h2>
+          </div>
+          <p data-reveal className="reveal how-intro__description text-base leading-relaxed text-snow-400 sm:text-lg">
             {copy.how.description}
           </p>
         </div>
 
-        <div data-reveal className="reveal relative">
-          {/* Connector line */}
-          <div className="hidden md:block absolute top-24 left-[12%] right-[12%] h-px bg-navy-700/80 overflow-hidden">
-            <div className="process-line-fill h-full origin-left scale-x-0 bg-gradient-to-r from-teal-500/30 via-teal-400 to-cyan-400 transition-transform duration-[1400ms] ease-out" />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-5">
-            {steps.map((step, index) => {
-              const Icon = step.icon;
-              return (
-                <div
-                  key={index}
-                  data-reveal
-                  style={{ '--reveal-delay': `${index * 130}ms` } as React.CSSProperties}
-                  className="reveal relative flex flex-col items-center text-center group card-lift"
-                >
-                  {/* Icon circle */}
-                  <div className="relative mb-6">
-                    <div className="absolute inset-0 bg-teal-500/10 rounded-full blur-xl group-hover:bg-teal-500/20 transition-all duration-500" />
-                    <div className="relative w-20 h-20 rounded-full bg-navy-800 border border-navy-600 flex items-center justify-center group-hover:border-teal-500/40 transition-all duration-500">
-                      <Icon className="w-9 h-9 text-snow-300 group-hover:text-teal-400 transition-colors duration-500" />
-                    </div>
-                    <div className="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center font-display text-xs font-bold text-navy-950">
-                      {step.number}
-                    </div>
-                  </div>
-
-                  <h3 className="font-display text-xl font-medium text-snow-100 mb-3 leading-snug">
-                    {step.title}
-                  </h3>
-                  <span className="mb-3 rounded-full border border-teal-500/20 bg-teal-500/10 px-3 py-1 text-xs font-display text-teal-300">
-                    {index === 2 ? copy.how.needsBased : language === 'tr' ? step.duration : step.durationAlt}
-                  </span>
-                  <p className="text-snow-400 text-sm leading-relaxed max-w-xs">
-                    {step.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
+        <div className="how-journey" aria-label={copy.how.label}>
+          {copy.how.steps.map((step, index) => (
+            <article
+              key={step.title}
+              data-reveal
+              style={{ '--reveal-delay': `${index * 120}ms` } as React.CSSProperties}
+              className="reveal how-stage"
+            >
+              <div className="how-stage__rail">
+                <span className="how-stage__number">0{index + 1}</span>
+                {index < copy.how.steps.length - 1 && <span className="how-stage__connector" aria-hidden="true" />}
+              </div>
+              <div className="how-stage__body">
+                <span className="how-stage__meta">{step.meta}</span>
+                <h3 className="how-stage__title">{step.title}</h3>
+                <p className="how-stage__description">{step.description}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

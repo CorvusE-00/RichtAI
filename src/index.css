@@ -72,10 +72,6 @@
     transform: translate3d(0, 0, 0);
   }
 
-  .reveal-visible .process-line-fill {
-    transform: scaleX(1);
-  }
-
   .hero-noise {
     background-image:
       radial-gradient(circle at 20% 20%, rgba(20, 184, 166, 0.06) 0 1px, transparent 1.5px),
@@ -156,6 +152,131 @@
 
   .faq-answer > div {
     overflow: hidden;
+  }
+
+  .how-intro {
+    @apply grid gap-6 border-b border-navy-700/65 pb-10 sm:gap-8 sm:pb-12;
+  }
+
+  .how-intro__copy {
+    @apply max-w-3xl;
+  }
+
+  .how-intro__description {
+    @apply max-w-xl;
+  }
+
+  .how-journey {
+    @apply mt-10 grid gap-0 sm:mt-12;
+  }
+
+  .how-stage {
+    @apply relative grid grid-cols-[3.25rem_minmax(0,1fr)] gap-4 border-b border-navy-700/60 py-6 first:pt-0 last:border-b-0 last:pb-0 sm:grid-cols-[4.5rem_minmax(0,1fr)] sm:gap-6 sm:py-8;
+  }
+
+  .how-stage__rail {
+    @apply relative;
+  }
+
+  .how-stage__number {
+    @apply font-display text-lg tracking-wide text-teal-300 sm:text-xl;
+  }
+
+  .how-stage__connector {
+    @apply absolute left-2 top-8 bottom-[-1.5rem] w-px bg-navy-700 sm:left-2.5 sm:top-9 sm:bottom-[-2rem];
+  }
+
+  .how-stage__body {
+    @apply max-w-2xl;
+  }
+
+  .how-stage__meta {
+    @apply text-xs font-display uppercase tracking-[0.14em] text-snow-500;
+  }
+
+  .how-stage__title {
+    @apply mt-3 font-display text-xl font-medium leading-snug text-snow-100 sm:text-2xl;
+  }
+
+  .how-stage__description {
+    @apply mt-2.5 text-sm leading-relaxed text-snow-400 sm:text-base;
+  }
+
+  .faq-layout {
+    @apply grid gap-10;
+  }
+
+  .faq-intro {
+    @apply max-w-2xl;
+  }
+
+  .faq-list {
+    @apply border-t border-navy-700/65;
+  }
+
+  .faq-item {
+    @apply border-b border-navy-700/65;
+  }
+
+  .faq-trigger {
+    @apply flex w-full items-center justify-between gap-5 py-5 text-left text-snow-100 transition-colors duration-200 hover:text-teal-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-teal-400 sm:py-6;
+  }
+
+  .faq-trigger > span {
+    @apply font-display text-base font-medium sm:text-lg;
+  }
+
+  .faq-trigger__icon {
+    @apply h-5 w-5 shrink-0 text-snow-500 transition-transform duration-300;
+  }
+
+  .faq-trigger__icon.is-open {
+    @apply rotate-180 text-teal-300;
+  }
+
+  .faq-answer__text {
+    @apply max-w-2xl pb-5 pr-8 text-sm leading-relaxed text-snow-400 sm:pb-6 sm:text-base;
+  }
+
+  @media (min-width: 768px) {
+    .how-intro {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      align-items: end;
+      column-gap: 5rem;
+    }
+
+    .how-journey {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: 2rem;
+      position: relative;
+    }
+
+    .how-journey::before {
+      content: '';
+      @apply absolute left-0 right-0 top-0 h-px bg-navy-700/65;
+    }
+
+    .how-stage {
+      @apply grid grid-cols-1 gap-5 border-b-0 border-r border-navy-700/60 py-7 pr-6 last:border-r-0 last:pr-0;
+    }
+
+    .how-stage:first-child {
+      @apply pt-7;
+    }
+
+    .how-stage__connector {
+      display: none;
+    }
+
+    .faq-layout {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      align-items: start;
+      column-gap: 5rem;
+    }
+
+    .faq-list {
+      @apply mt-1;
+    }
   }
 
   .grid-bg {

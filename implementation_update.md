@@ -1,6 +1,6 @@
 # Richt Ai — Design, Language & Metadata Implementation Plan
 
-Status: **V7 complete — V8 not started; metadata validation remains pending domain/social confirmation**
+Status: **V8 complete — V9 not started; metadata validation remains pending domain/social confirmation**
 Last updated: 2026-10-01
 Project: `C:\Users\Emre\Desktop\RichtAI`
 
@@ -142,7 +142,7 @@ Do not add `AggregateRating`, `Review`, `PostalAddress`, `telephone`, `sameAs`, 
 
 # Visual Refinement Phase — Removing the Generic AI/SaaS Look
 
-Status: **V7 complete — V8 not started**
+Status: **V8 complete — V9 not started**
 
 This is the next project phase after the completed metadata work. It is a careful visual evolution of the existing Richt Ai landing page, not a full rebuild. Each phase below is intentionally small enough to be implemented and verified independently by another coding agent without broadening into unrelated sections.
 
@@ -507,6 +507,17 @@ Each phase below is a separate implementation task. An agent should claim the ph
 - **Acceptance criteria:** Process steps show what happens and what the visitor can expect; FAQ remains keyboard accessible with correct expanded/collapsed states; Turkish and English answers remain natural and do not cause layout jumps.
 - **Regression risks:** Timeline/diagram changes can break connector alignment, focus states, or section height; longer English/Turkish answers may expose mobile overflow.
 
+#### V8 implementation record
+
+- **How It Works composition:** Replaced the centered three-card/icon-circle layout with a three-stage editorial client journey: Introduction and discovery, Scope and build, and Launch and ongoing support. Each stage uses a large number, quiet timing metadata, concise client-facing copy, and a restrained progression rule.
+- **Conceptual distinction from Trust:** Trust remains the four-step internal working method. How It Works now explains what the client experiences from first conversation to launch and ongoing support, without repeating Trust’s process titles or system evidence.
+- **Copy/timing changes:** Replaced rigid `1–2 hafta` / `1–2 weeks` wording and removed obsolete `duration`, `durationAlt`, and `needsBased` keys. Added aligned `meta` values: approximately 30 minutes, based on scope, and as needed. Updated practical FAQ answers so timeline and one-person guidance do not duplicate the founder section or promise a fixed delivery time.
+- **Icons and legacy patterns removed:** Removed `MessageCircle`, `Settings`, `Headset`, the icon mapping, large circular icon markup, hover lift, duration pills, connector sweep, `HelpCircle`, FAQ orb, boxed accordion treatment, and per-item hover borders.
+- **FAQ composition:** Replaced the centered card stack with a left editorial introduction and right document-like accordion list using quiet horizontal separators. ChevronDown remains only as the disclosure utility.
+- **Accessibility verification:** Native buttons, `aria-expanded`, `aria-controls`, `role="region"`, and `aria-labelledby` remain intact. Verified click toggling and keyboard Enter toggling; open/closed states updated correctly and focus styling remains in the source.
+- **Responsive behavior:** How It Works becomes a simple vertical numbered sequence on narrow screens and a three-stage editorial sequence on desktop. FAQ stacks naturally below its introduction on mobile; the verified preview has no horizontal overflow. Exact 320px/375px screenshot capture remains deferred to V9.
+- **Verification:** `pnpm typecheck`, `pnpm lint`, and `pnpm build` passed. Turkish and English browser states, How It Works → Trust → FAQ → Final CTA continuity, FAQ interaction, and desktop overflow were checked. V9 remains untouched.
+
 ### V9 — Global rhythm and responsive QA
 
 - **Scope:** Rebalance vertical spacing, section transitions, typography, visual density, and repeated treatments after V1–V8 are complete.
@@ -542,7 +553,7 @@ Each phase below is a separate implementation task. An agent should claim the ph
 - [x] V5.1 Restructure capabilities without creating another generic card grid.
 - [x] V6.1 Remove unapproved placeholder proof and add honest proof mechanisms.
 - [x] V7.1 Refine the founder-led editorial section.
-- [ ] V8.1 Polish How It Works and FAQ presentation/accessibility.
+- [x] V8.1 Polish How It Works and FAQ presentation/accessibility.
 - [ ] V9.1 Complete global rhythm and responsive QA.
 - [ ] V10.1 Add only the approved chatbot frontend shell.
 - [ ] V11.1 Complete final accessibility, performance, design, and metadata QA.
@@ -981,6 +992,7 @@ Notes: Copy decision or remaining approval
 | 2026-10-01 | Codex | V3.1 | Tuned hero balance and moved the two-column layout to `xl`, removed tablet visual dead space, softened workflow borders/top bar/separators, compacted hero reassurance spacing, and changed the workflow to a calm five-stage ~14-second cycle with a completed-state pause. Verified typecheck, lint, build, Turkish/English browser states, CTA/contact modal behavior, hero-to-statistics transition, no horizontal overflow in the available narrow viewport, and reduced-motion behavior by source audit. V4 remains untouched; exact target-width screenshot capture is deferred to broader QA. |
 | 2026-10-01 | Codex | V4.1 | Replaced the generic four-card Problem section with an asymmetrical editorial friction board. Added four bilingual operational scenarios, removed the four primary Lucide problem icons, preserved all original problem themes without metrics or proof claims, and verified typecheck, lint, build, Turkish/English browser states, section transitions, and desktop overflow. V5 remains untouched; exact narrow-width screenshot capture is deferred to broader QA. |
 | 2026-10-01 | Codex | V5.1 | Replaced the generic two-card Solution section with three alternating capability bands for customer-facing AI, operational automation, and digital experience. Added distinct text-led interaction, workflow, and visitor-journey fragments; removed tilt state, primary service icons, checklist rows, card treatment, and decorative blur. Verified typecheck, lint, build, Turkish/English browser states, capability-to-How-It-Works transition, and desktop overflow. V6 remains untouched; exact narrow-width screenshot capture is deferred to broader QA. |
+| 2026-10-01 | Codex | V8.1 | Replaced the legacy How It Works icon-card layout with a three-stage client journey using numbered editorial stages and honest timing metadata. Reworked FAQ into a left-intro/right accordion document layout, removed HelpCircle/orb/card-wall treatment, preserved native keyboard and ARIA behavior, updated aligned TR/EN copy, and verified typecheck, lint, build, bilingual browser states, transitions, FAQ toggling, and desktop overflow. V9 remains untouched; exact 320px/375px capture is deferred to broader QA. |
 
 ## 10. Definition of done
 
