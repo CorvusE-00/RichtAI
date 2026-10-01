@@ -1,6 +1,6 @@
 # Richt Ai — Design, Language & Metadata Implementation Plan
 
-Status: **V6 complete — V7 not started; metadata validation remains pending domain/social confirmation**
+Status: **V7 complete — V8 not started; metadata validation remains pending domain/social confirmation**
 Last updated: 2026-10-01
 Project: `C:\Users\Emre\Desktop\RichtAI`
 
@@ -142,7 +142,7 @@ Do not add `AggregateRating`, `Review`, `PostalAddress`, `telephone`, `sameAs`, 
 
 # Visual Refinement Phase — Removing the Generic AI/SaaS Look
 
-Status: **V6 complete — V7 not started**
+Status: **V7 complete — V8 not started**
 
 This is the next project phase after the completed metadata work. It is a careful visual evolution of the existing Richt Ai landing page, not a full rebuild. Each phase below is intentionally small enough to be implemented and verified independently by another coding agent without broadening into unrelated sections.
 
@@ -488,6 +488,17 @@ Each phase below is a separate implementation task. An agent should claim the ph
 - **Acceptance criteria:** The founder story is concise, credible, and not repetitive; the image remains recognizable on mobile; the section supports the studio positioning without making unsupported claims; alt text remains accurate.
 - **Regression risks:** Overemphasis on the founder can make the business feel informal or dependent on one person; crop changes can reduce face clarity or load performance.
 
+#### V7 implementation record
+
+- **Founder composition:** Replaced the generic profile card with a border-led editorial split beneath the locked V6 process proof. The real portrait carries the visual weight on the left, while the founder label, name, role, statement, and working-model principle sit on the right.
+- **Portrait display:** Kept `/images/emre-kocaaliler-portrait.png` untouched. Increased the desktop display to a controlled 360px-wide, 4:5 editorial crop with a restrained border, no circular treatment, and no glow halo.
+- **Copy changes:** Reworked the Turkish and English founder copy around direct involvement from first conversation through implementation and after launch. Claims remain limited to the already approved founder positioning.
+- **Skill-chip cleanup:** Removed the `Sparkles` import, skill-chip rendering, and badge presentation. Web experience, AI automation, and direct support remain represented by the founder role and prose rather than decorative pills.
+- **Why-solo integration:** Removed the detached `whySolo` block and integrated its core idea as the restrained `Tek iletişim noktası` / `One point of contact` principle within the founder editorial area.
+- **Responsive behavior:** Mobile uses a clear portrait → identity → statement → working-model reading order; desktop uses the two-column portrait/copy split. The portrait remains proportionate and the page has no horizontal overflow in the verified preview.
+- **Verification:** `pnpm typecheck`, `pnpm lint`, and `pnpm build` passed. Turkish and English founder states were inspected in the local browser; the portrait measured 360px wide on desktop, the founder has no `card-base`, no badge chips, no detached principle, all four V6 process rows remain, and no unsupported claim was detected. Exact 375px screenshot capture remains deferred to V9 responsive QA.
+- **Deferred:** V8 How It Works / FAQ polish and V9 global rhythm and target-width QA remain untouched.
+
 ### V8 — How It Works / FAQ polish
 
 - **Scope:** Refine the process section into a calm, visually clear sequence and tighten FAQ presentation so answers support decision-making without generic filler.
@@ -530,7 +541,7 @@ Each phase below is a separate implementation task. An agent should claim the ph
 - [x] V4.1 Reframe the problem section around business situations.
 - [x] V5.1 Restructure capabilities without creating another generic card grid.
 - [x] V6.1 Remove unapproved placeholder proof and add honest proof mechanisms.
-- [ ] V7.1 Refine the founder-led editorial section.
+- [x] V7.1 Refine the founder-led editorial section.
 - [ ] V8.1 Polish How It Works and FAQ presentation/accessibility.
 - [ ] V9.1 Complete global rhythm and responsive QA.
 - [ ] V10.1 Add only the approved chatbot frontend shell.

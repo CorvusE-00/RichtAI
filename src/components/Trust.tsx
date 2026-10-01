@@ -1,4 +1,3 @@
-import { Sparkles } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 
 export function Trust() {
@@ -66,41 +65,32 @@ export function Trust() {
           </ol>
         </div>
 
-        <div data-reveal className="reveal trust-founder card-base p-8 sm:p-10">
-          <div className="relative shrink-0">
-            <div className="absolute inset-0 rounded-2xl bg-teal-500/15 blur-xl" />
+        <div data-reveal className="reveal trust-founder">
+          <div className="trust-founder__portrait">
             <img
               src="/images/emre-kocaaliler-portrait.png"
               alt={founder.alt}
               loading="lazy"
-              className="relative h-28 w-28 rounded-2xl border border-teal-400/30 object-cover object-center shadow-[0_0_30px_rgba(20,184,166,0.12)] sm:h-32 sm:w-32"
+              className="h-full w-full rounded-[1.25rem] border border-navy-600/70 object-cover object-center"
             />
           </div>
 
           <div className="trust-founder__content">
-            <h3 className="font-display text-xl font-medium text-snow-50 sm:text-2xl">
+            <p className="trust-founder__label">{founder.label}</p>
+            <h3 className="mt-4 font-display text-2xl font-medium tracking-tight text-snow-50 sm:text-3xl">
               {founder.name}
             </h3>
             <p className="mt-2 font-display text-sm text-teal-400">
               {founder.role}
             </p>
-            <p className="mt-3 max-w-xl text-sm leading-relaxed text-snow-400">
-              {founder.description}
+            <p className="trust-founder__statement">
+              {founder.statement}
             </p>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {founder.skills.map((skill) => (
-                <span key={skill} className="inline-flex items-center gap-1.5 rounded-full border border-navy-600/60 bg-navy-900/40 px-3 py-1.5 text-xs text-snow-400">
-                  <Sparkles className="h-3 w-3 text-teal-400" aria-hidden="true" />
-                  {skill}
-                </span>
-              ))}
+            <div className="trust-founder__model">
+              <p className="trust-founder__model-label">{founder.modelLabel}</p>
+              <p className="trust-founder__model-description">{founder.modelDescription}</p>
             </div>
           </div>
-        </div>
-
-        <div data-reveal className="reveal trust-principle">
-          <h3 className="font-display text-xl font-medium text-snow-100 sm:text-2xl">{copy.trust.whySolo}</h3>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-snow-500">{copy.trust.whySoloDescription}</p>
         </div>
       </div>
     </section>
