@@ -572,6 +572,118 @@
     }
   }
 
+  .trust-intro-grid {
+    @apply grid gap-10;
+  }
+
+  .trust-intro {
+    @apply max-w-2xl;
+  }
+
+  .trust-system-proof {
+    @apply self-end border-y border-navy-700/65 py-5 sm:py-6;
+  }
+
+  .trust-system-proof__header {
+    @apply flex items-center justify-between gap-4 text-xs font-display uppercase tracking-[0.12em] text-snow-500;
+  }
+
+  .trust-system-proof__status {
+    @apply text-teal-300/80;
+  }
+
+  .trust-system-proof__flow {
+    @apply mt-6 grid grid-cols-2 gap-x-3 gap-y-4;
+  }
+
+  .trust-system-proof__step {
+    @apply relative flex min-w-0 items-center gap-2 text-sm text-snow-200;
+  }
+
+  .trust-system-proof__index {
+    @apply shrink-0 font-display text-xs text-teal-300;
+  }
+
+  .trust-system-proof__arrow {
+    @apply hidden text-teal-300/70;
+  }
+
+  .trust-system-proof__description {
+    @apply mt-5 max-w-xl border-l border-teal-400/50 pl-3 text-sm leading-relaxed text-snow-400;
+  }
+
+  .trust-process-block {
+    @apply mt-14 border-t border-navy-700/65 pt-5 sm:mt-16;
+  }
+
+  .trust-process-block__heading {
+    @apply flex items-center gap-4;
+  }
+
+  .trust-process-block__kicker {
+    @apply shrink-0 text-xs font-display uppercase tracking-[0.14em] text-snow-500;
+  }
+
+  .trust-process-block__rule {
+    @apply h-px flex-1 bg-navy-700/60;
+  }
+
+  .trust-process {
+    @apply mt-2;
+  }
+
+  .trust-process__row {
+    @apply grid grid-cols-[2.5rem_minmax(0,1fr)_0.5rem] items-start gap-3 border-b border-navy-700/60 py-5 sm:grid-cols-[4rem_minmax(0,1fr)_0.5rem] sm:gap-5 sm:py-6;
+  }
+
+  .trust-process__number {
+    @apply pt-0.5 font-display text-sm tracking-wide text-teal-300;
+  }
+
+  .trust-process__title {
+    @apply font-display text-base font-medium text-snow-100 sm:text-lg;
+  }
+
+  .trust-process__description {
+    @apply mt-1.5 max-w-2xl text-sm leading-relaxed text-snow-400 sm:text-base;
+  }
+
+  .trust-process__marker {
+    @apply mt-2 h-2 w-2 rounded-full border border-teal-300/70;
+  }
+
+  .trust-founder {
+    @apply mt-12 flex flex-col items-center gap-6 sm:mt-16 sm:flex-row sm:items-center sm:gap-8;
+  }
+
+  .trust-founder__content {
+    @apply text-center sm:text-left;
+  }
+
+  .trust-principle {
+    @apply mt-10 border-l border-teal-400/55 pl-4 sm:mt-12 sm:pl-5;
+  }
+
+  @media (min-width: 1024px) {
+    .trust-intro-grid {
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      align-items: end;
+      column-gap: 5rem;
+    }
+
+    .trust-system-proof__flow {
+      @apply grid-cols-4 gap-2;
+    }
+
+    .trust-system-proof__step {
+      @apply gap-2;
+    }
+
+    .trust-system-proof__arrow {
+      @apply ml-auto inline;
+    }
+  }
+
   .btn-primary {
     @apply relative inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl
            bg-teal-500 text-navy-950 font-display font-semibold

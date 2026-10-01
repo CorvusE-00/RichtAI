@@ -1,6 +1,6 @@
 # Richt Ai — Design, Language & Metadata Implementation Plan
 
-Status: **V5 complete — V6 not started; metadata validation remains pending domain/social confirmation**
+Status: **V6 complete — V7 not started; metadata validation remains pending domain/social confirmation**
 Last updated: 2026-10-01
 Project: `C:\Users\Emre\Desktop\RichtAI`
 
@@ -142,7 +142,7 @@ Do not add `AggregateRating`, `Review`, `PostalAddress`, `telephone`, `sameAs`, 
 
 # Visual Refinement Phase — Removing the Generic AI/SaaS Look
 
-Status: **V1 complete — V2/V3 not started**
+Status: **V6 complete — V7 not started**
 
 This is the next project phase after the completed metadata work. It is a careful visual evolution of the existing Richt Ai landing page, not a full rebuild. Each phase below is intentionally small enough to be implemented and verified independently by another coding agent without broadening into unrelated sections.
 
@@ -470,6 +470,16 @@ Each phase below is a separate implementation task. An agent should claim the ph
 - **Acceptance criteria:** No visitor could reasonably mistake sample names, quotes, or metrics for approved customer proof; the section still communicates why a visitor should trust the process; founder content remains visible and accessible in both languages.
 - **Regression risks:** Removing the existing strip may leave a perceived trust gap or alter page rhythm; any replacement must be evidence-based and not become decorative filler.
 
+#### V6 implementation record
+
+- **Placeholder proof removed:** Deleted testimonial quotes, names, roles, locations, five-star visuals, placeholder client/company labels, and the client-name strip from the Trust DOM. No replacement testimonials, ratings, logos, metrics, or outcomes were added.
+- **Proof mechanism:** Replaced the old centered proof grid with an honest evidence composition: a compact conceptual `Message → Interpretation → System action → Next step` fragment plus four concrete process rows covering clarification, system design, build/testing, and continued direct support.
+- **Composition chosen:** Left-aligned Trust introduction with the conceptual system fragment on larger screens; a structured process sequence below; the existing founder block and one-person accountability explanation remain visible beneath it. Mobile follows the simple order of heading, system evidence, process, and founder.
+- **i18n cleanup:** Removed `testimonials`, `testimonialsAria`, `clients`, and `clientNames` from Turkish and English. Added aligned `processLabel`, `process`, and `systemProof` structures with direct, believable wording.
+- **Founder boundary:** Preserved the existing portrait, accurate alt text, name, role, description, skills, and founder-led accountability content. Editorial founder refinement remains deferred to V7.
+- **Verification:** `pnpm typecheck`, `pnpm lint`, and `pnpm build` passed. Turkish and English Trust states were checked in the local preview; the Trust DOM contains no testimonial, rating, or client-placeholder proof, and the existing founder portrait remains present. Exact 375px screenshot capture and the final whole-site matrix remain deferred to V9.
+- **Deferred:** V7 founder editorial refinement and V9 global responsive/rhythm QA remain untouched.
+
 ### V7 — Founder section refinement
 
 - **Scope:** Strengthen the founder section as an editorial explanation of direct communication, accountability, and continuity; use the existing real portrait with a stable responsive crop.
@@ -519,7 +529,7 @@ Each phase below is a separate implementation task. An agent should claim the ph
 - [x] V3.1 Complete hero responsive and reduced-motion QA.
 - [x] V4.1 Reframe the problem section around business situations.
 - [x] V5.1 Restructure capabilities without creating another generic card grid.
-- [ ] V6.1 Remove unapproved placeholder proof and add honest proof mechanisms.
+- [x] V6.1 Remove unapproved placeholder proof and add honest proof mechanisms.
 - [ ] V7.1 Refine the founder-led editorial section.
 - [ ] V8.1 Polish How It Works and FAQ presentation/accessibility.
 - [ ] V9.1 Complete global rhythm and responsive QA.
