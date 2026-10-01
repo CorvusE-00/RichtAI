@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Navbar } from '@/components/Navbar';
 import { Hero } from '@/components/Hero';
 import { Problem } from '@/components/Problem';
@@ -37,6 +38,7 @@ function App() {
       </main>
       <Footer onCTAClick={openContact} />
       <ContactModal isOpen={isContactOpen} onClose={closeContact} />
+      <SpeedInsights />
     </div>
   );
 }
