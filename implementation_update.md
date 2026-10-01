@@ -1,6 +1,6 @@
 # Richt Ai — Design, Language & Metadata Implementation Plan
 
-Status: **V3 complete — V4 not started; metadata validation remains pending domain/social confirmation**
+Status: **V4 complete — V5 not started; metadata validation remains pending domain/social confirmation**
 Last updated: 2026-10-01
 Project: `C:\Users\Emre\Desktop\RichtAI`
 
@@ -433,6 +433,16 @@ Each phase below is a separate implementation task. An agent should claim the ph
 - **Acceptance criteria:** The section tells a short operational story rather than presenting four interchangeable icon cards; the content works in TR/EN; icons are supporting elements only; keyboard and reveal behavior remain intact.
 - **Regression risks:** Editorial layouts can become too dense on mobile or make the section less scannable if hierarchy is not tested.
 
+#### V4 implementation record
+
+- **Composition chosen:** Replaced the centered heading plus four-card grid with an asymmetrical editorial layout: a left-side explanation/prompt and one larger friction board on the right. The board is a shared operational surface containing four rows, not four standalone mini-dashboards.
+- **Scenarios implemented:** Added concrete illustrative fragments for an after-hours unanswered message, a manual website-to-WhatsApp-to-notes-to-calendar handoff, a mobile visit with unclear service/rendezvous information, and a fragmented digital experience that makes easier-to-reach options feel more accessible.
+- **Icon changes:** Removed the Problem section's primary `Clock`, `Globe`, `MessageSquareOff`, and `TrendingDown` imports and replaced them with timestamps, text labels, flow arrows, status dots, message fragments, and thin separators. No new visual depends on color alone.
+- **Copy/data structure:** Replaced `problem.cards` with aligned Turkish/English `problem.incidents` data plus an illustrative board caption. The copy preserves the approved problem meaning without adding metrics, financial claims, client proof, or unsupported outcomes.
+- **Responsive strategy:** The editorial column and board stack naturally below `lg`; board rows use a readable two-column layout from `sm` upward and remain single-column on narrow screens. All four incidents stay present; no desktop-scale four-column diagram was introduced.
+- **Verification:** `pnpm typecheck`, `pnpm lint`, and `pnpm build` passed. The local browser preview was inspected in Turkish desktop view and English desktop accessibility state; all four incidents, their labels/statuses, the StatisticsStrip-to-Problem transition, and the Problem-to-Solution transition were present. No horizontal overflow was observed in the available desktop preview, and the existing hero remained unchanged.
+- **Deferred to V9:** Exact 320px/375px screenshot capture and the final whole-site rhythm/performance matrix remain broader QA work. V5 and all later sections remain untouched.
+
 ### V5 — Capabilities/Solution section
 
 - **Scope:** Evolve the two-card solution area toward a scalable digital-systems structure covering customer-facing AI, operational automation, and digital experience while retaining clear entry points.
@@ -496,7 +506,7 @@ Each phase below is a separate implementation task. An agent should claim the ph
 - [x] V1.1 Implement the asymmetric hero structure.
 - [x] V2.1 Implement the operational hero automation visual.
 - [x] V3.1 Complete hero responsive and reduced-motion QA.
-- [ ] V4.1 Reframe the problem section around business situations.
+- [x] V4.1 Reframe the problem section around business situations.
 - [ ] V5.1 Restructure capabilities without creating another generic card grid.
 - [ ] V6.1 Remove unapproved placeholder proof and add honest proof mechanisms.
 - [ ] V7.1 Refine the founder-led editorial section.
@@ -937,6 +947,7 @@ Notes: Copy decision or remaining approval
 | 2026-10-01 | Codex | V1.1 | Replaced the centered hero composition with a responsive copy-first structure and stable right-side V2 visual region. Preserved the existing `AIWorkflow` as temporary content, moved the CTA and trust information ahead of the workflow on mobile, removed hero-only grid/noise/floating-orb decoration, and retained one subdued radial layer. Verified typecheck, lint, build, Turkish/English switching, narrow/mobile hero order, CTA/contact modal behavior, downstream section visibility, and no new horizontal overflow. V2/V3 remain deferred. |
 | 2026-10-01 | Codex | V2.1 | Replaced the generic three-node workflow with one bilingual operational scene covering a new enquiry, structured interpretation, system actions, and completed appointment. Added calm stage emphasis with a fully resolved reduced-motion-safe state, preserved the V1 hero shell contract, and verified typecheck, lint, build, Turkish/English accessibility trees, and the local narrow/mobile preview. V3 responsive/motion matrix remains pending. |
 | 2026-10-01 | Codex | V3.1 | Tuned hero balance and moved the two-column layout to `xl`, removed tablet visual dead space, softened workflow borders/top bar/separators, compacted hero reassurance spacing, and changed the workflow to a calm five-stage ~14-second cycle with a completed-state pause. Verified typecheck, lint, build, Turkish/English browser states, CTA/contact modal behavior, hero-to-statistics transition, no horizontal overflow in the available narrow viewport, and reduced-motion behavior by source audit. V4 remains untouched; exact target-width screenshot capture is deferred to broader QA. |
+| 2026-10-01 | Codex | V4.1 | Replaced the generic four-card Problem section with an asymmetrical editorial friction board. Added four bilingual operational scenarios, removed the four primary Lucide problem icons, preserved all original problem themes without metrics or proof claims, and verified typecheck, lint, build, Turkish/English browser states, section transitions, and desktop overflow. V5 remains untouched; exact narrow-width screenshot capture is deferred to broader QA. |
 
 ## 10. Definition of done
 

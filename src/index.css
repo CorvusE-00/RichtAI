@@ -319,6 +319,132 @@
     @apply mt-0.5 text-xs text-snow-500;
   }
 
+  .problem-prompt {
+    @apply flex items-start gap-3 text-teal-300/90;
+  }
+
+  .problem-prompt__line {
+    @apply mt-2 h-px w-8 shrink-0 bg-teal-400/60;
+  }
+
+  .problem-board {
+    @apply overflow-hidden rounded-2xl border border-navy-600/65 bg-navy-900/70;
+    box-shadow: 0 16px 36px rgba(3, 12, 26, 0.16), inset 0 1px 0 rgba(148, 163, 184, 0.035);
+  }
+
+  .problem-board__header {
+    @apply flex items-center justify-between gap-4 border-b border-navy-700/60 px-4 py-3 sm:px-5;
+  }
+
+  .problem-board__title {
+    @apply flex items-center gap-2 text-xs font-display font-medium tracking-wide text-snow-300;
+  }
+
+  .problem-board__dot,
+  .problem-incident__label-dot,
+  .problem-incident__status-dot {
+    @apply h-1.5 w-1.5 shrink-0 rounded-full bg-teal-400;
+  }
+
+  .problem-board__caption {
+    @apply text-xs text-snow-500;
+  }
+
+  .problem-board__body {
+    @apply divide-y divide-navy-700/60;
+  }
+
+  .problem-incident {
+    @apply grid gap-5 px-4 py-5 sm:grid-cols-[minmax(9rem,0.58fr)_minmax(0,1.42fr)] sm:items-center sm:px-5;
+    transition: background-color 350ms ease;
+  }
+
+  .problem-incident--focus {
+    @apply bg-navy-800/25;
+  }
+
+  .problem-incident__label {
+    @apply flex items-center gap-2 text-xs font-display tracking-wide text-snow-500;
+  }
+
+  .problem-incident__label-dot {
+    @apply bg-navy-500;
+  }
+
+  .problem-incident__title {
+    @apply mt-2 font-display text-base sm:text-lg font-medium leading-snug text-snow-100;
+  }
+
+  .problem-incident__detail {
+    @apply mt-2 text-sm leading-relaxed text-snow-400;
+  }
+
+  .problem-incident__fragment {
+    @apply min-w-0 rounded-xl border border-navy-700/70 bg-navy-950/45 px-3.5 py-3;
+  }
+
+  .problem-fragment__row,
+  .problem-fragment__comparison {
+    @apply flex items-center justify-between gap-3 text-xs text-snow-400;
+  }
+
+  .problem-fragment__row span:first-child,
+  .problem-fragment__comparison span:first-child {
+    @apply font-display text-snow-300;
+  }
+
+  .problem-fragment__row--muted {
+    @apply mt-3 border-t border-navy-700/55 pt-3 text-snow-500;
+  }
+
+  .problem-fragment__row--muted span:first-child {
+    @apply text-snow-500;
+  }
+
+  .problem-fragment__message {
+    @apply mt-2 text-sm leading-relaxed text-snow-200;
+  }
+
+  .problem-fragment__caption {
+    @apply mt-3 border-t border-navy-700/55 pt-3 text-xs text-snow-500;
+  }
+
+  .problem-fragment__warning {
+    @apply mt-3 border-l-2 border-teal-400/55 pl-2.5 text-sm text-snow-300;
+  }
+
+  .problem-fragment__warning--muted {
+    @apply mt-2 border-navy-600 text-snow-500;
+  }
+
+  .problem-fragment__comparison + .problem-fragment__comparison {
+    @apply mt-2 border-t border-navy-700/55 pt-2;
+  }
+
+  .problem-fragment__comparison--muted {
+    @apply text-snow-500;
+  }
+
+  .problem-route {
+    @apply flex flex-wrap items-center gap-y-2 text-xs text-snow-300;
+  }
+
+  .problem-route__step {
+    @apply inline-flex items-center gap-2;
+  }
+
+  .problem-route__arrow {
+    @apply text-teal-300/80;
+  }
+
+  .problem-incident__status {
+    @apply mt-3 flex items-center gap-2 text-xs text-snow-500;
+  }
+
+  .problem-incident__status-dot {
+    @apply bg-teal-400/80;
+  }
+
   .btn-primary {
     @apply relative inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl
            bg-teal-500 text-navy-950 font-display font-semibold
