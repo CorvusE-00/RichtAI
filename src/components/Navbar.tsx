@@ -54,7 +54,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
     <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${isScrolled ? 'py-1' : 'py-2'}`}>
       <div className={`absolute inset-0 backdrop-blur-md border-b transition-all duration-500 ${isScrolled ? 'bg-navy-950/92 border-navy-600/70 shadow-[0_10px_40px_rgba(2,8,23,0.25)]' : 'bg-navy-950/45 border-navy-600/35'}`} />
 
-      <nav className={`relative max-w-6xl mx-auto px-5 sm:px-6 grid grid-cols-[1fr_auto_1fr] items-center transition-all duration-500 ${isScrolled ? 'h-14' : 'h-16'}`}>
+      <nav className={`relative max-w-6xl mx-auto px-5 sm:px-6 grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center transition-all duration-500 ${isScrolled ? 'h-14' : 'h-16'}`}>
         {/* Logo */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -83,16 +83,20 @@ export function Navbar({ onCTAClick }: NavbarProps) {
               {link.label}
             </button>
           ))}
+        </div>
+
+        {/* Desktop Actions */}
+        <div className="hidden lg:flex items-center gap-3 justify-self-end">
           <button
             onClick={toggleLanguage}
-            className="ml-2 inline-flex min-w-11 items-center justify-center rounded-lg border border-navy-600/70 px-2.5 py-2 text-xs font-semibold tracking-wide text-snow-300 transition-colors hover:border-teal-400/50 hover:text-teal-200"
+            className="inline-flex min-w-11 items-center justify-center rounded-lg border border-navy-600/70 px-2.5 py-2 text-xs font-semibold tracking-wide text-snow-300 transition-colors hover:border-teal-400/50 hover:text-teal-200"
             aria-label={copy.nav.switchLanguage}
           >
             {language === 'tr' ? 'EN' : 'TR'}
           </button>
           <button
             onClick={handleCTA}
-            className="ml-3 inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-gradient-to-r from-teal-500 to-cyan-500 text-navy-950 font-display font-semibold text-sm transition-all duration-300 hover:from-teal-400 hover:to-cyan-400 hover:shadow-[0_0_20px_rgba(20,184,166,0.35)] hover:-translate-y-0.5"
+            className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-gradient-to-r from-teal-500 to-cyan-500 text-navy-950 font-display font-semibold text-sm transition-all duration-300 hover:from-teal-400 hover:to-cyan-400 hover:shadow-[0_0_20px_rgba(20,184,166,0.35)] hover:-translate-y-0.5"
           >
             {copy.nav.cta}
           </button>
