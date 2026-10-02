@@ -146,3 +146,9 @@ Do not begin imagery work, modify unrelated sections, change the site architectu
 
 - Reduced Turkish-only desktop bottom padding and tightened the Turkish heading scale/line-height to remove the accidental next-section sliver without changing English desktop or mobile behavior.
 - Reduced only the Turkish desktop headline-to-copy, copy-to-CTA, and CTA-to-meta gaps; workflow sizing and content remain unchanged.
+
+## Problem / Challenges spacing record
+
+- Reduced large-screen section padding to `lg:py-20` while preserving the existing mobile `py-20 sm:py-24` rhythm.
+- Added a 34rem editorial max-width and tightened only the desktop label-to-heading, heading-to-description, and description-to-prompt spacing.
+- Kept `lg:items-center`, the 0.95fr/1.05fr grid, board cap, incidents, and mobile spacing unchanged; no optical offset was needed.

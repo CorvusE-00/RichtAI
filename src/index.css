@@ -542,6 +542,24 @@
     @apply mt-2 h-px w-8 shrink-0 bg-teal-400/60;
   }
 
+  @media (min-width: 1024px) {
+    .problem-editorial {
+      max-width: 34rem;
+    }
+
+    .problem-editorial .problem-editorial__heading {
+      margin-top: 1.35rem;
+    }
+
+    .problem-editorial .problem-editorial__description {
+      margin-top: 1.15rem;
+    }
+
+    .problem-editorial .problem-editorial__prompt {
+      margin-top: 1.5rem;
+    }
+  }
+
   .problem-board {
     @apply overflow-hidden rounded-2xl border border-navy-600/65 bg-navy-900/70;
     box-shadow: 0 16px 36px rgba(3, 12, 26, 0.16), inset 0 1px 0 rgba(148, 163, 184, 0.035);

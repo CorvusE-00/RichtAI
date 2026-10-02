@@ -5,22 +5,22 @@ export function Problem() {
   const incidents = copy.problem.incidents;
 
   return (
-    <section id="sorun" className="section-tone section-tone--problem relative overflow-hidden py-20 sm:py-24">
+    <section id="sorun" className="section-tone section-tone--problem relative overflow-hidden py-20 sm:py-24 lg:py-20">
       <div className="section-surface section-surface--problem absolute inset-0" />
 
       <div className="relative max-w-6xl mx-auto px-5 sm:px-6">
         <div className="grid items-start gap-10 lg:items-center lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
-          <div data-reveal className="reveal">
+          <div data-reveal className="problem-editorial reveal">
             <span className="section-label">{copy.problem.label}</span>
-            <h2 className="mt-6 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-snow-50 leading-tight tracking-tight">
+            <h2 className="problem-editorial__heading mt-6 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-snow-50 leading-tight tracking-tight">
               {copy.problem.headline}
               <br />
               <span className="text-snow-400">{copy.problem.headlineAccent}</span>
             </h2>
-            <p className="mt-5 text-snow-400 text-base sm:text-lg leading-relaxed">
+            <p className="problem-editorial__description mt-5 text-snow-400 text-base sm:text-lg leading-relaxed">
               {copy.problem.description}
             </p>
-            <p className="problem-prompt mt-7 text-sm sm:text-base font-display">
+            <p className="problem-editorial__prompt problem-prompt mt-7 text-sm sm:text-base font-display">
               <span className="problem-prompt__line" aria-hidden="true" />
               <span>{copy.problem.prompt}</span>
             </p>
