@@ -152,3 +152,10 @@ Do not begin imagery work, modify unrelated sections, change the site architectu
 - Reduced large-screen section padding to `lg:py-20` while preserving the existing mobile `py-20 sm:py-24` rhythm.
 - Added a 34rem editorial max-width and tightened only the desktop label-to-heading, heading-to-description, and description-to-prompt spacing.
 - Kept `lg:items-center`, the 0.95fr/1.05fr grid, board cap, incidents, and mobile spacing unchanged; no optical offset was needed.
+
+## V9B2 implementation record
+
+- Added the exact provided screenshot at `public/images/luma-dental-prototype-preview.png` without pixel edits.
+- Replaced only the third Digital Experience visual with a restrained navy browser-like frame and the real Luma Dental prototype preview.
+- Added a small `Prototype build` label; no claims, metrics, or client-result language were added outside the screenshot.
+- Preserved the first two capability visuals, existing copy, alternating layout, and mobile full-width behavior.

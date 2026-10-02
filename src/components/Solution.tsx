@@ -74,21 +74,21 @@ export function Solution() {
                 )}
 
                 {index === 2 && (
-                  <div className="capability-experience">
-                    <div className="capability-experience__rail" aria-hidden="true">
-                      <span />
-                      <span />
-                      <span />
+                  <div className="capability-prototype">
+                    <div className="capability-prototype__chrome">
+                      <div className="capability-prototype__dots" aria-hidden="true">
+                        <span />
+                        <span />
+                        <span />
+                      </div>
+                      <span className="capability-prototype__label">Prototype build</span>
                     </div>
-                    <div className="capability-experience__items">
-                      {capability.visualItems.map((item, itemIndex) => (
-                        <div key={item} className={`capability-experience__item ${itemIndex === 2 ? 'is-active' : ''}`}>
-                          <span>{item}</span>
-                          <span aria-hidden="true">{itemIndex === 2 ? '↗' : '·'}</span>
-                        </div>
-                      ))}
+                    <div className="capability-prototype__viewport">
+                      <img
+                        src="/images/luma-dental-prototype-preview.png"
+                        alt="Luma Dental prototype website preview"
+                      />
                     </div>
-                    <div className="capability-fragment__meta">{capability.visualMeta}</div>
                   </div>
                 )}
               </div>
