@@ -156,24 +156,34 @@
       padding-bottom: 2.5rem;
     }
 
+    .hero-section--tr > .reveal {
+      min-height: calc(100svh - 8.5rem - 2.5rem);
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-section--tr > .reveal > .grid {
+      width: 100%;
+    }
+
     .hero-section--tr .hero-copy__subheadline {
-      margin-top: 1.25rem;
+      margin-top: 1.45rem;
     }
 
     .hero-section--tr .hero-copy__cta {
-      margin-top: 1.75rem;
+      margin-top: 1.95rem;
     }
 
     .hero-section--tr .hero-copy__meta {
-      margin-top: 1.25rem;
+      margin-top: 1.45rem;
     }
   }
 
   @media (min-width: 1280px) {
     .hero-section--tr .hero-heading {
       max-width: 37rem;
-      font-size: 3.5rem;
-      line-height: 0.98;
+      font-size: 3.7rem;
+      line-height: 1.01;
     }
 
     .hero-section--tr .hero-heading > span + span {
