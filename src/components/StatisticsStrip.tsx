@@ -76,8 +76,8 @@ export function StatisticsStrip() {
       className="section-tone section-tone--stats relative border-y border-navy-700/60"
     >
       <div className="section-surface section-surface--stats absolute inset-0" />
-      <div className="relative max-w-6xl mx-auto px-5 sm:px-6 py-7 sm:py-9">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-7 gap-x-4 sm:gap-x-8">
+      <div className="relative max-w-6xl mx-auto px-5 sm:px-6 py-6 sm:py-9">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-5 sm:gap-y-0 gap-x-4 sm:gap-x-8">
           {metrics.map((metric, index) => {
             const Icon = metric.icon;
             return (
@@ -92,7 +92,7 @@ export function StatisticsStrip() {
                   <div className="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-snow-50">
                     {'display' in metric && metric.display ? metric.display : <Counter value={metric.value ?? 0} suffix={metric.suffix ?? ''} active={active} />}
                   </div>
-                  <div className="mt-1 text-[11px] sm:text-xs text-snow-500 font-display tracking-wide">
+                  <div className="mt-1 text-xs text-snow-500 font-display tracking-wide">
                     {metric.label}
                   </div>
                 </div>

@@ -912,6 +912,111 @@
            transition-all duration-500 ease-out
            hover:border-navy-500/80 hover:bg-navy-800/75;
   }
+
+  /* Mobile keeps the approved visual language, but removes desktop-style density. */
+  @media (max-width: 767px) {
+    .workflow-scene__top {
+      @apply flex-col items-start gap-1.5;
+    }
+
+    .workflow-scene__example {
+      @apply text-snow-500;
+    }
+
+    .workflow-fields {
+      @apply grid-cols-1 gap-y-2.5;
+    }
+
+    .workflow-complete {
+      @apply mt-5;
+    }
+
+    .problem-board__header {
+      @apply items-start;
+    }
+
+    .problem-board__caption {
+      max-width: 8rem;
+      text-align: right;
+      line-height: 1.35;
+    }
+
+    .problem-incident {
+      @apply gap-4 px-4 py-5;
+    }
+
+    .problem-incident__fragment {
+      @apply rounded-xl px-3 py-3;
+    }
+
+    .problem-route {
+      @apply gap-x-3 text-[0.8125rem];
+    }
+
+    .capability-band {
+      @apply gap-6 py-8;
+    }
+
+    .capability-visual {
+      @apply rounded-xl px-4 py-4;
+    }
+
+    .capability-fragment__header {
+      @apply flex-wrap;
+      row-gap: 0.5rem;
+    }
+
+    .capability-interaction__step,
+    .capability-automation__step,
+    .capability-experience__item {
+      @apply text-[0.9375rem];
+    }
+
+    .capability-automation__steps,
+    .capability-experience {
+      @apply mt-5;
+    }
+
+    .faq-trigger {
+      @apply gap-4 py-5;
+    }
+
+    .faq-trigger > span {
+      @apply text-[0.9375rem] leading-relaxed;
+    }
+
+    .faq-answer__text {
+      @apply pr-7 text-[0.9375rem];
+    }
+  }
+
+  @media (max-width: 420px) {
+    .workflow-event__meta {
+      display: none;
+    }
+
+    .workflow-scene__body {
+      @apply p-4;
+    }
+
+    .workflow-section-heading {
+      @apply tracking-[0.1em];
+    }
+
+    .hero-meta {
+      @apply mt-5;
+    }
+
+    .problem-board__caption {
+      max-width: 7rem;
+    }
+
+    .problem-incident__detail,
+    .problem-fragment__message,
+    .problem-fragment__warning {
+      @apply text-[0.9375rem];
+    }
+  }
 }
 
 @layer utilities {

@@ -10,13 +10,13 @@ export function Hero({ onCTAClick }: HeroProps) {
   const { copy } = useLanguage();
 
   return (
-    <section id="anasayfa" className="relative overflow-hidden pt-28 pb-12 sm:pt-32 sm:pb-16 lg:pt-36 lg:pb-20">
+    <section id="anasayfa" className="relative overflow-hidden pt-24 pb-10 sm:pt-32 sm:pb-16 lg:pt-36 lg:pb-20">
       {/* One restrained atmospheric layer; the visual system carries the hero's detail. */}
       <div className="absolute inset-0 radial-glow opacity-70 pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-b from-navy-950/45 via-navy-950/80 to-navy-950 pointer-events-none" />
 
       <div data-reveal className="reveal relative z-10 max-w-6xl mx-auto px-5 sm:px-6">
-        <div className="grid items-center gap-10 md:gap-14 xl:grid-cols-[1.02fr_0.98fr] xl:gap-16">
+        <div className="grid items-center gap-8 sm:gap-10 md:gap-14 xl:grid-cols-[1.02fr_0.98fr] xl:gap-16">
           <div className="text-center xl:text-left">
             {/* Quiet category marker */}
             <div className="hero-eyebrow animate-fade-in-up">
