@@ -1,108 +1,72 @@
-# Hero live activity overlay refinement
+# Hero micro-refinement — distinct hero signal + reassurance row fix
 
 ## Objective
 
-Refine only the small overlay attached to the Hero visual.
+Refine the Hero in two specific ways:
 
-The current overlay explains a process with arrows and sequential steps, which repeats the Solution section and feels like a static SaaS workflow diagram. Replace it with a compact live activity concept that suggests the AI automation system is quietly working in the background.
+1. Replace the current Hero mini overlay because it repeats process and step-flow logic already used in the Solution section.
+2. Fix the desktop Turkish reassurance layout so `Herhangi bir taahhüt yok` and `Doğrudan Emre Kocaaliler ile iletişim` stay on the same row.
 
-The overlay should be visually engaging, slightly animated, premium, restrained, easy to understand, distinct from the Solution section, and secondary to the Hero image.
+This is a narrow Hero refinement only. Do not redesign the whole Hero.
 
-Do not redesign the Hero itself.
+## Current problem
 
-## New concept
+The current Hero mini panel feels too similar to the Solution process structure and too heavy when placed over the image. The Hero needs a different supporting signal that is more visual, premium, distinctive, animation-friendly, and less text-heavy.
 
-Use one small activity panel:
+## New supporting signal direction
 
-- English: `Live activity`
-- Turkish: `Canlı akış`
+Communicate:
 
-The panel should show a glimpse of background activity happening now. It must not explain the entire automation process.
+- connected systems working together
+- always-on business communication
+- website enquiries, WhatsApp/messages, CRM, and scheduling/calendar connected in one operational system
 
-Suggested natural activity labels:
+Use a compact visual connected-systems signal instead of a mini step list.
 
-### English
+Possible concept labels:
 
-- `New lead captured`
-- `Priority detected`
-- `Follow-up queued`
-- `Calendar availability checked`
+- English: `Connected systems`, `Always-on communication`, or `System sync`
+- Turkish: `Bağlı sistemler`, `Sürekli çalışan iletişim akışı`, or `Sistem senkronu`
 
-Use three or four events based on the strongest composition.
+Choose the clearest and most premium wording.
 
-### Turkish
+## Visual and animation direction
 
-- `Yeni talep alındı`
-- `Öncelik belirlendi`
-- `Takip planlandı`
-- `Uygun saat kontrol edildi`
+Prefer one compact detached panel or rail below the image, near its lower edge, or partially detached from it. It should not feel pasted awkwardly across the photo.
 
-Preserve natural wording in both languages. Avoid technical jargon and awkward literal translation.
+Possible visual elements:
 
-## Animation direction
+- four small pills, nodes, or markers for Website, WhatsApp, CRM, and Calendar
+- a subtle animated pulse, moving highlight, or connection sweep
+- one or two micro-status indicators if needed
 
-Implement calm, premium motion:
+The result should communicate signal flow and connected operations, not narrate a process.
 
-- one event is active at a time
-- the active event receives slightly stronger emphasis
-- previous events can become completed or muted
-- a small live-status dot may pulse
-- completed events may use a tiny check
-- the active event may use a subtle fade or vertical slide
-- activity advances approximately every 2.5–3.5 seconds
-- the animation loops gently
+Do not use another 3-step list, arrow-based sentence flow, numbered steps, long microcopy, fake metrics, dashboard-style statistics, or a heavy text block directly over the image.
 
-Do not use bouncing, flashy transitions, rapid movement, large glows, or exaggerated loading animations.
+Keep the result ambient, elegant, believable, design-forward, readable, restrained, and agency-appropriate.
 
-## Reduced motion
+Animation must be calm, premium, non-gimmicky, and respectful of `prefers-reduced-motion`. Reduced motion should show a static readable final state.
 
-Respect `prefers-reduced-motion`.
+## Reassurance row fix
 
-When reduced motion is enabled:
+On Turkish desktop, these must share one row:
 
-- stop cycling animation
-- remove pulse animation
-- show a stable, completed, readable state
+- `Herhangi bir taahhüt yok`
+- `Doğrudan Emre Kocaaliler ile iletişim`
 
-## Visual structure
+They may use a centered dot or similar divider. `İlk görüşme yaklaşık 30 dakika sürer.` may remain above as its own line.
 
-Use one compact surface only:
-
-- a tiny label or status at the top
-- three compact activity rows
-- one active state
-- subtle completion indicators
-
-Do not add multiple floating cards, arrows, mini workflow diagrams, charts, or fake metrics. Keep typography readable and the Hero image visually dominant.
-
-## Responsive behavior
-
-### Desktop
-
-- allow the overlay to overlap the lower part of the Hero image
-- keep it compact
-- prevent awkward text wrapping
-- keep the visual dominant
-
-### Mobile
-
-- keep rows readable
-- allow rows to stack naturally
-- prevent horizontal overflow
-- do not use microscopic text
-- do not make the Hero significantly taller
-- leave the existing Hero mobile composition otherwise unchanged
+Maintain the equivalent clean English structure. Mobile may stack naturally when needed; desktop is the main concern.
 
 ## Locked areas
 
 Do not change:
 
-- Hero image
-- Hero layout
 - Hero headline
 - Hero subheadline
 - Hero CTA
-- Hero reassurance
+- Hero main image concept
 - Navbar
 - StatisticsStrip
 - Problem / Challenges
@@ -114,63 +78,63 @@ Do not change:
 - Final CTA
 - Footer
 
-This phase concerns only the Hero activity overlay.
+This phase concerns only the Hero supporting signal/panel and Hero reassurance row layout.
 
 ## Expected implementation scope
 
 Likely files:
 
 - `src/components/Hero.tsx`
-- optional small Hero activity component if it improves clarity
+- optional small Hero subcomponent if useful
 - `src/index.css`
 - `src/lib/i18n.tsx`
 - `implementation_update.md`
 
 Do not add a dependency.
 
-## Checklist 1 — Overlay structure
+## Checklist 1 — Hero supporting signal concept
 
-- [x] Remove the current arrow-based workflow overlay.
-- [x] Create a compact `Live activity` / `Canlı akış` structure.
-- [x] Use one surface only.
-- [x] Preserve Hero image dominance.
+- [x] Remove the repeated mini activity/process overlay direction.
+- [x] Replace it with a distinct connected-systems or always-on communication concept.
+- [x] Ensure it does not repeat Solution section logic.
+- [x] Keep the Hero image visually dominant.
 
-## Checklist 2 — Bilingual activity copy
+## Checklist 2 — Hero supporting signal visual design
 
-- [x] Define natural English activity labels.
-- [x] Define natural Turkish equivalents.
-- [x] Avoid technical jargon and awkward translation.
-- [x] Confirm the copy does not repeat the Solution section.
+- [x] Decide placement relative to the Hero image.
+- [x] Reduce awkward text-over-image treatment.
+- [x] Create a more visual, less text-heavy structure.
+- [x] Ensure it feels premium and agency-appropriate.
 
-## Checklist 3 — Animation
+## Checklist 3 — Hero supporting signal animation
 
-- [x] Implement active and completed event states.
-- [x] Add subtle fade or slide behavior.
-- [x] Add a subtle live-status pulse.
-- [x] Use 2.5–3.5 second pacing.
-- [x] Implement a gentle loop.
+- [x] Define subtle motion behavior.
+- [x] Use connection, pulse, or highlight-style animation.
+- [x] Avoid gimmicky or flashy effects.
+- [x] Support `prefers-reduced-motion`.
 
-## Checklist 4 — Reduced motion
+## Checklist 4 — Reassurance row correction
 
-- [x] Detect `prefers-reduced-motion`.
-- [x] Stop cycling when reduced motion is enabled.
-- [x] Remove pulse animation when reduced motion is enabled.
-- [x] Present a stable, readable state.
+- [x] Fix Turkish desktop reassurance alignment.
+- [x] Keep `Herhangi bir taahhüt yok` and `Doğrudan Emre Kocaaliler ile iletişim` on the same row.
+- [x] Preserve clean behavior in English.
+- [x] Maintain a sensible mobile fallback.
 
 ## Checklist 5 — Responsive refinement
 
-- [x] Verify desktop behavior.
-- [x] Verify at 375px mobile width.
-- [x] Verify at 320px mobile width.
-- [x] Prevent wrapping and horizontal overflow.
-- [x] Preserve Hero height and balance.
+- [x] Verify a large desktop viewport.
+- [x] Verify Turkish desktop.
+- [x] Verify English desktop.
+- [x] Verify 375px mobile.
+- [x] Verify 320px mobile.
+- [x] Avoid overflow, bad wrapping, and awkward alignment.
 
 ## Checklist 6 — Verification
 
-- [x] Verify Turkish and English states.
-- [x] Verify no repetition with the Solution section.
-- [x] Verify no fake metrics.
-- [x] Verify CTA, image, and Hero layout are unchanged.
+- [x] Confirm the Hero support element is visually distinct from Solution.
+- [x] Confirm the Hero remains premium and less repetitive.
+- [x] Confirm the reassurance row is fixed.
+- [x] Confirm no unrelated sections changed.
 - [x] Run `pnpm typecheck`.
 - [x] Run `pnpm lint`.
 - [x] Run `pnpm build`.

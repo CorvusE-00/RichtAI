@@ -167,91 +167,92 @@
     @apply block h-full w-full object-cover object-center;
   }
 
-  .hero-live-activity {
-    @apply absolute bottom-5 left-5 right-5 rounded-xl border border-navy-600/80 bg-navy-950/90 px-4 py-3 backdrop-blur-md;
+  .hero-connected-systems {
+    @apply relative z-10 mx-6 -mt-6 rounded-xl border border-navy-600/80 bg-navy-950/95 px-4 py-3 backdrop-blur-md;
     box-shadow: 0 12px 28px rgba(3, 12, 26, 0.26), inset 0 1px 0 rgba(148, 163, 184, 0.045);
   }
 
-  .hero-live-activity__header {
-    @apply flex items-center justify-between gap-3 text-[11px] font-display uppercase tracking-[0.14em] text-snow-500;
+  .hero-connected-systems__header {
+    @apply flex items-center gap-2 text-[11px] font-display uppercase tracking-[0.14em] text-snow-500;
   }
 
-  .hero-live-activity__status {
-    @apply inline-flex min-w-0 items-center gap-2 whitespace-nowrap;
-  }
-
-  .hero-live-activity__status-dot {
+  .hero-connected-systems__status-dot {
     @apply h-1.5 w-1.5 shrink-0 rounded-full bg-teal-400;
     box-shadow: 0 0 0 2px rgba(45, 212, 191, 0.08);
+    animation: connected-status-pulse 3.2s ease-in-out infinite;
   }
 
-  .hero-live-activity__label {
-    @apply shrink-0 text-[10px] tracking-[0.12em] text-snow-500;
+  .hero-connected-systems__rail {
+    @apply mt-3 flex items-center gap-2;
   }
 
-  .hero-live-activity__rows {
-    @apply mt-2 grid gap-1;
+  .hero-connected-systems__segment {
+    @apply flex min-w-0 flex-1 items-center gap-2;
   }
 
-  .hero-live-activity__row {
-    @apply flex min-w-0 items-center gap-2 rounded-lg border border-transparent px-2.5 py-1.5 text-xs text-snow-400;
-    transition: background-color 450ms ease, border-color 450ms ease, color 450ms ease, opacity 450ms ease;
+  .hero-connected-systems__node {
+    @apply flex min-w-0 flex-1 items-center gap-2 rounded-lg border border-navy-600/70 bg-navy-900/70 px-2.5 py-2 text-xs text-snow-300;
   }
 
-  .hero-live-activity__row-dot {
-    @apply h-1.5 w-1.5 shrink-0 rounded-full bg-snow-500;
+  .hero-connected-systems__node-dot {
+    @apply h-1.5 w-1.5 shrink-0 rounded-full bg-teal-300/80;
+    animation: connected-node-pulse 4.8s ease-in-out infinite;
   }
 
-  .hero-live-activity__row-check {
-    @apply h-3.5 w-3.5 shrink-0 text-teal-300;
+  .hero-connected-systems__connector {
+    @apply h-px min-w-2 flex-1 bg-gradient-to-r from-teal-400/20 via-teal-300/65 to-teal-400/20;
+    background-size: 200% 100%;
+    animation: connected-signal-sweep 5.5s ease-in-out infinite;
   }
 
-  .hero-live-activity__row--complete {
-    @apply text-snow-500;
+  .hero-connected-systems__segment:nth-child(2) .hero-connected-systems__node-dot {
+    animation-delay: 1.2s;
   }
 
-  .hero-live-activity__row--pending {
-    @apply opacity-55;
+  .hero-connected-systems__segment:nth-child(3) .hero-connected-systems__node-dot {
+    animation-delay: 2.4s;
   }
 
-  .hero-live-activity__row--active {
-    @apply border-teal-400/15 bg-teal-400/10 text-teal-100;
-    animation: hero-activity-enter 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  .hero-connected-systems__segment:nth-child(4) .hero-connected-systems__node-dot {
+    animation-delay: 3.6s;
   }
 
-  .hero-live-activity__row--active .hero-live-activity__row-dot {
-    @apply bg-teal-300;
-    animation: hero-activity-pulse 2.8s ease-in-out infinite;
+  @keyframes connected-status-pulse {
+    0%, 100% { opacity: 0.55; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1); }
   }
 
-  @keyframes hero-activity-enter {
-    from { opacity: 0.55; transform: translateY(0.3rem); }
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes connected-node-pulse {
+    0%, 100% { opacity: 0.45; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1); }
   }
 
-  @keyframes hero-activity-pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.12); }
-    50% { box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.08); }
+  @keyframes connected-signal-sweep {
+    0%, 100% { background-position: 100% 0; opacity: 0.55; }
+    50% { background-position: 0 0; opacity: 1; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-live-activity__row {
-      transition: none;
-    }
-
-    .hero-live-activity__row--active,
-    .hero-live-activity__row--active .hero-live-activity__row-dot {
+    .hero-connected-systems__status-dot,
+    .hero-connected-systems__node-dot,
+    .hero-connected-systems__connector {
       animation: none;
     }
   }
 
   @media (min-width: 640px) {
-    .hero-live-activity__rows { gap: 0.125rem; }
+    .hero-connected-systems__rail { gap: 0.5rem; }
   }
 
   @media (min-width: 1280px) {
     .hero-visual-region {
       padding-left: 1.5rem;
+    }
+
+    .hero-section--tr .hero-meta__reassurance {
+      flex-wrap: nowrap;
+      gap: 0.75rem;
+      white-space: nowrap;
     }
 
     .hero-visual-region::before {
@@ -1235,17 +1236,26 @@
       margin-top: 0.75rem;
     }
 
-    .hero-live-activity {
+    .hero-connected-systems {
       position: static;
       margin-top: 0.75rem;
+      @apply mx-0;
       @apply px-3 py-2.5;
     }
 
-    .hero-live-activity__label { display: none; }
+    .hero-connected-systems__rail {
+      @apply grid grid-cols-2 gap-2;
+    }
 
-    .hero-live-activity__rows { @apply mt-1.5 gap-0.5; }
+    .hero-connected-systems__segment {
+      @apply contents;
+    }
 
-    .hero-live-activity__row {
+    .hero-connected-systems__connector {
+      display: none;
+    }
+
+    .hero-connected-systems__node {
       @apply px-2 py-1 text-[0.625rem] leading-4;
     }
 
