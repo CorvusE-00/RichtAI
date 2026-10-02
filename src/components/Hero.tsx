@@ -69,7 +69,7 @@ export function Hero({ onCTAClick }: HeroProps) {
             <div className="hero-visual">
               <div className="hero-visual__frame">
                 <img
-                  src="/images/ai-operations-hero.png"
+                  src="/images/ai-operations-hero-v2.png"
                   alt="AI automation system quietly organizing business operations"
                 />
               </div>
