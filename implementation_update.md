@@ -135,3 +135,9 @@ Do not begin imagery work, modify unrelated sections, change the site architectu
 - Added Turkish-only desktop tuning for heading scale, line-height, width, and Hero padding; English desktop classes remain unchanged.
 - Tightened mobile Hero spacing and converted the workflow summary into compact one-column rows while retaining the full enquiry → interpretation → action → appointment story.
 - Reduced mobile workflow chrome, internal padding, metadata, and action gaps without scaling the component or changing content.
+
+## Mobile Hero behavior correction record
+
+- Added safe mobile Hero clearance below the fixed navbar and a mobile-only heading scale/line-height adjustment.
+- Added a dedicated two-row mobile reassurance treatment while preserving the desktop meta layout and all three reassurance ideas.
+- Kept the workflow status/example bar, hid only source/time metadata, and compacted interpretation, actions, and completion using mobile-only layout rules.

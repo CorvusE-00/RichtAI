@@ -1070,10 +1070,6 @@
       @apply p-2.5;
     }
 
-    .workflow-scene__example {
-      display: none;
-    }
-
     .workflow-fields dd {
       @apply text-[0.8125rem];
     }
@@ -1098,6 +1094,73 @@
     .problem-fragment__message,
     .problem-fragment__warning {
       @apply text-[0.9375rem];
+    }
+  }
+
+  @media (max-width: 639px) {
+    .hero-heading {
+      font-size: 2.15rem;
+      line-height: 1;
+    }
+
+    .hero-meta--mobile {
+      @apply border-t border-navy-700/50 pt-2 text-[0.6875rem] leading-relaxed text-snow-500;
+    }
+
+    .hero-meta__mobile-row {
+      @apply flex items-center justify-center gap-1.5;
+    }
+
+    .hero-meta__mobile-row--direct {
+      @apply mt-1;
+    }
+
+    .workflow-scene__top {
+      @apply px-3 py-2;
+    }
+
+    .workflow-scene__body {
+      @apply p-2.5;
+    }
+
+    .workflow-event__meta {
+      display: none;
+    }
+
+    .workflow-fields {
+      @apply grid-cols-1 gap-y-1.5;
+    }
+
+    .workflow-fields > div {
+      @apply flex items-center justify-between gap-3;
+    }
+
+    .workflow-fields dd {
+      @apply mt-0 text-right;
+    }
+
+    .workflow-event {
+      @apply pb-2.5;
+    }
+
+    .workflow-interpretation {
+      @apply pt-2.5;
+    }
+
+    .workflow-actions {
+      @apply mt-2.5 pt-2.5;
+    }
+
+    .workflow-message {
+      @apply mt-2 py-2.5;
+    }
+
+    .workflow-actions__list {
+      @apply mt-2 space-y-1.5;
+    }
+
+    .workflow-complete {
+      @apply mt-2.5 gap-2 px-2.5 py-2.5;
     }
   }
 }
