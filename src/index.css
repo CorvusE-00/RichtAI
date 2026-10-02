@@ -150,6 +150,8 @@
 
   @media (min-width: 1024px) {
     .hero-section--tr {
+      min-height: 100vh;
+      min-height: 100svh;
       padding-top: 8.5rem;
       padding-bottom: 2.5rem;
     }
