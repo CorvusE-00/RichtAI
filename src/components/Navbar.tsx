@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
 import { MermaidMark } from './MermaidMark';
 import { useLanguage } from '@/lib/i18n';
 
@@ -9,11 +10,13 @@ interface NavbarProps {
 export function Navbar({ onCTAClick }: NavbarProps) {
   const { copy, language, toggleLanguage } = useLanguage();
   const navLinks = copy.nav.links;
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('sorun');
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setIsMenuOpen(false);
   };
 
   const handleCTA = useCallback(() => {
@@ -108,13 +111,30 @@ export function Navbar({ onCTAClick }: NavbarProps) {
             {language === 'tr' ? 'EN' : 'TR'}
           </button>
           <button
-            onClick={handleCTA}
-            className="inline-flex max-w-[9rem] items-center justify-center truncate whitespace-nowrap rounded-lg bg-gradient-to-r from-teal-500 to-cyan-500 px-2.5 py-2 text-[0.65rem] font-display font-semibold leading-none text-navy-950 transition-all duration-300 hover:from-teal-400 hover:to-cyan-400 sm:max-w-none sm:px-5 sm:py-2.5 sm:text-sm"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            className="p-2 rounded-lg text-snow-300 hover:text-snow-100 hover:bg-navy-700/60 transition-colors duration-200"
+            aria-label={copy.nav.menu}
           >
-            {copy.nav.cta}
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </nav>
+
+      {/* Mobile Menu */}
+      <div className={`lg:hidden relative overflow-hidden bg-navy-900/95 backdrop-blur-md border-b border-navy-600/40 transition-[max-height,opacity] duration-300 ${isMenuOpen ? 'max-h-[28rem] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}`}>
+        <div className="px-5 py-4 space-y-1">
+          {navLinks.map((link) => (
+            <button
+              key={link.id}
+              onClick={() => scrollTo(link.id)}
+              aria-current={activeSection === link.id ? 'page' : undefined}
+              className={`block w-full text-left px-4 py-3 rounded-lg transition-colors duration-200 font-display text-sm ${activeSection === link.id ? 'bg-teal-500/10 text-teal-300' : 'text-snow-300 hover:text-snow-100 hover:bg-navy-700/40'}`}
+            >
+              {link.label}
+            </button>
+          ))}
+        </div>
+      </div>
     </header>
   );
 }
