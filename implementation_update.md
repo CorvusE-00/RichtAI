@@ -141,3 +141,8 @@ Do not begin imagery work, modify unrelated sections, change the site architectu
 - Added safe mobile Hero clearance below the fixed navbar and a mobile-only heading scale/line-height adjustment.
 - Added a dedicated two-row mobile reassurance treatment while preserving the desktop meta layout and all three reassurance ideas.
 - Kept the workflow status/example bar, hid only source/time metadata, and compacted interpretation, actions, and completion using mobile-only layout rules.
+
+## TR desktop Hero composition correction
+
+- Reduced Turkish-only desktop bottom padding and tightened the Turkish heading scale/line-height to remove the accidental next-section sliver without changing English desktop or mobile behavior.
+- Reduced only the Turkish desktop headline-to-copy, copy-to-CTA, and CTA-to-meta gaps; workflow sizing and content remain unchanged.
