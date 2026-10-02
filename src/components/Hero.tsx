@@ -17,20 +17,20 @@ export function Hero({ onCTAClick }: HeroProps) {
 
       <div data-reveal className="reveal relative z-10 max-w-6xl mx-auto px-5 sm:px-6">
         <div className="grid items-center gap-3 sm:gap-8 md:gap-14 xl:grid-cols-[1.02fr_0.98fr] xl:gap-16">
-          <div className="text-center xl:text-left">
+          <div className="hero-copy text-center xl:text-left">
             {/* Headline */}
-            <h1 className="hero-heading mt-0 max-w-[40rem] font-display text-4xl sm:text-5xl xl:text-6xl 2xl:text-7xl font-semibold leading-[1.04] tracking-[-0.04em] text-snow-50 animate-fade-in-up animate-delay-100">
+            <h1 className="hero-copy__heading hero-heading mt-0 max-w-[40rem] font-display text-4xl sm:text-5xl xl:text-6xl 2xl:text-7xl font-semibold leading-[1.04] tracking-[-0.04em] text-snow-50 animate-fade-in-up animate-delay-100">
               <span className="block">{copy.hero.headline}</span>
               <span className="mt-1 block text-gradient-teal">{copy.hero.headlineAccent}</span>
             </h1>
 
             {/* Supporting copy */}
-            <p className="mt-3 max-w-xl text-base sm:mt-6 sm:text-lg text-snow-400 leading-relaxed animate-fade-in-up animate-delay-300">
+            <p className="hero-copy__subheadline max-w-xl text-base sm:mt-6 sm:text-lg text-snow-400 leading-relaxed animate-fade-in-up animate-delay-300">
               {copy.hero.subheadline}
             </p>
 
             {/* Primary action */}
-            <div className="mt-4 flex flex-col items-center gap-4 sm:mt-8 xl:items-start animate-fade-in-up animate-delay-500">
+            <div className="hero-copy__cta flex flex-col items-center gap-4 sm:mt-8 xl:items-start animate-fade-in-up animate-delay-500">
               <button onClick={onCTAClick} className="btn-primary group w-full sm:w-auto">
                 <span>{copy.hero.cta}</span>
                 <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -38,7 +38,7 @@ export function Hero({ onCTAClick }: HeroProps) {
             </div>
 
             {/* Quiet reassurance and trust information */}
-            <div className="hero-meta hero-meta--desktop mt-4 hidden text-center sm:mt-6 sm:block xl:text-left">
+            <div className="hero-copy__meta hero-meta hero-meta--desktop mt-4 hidden text-center sm:mt-6 sm:block xl:text-left">
               <span className="text-snow-500 text-xs sm:text-sm">{copy.hero.duration}</span>
               <div className="hero-meta__reassurance mt-2.5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-snow-500 text-xs sm:text-sm xl:justify-start">
                 <div className="flex items-center gap-1.5">
@@ -53,7 +53,7 @@ export function Hero({ onCTAClick }: HeroProps) {
               </div>
             </div>
 
-            <div className="hero-meta hero-meta--mobile mt-3 text-center sm:hidden">
+            <div className="hero-copy__meta hero-meta hero-meta--mobile mt-3 text-center sm:hidden">
               <div className="hero-meta__mobile-row">
                 <span>{copy.hero.duration}</span>
                 <span aria-hidden="true">·</span>

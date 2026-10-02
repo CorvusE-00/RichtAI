@@ -1098,6 +1098,34 @@
   }
 
   @media (max-width: 639px) {
+    .hero-copy {
+      display: contents;
+    }
+
+    .hero-copy__heading {
+      order: 1;
+    }
+
+    .hero-copy__subheadline {
+      order: 2;
+      margin-top: 0.5rem;
+    }
+
+    .hero-visual-region {
+      order: 3;
+      margin-top: 0.75rem;
+    }
+
+    .hero-copy__cta {
+      order: 4;
+      margin-top: 0.25rem;
+    }
+
+    .hero-copy__meta {
+      order: 5;
+      margin-top: 0;
+    }
+
     .hero-heading {
       font-size: 2.15rem;
       line-height: 1;
