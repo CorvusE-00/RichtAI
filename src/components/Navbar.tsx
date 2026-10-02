@@ -99,7 +99,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
         </div>
 
         {/* Mobile Controls */}
-        <div className="hidden lg:flex items-center gap-2 justify-self-end">
+        <div className="lg:hidden flex items-center gap-2 justify-self-end">
           <button
             onClick={toggleLanguage}
             className="inline-flex min-w-11 items-center justify-center rounded-lg border border-navy-600/70 px-2.5 py-2 text-xs font-semibold tracking-wide text-snow-300 transition-colors hover:border-teal-400/50 hover:text-teal-200"
