@@ -129,3 +129,9 @@ Do not begin imagery work, modify unrelated sections, change the site architectu
 - Removed mobile-only utility icons and non-essential workflow metadata while preserving the three reassurance ideas.
 - Verification: `pnpm typecheck`, `pnpm lint`, `pnpm build`, live preview HTTP 200, and `git diff --check` passed. No new dependency or imagery work was introduced.
 - The remaining unchecked items are manual browser checks for Turkish/English switching and 375/320px visual inspection; the live preview remains available at `http://localhost:5173/`.
+
+## Hero correction record
+
+- Added Turkish-only desktop tuning for heading scale, line-height, width, and Hero padding; English desktop classes remain unchanged.
+- Tightened mobile Hero spacing and converted the workflow summary into compact one-column rows while retaining the full enquiry → interpretation → action → appointment story.
+- Reduced mobile workflow chrome, internal padding, metadata, and action gaps without scaling the component or changing content.

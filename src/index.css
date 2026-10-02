@@ -148,6 +148,25 @@
     @apply border-t border-navy-700/50 pt-3;
   }
 
+  @media (min-width: 1024px) {
+    .hero-section--tr {
+      padding-top: 8.5rem;
+      padding-bottom: 4.5rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .hero-section--tr .hero-heading {
+      max-width: 36rem;
+      font-size: 3.6rem;
+      line-height: 1;
+    }
+
+    .hero-section--tr .hero-heading > span + span {
+      margin-top: 0.25rem;
+    }
+  }
+
   /* Stable operational region without adding another decorative card. */
   .hero-visual-region {
     @apply relative flex min-h-0 items-center;
@@ -928,7 +947,7 @@
   /* Mobile keeps the approved visual language, but removes desktop-style density. */
   @media (max-width: 767px) {
     .workflow-scene__top {
-      @apply flex-row items-center justify-between gap-2;
+      @apply gap-2 px-3 py-2;
     }
 
     .workflow-scene__example {
@@ -936,31 +955,39 @@
     }
 
     .workflow-fields {
-      @apply grid-cols-2 gap-x-3 gap-y-2;
+      @apply grid-cols-1 gap-y-1.5;
+    }
+
+    .workflow-fields > div {
+      @apply flex items-center justify-between gap-3;
+    }
+
+    .workflow-fields dd {
+      @apply mt-0 text-right;
     }
 
     .workflow-event {
-      @apply pb-3;
+      @apply pb-2.5;
     }
 
     .workflow-interpretation {
-      @apply pt-3;
+      @apply pt-2.5;
     }
 
     .workflow-actions {
-      @apply mt-3 pt-3;
+      @apply mt-2.5 pt-2.5;
     }
 
     .workflow-message {
-      @apply mt-2.5 py-2.5;
+      @apply mt-2 py-2.5;
     }
 
     .workflow-actions__list {
-      @apply mt-2 space-y-2;
+      @apply mt-2 space-y-1.5;
     }
 
     .workflow-complete {
-      @apply mt-3 px-3 py-2.5;
+      @apply mt-2.5 gap-2 px-2.5 py-2.5;
     }
 
     .hero-meta__reassurance {
@@ -1040,7 +1067,7 @@
     }
 
     .workflow-scene__body {
-      @apply p-3;
+      @apply p-2.5;
     }
 
     .workflow-scene__example {
@@ -1056,7 +1083,7 @@
     }
 
     .hero-meta {
-      @apply mt-5;
+      @apply mt-4;
     }
 
     .hero-meta__separator {
