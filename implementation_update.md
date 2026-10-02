@@ -1,85 +1,102 @@
-# V9A — Global Rhythm, Section Tone, and Mobile-First Polish
+# V9B1 — Visual Differentiation Cleanup
 
-Status: **V9A complete — imagery/proof pass deferred**
+Status: **V9B1 complete — V9B2 deferred**
 
 ## Scope
 
-Polish the existing Richt Ai landing page as one coherent experience across desktop, tablet, and mobile. Prioritize mobile clarity while preserving the approved V0–V8 concepts and content structure.
+Refine the existing full-page composition so approved sections no longer repeat the same structural motifs. V9A remains approved and its mobile improvements must be preserved.
 
-Do not add the chatbot, redesign section concepts, add stock photography, add new content categories, or add imagery in this phase. Do not change business logic or copy.
+Do not add imagery, add the chatbot, rewrite the site architecture, redesign approved section concepts, change locked surfaces, add dependencies, or begin imagery work.
 
-## Mobile-first work
+## Challenges / Problem balance
 
-- [x] Review the Turkish page at 320px and 375px, and the English page at 375px.
-- [x] Improve hero headline wrapping, paragraph readability, CTA prominence, trust/meta rows, spacing, and operational-panel density on mobile without changing the hero concept.
-- [x] Make the operational panel feel intentionally designed for mobile, using mobile-specific layout rules only where needed.
-- [x] Improve Problem mobile readability by reducing tiny labels, stacking incidents clearly, and avoiding mini-dashboard density while preserving all four themes.
-- [x] Improve Solution mobile readability by keeping all three capabilities understandable and simplifying delicate micro-interfaces at small widths where needed.
-- [x] Verify How It Works, Trust, FAQ, Final CTA, and Footer remain readable and connected on mobile.
-- [x] Verify no horizontal overflow and no microscopic labels at mobile widths.
+- [x] Inspect the desktop Problem composition as a statement supported by evidence.
+- [x] Move the desktop Problem grid closer to `0.95fr / 1.05fr` or `1fr / 1fr`.
+- [x] Increase the effective visual presence of the editorial copy without making it oversized.
+- [x] Slightly reduce the board’s maximum perceived width or internal visual mass without shrinking text.
+- [x] Preserve all four challenge incidents and the existing board concept.
+- [x] Preserve the V9A mobile Problem behavior.
 
-## Whole-page rhythm and transitions
+## Numbering hierarchy
 
-- [x] Audit the full vertical rhythm across Hero, StatisticsStrip, Problem, Solution, How It Works, Trust, Founder, FAQ, Final CTA, and Footer.
-- [x] Adjust section padding, intro-to-content spacing, heading-to-body gaps, dead zones, and cramped transitions with intentional hierarchy rather than one shared spacing value.
-- [x] Use quiet tone shifts, border rules, spacing, and restrained gradients to clarify section transitions.
-- [x] Avoid decorative blobs, glow walls, SVG waves, and ornamental separators.
-- [x] Preserve the approved concepts of How It Works, FAQ, Final CTA, and Footer while polishing spacing, tone, emphasis, mobile readability, and surrounding connections.
+- [x] Audit all visible numbered systems across Solution, How It Works, and Trust.
+- [x] Keep the Solution capability indexes as quiet editorial references.
+- [x] Keep the How It Works `01 / 02 / 03` sequence as chronological client-journey numbering.
+- [x] Keep How It Works numbers visible and do not replace them with icons.
+- [x] Remove the `01 / 02 / 03 / 04` indexes from the Trust system proof flow.
+- [x] Replace Trust system-proof numbers with words, thin directional connectors, and restrained state markers.
+- [x] Replace the four Trust process numbers with a visually distinct semantic marker system.
+- [x] Use four small custom line glyphs or simple inline SVG/CSS markers for: understand/map, structure/design, build/verify, and continuity/support.
+- [x] Keep Trust process rows, copy, and hierarchy intact.
+- [x] Keep Trust markers approximately 16–20px, one-color neutral/teal, and understated.
+- [x] Do not use large Lucide icons, icon circles, or four cards.
+- [x] Confirm Solution, How It Works, and Trust now have distinct visual vocabularies.
 
-## Tone and color hierarchy
+## StatisticsStrip refinement
 
-- [x] Keep the existing dark navy, teal, cyan, and snow brand family.
-- [x] Establish subtle distinction between the base background, section surfaces, elevated local panels, transition sections, and footer/end-state area.
-- [x] Ensure the page no longer reads as one uninterrupted navy slab.
-- [x] Audit teal usage across labels, numbers, rules, dots, and accents.
-- [x] Keep stronger teal for the primary CTA, active states, one focal accent per section, and meaningful system/status emphasis.
-- [x] Reduce decorative teal repetition and keep cyan secondary and rare.
+- [x] Refine the strip so it reads as a service-principle rail rather than a SaaS KPI bar.
+- [x] Keep the existing factual and qualitative information: `7/24`, `1:1`, `Smart`, and `One`.
+- [x] Do not invent metrics, add unsupported numbers, or substantially increase the strip height.
+- [x] Slightly reduce value/numeric dominance.
+- [x] Let each label and value read more as one service principle.
+- [x] Reduce icon repetition further.
+- [x] Use separators or typography instead of four equal metric moments where appropriate.
+- [x] Keep the strip compact as the Hero-to-Problem transition.
+- [x] Preserve the clean V9A 2×2 mobile layout if it remains effective.
 
-## StatisticsStrip
+## Repetition audit
 
-- [x] Refine StatisticsStrip as a transition band rather than a SaaS metrics rail.
-- [x] Soften icon prominence and reduce visual clutter.
-- [x] Improve mobile spacing and align the band with the refined site language.
-- [x] Do not add unsupported metrics or redesign the strip fully.
+- [x] Review repeated teal dots, small numbered labels, and horizontal-rule-plus-number patterns.
+- [x] Reduce repetition only where consecutive sections begin to look templated.
+- [x] Do not globally remove meaningful active, system, status, or focal accents.
 
-## Accessibility and preservation
+## Locked surfaces
 
-- [x] Preserve semantic structure, keyboard behavior, focus states, contrast, and reduced-motion behavior.
-- [x] Do not reduce muted text contrast too aggressively.
-- [x] Preserve desktop quality while improving mobile clarity.
-- [x] Keep Turkish and English behavior stable.
+- [x] Leave the Hero structure and workflow unchanged.
+- [x] Leave Solution composition unchanged apart from its existing quiet indexes.
+- [x] Leave How It Works copy and structure unchanged apart from preserving its numbering.
+- [x] Leave Founder layout, FAQ behavior, Final CTA, Footer, metadata, and contact flow unchanged.
+- [x] Do not add imagery or chatbot work.
 
 ## Expected implementation surface
 
-- [x] Update `src/index.css` for shared tones, spacing, responsive rules, and accent hierarchy.
-- [x] Make only small wrapper/class adjustments in existing section components where required for mobile or transitions.
-- [x] Update this checklist with the actual fixes and evidence after implementation.
-- [x] Do not add imagery or change business logic/content structure.
+- [x] Update `src/components/Problem.tsx` only for the approved desktop balance adjustment if required.
+- [x] Update `src/components/StatisticsStrip.tsx` for the service-principle rail treatment if required.
+- [x] Update `src/components/Trust.tsx` to remove Trust system-proof indexes and introduce semantic process markers.
+- [x] Update `src/index.css` for proportions, marker/glyph styling, density, and repetition cleanup.
+- [x] Update this checklist after each implementation slice and verification pass.
+- [x] Do not add a new dependency.
 
 ## Verification checklist
 
 - [x] Run `pnpm typecheck`.
 - [x] Run `pnpm lint`.
 - [x] Run `pnpm build`.
-- [x] Inspect Turkish at 320px, 375px, 768px, 1024px, and desktop widths.
-- [x] Inspect English at 375px and desktop widths.
-- [x] Confirm the mobile hero is clearly improved.
-- [x] Confirm Problem and Solution visuals are meaningfully more readable on mobile.
-- [x] Confirm section transitions are cleaner and tone hierarchy is clearer.
-- [x] Confirm desktop remains strong and no section concept changed.
+- [x] Inspect desktop Problem statement versus board balance.
+- [x] Inspect the Solution → How It Works → Trust numbering rhythm on desktop.
+- [x] Inspect the Hero → StatisticsStrip → Problem transition on desktop.
+- [x] Inspect Turkish at 375px and 320px.
+- [x] Inspect English at 375px and 320px if needed for layout parity.
+- [x] Confirm all four Problem incidents remain.
+- [x] Confirm How It Works numbering remains visible and chronological.
+- [x] Confirm Solution indexes remain subtle.
+- [x] Confirm Trust no longer contains two repeated numbered systems.
+- [x] Confirm StatisticsStrip contains no unsupported claims.
+- [x] Confirm no horizontal overflow.
+- [x] Confirm Turkish and English remain stable.
+- [x] Confirm all V9A mobile improvements remain intact.
 - [x] Confirm no new imagery was added.
 
-## Deferred for the next imagery/proof pass
+## Deferred to V9B2
 
-- [ ] Consider adding one or two intentional real images or mockups only after V9A, using the available layout without changing the approved section concepts.
-- [ ] Revisit proof-oriented visual opportunities only after suitable real evidence is available.
+- [ ] Defer imagery, proof-oriented visual work, and any broader changes outside the V9B1 differentiation cleanup.
 
 ## Definition of done
 
-- [x] Mobile hero, Problem, and Solution are clearly improved.
-- [x] The page has intentional vertical rhythm and tonal hierarchy from top to bottom.
-- [x] Teal usage is disciplined without weakening meaningful system or CTA states.
-- [x] Desktop quality is preserved.
-- [x] Turkish and English remain stable.
-- [x] No new imagery is added in V9A.
-- [x] Typecheck, lint, build, and the required responsive browser checks pass.
+- [x] The Problem board no longer visually overwhelms its editorial copy.
+- [x] Numbered systems have clear roles instead of appearing everywhere.
+- [x] Trust has a distinct visual vocabulary from How It Works.
+- [x] StatisticsStrip feels less like a generic KPI strip.
+- [x] V9A mobile quality is preserved.
+- [x] No new imagery is added.
+- [x] Typecheck, lint, build, and responsive browser checks pass.

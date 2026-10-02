@@ -30,7 +30,7 @@ export function Trust() {
             <div className="trust-system-proof__flow">
               {systemProof.items.map((item, index) => (
                 <div key={item} className="trust-system-proof__step">
-                  <span className="trust-system-proof__index">0{index + 1}</span>
+                  <span className="trust-system-proof__marker" aria-hidden="true" />
                   <span>{item}</span>
                   {index < systemProof.items.length - 1 && <span className="trust-system-proof__arrow" aria-hidden="true">→</span>}
                 </div>
@@ -54,12 +54,18 @@ export function Trust() {
                 style={{ '--reveal-delay': `${index * 80}ms` } as React.CSSProperties}
                 className="reveal trust-process__row"
               >
-                <span className="trust-process__number">0{index + 1}</span>
+                <span className="trust-process__glyph" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round">
+                    {index === 0 && <><path d="M3.5 5.5h5l2 2h6v7h-13z" /><path d="M3.5 9.5h13" /></>}
+                    {index === 1 && <><path d="M4 5h12M4 10h12M4 15h12" /><path d="M2.75 5h.01M2.75 10h.01M2.75 15h.01" /></>}
+                    {index === 2 && <><path d="m4 11 3.2 3.2L16.5 5" /><path d="M4 5.5h4" /><path d="M4 17h12" /></>}
+                    {index === 3 && <><path d="M5 5v5h5" /><path d="M5.3 10A6 6 0 1 0 7 5.5" /><path d="m5 5 2.7.5" /></>}
+                  </svg>
+                </span>
                 <div className="trust-process__content">
                   <h3 className="trust-process__title">{step.title}</h3>
                   <p className="trust-process__description">{step.description}</p>
                 </div>
-                <span className="trust-process__marker" aria-hidden="true" />
               </li>
             ))}
           </ol>

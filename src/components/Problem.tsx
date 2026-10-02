@@ -9,7 +9,7 @@ export function Problem() {
       <div className="section-surface section-surface--problem absolute inset-0" />
 
       <div className="relative max-w-6xl mx-auto px-5 sm:px-6">
-        <div className="grid items-start gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:gap-16">
+        <div className="grid items-start gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
           <div data-reveal className="reveal lg:sticky lg:top-28">
             <span className="section-label">{copy.problem.label}</span>
             <h2 className="mt-6 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-snow-50 leading-tight tracking-tight">
@@ -26,7 +26,7 @@ export function Problem() {
             </p>
           </div>
 
-          <div data-reveal className="reveal problem-board" aria-label={copy.problem.prompt}>
+          <div data-reveal className="reveal problem-board lg:w-full lg:max-w-[32rem] lg:justify-self-end" aria-label={copy.problem.prompt}>
             <div className="problem-board__header">
               <div className="problem-board__title">
                 <span className="problem-board__dot" aria-hidden="true" />
