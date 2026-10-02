@@ -25,7 +25,7 @@ export const translations = {
     hero: {
       headline: 'İşletmenizin dijital iletişimini',
       headlineAccent: 'daha akıllı hâle getirin.',
-      subheadline: 'Web sitenizi ve müşteri iletişiminizi daha düzenli, hızlı ve anlaşılır hâle getirin.',
+      subheadline: 'Manuel işleri azaltan, müşteri iletişimini düzenleyen ve dijital deneyimi güçlendiren yapay zekâ otomasyonları ve modern web sistemleri.',
       cta: 'Ücretsiz tanışma görüşmesi',
       duration: 'İlk görüşme yaklaşık 30 dakika sürer.',
       noCommitment: 'Herhangi bir taahhüt yok',
@@ -260,7 +260,7 @@ export const translations = {
     hero: {
       headline: 'Make your business communication',
       headlineAccent: 'smarter by design.',
-      subheadline: 'Make your website and customer communication clearer, faster, and easier to manage.',
+      subheadline: 'AI automation, customer-facing systems and modern web experiences — built to reduce manual work and keep every interaction moving.',
       cta: 'Book a free introduction call',
       duration: 'The first call takes around 30 minutes.',
       noCommitment: 'No commitment required',

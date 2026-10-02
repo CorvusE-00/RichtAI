@@ -1,5 +1,4 @@
-import { ArrowRight, ShieldCheck, UserRound } from 'lucide-react';
-import { AIWorkflow } from './AIWorkflow';
+import { ArrowRight, Check, ShieldCheck, UserRound } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 
 interface HeroProps {
@@ -16,7 +15,7 @@ export function Hero({ onCTAClick }: HeroProps) {
       <div className="absolute inset-0 bg-gradient-to-b from-navy-950/45 via-navy-950/80 to-navy-950 pointer-events-none" />
 
       <div data-reveal className="reveal relative z-10 max-w-6xl mx-auto px-5 sm:px-6">
-        <div className="grid items-center gap-3 sm:gap-8 md:gap-14 xl:grid-cols-[1.02fr_0.98fr] xl:gap-16">
+        <div className="grid items-center gap-3 sm:gap-8 md:gap-14 lg:grid-cols-[0.84fr_1.16fr] xl:gap-16">
           <div className="hero-copy text-center xl:text-left">
             {/* Headline */}
             <h1 className="hero-copy__heading hero-heading mt-0 max-w-[40rem] font-display text-4xl sm:text-5xl xl:text-6xl 2xl:text-7xl font-semibold leading-[1.04] tracking-[-0.04em] text-snow-50 animate-fade-in-up animate-delay-100">
@@ -65,9 +64,32 @@ export function Hero({ onCTAClick }: HeroProps) {
             </div>
           </div>
 
-          {/* Stable operational visual region; the workflow remains a single embedded scene. */}
+          {/* Visual-led Hero region with one compact operational proof overlay. */}
           <div className="hero-visual-region" aria-label={copy.workflow.aria}>
-            <AIWorkflow />
+            <div className="hero-visual">
+              <div className="hero-visual__frame">
+                <img
+                  src="/images/ai-operations-hero.png"
+                  alt="AI automation system quietly organizing business operations"
+                />
+              </div>
+
+              <div className="hero-proof" aria-label={copy.workflow.aria}>
+                <div className="hero-proof__header">
+                  <span className="hero-proof__status-dot" aria-hidden="true" />
+                  <span>{copy.workflow.status}</span>
+                </div>
+                <div className="hero-proof__flow">
+                  <span>{copy.workflow.incoming}</span>
+                  <span className="hero-proof__arrow" aria-hidden="true">→</span>
+                  <span>{copy.workflow.interpretation}</span>
+                  <span className="hero-proof__arrow" aria-hidden="true">→</span>
+                  <span>{copy.workflow.actionTitle}</span>
+                  <span className="hero-proof__arrow" aria-hidden="true">→</span>
+                  <span className="hero-proof__complete"><Check className="h-3 w-3" aria-hidden="true" />{copy.workflow.completed}</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
