@@ -1,230 +1,176 @@
-# Hero polish + full-site copy refinement
+# Hero live activity overlay refinement
 
 ## Objective
 
-Refine the new Hero and perform a site-wide bilingual copy audit so the entire site feels:
+Refine only the small overlay attached to the Hero visual.
 
-- more professional
-- easier for customers to understand
-- less repetitive
-- more premium
-- more consistent in Turkish and English
-- more clearly written from the buyer’s perspective
+The current overlay explains a process with arrows and sequential steps, which repeats the Solution section and feels like a static SaaS workflow diagram. Replace it with a compact live activity concept that suggests the AI automation system is quietly working in the background.
 
-This phase is not a redesign of the entire site structure. It is a refinement pass focused on Hero polish and full-site copy clarity and professionalism.
+The overlay should be visually engaging, slightly animated, premium, restrained, easy to understand, distinct from the Solution section, and secondary to the Hero image.
 
-## Core priorities
+Do not redesign the Hero itself.
 
-### Priority 1 — Hero polish
+## New concept
 
-The new Hero direction is approved, but the following details need refinement:
+Use one small activity panel:
 
-- prevent the compact operational proof row beneath “Automation active” from wrapping awkwardly
-- give the Hero image a slightly taller and stronger vertical presence
-- make the Hero image feel more realistic, premium, and polished
-- preserve a strong desktop and mobile Hero
+- English: `Live activity`
+- Turkish: `Canlı akış`
 
-### Priority 2 — Full-site copy audit
+The panel should show a glimpse of background activity happening now. It must not explain the entire automation process.
 
-Review all important customer-facing copy in both languages. The goal is not to add text, but to make the existing text simpler, clearer, less repetitive, more convincing, more customer-friendly, and more professional.
+Suggested natural activity labels:
 
-## Hero polish requirements
+### English
 
-### Operational proof row
+- `New lead captured`
+- `Priority detected`
+- `Follow-up queued`
+- `Calendar availability checked`
 
-The flow beneath “Automation active” must remain controlled and readable:
+Use three or four events based on the strongest composition.
 
-`New enquiry → Request summary → System actions → Appointment created`
+### Turkish
 
-Requirements:
+- `Yeni talep alındı`
+- `Öncelik belirlendi`
+- `Takip planlandı`
+- `Uygun saat kontrol edildi`
 
-- avoid awkward wrapping to a second line
-- preserve readability and compactness
-- keep it elegant on desktop
-- adapt appropriately on smaller widths
-- avoid cramped unreadable text, broken arrows, overflow, or sloppy line breaks
+Preserve natural wording in both languages. Avoid technical jargon and awkward literal translation.
 
-Acceptable approaches include improved spacing, responsive font sizing, responsive wrapping, a mobile-specific stacked treatment, or a narrow-screen layout adjustment.
+## Animation direction
 
-### Hero image quality
+Implement calm, premium motion:
 
-Refine the approved Hero image direction with:
+- one event is active at a time
+- the active event receives slightly stronger emphasis
+- previous events can become completed or muted
+- a small live-status dot may pulse
+- completed events may use a tiny check
+- the active event may use a subtle fade or vertical slide
+- activity advances approximately every 2.5–3.5 seconds
+- the animation loops gently
 
-- slightly taller vertical presence
-- more premium and realistic lighting/materials
-- a polished, credible business-operations atmosphere
-- clear alignment with AI automation and modern business operations
+Do not use bouncing, flashy transitions, rapid movement, large glows, or exaggerated loading animations.
 
-Avoid sci-fi clichés, robots, holograms, glowing neural networks, cheesy corporate stock, fake metrics, and noisy nonsense UI.
+## Reduced motion
 
-### Mobile Hero quality
+Respect `prefers-reduced-motion`.
 
-Preserve the intentional mobile ordering, strong hierarchy, collision-free layout, sensible crop, and readable proof strip. Desktop polish must not reduce mobile quality.
+When reduced motion is enabled:
 
-## Full-site copy audit requirements
+- stop cycling animation
+- remove pulse animation
+- show a stable, completed, readable state
 
-Review major site copy in both Turkish and English. Every line should be customer-first, direct, simple, premium, clear on first read, natural, free of unnecessary repetition, and free of vague AI clichés or filler.
+## Visual structure
 
-The tone should feel like a founder-led specialist studio that is operationally capable, calm, credible, and easy to understand—not generic AI/SaaS filler, overcomplicated jargon, literal translation, or buzzword-heavy marketing.
+Use one compact surface only:
 
-### Turkish copy
+- a tiny label or status at the top
+- three compact activity rows
+- one active state
+- subtle completion indicators
 
-Review Turkish carefully for unnatural or weak phrasing. It should feel natural, elegant, simple, trustworthy, client-friendly, and not stiff or overly literal. Avoid awkward uses of words such as `sakin` when the context does not support them.
+Do not add multiple floating cards, arrows, mini workflow diagrams, charts, or fake metrics. Keep typography readable and the Hero image visually dominant.
 
-### English copy
+## Responsive behavior
 
-Make English polished and native. Avoid repetition, clunky phrasing, generic startup filler, and overlapping ideas.
+### Desktop
 
-## Sections to audit
+- allow the overlay to overlap the lower part of the Hero image
+- keep it compact
+- prevent awkward text wrapping
+- keep the visual dominant
 
-Review and refine copy in both languages for:
+### Mobile
 
-- Hero
-- StatisticsStrip labels, only if needed
+- keep rows readable
+- allow rows to stack naturally
+- prevent horizontal overflow
+- do not use microscopic text
+- do not make the Hero significantly taller
+- leave the existing Hero mobile composition otherwise unchanged
+
+## Locked areas
+
+Do not change:
+
+- Hero image
+- Hero layout
+- Hero headline
+- Hero subheadline
+- Hero CTA
+- Hero reassurance
+- Navbar
+- StatisticsStrip
 - Problem / Challenges
 - Solution
-- How it works
+- How It Works
 - Trust
 - Founder
 - FAQ
 - Final CTA
-- Footer microcopy, if applicable
-- supporting labels, proof labels, and small user-facing UI text
+- Footer
 
-Do not change navigation labels unless there is a strong clarity reason. Do not change the brand name or CTA behavior.
-
-### Section goals
-
-#### Hero
-
-- keep the approved direction
-- ensure headline and subheadline do not feel repetitive
-- make reassurance natural in both languages
-- make operational proof labels read cleanly
-
-#### Problem / Challenges
-
-- make pain statements clearer and more customer-readable
-- remove awkward phrasing
-- keep the section diagnostic rather than overly dramatic
-
-#### Solution
-
-- make each capability easy to understand quickly
-- keep the three capabilities clearly distinct
-- reduce jargon
-- make explanatory lines immediately understandable to a potential client
-
-#### How it works
-
-- make the steps extremely clear and calm
-- avoid vague or over-descriptive phrasing
-- make the process feel simple and trustworthy
-
-#### Trust
-
-- make the founder-led and single-point-of-contact message clear
-- keep it professional and reassuring
-- remove awkward or repetitive wording
-
-#### FAQ
-
-- make questions sound like real buyer questions
-- make answers simple, direct, helpful, and non-repetitive
-
-#### Final CTA
-
-- make the closing message clear and easy to act on
-- avoid repeating the Hero wording unnecessarily
-
-## Editorial direction
-
-Copy changes must feel like a consistent editorial refinement pass, not random rewrites. The site should become easier to scan, easier to trust, and easier to understand without becoming wordy.
-
-## Locked areas
-
-Do not introduce:
-
-- new sections
-- chatbot work
-- dental screenshot changes
-- major layout redesign outside Hero polish
-- new dependencies
-- SEO or metadata rewrites unless absolutely required by copy changes
-- fake proof claims
-- invented results or metrics
+This phase concerns only the Hero activity overlay.
 
 ## Expected implementation scope
 
-Likely files for the later implementation:
+Likely files:
 
 - `src/components/Hero.tsx`
-- `src/components/Problem.tsx`
-- `src/components/Solution.tsx`
-- `src/components/HowItWorks.tsx`
-- `src/components/Trust.tsx`
-- `src/components/FAQ.tsx`
-- `src/components/FinalCTA.tsx`
-- `src/components/Footer.tsx`, if needed
-- `src/lib/i18n.tsx`
+- optional small Hero activity component if it improves clarity
 - `src/index.css`
-- `public/images/ai-operations-hero.png` or an updated equivalent
+- `src/lib/i18n.tsx`
 - `implementation_update.md`
 
-Only the listed scope should be changed during implementation.
+Do not add a dependency.
 
-## Checklist 1 — Hero polish
+## Checklist 1 — Overlay structure
 
-- [x] Refine the Hero operational proof row so it does not wrap awkwardly.
-- [x] Refine the Hero visual height and presence.
-- [x] Improve the Hero image realism and quality direction.
-- [x] Protect mobile Hero quality.
+- [x] Remove the current arrow-based workflow overlay.
+- [x] Create a compact `Live activity` / `Canlı akış` structure.
+- [x] Use one surface only.
+- [x] Preserve Hero image dominance.
 
-## Checklist 2 — Hero copy micro-audit
+## Checklist 2 — Bilingual activity copy
 
-- [x] Audit Hero microcopy in Turkish and English.
-- [x] Remove repetition.
-- [x] Improve clarity and professionalism.
-- [x] Keep CTA text unchanged.
+- [x] Define natural English activity labels.
+- [x] Define natural Turkish equivalents.
+- [x] Avoid technical jargon and awkward translation.
+- [x] Confirm the copy does not repeat the Solution section.
 
-## Checklist 3 — Problem / Challenges copy audit
+## Checklist 3 — Animation
 
-- [x] Refine headings, body copy, and supporting lines.
-- [x] Improve customer clarity.
-- [x] Remove awkward phrasing.
+- [x] Implement active and completed event states.
+- [x] Add subtle fade or slide behavior.
+- [x] Add a subtle live-status pulse.
+- [x] Use 2.5–3.5 second pacing.
+- [x] Implement a gentle loop.
 
-## Checklist 4 — Solution copy audit
+## Checklist 4 — Reduced motion
 
-- [x] Refine all three capabilities.
-- [x] Reduce repetition.
-- [x] Make the differences between capabilities clearer.
-- [x] Improve supporting labels and microcopy.
+- [x] Detect `prefers-reduced-motion`.
+- [x] Stop cycling when reduced motion is enabled.
+- [x] Remove pulse animation when reduced motion is enabled.
+- [x] Present a stable, readable state.
 
-## Checklist 5 — How it works + Trust copy audit
+## Checklist 5 — Responsive refinement
 
-- [x] Simplify process wording.
-- [x] Refine trust and founder language.
-- [x] Keep the tone calm and credible.
+- [x] Verify desktop behavior.
+- [x] Verify at 375px mobile width.
+- [x] Verify at 320px mobile width.
+- [x] Prevent wrapping and horizontal overflow.
+- [x] Preserve Hero height and balance.
 
-## Checklist 6 — FAQ + Final CTA + footer microcopy
+## Checklist 6 — Verification
 
-- [x] Make FAQs more natural and easier to understand.
-- [x] Make the closing CTA clearer and less repetitive.
-- [x] Refine remaining small user-facing text.
-
-## Checklist 7 — Bilingual consistency pass
-
-- [x] Ensure Turkish and English feel equally polished.
-- [x] Ensure ideas match without awkward literal translation.
-- [x] Remove weak or strange wording in both languages.
-
-## Checklist 8 — Verification
-
-- [x] Review all visible copy in Turkish and English.
-- [x] Verify no major repeated phrases remain.
-- [x] Verify the Hero proof row works responsively.
-- [x] Verify the Hero image remains strong.
-- [x] Verify mobile and desktop both work.
+- [x] Verify Turkish and English states.
+- [x] Verify no repetition with the Solution section.
+- [x] Verify no fake metrics.
+- [x] Verify CTA, image, and Hero layout are unchanged.
 - [x] Run `pnpm typecheck`.
 - [x] Run `pnpm lint`.
 - [x] Run `pnpm build`.
