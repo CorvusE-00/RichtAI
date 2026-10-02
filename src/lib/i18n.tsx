@@ -23,7 +23,6 @@ export const translations = {
       switchLanguage: 'Switch to English',
     },
     hero: {
-      badge: 'İşletmeler için modern web ve yapay zekâ çözümleri',
       headline: 'İşletmenizin dijital iletişimini',
       headlineAccent: 'daha akıllı hâle getirin.',
       subheadline: 'Web sitenizi ve müşteri iletişiminizi daha düzenli, hızlı ve anlaşılır hâle getirin.',
@@ -259,7 +258,6 @@ export const translations = {
       switchLanguage: 'Türkçeye geç',
     },
     hero: {
-      badge: 'Modern web and AI solutions for ambitious businesses',
       headline: 'Make your business communication',
       headlineAccent: 'smarter by design.',
       subheadline: 'Make your website and customer communication clearer, faster, and easier to manage.',

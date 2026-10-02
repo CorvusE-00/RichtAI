@@ -54,11 +54,11 @@ export function Navbar({ onCTAClick }: NavbarProps) {
     <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${isScrolled ? 'py-1' : 'py-2'}`}>
       <div className={`absolute inset-0 backdrop-blur-md border-b transition-all duration-500 ${isScrolled ? 'bg-navy-950/92 border-navy-600/70 shadow-[0_10px_40px_rgba(2,8,23,0.25)]' : 'bg-navy-950/45 border-navy-600/35'}`} />
 
-      <nav className={`relative max-w-6xl mx-auto px-5 sm:px-6 flex items-center justify-between transition-all duration-500 ${isScrolled ? 'h-14' : 'h-16'}`}>
+      <nav className={`relative max-w-6xl mx-auto px-5 sm:px-6 grid grid-cols-[1fr_auto_1fr] items-center transition-all duration-500 ${isScrolled ? 'h-14' : 'h-16'}`}>
         {/* Logo */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="flex items-center gap-2.5 group"
+          className="justify-self-start flex items-center gap-2.5 group"
         >
           <div className={`relative transition-transform duration-500 ${isScrolled ? 'scale-90' : ''}`}>
             <div className="absolute inset-0 bg-teal-500/30 blur-lg group-hover:bg-teal-500/40 transition-all duration-300" />
@@ -72,7 +72,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
         </button>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden lg:flex items-center gap-1 justify-self-center">
           {navLinks.map((link) => (
             <button
               key={link.id}
@@ -99,7 +99,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
         </div>
 
         {/* Mobile Controls */}
-        <div className="md:hidden flex items-center gap-2">
+        <div className="hidden lg:flex items-center gap-2 justify-self-end">
           <button
             onClick={toggleLanguage}
             className="inline-flex min-w-11 items-center justify-center rounded-lg border border-navy-600/70 px-2.5 py-2 text-xs font-semibold tracking-wide text-snow-300 transition-colors hover:border-teal-400/50 hover:text-teal-200"
@@ -118,7 +118,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
       </nav>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden relative overflow-hidden bg-navy-900/95 backdrop-blur-md border-b border-navy-600/40 transition-[max-height,opacity] duration-300 ${isMenuOpen ? 'max-h-[28rem] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}`}>
+      <div className={`lg:hidden relative overflow-hidden bg-navy-900/95 backdrop-blur-md border-b border-navy-600/40 transition-[max-height,opacity] duration-300 ${isMenuOpen ? 'max-h-[28rem] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}`}>
           <div className="px-5 py-4 space-y-1">
             {navLinks.map((link) => (
               <button

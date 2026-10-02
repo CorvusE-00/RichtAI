@@ -9,8 +9,8 @@ export function Problem() {
       <div className="section-surface section-surface--problem absolute inset-0" />
 
       <div className="relative max-w-6xl mx-auto px-5 sm:px-6">
-        <div className="grid items-start gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
-          <div data-reveal className="reveal lg:sticky lg:top-28">
+        <div className="grid items-start gap-10 lg:items-center lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+          <div data-reveal className="reveal">
             <span className="section-label">{copy.problem.label}</span>
             <h2 className="mt-6 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-snow-50 leading-tight tracking-tight">
               {copy.problem.headline}

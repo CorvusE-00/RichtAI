@@ -144,14 +144,6 @@
     text-wrap: balance;
   }
 
-  .hero-eyebrow {
-    @apply inline-flex items-center gap-2 border-l border-teal-400/60 pl-3 text-snow-400 text-xs sm:text-sm font-display tracking-wide;
-  }
-
-  .hero-eyebrow__mark {
-    @apply h-1.5 w-1.5 rounded-full bg-teal-400;
-  }
-
   .hero-meta {
     @apply border-t border-navy-700/50 pt-3;
   }
@@ -936,7 +928,7 @@
   /* Mobile keeps the approved visual language, but removes desktop-style density. */
   @media (max-width: 767px) {
     .workflow-scene__top {
-      @apply flex-col items-start gap-1.5;
+      @apply flex-row items-center justify-between gap-2;
     }
 
     .workflow-scene__example {
@@ -944,11 +936,43 @@
     }
 
     .workflow-fields {
-      @apply grid-cols-1 gap-y-2.5;
+      @apply grid-cols-2 gap-x-3 gap-y-2;
+    }
+
+    .workflow-event {
+      @apply pb-3;
+    }
+
+    .workflow-interpretation {
+      @apply pt-3;
+    }
+
+    .workflow-actions {
+      @apply mt-3 pt-3;
+    }
+
+    .workflow-message {
+      @apply mt-2.5 py-2.5;
+    }
+
+    .workflow-actions__list {
+      @apply mt-2 space-y-2;
     }
 
     .workflow-complete {
-      @apply mt-5;
+      @apply mt-3 px-3 py-2.5;
+    }
+
+    .hero-meta__reassurance {
+      @apply mt-2 flex-wrap justify-center gap-x-3 gap-y-1.5;
+    }
+
+    .hero-meta__reassurance > div {
+      @apply gap-0;
+    }
+
+    .hero-meta__reassurance svg {
+      display: none;
     }
 
     .problem-board__header {
@@ -1016,7 +1040,15 @@
     }
 
     .workflow-scene__body {
-      @apply p-4;
+      @apply p-3;
+    }
+
+    .workflow-scene__example {
+      display: none;
+    }
+
+    .workflow-fields dd {
+      @apply text-[0.8125rem];
     }
 
     .workflow-section-heading {
@@ -1025,6 +1057,10 @@
 
     .hero-meta {
       @apply mt-5;
+    }
+
+    .hero-meta__separator {
+      display: none;
     }
 
     .problem-board__caption {

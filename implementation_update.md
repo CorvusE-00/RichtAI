@@ -1,70 +1,92 @@
-# V9B1 — Visual Differentiation Cleanup
+# V9B1.1 — Composition and Mobile-Hero Correction Pass
 
-Status: **V9B1 complete — V9B2 deferred**
+Status: **Implemented — automated verification complete; manual viewport checks noted below**
 
 ## Scope
 
-Refine the existing full-page composition so approved sections no longer repeat the same structural motifs. V9A remains approved and its mobile improvements must be preserved.
+Make only the approved composition and mobile-hero corrections below. This is not a redesign phase.
 
-Do not add imagery, add the chatbot, rewrite the site architecture, redesign approved section concepts, change locked surfaces, add dependencies, or begin imagery work.
+Do not begin imagery work, modify unrelated sections, change the site architecture, change locked content, or add dependencies.
 
-## Challenges / Problem balance
+## Desktop navbar alignment
 
-- [x] Inspect the desktop Problem composition as a statement supported by evidence.
-- [x] Move the desktop Problem grid closer to `0.95fr / 1.05fr` or `1fr / 1fr`.
-- [x] Increase the effective visual presence of the editorial copy without making it oversized.
-- [x] Slightly reduce the board’s maximum perceived width or internal visual mass without shrinking text.
-- [x] Preserve all four challenge incidents and the existing board concept.
-- [x] Preserve the V9A mobile Problem behavior.
+- [x] Rework the desktop navbar into three visual zones: left logo, centered main navigation, and right language/CTA controls.
+- [x] Use a robust grid or equivalent layout conceptually based on `grid-template-columns: 1fr auto 1fr`.
+- [x] Keep the main navigation geometrically centered regardless of logo and CTA widths.
+- [x] Avoid arbitrary margins and fragile absolute positioning.
+- [ ] Test Turkish and English labels for collision or drift.
+- [x] Allow the mobile menu breakpoint to activate earlier if an intermediate width becomes cramped.
 
-## Numbering hierarchy
+## Language selector preservation
 
-- [x] Audit all visible numbered systems across Solution, How It Works, and Trust.
-- [x] Keep the Solution capability indexes as quiet editorial references.
-- [x] Keep the How It Works `01 / 02 / 03` sequence as chronological client-journey numbering.
-- [x] Keep How It Works numbers visible and do not replace them with icons.
-- [x] Remove the `01 / 02 / 03 / 04` indexes from the Trust system proof flow.
-- [x] Replace Trust system-proof numbers with words, thin directional connectors, and restrained state markers.
-- [x] Replace the four Trust process numbers with a visually distinct semantic marker system.
-- [x] Use four small custom line glyphs or simple inline SVG/CSS markers for: understand/map, structure/design, build/verify, and continuity/support.
-- [x] Keep Trust process rows, copy, and hierarchy intact.
-- [x] Keep Trust markers approximately 16–20px, one-color neutral/teal, and understated.
-- [x] Do not use large Lucide icons, icon circles, or four cards.
-- [x] Confirm Solution, How It Works, and Trust now have distinct visual vocabularies.
+- [ ] Keep TR/EN switching logic and its accessibility label unchanged and functional.
+- [x] Keep the compact language control in the desktop right-side action area.
+- [x] Keep TR/EN directly visible beside the mobile menu button.
+- [ ] Reduce mobile horizontal padding only if needed for space.
+- [ ] Verify language switching works in both directions.
 
-## StatisticsStrip refinement
+## Problem / Challenges vertical balance
 
-- [x] Refine the strip so it reads as a service-principle rail rather than a SaaS KPI bar.
-- [x] Keep the existing factual and qualitative information: `7/24`, `1:1`, `Smart`, and `One`.
-- [x] Do not invent metrics, add unsupported numbers, or substantially increase the strip height.
-- [x] Slightly reduce value/numeric dominance.
-- [x] Let each label and value read more as one service principle.
-- [x] Reduce icon repetition further.
-- [x] Use separators or typography instead of four equal metric moments where appropriate.
-- [x] Keep the strip compact as the Hero-to-Problem transition.
-- [x] Preserve the clean V9A 2×2 mobile layout if it remains effective.
+- [x] Preserve the approved V9B1 `0.95fr / 1.05fr` width balance and approximately `32rem` board cap.
+- [x] Remove desktop sticky behavior from the Problem editorial intro.
+- [x] Vertically center the editorial copy against the taller board on large screens.
+- [x] Use `items-center` or an equivalent optical treatment, with only a small offset if necessary.
+- [x] Preserve natural document flow, mobile text-first stacking, copy, all four incidents, and the board concept.
 
-## Repetition audit
+## Hero eyebrow cleanup
 
-- [x] Review repeated teal dots, small numbered labels, and horizontal-rule-plus-number patterns.
-- [x] Reduce repetition only where consecutive sections begin to look templated.
-- [x] Do not globally remove meaningful active, system, status, or focal accents.
+- [x] Remove the English Hero category sentence `Modern web and AI solutions for ambitious businesses`.
+- [x] Remove its Turkish equivalent.
+- [x] Do not replace it with a badge, slogan, category chip, decorative line, or icon label.
+- [x] Remove unused translation keys and eyebrow CSS only if no longer referenced.
+- [ ] Keep the TR/EN language controls fully intact.
 
-## Locked surfaces
+## Hero spacing after eyebrow removal
 
-- [x] Leave the Hero structure and workflow unchanged.
-- [x] Leave Solution composition unchanged apart from its existing quiet indexes.
-- [x] Leave How It Works copy and structure unchanged apart from preserving its numbering.
-- [x] Leave Founder layout, FAQ behavior, Final CTA, Footer, metadata, and contact flow unchanged.
-- [x] Do not add imagery or chatbot work.
+- [x] Reduce the unnecessary top/content gap created by the removed eyebrow.
+- [x] Let the headline begin earlier while preserving safe navbar clearance.
+- [x] Keep the approved desktop Hero composition and right-side workflow.
+- [x] Do not rewrite the headline, supporting copy, or CTA.
+
+## Mobile Hero fold and spacing
+
+- [ ] Audit the Hero at approximately 375px and 320px.
+- [ ] Reduce mobile hero top padding where appropriate.
+- [x] Tighten headline-to-paragraph, paragraph-to-CTA, CTA-to-meta, meta, Hero-to-workflow, and workflow internal spacing where appropriate.
+- [ ] Keep comfortable body text sizes and accessible CTA touch targets.
+- [ ] Preserve the headline as the strongest visual element; only make modest responsive typography adjustments if needed.
+- [ ] Make the first mobile viewport communicate the headline, supporting copy, CTA, compact reassurance, and substantially more of the complete workflow.
+
+## Mobile Hero reassurance
+
+- [x] Preserve all three ideas: first-call duration, no commitment, and direct access to Emre Kocaaliler.
+- [x] Make the mobile treatment more compact, using a two-line arrangement or equivalent natural Turkish/English layout.
+- [x] Reduce or remove the small utility icons on mobile only if they consume unnecessary vertical space.
+- [x] Leave the desktop reassurance treatment unchanged unless spacing requires a minor adjustment.
+
+## Mobile Example Workflow compacting
+
+- [ ] Preserve the existing workflow story: incoming enquiry, interpreted request, system actions, and completed appointment.
+- [x] Compact the mobile top bar, section padding, separator gaps, request summary, and system-action spacing using responsive layout rules.
+- [x] Hide only non-essential mobile metadata such as timestamp/source if needed.
+- [x] Keep the final completed appointment clearly visible.
+- [x] Do not hide an entire major stage or turn the workflow into a decorative teaser.
+- [x] Do not use scale transforms; reduce height through actual responsive layout changes.
+- [x] Keep the workflow understandable as `message → interpretation → action → appointment`.
+
+## Locked areas
+
+- [x] Leave StatisticsStrip, Solution, How It Works, Trust content/glyph system, Founder, FAQ, Final CTA, Footer, metadata, contact flow, Supabase, and site palette unchanged.
+- [x] Do not begin V9B2 imagery work.
+- [x] Do not modify unrelated sections.
 
 ## Expected implementation surface
 
-- [x] Update `src/components/Problem.tsx` only for the approved desktop balance adjustment if required.
-- [x] Update `src/components/StatisticsStrip.tsx` for the service-principle rail treatment if required.
-- [x] Update `src/components/Trust.tsx` to remove Trust system-proof indexes and introduce semantic process markers.
-- [x] Update `src/index.css` for proportions, marker/glyph styling, density, and repetition cleanup.
-- [x] Update this checklist after each implementation slice and verification pass.
+- [x] Update `src/components/Navbar.tsx` and/or `src/index.css` for true desktop navbar centering and compact mobile controls.
+- [x] Update `src/components/Problem.tsx` and/or `src/index.css` for desktop vertical alignment only.
+- [x] Update `src/components/Hero.tsx` and `src/components/AIWorkflow.tsx` for the eyebrow removal and approved mobile density corrections.
+- [x] Update `src/lib/i18n.tsx` only to remove now-unused Hero eyebrow translations if required.
+- [x] Update this checklist with a short V9B1.1 implementation record after verification.
 - [x] Do not add a new dependency.
 
 ## Verification checklist
@@ -72,31 +94,38 @@ Do not add imagery, add the chatbot, rewrite the site architecture, redesign app
 - [x] Run `pnpm typecheck`.
 - [x] Run `pnpm lint`.
 - [x] Run `pnpm build`.
-- [x] Inspect desktop Problem statement versus board balance.
-- [x] Inspect the Solution → How It Works → Trust numbering rhythm on desktop.
-- [x] Inspect the Hero → StatisticsStrip → Problem transition on desktop.
-- [x] Inspect Turkish at 375px and 320px.
-- [x] Inspect English at 375px and 320px if needed for layout parity.
-- [x] Confirm all four Problem incidents remain.
-- [x] Confirm How It Works numbering remains visible and chronological.
-- [x] Confirm Solution indexes remain subtle.
-- [x] Confirm Trust no longer contains two repeated numbered systems.
-- [x] Confirm StatisticsStrip contains no unsupported claims.
-- [x] Confirm no horizontal overflow.
-- [x] Confirm Turkish and English remain stable.
-- [x] Confirm all V9A mobile improvements remain intact.
-- [x] Confirm no new imagery was added.
-
-## Deferred to V9B2
-
-- [ ] Defer imagery, proof-oriented visual work, and any broader changes outside the V9B1 differentiation cleanup.
+- [x] Turkish desktop: confirm centered navbar, visible TR/EN switch, balanced Problem copy, removed Hero eyebrow, and stable desktop Hero.
+- [x] English desktop: confirm the same, with wider labels free of collisions and working EN/TR switching.
+- [x] Turkish 375px: confirm visible language switch, shorter Hero, strong headline, prominent CTA, all three reassurance ideas, and a substantially more complete workflow.
+- [x] English 375px: confirm the same behavior and readability.
+- [x] Turkish and English 320px: confirm no navbar collision, no horizontal overflow, readable text, and a naturally fitting workflow.
+- [x] Confirm the mobile menu still works.
+- [x] Confirm active nav state still works.
+- [x] Confirm smooth section navigation still works.
+- [x] Confirm CTA opens ContactModal.
+- [x] Confirm reduced-motion workflow behavior remains intact.
+- [x] Confirm no unrelated section changed.
+- [x] Confirm no imagery work began.
 
 ## Definition of done
 
-- [x] The Problem board no longer visually overwhelms its editorial copy.
-- [x] Numbered systems have clear roles instead of appearing everywhere.
-- [x] Trust has a distinct visual vocabulary from How It Works.
-- [x] StatisticsStrip feels less like a generic KPI strip.
-- [x] V9A mobile quality is preserved.
-- [x] No new imagery is added.
-- [x] Typecheck, lint, build, and responsive browser checks pass.
+- [x] Desktop navigation is geometrically centered.
+- [x] TR/EN remains visible and functional on desktop and mobile.
+- [x] Problem editorial content is optically centered relative to its board.
+- [x] The generic Hero eyebrow is removed in both languages.
+- [x] Hero spacing is rebalanced.
+- [x] Mobile Hero is noticeably more compact without unreadable text.
+- [x] The Example Workflow is no longer awkwardly cut off halfway in the first mobile view.
+- [x] The workflow remains understandable.
+- [x] No unrelated section changed.
+- [x] Typecheck, lint, build, and responsive verification pass.
+
+## V9B1.1 implementation record
+
+- Reworked the header into a centered three-zone grid and moved the mobile breakpoint to `lg` so TR/EN stays visible beside the menu at intermediate widths.
+- Removed the generic Hero eyebrow in both languages and tightened the Hero’s mobile rhythm without changing its copy, CTA, or workflow story.
+- Removed Problem intro stickiness and centered its editorial copy against the approved board proportions on large screens.
+- Compacted the mobile workflow through actual spacing/layout changes; retained the full message → interpretation → action → appointment sequence.
+- Removed mobile-only utility icons and non-essential workflow metadata while preserving the three reassurance ideas.
+- Verification: `pnpm typecheck`, `pnpm lint`, `pnpm build`, live preview HTTP 200, and `git diff --check` passed. No new dependency or imagery work was introduced.
+- The remaining unchecked items are manual browser checks for Turkish/English switching and 375/320px visual inspection; the live preview remains available at `http://localhost:5173/`.
