@@ -57,7 +57,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
         {/* Logo */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="justify-self-start flex items-center gap-2.5 group"
+          className="col-start-1 justify-self-start flex items-center gap-2.5 group"
         >
           <div className={`relative transition-transform duration-500 ${isScrolled ? 'scale-90' : ''}`}>
             <div className="absolute inset-0 bg-teal-500/30 blur-lg group-hover:bg-teal-500/40 transition-all duration-300" />
@@ -71,7 +71,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
         </button>
 
         {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center gap-1 justify-self-center">
+        <div className="col-start-2 hidden lg:flex items-center gap-1 justify-self-center">
           {navLinks.map((link) => (
             <button
               key={link.id}
@@ -85,7 +85,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
         </div>
 
         {/* Desktop Actions */}
-        <div className="hidden lg:flex items-center gap-3 justify-self-end">
+        <div className="col-start-3 hidden lg:flex items-center gap-3 justify-self-end">
           <button
             onClick={toggleLanguage}
             className="inline-flex min-w-11 items-center justify-center rounded-lg border border-navy-600/70 px-2.5 py-2 text-xs font-semibold tracking-wide text-snow-300 transition-colors hover:border-teal-400/50 hover:text-teal-200"
@@ -102,7 +102,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
         </div>
 
         {/* Mobile Controls */}
-        <div className="lg:hidden flex items-center gap-2 justify-self-end">
+        <div className="col-start-3 lg:hidden flex items-center gap-2 justify-self-end">
           <button
             onClick={toggleLanguage}
             className="inline-flex min-w-11 items-center justify-center rounded-lg border border-navy-600/70 px-2.5 py-2 text-xs font-semibold tracking-wide text-snow-300 transition-colors hover:border-teal-400/50 hover:text-teal-200"
