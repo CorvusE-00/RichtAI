@@ -1,140 +1,204 @@
-# Hero micro-refinement — distinct hero signal + reassurance row fix
+# Hero connected-systems placement refinement
 
-## Objective
+## OBJECTIVE
 
-Refine the Hero in two specific ways:
+Refine ONLY the placement and presentation of the Hero connected-systems element.
 
-1. Replace the current Hero mini overlay because it repeats process and step-flow logic already used in the Solution section.
-2. Fix the desktop Turkish reassurance layout so `Herhangi bir taahhüt yok` and `Doğrudan Emre Kocaaliler ile iletişim` stay on the same row.
+The current concept is approved:
+- Web sitesi / Website
+- WhatsApp
+- CRM
+- Takvim / Calendar
 
-This is a narrow Hero refinement only. Do not redesign the whole Hero.
+The problem is placement.
 
-## Current problem
+On desktop, the connected-systems panel currently overlaps / visually merges with the Hero image and feels awkward.
 
-The current Hero mini panel feels too similar to the Solution process structure and too heavy when placed over the image. The Hero needs a different supporting signal that is more visual, premium, distinctive, animation-friendly, and less text-heavy.
+The Hero image should remain visually clean and independent.
 
-## New supporting signal direction
+The connected-systems element should move BELOW the image as a separate supporting rail.
 
-Communicate:
+## DESKTOP DIRECTION
 
-- connected systems working together
-- always-on business communication
-- website enquiries, WhatsApp/messages, CRM, and scheduling/calendar connected in one operational system
+At desktop widths:
 
-Use a compact visual connected-systems signal instead of a mini step list.
+Structure should be:
 
-Possible concept labels:
+1. Hero image
+2. clear spacing
+3. connected-systems rail
 
-- English: `Connected systems`, `Always-on communication`, or `System sync`
-- Turkish: `Bağlı sistemler`, `Sürekli çalışan iletişim akışı`, or `Sistem senkronu`
+Do NOT overlap the rail with the image.
 
-Choose the clearest and most premium wording.
+Do NOT place it inside the image frame.
 
-## Visual and animation direction
+Do NOT use negative margins.
 
-Prefer one compact detached panel or rail below the image, near its lower edge, or partially detached from it. It should not feel pasted awkwardly across the photo.
+The image should read as one clean visual block.
 
-Possible visual elements:
+The system rail should read as a separate supporting element.
 
-- four small pills, nodes, or markers for Website, WhatsApp, CRM, and Calendar
-- a subtle animated pulse, moving highlight, or connection sweep
-- one or two micro-status indicators if needed
+## SPACING
 
-The result should communicate signal flow and connected operations, not narrate a process.
+Target:
+- approximately 12–16px gap between image and systems rail
 
-Do not use another 3-step list, arrow-based sentence flow, numbered steps, long microcopy, fake metrics, dashboard-style statistics, or a heavy text block directly over the image.
+The rail may:
+- match the image width
+OR
+- be slightly narrower, approximately 85–95% of the image width
 
-Keep the result ambient, elegant, believable, design-forward, readable, restrained, and agency-appropriate.
+Choose whichever looks more balanced.
 
-Animation must be calm, premium, non-gimmicky, and respectful of `prefers-reduced-motion`. Reduced motion should show a static readable final state.
+Prefer centered alignment under the image.
 
-## Reassurance row fix
+## VISUAL STYLE
 
-On Turkish desktop, these must share one row:
+Keep the systems rail restrained.
 
-- `Herhangi bir taahhüt yok`
-- `Doğrudan Emre Kocaaliler ile iletişim`
+Use:
+- one compact surface
+- thin border
+- dark navy background
+- subtle teal activity signal
+- simple connected nodes
 
-They may use a centered dot or similar divider. `İlk görüşme yaklaşık 30 dakika sürer.` may remain above as its own line.
+Avoid:
+- strong shadow
+- floating-card look
+- heavy glow
+- large padding
+- multiple nested cards
 
-Maintain the equivalent clean English structure. Mobile may stack naturally when needed; desktop is the main concern.
+## CONTENT
 
-## Locked areas
+Keep the same connected systems concept.
 
-Do not change:
+Turkish:
+- Web sitesi
+- WhatsApp
+- CRM
+- Takvim
 
+English:
+- Website
+- WhatsApp
+- CRM
+- Calendar
+
+Do not turn this into a process explanation.
+
+Do not add more text.
+
+## ANIMATION
+
+Keep the existing subtle connected-system animation direction if present.
+
+The signal may travel between nodes or highlight them sequentially.
+
+Animation must remain:
+- subtle
+- slow
+- premium
+- non-distracting
+
+Respect `prefers-reduced-motion`.
+
+## MOBILE
+
+The current mobile treatment is generally approved.
+
+Do not redesign mobile.
+
+Only ensure:
+- image and systems rail remain cleanly separated
+- no overlap
+- no horizontal overflow
+- spacing feels intentional
+
+Mobile may use the same stacked relationship:
+image → gap → systems rail
+
+## LOCKED AREAS
+
+Do NOT change:
 - Hero headline
 - Hero subheadline
+- Hero image
 - Hero CTA
-- Hero main image concept
+- reassurance copy
 - Navbar
 - StatisticsStrip
-- Problem / Challenges
+- Problem
 - Solution
 - How It Works
 - Trust
-- Founder
 - FAQ
 - Final CTA
 - Footer
 
-This phase concerns only the Hero supporting signal/panel and Hero reassurance row layout.
+This task is ONLY about the connected-systems rail placement and spacing.
 
-## Expected implementation scope
+## EXPECTED FILE SCOPE FOR LATER IMPLEMENTATION
 
-Likely files:
-
+Likely:
 - `src/components/Hero.tsx`
-- optional small Hero subcomponent if useful
 - `src/index.css`
-- `src/lib/i18n.tsx`
 - `implementation_update.md`
 
-Do not add a dependency.
+No new dependency.
+No copy changes.
 
-## Checklist 1 — Hero supporting signal concept
+## IMPLEMENTATION CHECKLIST
 
-- [x] Remove the repeated mini activity/process overlay direction.
-- [x] Replace it with a distinct connected-systems or always-on communication concept.
-- [x] Ensure it does not repeat Solution section logic.
-- [x] Keep the Hero image visually dominant.
+### Checklist 1 — Desktop placement
 
-## Checklist 2 — Hero supporting signal visual design
+- [x] remove connected-systems overlap with image
+- [x] place rail below image
+- [x] add clear spacing
+- [x] keep image clean and dominant
 
-- [x] Decide placement relative to the Hero image.
-- [x] Reduce awkward text-over-image treatment.
-- [x] Create a more visual, less text-heavy structure.
-- [x] Ensure it feels premium and agency-appropriate.
+### Checklist 2 — Rail sizing
 
-## Checklist 3 — Hero supporting signal animation
+- [x] evaluate full-width vs slightly narrower rail
+- [x] center under image
+- [x] maintain compact height
 
-- [x] Define subtle motion behavior.
-- [x] Use connection, pulse, or highlight-style animation.
-- [x] Avoid gimmicky or flashy effects.
-- [x] Support `prefers-reduced-motion`.
+### Checklist 3 — Visual refinement
 
-## Checklist 4 — Reassurance row correction
+- [x] keep one restrained surface
+- [x] preserve connected-node design
+- [x] avoid floating-card heaviness
 
-- [x] Fix Turkish desktop reassurance alignment.
-- [x] Keep `Herhangi bir taahhüt yok` and `Doğrudan Emre Kocaaliler ile iletişim` on the same row.
-- [x] Preserve clean behavior in English.
-- [x] Maintain a sensible mobile fallback.
+### Checklist 4 — Responsive behavior
 
-## Checklist 5 — Responsive refinement
+- [x] verify desktop
+- [x] verify 375px mobile
+- [x] verify 320px mobile
+- [x] no overlap
+- [x] no overflow
 
-- [x] Verify a large desktop viewport.
-- [x] Verify Turkish desktop.
-- [x] Verify English desktop.
-- [x] Verify 375px mobile.
-- [x] Verify 320px mobile.
-- [x] Avoid overflow, bad wrapping, and awkward alignment.
+### Checklist 5 — Verification
 
-## Checklist 6 — Verification
+- [x] Hero image remains visually clean
+- [x] rail reads as supporting information
+- [x] no unrelated Hero changes
+- [x] typecheck
+- [x] lint
+- [x] build
 
-- [x] Confirm the Hero support element is visually distinct from Solution.
-- [x] Confirm the Hero remains premium and less repetitive.
-- [x] Confirm the reassurance row is fixed.
-- [x] Confirm no unrelated sections changed.
-- [x] Run `pnpm typecheck`.
-- [x] Run `pnpm lint`.
-- [x] Run `pnpm build`.
+## CRITICAL WORKFLOW RULE
+
+DO NOT IMPLEMENT ANY CHECKLIST ITEM IN THIS TURN.
+
+Only rewrite `implementation_update.md`.
+
+The document must:
+- contain only this latest plan
+- contain no old history
+- contain no completed checklist items
+- contain no implementation record
+- use unchecked checklist items only
+- be self-contained
+
+After writing the file, STOP.

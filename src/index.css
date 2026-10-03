@@ -168,7 +168,7 @@
   }
 
   .hero-connected-systems {
-    @apply relative z-10 mx-6 -mt-6 rounded-xl border border-navy-600/80 bg-navy-950/95 px-4 py-3 backdrop-blur-md;
+    @apply relative z-10 mx-6 mt-3 rounded-xl border border-navy-600/80 bg-navy-950/95 px-4 py-3 backdrop-blur-md;
     box-shadow: 0 12px 28px rgba(3, 12, 26, 0.26), inset 0 1px 0 rgba(148, 163, 184, 0.045);
   }
 
