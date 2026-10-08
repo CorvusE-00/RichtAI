@@ -976,35 +976,210 @@ Counts cover 10 distinct animation systems, excluding static MermaidMark renderi
 
 ## Responsive architecture audit
 
-Inspect the structural behavior at these target widths:
+This is a source/CSS structure audit, not a visual redesign or responsive fix. No screenshots, breakpoint code, copy, or layout were changed.
 
-- 320
-- 375
-- 430
-- 768
-- 1024
-- 1280+
-- desktop
+### Global responsive model
 
-This phase does not require visual redesign or manual screenshots for every width. Identify structural issues and dependencies instead, including:
+- Tailwind defaults used by the repository are `sm` 640px, `md` 768px, `lg` 1024px, `xl` 1280px, and `2xl` 1536px. TSX utilities use these breakpoints directly.
+- Explicit global CSS media queries exist at `min-width: 640px`, `min-width: 768px`, `min-width: 1024px`, `min-width: 1280px`, `max-width: 767px`, `max-width: 639px`, `max-width: 420px`, and `prefers-reduced-motion: reduce`.
+- The common container is `max-w-6xl mx-auto px-5 sm:px-6`; Navbar uses `px-3 sm:px-6`. Local max widths include Hero heading `40rem`, Problem editorial `34rem`, Problem board `32rem`, founder portrait `20rem` on narrow layouts, and modal `max-w-lg`.
+- Section vertical spacing is local rather than tokenized: Hero uses `pt-28/sm:pt-24/lg:pt-36` and bottom variants; Problem `py-20 sm:py-24 lg:py-20`; Solution/How `py-16 sm:py-20`; Trust `py-20 sm:py-28`; FAQ `py-20 sm:py-24`; FinalCTA `py-24 sm:py-32`; Footer uses inner `py-12 sm:py-16`.
+- Responsive logic lives in both TSX utilities and the single global `src/index.css`. The system is therefore functional but mixed: Tailwind utilities define most geometry, while global selectors add component-specific order, aspect, spacing, and narrow-width patches.
+- The principal architecture transitions are `lg` for Navbar and Hero columns, `md`/768px for Solution, HowItWorks, FAQ, and Trust layouts, and 640px/639px for Hero mobile composition and workflow compaction. It is not one fully centralized responsive system; it is a shared container convention plus local patches.
 
-- desktop markup stacked on mobile
-- duplicated mobile and desktop markup
-- language-specific overrides
-- breakpoint-specific hacks
-- fixed sizes
-- negative margins
-- absolute-positioning dependencies
-- overflow risks
+### Width-by-width risk map
 
-Pay special attention to:
+| Width | Main structural risks | Highest-risk sections |
+| --- | --- | --- |
+| 320px | Long TR/EN labels, compact Navbar controls, Hero heading and system nodes, stacked incident fragments, modal padding/scroll height, and footer density have the least horizontal space. | Navbar, Hero, Problem, ContactModal, Footer |
+| 375px | Same mobile architecture with more room, but Hero two-column system rail and Turkish metadata still depend on narrow text wrapping; mobile menu width and FAQ question wrapping remain sensitive. | Hero, Navbar, Problem, FAQ |
+| 430px | The `max-width: 420px` patch no longer applies, so workflow/metadata and narrow caption behavior change at a nearby width; mobile remains below the `640px` Hero composition threshold. | Hero, Problem, AIWorkflow if re-rendered, FAQ |
+| 768px | `md`/768px switches HowItWorks, Solution, and FAQ to multi-column behavior while `lg` Navbar/Hero remain mobile/stacked; columns must absorb translated content without fixed-height assumptions. | Solution, HowItWorks, FAQ, Trust |
+| 1024px | `lg` activates desktop Navbar and Hero columns, Problem editorial overrides, and Trust multi-column layout; controls and long labels may compete immediately at the breakpoint. | Navbar, Hero, Problem, Trust |
+| 1280px+ | Hero adds larger heading utilities, wider gap, visual-region padding, and Turkish reassurance `nowrap`; longer navigation/CTA labels and Turkish Hero height can diverge from English. | Hero, Navbar |
+| Large desktop | `max-w-6xl` constrains most content while typography and aspect-ratio visuals stay large; excess side space and vertical balance become composition concerns rather than overflow concerns. | Hero, Solution, Trust, FinalCTA |
 
-- Navbar
-- Hero
-- Solution visuals
-- Founder
-- FAQ
-- Footer
+### Navbar responsive audit
+
+- Desktop starts at `lg` (1024px). Desktop links are one `hidden lg:flex` center region and desktop language/CTA are a separate `hidden lg:flex` right region. Mobile controls are a separate `lg:hidden` region containing the visible language switch and hamburger.
+- The desktop `<nav>` uses `grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]`; logo, navigation, desktop actions, and mobile controls explicitly use `col-start-1/2/3`. This prevents hidden desktop siblings from auto-placing mobile controls into the center column.
+- Desktop and mobile controls are duplicated markup at the breakpoint, but each control set is visibility-gated. The mobile dropdown separately maps the same `copy.nav.links` array and has no CTA.
+- The logo remains in column 1, scales to `90%` when scrolled, and scrolls to the page top. Desktop links are hidden below `lg`; the mobile menu trigger remains visible below `lg`.
+- The mobile dropdown is positioned below the fixed header as a relative block with `max-h-0`/`max-h-[28rem]`, opacity, overflow hidden, and a `300ms` transition. It contains full-width link buttons and closes after smooth scrolling.
+- Active link state is an underline on desktop and a teal background/text state in the mobile dropdown. `activeSection` is supplied by a separate IntersectionObserver over the section IDs.
+- Scroll state changes header padding, nav height (`h-16` to `h-14`), backdrop, border, shadow, logo scale, and logo text size.
+- The mobile/desktop split is structurally reusable because the behavior and visibility boundary are explicit. V2 should preserve language switching, CTA callback, smooth scrolling, active-section tracking, fixed header behavior, and mobile menu closure.
+- The current layout assumptions to rebuild later are the three-column grid, fixed navy backdrop, duplicated breakpoint markup, and max-height dropdown treatment. Near `lg`, the desktop set appears abruptly and translated nav/CTA labels must fit the centered/right regions; at 320/375, the logo, language control, and hamburger compete for the single row.
+
+### Hero responsive audit
+
+- Desktop architecture begins at `lg`: the Hero grid changes to `lg:grid-cols-[0.84fr_1.16fr]` with `md:gap-14` and `xl:gap-16`. Before `lg`, the same grid is one column, so tablet widths remain stacked rather than desktop two-column.
+- At `max-width: 639px`, `.hero-copy` becomes `display: contents`. Its children are explicitly ordered: heading `1`, subheadline `2`, visual region `3`, CTA `4`, and metadata `5`. This is an intentionally composed mobile order, not ordinary source-order stacking.
+- At 320/375/430, the Hero heading uses the mobile `.hero-heading` size `2.15rem` and line-height `1`; the subheadline is full available width with a small top margin; the CTA is full width; and mobile reassurance uses a compact two-row layout.
+- The mobile visual region follows the copy and contains the image frame plus systems rail. The image frame keeps `aspect-ratio: 3 / 2`; the rail becomes a two-column grid, hides connectors, removes side margin, and compacts nodes to `text-[0.625rem]` with no horizontal overflow by design.
+- At 640px and above, the systems rail returns to a flex row with connectors. At `xl`/1280px the visual region receives left padding and a decorative vertical rule; at `2xl` the heading grows through the TSX `2xl:text-7xl` utility.
+- Heading max width is `40rem`; subheadline max width is `xl`; CTA is `w-full sm:w-auto`; desktop metadata is hidden below `sm` and mobile metadata is hidden at `sm` and above. Turkish-only `.hero-section--tr` changes reassurance to `nowrap` at 1280px, making longer copy a desktop pressure point.
+- Overflow is managed by the Hero section `overflow-hidden`, frame overflow, min-width resets, and compact rail nodes. The primary remaining structural risks are text wrapping, stacked vertical height, aspect-ratio image size, and long Turkish metadata rather than a known horizontal overflow bug.
+- Current mobile architecture is a real composition with reorder and `display: contents`; current desktop architecture is a two-column image-led layout. The functional behavior reusable for V2 is CTA callback, translated copy access, image alt/ratio discipline, connected-system concept, and mobile-first width containment.
+- Future V2 mobile Hero should be treated as **B. intentionally composed mobile layout**, based on the existing explicit order and the V2 direction. It should not be treated as a mechanically stacked desktop Hero.
+
+### StatisticsStrip responsive audit
+
+- The strip uses `grid-cols-2` by default and `sm:grid-cols-4` from 640px, with compact vertical gaps on mobile and wider horizontal gaps on larger screens.
+- Metric values and labels are content-driven; the translated labels can wrap, but there are no fixed heights. Numeric counters do not change layout structure.
+- Responsive behavior is low priority if the section is removed from render as planned. Until then, preserve the two-column mobile fit and four-column desktop fit.
+
+### Problem responsive audit
+
+- The outer layout is stacked by default and becomes `lg:grid-cols-[0.95fr_1.05fr]` with `lg:items-center` and `lg:gap-16`. The editorial block receives a 34rem max width at 1024px; the board receives `lg:max-w-[32rem]` and aligns to the end.
+- Incident rows are stacked by default and switch to a two-column grid at `sm`, with a `0.58fr/1.42fr` intro/fragment split. The board itself is overflow-hidden and each fragment is min-width constrained.
+- Mobile patches adjust board header alignment, caption max width/right alignment, incident gap/padding, fragment radius/padding, route gaps, and narrow detail/message/warning font sizes. At 420px and below, caption width and incident text patches become stricter.
+- Route rows are flex-wrap content with gap-y behavior; long translated route segments can wrap inside the fragment. No fixed incident height is used.
+- The board’s mobile architecture is structurally safe but complex because four incidents use four index-driven fragment shapes plus several narrow-width patches. Compared with V2’s planned shorter friction section, the current incident-board architecture creates unnecessary mobile complexity and should be rebuilt rather than carried forward.
+
+### Solution responsive audit
+
+- Capability bands are stacked by default and become two columns at `min-width: 768px`, with `0.9fr/1.1fr` columns, centered alignment, and a 4rem gap.
+- At desktop, even bands reverse copy/visual order through `.capability-band:nth-child(even)`. At mobile, source order remains copy then visual for every band.
+- Each band’s visual is a rounded, bordered surface; the third Digital Experiences branch contains a Luma image in a fixed `16 / 9` viewport. Visual internals are different for interaction, automation, and prototype branches and are selected by `index === 0/1/2` in TSX.
+- Mobile compression reduces band gap/padding, visual radius/padding, header wrapping, and internal type. The visual/copy relationship remains stacked, but each visual has different content density and internal layout needs.
+- Future What We Build capabilities can share an outer responsive shell for container, copy/visual stacking, desktop columns, and spacing. The three capability types still need individual responsive composition inside that shell because the interaction flow, automation steps, and Luma prototype have different intrinsic heights and overflow/ratio constraints.
+- Avoid carrying the `nth-child` order dependency into V2 if possible; explicit capability presentation metadata is safer than making responsive order depend on array position.
+
+### HowItWorks responsive audit
+
+- Mobile is a stacked journey: `.how-stage` uses a `3.25rem` rail column and a vertical absolute connector. At `sm`, the rail grows to `4.5rem`.
+- At `min-width: 768px`, `.how-journey` becomes three equal columns with a journey-level horizontal top rule; individual vertical connectors are hidden and each stage uses borders/right padding.
+- Rail ownership changes by breakpoint: mobile owns the connector inside each stage; desktop owns the shared `how-journey::before` rule while stage borders separate columns.
+- Content height is intrinsic. Longer TR/EN titles/descriptions increase row height on mobile and column height on desktop; the desktop top rule remains independent of content height.
+- The existing responsive model is reusable for a future three-step How We Work section if the ordered data remains simple and connectors remain decorative. Text should not depend on fixed stage heights.
+
+### Trust / Founder responsive audit
+
+#### System proof
+
+- `.trust-intro-grid` is stacked by default and becomes `0.92fr/1.08fr` with a 5rem gap at 1024px. The system-proof flow is two columns by default and four columns at 1024px; arrows are hidden by default and shown inline at desktop.
+- The flow is content-driven and may wrap differently in Turkish/English. It depends on grid column fit rather than fixed heights.
+
+#### Process
+
+- Process rows are always ordered rows with a glyph rail and content column; mobile uses `2.5rem` rail/3-column gap and desktop uses a wider `4rem` rail/5-column gap at `sm`.
+- Titles/descriptions grow intrinsically. Longer translated descriptions increase page height but do not require a separate desktop composition.
+
+#### Founder block
+
+- The portrait wrapper uses `aspect-[4/5]`, is centered with a `max-w-[20rem]` constraint on narrow layouts, and becomes the first column of a `minmax(280px,360px)/minmax(0,1fr)` grid at 1024px.
+- Mobile therefore stacks portrait before copy; desktop places portrait and copy side by side. The image remains `object-cover` and has no fixed pixel height beyond its aspect ratio/available width.
+- Founder statement/model copy can be long in either language; the content column is intrinsic and uses a maximum width for the model description. The likely risk is vertical density, not horizontal overflow.
+
+When Trust is decomposed, system-proof flow dependencies move to Live System Demo, process row dependencies move to How We Work, and portrait/copy grid dependencies remain only in Founder / Why Richt. This removes the current single-section multi-layout coupling and allows each destination to have a simpler responsive composition.
+
+### FAQ responsive audit
+
+- Mobile is a single-column intro plus accordion list. Triggers use `py-5`, a gap of `1rem`, and smaller type; answers use a reduced right padding and compact text.
+- At `min-width: 768px`, `.faq-layout` becomes `0.8fr/1.2fr` with a 5rem column gap and the list receives a small top offset. Accordion width is intrinsic to the second column.
+- Long questions wrap inside the trigger’s flex row with a fixed icon shrink behavior; the icon remains aligned at the end through `justify-between`. Answers use `max-w-2xl` and `overflow-hidden` within the grid-row transition.
+- The structure is reusable. Preserve intrinsic question wrapping, icon shrink/alignment, ARIA attributes, and open/closed state when restyling.
+
+### Final CTA responsive audit
+
+- The CTA content is a centered `max-w-3xl` block with headline scaling from `text-4xl` to `sm:text-6xl`/`lg:text-7xl`; description is `max-w-xl`.
+- The primary CTA uses `min-w-[18rem]` and becomes `20rem` at `sm`, with a vertical stack for CTA, reassurance, and quote at all widths. Quote uses `max-w-md` and can grow with translated copy.
+- The section depends on the current dark tone/surface rhythm but has no component-specific responsive CSS. Main risk is large heading wrapping and vertical height at 320/375, not column overflow.
+
+### Footer responsive audit
+
+- The top prompt block stacks by default and switches to a row at `md`, using a rounded bordered surface and CTA button.
+- The footer content grid is one column by default, two columns at `sm`, and four columns at `lg`. Sitemap, social controls, and contact blocks therefore move through three density states.
+- The bottom bar stacks at mobile and becomes a row at `sm`. Sitemap labels, contact text, and social controls are content-driven; social controls stay fixed at `w-10 h-10`.
+- Mobile stacking is structurally straightforward but the current footer has more groups and card-like prompt treatment than the planned simpler V2 footer. The likely risk is density and vertical length rather than a known overflow issue.
+
+### ContactModal responsive audit
+
+- The modal uses a full-viewport fixed overlay with `p-4`, a content surface `w-full max-w-lg`, and `max-h-[90vh] overflow-y-auto scrollbar-hide`.
+- Fields are one column by default and two columns at `sm`; the modal inner padding grows from `p-6` to `sm:p-8`. The success state is centered and content-driven.
+- Backdrop and glow are absolute; body scrolling is locked while open. The modal surface itself owns scrolling, which is essential for keyboard and small viewport use.
+- At 320/375, long translated labels/placeholders, two-column transitions near 640px, viewport keyboard reduction, and the close control competing with the title are the main risks. No fix is made in this audit.
+- When visually restyled later, preserve `max-w-lg`/intrinsic width behavior, `max-h-[90vh]`, internal vertical scrolling, body scroll lock, keyboard Escape handling, form field grid collapse, success/error fit, and accessible dialog semantics.
+
+### TR / EN responsive differences
+
+- Hero is most sensitive: Turkish headline/subheadline and reassurance strings can wrap into more lines, and `.hero-section--tr` adds a 1280px `nowrap` reassurance rule. Avoid expanding this patch without testing both languages.
+- Navbar labels can create pressure in the centered desktop link group and right action group, especially at the `lg` transition. The same target IDs are stable, but visible label width differs.
+- FAQ questions and answers, HowItWorks descriptions, Trust process/founder copy, Solution capability descriptions, and Footer labels can change intrinsic heights between languages.
+- Array-mapped content can change row/band height without changing structure: Problem incidents, Solution capabilities, HowItWorks steps, Trust process, and FAQ questions all render variable-length translated content.
+- Recommend intrinsic flexible layouts and content-driven heights first. A language-specific exception may remain necessary for Hero reassurance or heading scale if shared widths cannot prevent unacceptable first-screen composition, but it should stay isolated and regression-tested.
+
+### Absolute positioning / overflow map
+
+| Area | Absolute/fixed behavior | Overflow risk | Migration risk |
+| --- | --- | --- | --- |
+| Navbar | Fixed header; absolute backdrop; relative max-height mobile dropdown | Long labels/control fit and dropdown height near 320/375 | HIGH |
+| Hero | Absolute background/noise layers; pseudo vertical rule; overflow-hidden frame/section | Text wrapping, image aspect, rail node fit, and order changes | HIGH |
+| Problem | Absolute section surface; board/fragment overflow hidden | Long incident details/routes and narrow captions | HIGH |
+| HowItWorks | Absolute mobile connectors and desktop journey rule | Connector offsets can misalign if stage spacing changes | MEDIUM |
+| Trust | Absolute section surface; no primary content absolute positioning | Intrinsic copy/portrait height and four-column proof fit | MEDIUM |
+| ContactModal | Fixed viewport overlay; absolute backdrop/glow; internal scroll | Keyboard viewport, max height, clipped long content | HIGH |
+| MermaidMark | Absolute full-size mask layer inside overflow-hidden wrapper | Mask sizing/contrast rather than layout overflow | MEDIUM |
+| AIWorkflow | Absolute action rail and fixed interval-driven state; not rendered | Dense card/rail compaction if reintroduced | HIGH if reintroduced |
+
+### Responsive migration classification
+
+| Area | Responsive action | Evidence |
+| --- | --- | --- |
+| Navbar | REWORK | Preserve behavior and breakpoints, but rebuild the fixed/grid/menu presentation for V2. |
+| Hero | REBUILD | Mobile uses `display: contents`, explicit order, language-specific patches, and image-led desktop assumptions. |
+| StatisticsStrip | REMOVE LATER | Simple grid/counter behavior has no protected responsive business contract. |
+| Problem | REBUILD | Four index-driven incident fragments and narrow patches are more complex than the planned friction section. |
+| Solution | REBUILD | Shared outer shell is possible, but current index/nth-child visual coupling and three intrinsic visual types are V1-specific. |
+| HowItWorks | REUSE | Ordered stages and stacked/three-column transition are structurally reusable. |
+| Trust | REBUILD | Combined proof/process/founder layouts should be separated before responsive migration. |
+| FAQ | REUSE | Single-to-two-column accordion structure and intrinsic answer behavior are reusable. |
+| FinalCTA | REWORK | Centered intrinsic block is reusable; spacing/type and surface assumptions can be migrated. |
+| Footer | REWORK | Grid/stack behavior is reusable, but V2 needs a simpler content architecture. |
+| ContactModal | REUSE | Preserve protected viewport, scroll, field-grid, and dialog behavior while restyling locally. |
+
+### V2 responsive guardrails
+
+- Treat mobile as intentionally composed, not as desktop mechanically stacked; the current Hero order proves the need for explicit mobile composition.
+- Maintain no horizontal overflow at 320px, especially in Navbar controls, Hero systems, Problem fragments, FAQ triggers, and ContactModal.
+- Prefer intrinsic sizing and content-driven heights; avoid fixed heights for translated text and stateful surfaces.
+- Avoid language-specific hacks unless shared flexible widths cannot handle both languages; test TR and EN separately.
+- Keep image aspect ratios intentional for Hero, Luma, and Founder rather than stretching or relying on viewport-specific heights.
+- Use breakpoint changes only when composition actually changes; do not duplicate patches for small width differences without evidence.
+- Protect modal internal scrolling, body scroll lock, Escape handling, and success/error fit at mobile viewport heights.
+- Avoid `nth-child`/array-index layout coupling for future capability compositions where explicit metadata can express order.
+- Avoid excessive absolute positioning for primary layout; reserve it for decoration, connectors, masks, and overlays.
+- Preserve section anchors, CTA behavior, active navigation, FAQ semantics, and reduced-motion behavior across responsive changes.
+
+### Required V2 QA widths
+
+| Width | Priority | Reason |
+| --- | --- | --- |
+| 320px | CRITICAL | Minimum horizontal space for Navbar, Hero, board fragments, FAQ, Footer, and modal. |
+| 375px | CRITICAL | Primary mobile composition and language-switch/menu fit target. |
+| 430px | IMPORTANT | Boundary after the `max-width: 420px` patch and before the 640px mobile architecture change. |
+| 768px | IMPORTANT | Solution, HowItWorks, and FAQ column transitions begin. |
+| 1024px | CRITICAL | Navbar/Hero desktop transition plus Problem/Trust desktop overrides. |
+| 1280px | IMPORTANT | Hero XL spacing, Turkish reassurance rule, and navigation/action width pressure. |
+| 1440px+ | SUPPORTING | Large-container balance, image/column proportion, and wide desktop whitespace. |
+
+### Highest responsive regression risks
+
+1. **Hero** — Multiple structural transitions, `display: contents`, explicit order, aspect-ratio visual, and Turkish-only rules can fail together. Likely failure: wrong mobile order, wrapping, or rail overflow. Guardrail: test TR/EN at 320/375/430/1024/1280 before changing shared Hero rules.
+2. **Navbar** — Hidden desktop/mobile sibling markup, three-column placement, fixed header, and long translated labels converge at `lg`. Likely failure: centered/overlapping controls or an inaccessible mobile dropdown. Guardrail: preserve explicit grid columns, one visible control set per breakpoint, and test 320/375/1024.
+3. **ContactModal** — Fixed viewport, `max-h-[90vh]`, internal scrolling, field-grid collapse, and keyboard viewport changes are protected functionality. Likely failure: clipped form/success state or body scroll remaining locked. Guardrail: preserve dimensions/scroll contract and test keyboard/mobile states.
+4. **Solution** — `nth-child` desktop order, index-driven visual branches, and Luma `16 / 9` constraints are coupled. Likely failure: copy paired with the wrong visual or compressed prototype. Guardrail: use explicit visual metadata in future and test each capability at 320/768/1024.
+5. **Trust/Founder** — One component combines proof flow, process rows, and portrait/copy grid with different breakpoint needs. Likely failure: decomposition loses intended stacking or creates dense four-column proof/founder layouts. Guardrail: audit each future destination independently and preserve intrinsic copy/image sizing.
+
+### Responsive architecture conclusion
+
+- The current architecture is fundamentally responsive: it has coherent containers, Tailwind breakpoints, intrinsic grids, explicit mobile stacking, and narrow-width handling.
+- It is not suitable as the direct unmodified foundation for V2 because responsive logic is split between TSX and global CSS, Hero/Problem/Solution contain V1-specific coupling, and Trust combines three destinations.
+- Preserve behavior contracts: section anchors, CTA flow, Navbar language/menu/active state, FAQ semantics, modal scrolling, image ratios, and reduced-motion fallback.
+- Rebuild Hero, Problem, Solution, and decomposed Trust/Founder responsive compositions; reuse HowItWorks, FAQ, and ContactModal structure with scoped visual migration.
+- Phase 1 should not attempt a global responsive cleanup, typography redesign, breakpoint change, or mobile bug-fix sweep while token foundations are being added.
+- Mobile-specific composition should remain a dedicated later phase, especially for the V2 Hero and any new system visuals.
 
 ## i18n and copy architecture audit
 
@@ -1115,7 +1290,7 @@ This section must give enough information to create the later Phase 1 implementa
 - [x] Audit CSS and current design system
 - [x] Identify design-token migration risks
 - [x] Audit animation systems
-- [ ] Audit responsive architecture
+- [x] Audit responsive architecture
 - [ ] Audit i18n and copy architecture
 - [ ] Inventory relevant assets
 - [ ] Audit relevant dependencies
