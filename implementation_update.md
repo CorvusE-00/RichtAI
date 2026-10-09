@@ -261,6 +261,8 @@ Implementation note: Turkish Navbar labels are Sorunlar, Sistemler, Süreç, Hak
 - [ ] Avoid excessive wrappers, dashboard-like surfaces, and duplicated controls.
 - [ ] Preserve desktop and mobile behavior contracts while changing presentation.
 
+Implementation note: The Navbar now uses a single `navbar-v2__shell` wrapper containing the background layer, a semantic `nav`, and the mobile menu. The nav adopts `.v2-container` for its width/gutter shell while retaining the existing three-column grid and breakpoint utilities. Stable hooks were added for the Navbar, shell, inner nav, brand, desktop navigation, desktop actions, mobile controls, and mobile menu. `navLinks.map(...)`, `aria-current`, `scrollTo`, `toggleLanguage`, `handleCTA`, `copy.nav.cta`, Menu/X state, open/closed classes, and all frozen observer/scroll logic are unchanged. No visual-system CSS was added, and no locked file changed. `pnpm typecheck` passed.
+
 ### 4. Apply the desktop Bold Systems visual system
 
 - [ ] Use a full-width fixed Carbon/near-Carbon header with a thin restrained border.
@@ -343,7 +345,7 @@ Phase 2 is complete only when:
 
 - [x] Audit and freeze the current Navbar contracts
 - [x] Finalize V2 labels and ID-safe i18n mapping
-- [ ] Prepare semantic V2 Navbar structure
+- [x] Prepare semantic V2 Navbar structure
 - [ ] Apply the desktop Bold Systems visual system
 - [ ] Rework brand, language control, and CTA presentation
 - [ ] Rework active and scrolled states without behavioral drift
