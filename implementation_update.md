@@ -297,6 +297,8 @@ Implementation note: The active desktop item remains primary on-dark text with a
 - [ ] Preserve menu open/close, menu-link scrolling, close-after-selection, language switching, CTA access, and body-scroll behavior.
 - [ ] Keep mobile tap targets approximately 44px where practical and avoid excessive radius or glass-modal treatment.
 
+Implementation note: The mobile top bar now uses the Carbon/Graphite surface direction with a restrained border and no blur, shadow, or glow. The MermaidMark frame and Space Grotesk wordmark keep stable geometry, and the mobile language control and Menu/X button use compact V2 borders, secondary text, focus rings, and practical touch targets. The opened menu is a full-width Carbon/Graphite header extension with thin borders; links are full-width editorial rows with separators and a small Signal Lime active marker instead of chip backgrounds. The existing translated `copy.nav.cta` is now available as a full-width Signal Lime CTA inside the open menu; it closes the menu before invoking the unchanged `handleCTA` → App-owned ContactModal path. Body scroll remains unlocked as before. The available 467px desktop-browser viewport was used for mobile-style checks; 320px, 375px, 430px, 768px, and 1023px emulation were not available. Desktop V2 remained intact in the existing 1280px layout check.
+
 ### 8. Preserve accessibility and restrained motion
 
 - [ ] Preserve semantic `nav`, button semantics, visible focus, keyboard navigation, sufficient contrast, and usable language controls.
@@ -355,7 +357,7 @@ Phase 2 is complete only when:
 - [x] Apply the desktop Bold Systems visual system
 - [x] Rework brand, language control, and CTA presentation
 - [x] Rework active and scrolled states without behavioral drift
-- [ ] Rebuild the mobile Navbar/menu presentation
+- [x] Rebuild the mobile Navbar/menu presentation
 - [ ] Preserve accessibility and restrained motion
 - [ ] Verify functional contracts and run project checks
 - [ ] Perform bilingual responsive QA and final Phase 2 readiness review

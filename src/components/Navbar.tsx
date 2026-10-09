@@ -61,7 +61,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
             className="navbar-v2__brand col-start-1 justify-self-start flex items-center gap-2.5 group"
           >
             <div className={`navbar-v2__brand-mark relative transition-transform duration-500 ${isScrolled ? 'scale-90' : ''}`}>
-              <div className="absolute inset-0 bg-teal-500/30 blur-lg group-hover:bg-teal-500/40 transition-all duration-300 lg:hidden" />
+              <div className="hidden absolute inset-0 bg-teal-500/30 blur-lg group-hover:bg-teal-500/40 transition-all duration-300" />
               <div className="navbar-v2__brand-mark-frame relative w-9 h-9 rounded-lg overflow-hidden border border-teal-400/25">
                 <MermaidMark className="h-full w-full" />
               </div>
@@ -106,14 +106,14 @@ export function Navbar({ onCTAClick }: NavbarProps) {
           <div className="navbar-v2__mobile-controls col-start-3 lg:hidden flex items-center gap-2 justify-self-end">
             <button
               onClick={toggleLanguage}
-              className="inline-flex min-w-11 items-center justify-center rounded-lg border border-navy-600/70 px-2.5 py-2 text-xs font-semibold tracking-wide text-snow-300 transition-colors hover:border-teal-400/50 hover:text-teal-200"
+              className="navbar-v2__language navbar-v2__language--mobile v2-focus-ring inline-flex min-w-11 items-center justify-center rounded-lg border px-2.5 py-2 text-xs font-semibold tracking-wide"
               aria-label={copy.nav.switchLanguage}
             >
               {language === 'tr' ? 'EN' : 'TR'}
             </button>
             <button
               onClick={() => setIsMenuOpen((prev) => !prev)}
-              className="p-2 rounded-lg text-snow-300 hover:text-snow-100 hover:bg-navy-700/60 transition-colors duration-200"
+              className="navbar-v2__menu-toggle v2-focus-ring p-2 rounded-lg transition-colors duration-200"
               aria-label={copy.nav.menu}
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -122,18 +122,27 @@ export function Navbar({ onCTAClick }: NavbarProps) {
         </nav>
 
         {/* Mobile Menu */}
-        <div className={`navbar-v2__menu lg:hidden relative overflow-hidden bg-navy-900/95 backdrop-blur-md border-b border-navy-600/40 transition-[max-height,opacity] duration-300 ${isMenuOpen ? 'max-h-[28rem] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}`}>
-          <div className="px-5 py-4 space-y-1">
+        <div className={`navbar-v2__menu lg:hidden relative overflow-hidden border-b transition-[max-height,opacity] duration-300 ${isMenuOpen ? 'max-h-[28rem] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}`}>
+          <div className="navbar-v2__menu-inner px-5 py-4 space-y-1">
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => scrollTo(link.id)}
                 aria-current={activeSection === link.id ? 'page' : undefined}
-                className={`block w-full text-left px-4 py-3 rounded-lg transition-colors duration-200 font-display text-sm ${activeSection === link.id ? 'bg-teal-500/10 text-teal-300' : 'text-snow-300 hover:text-snow-100 hover:bg-navy-700/40'}`}
+                className={`navbar-v2__menu-link block w-full text-left px-4 py-3 rounded-lg transition-colors duration-200 font-display text-sm ${activeSection === link.id ? 'text-teal-300' : 'text-snow-300'}`}
               >
                 {link.label}
               </button>
             ))}
+            <button
+              onClick={() => {
+                setIsMenuOpen(false);
+                handleCTA();
+              }}
+              className="navbar-v2__mobile-cta v2-focus-ring inline-flex w-full items-center justify-center font-display font-semibold text-sm"
+            >
+              {copy.nav.cta}
+            </button>
           </div>
         </div>
       </div>
