@@ -168,9 +168,11 @@ Implementation note: decision **B — TAILWIND ALIASES NOT NEEDED YET**. Surface
 
 ### 6. Add only approved Tailwind aliases, if required
 
-- [ ] Add only the aliases explicitly approved by Checklist 5, or record that `tailwind.config.js` remains untouched.
+- [x] Add only the aliases explicitly approved by Checklist 5, or record that `tailwind.config.js` remains untouched.
 
 If no aliases are needed, this checklist item is satisfied by documenting the no-change decision. If aliases are added, keep them semantic and minimal; do not introduce a new plugin or duplicate the full token system in Tailwind config.
+
+Implementation note: no Tailwind aliases were added. `tailwind.config.js` remains untouched, and existing V1 colors, fonts, animations, content globs, and plugins remain unchanged. Phase 2 Navbar does not require aliases and can use the current CSS variables, V2 primitives, existing utilities, and scoped CSS. Revisit aliases only when repeated real usage across multiple V2 components proves that shared `var(--v2-...)` mappings are being duplicated or are unclear.
 
 ### 7. Run build/type/lint verification
 
@@ -247,7 +249,7 @@ Phase 1 is complete only when:
 - [x] Add typography, shape, and layout semantic roles
 - [x] Add minimum `.v2-*` primitive classes
 - [x] Evaluate whether Tailwind semantic aliases are needed
-- [ ] Add only justified Tailwind aliases if required
+- [x] Add only justified Tailwind aliases if required
 - [ ] Run build/type/lint verification
 - [ ] Perform manual V1 visual regression verification
 - [ ] Complete Phase 1 cleanup/readiness review
