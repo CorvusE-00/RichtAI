@@ -233,16 +233,20 @@ Audit note — Checklist 1 complete: HeroProps is exactly HeroProps { onCTAClick
 
 ### 2. Finalize approved Hero copy and i18n scope
 
-- [ ] Update only the approved Hero headline/support fields and the narrowly-scoped Hero CTA alignment.
-- [ ] Prefer a minimal Hero-specific localized canvas extension; change connected-system workflow labels only if repository compatibility is explicitly proven, and do not repurpose workflow.aria without auditing AIWorkflow.
-- [ ] Preserve unrelated translation groups and the dormant AIWorkflow contract.
+- [x] Update only the approved Hero headline/support fields and the narrowly-scoped Hero CTA alignment.
+- [x] Prefer a minimal Hero-specific localized canvas extension; change connected-system workflow labels only if repository compatibility is explicitly proven, and do not repurpose workflow.aria without auditing AIWorkflow.
+- [x] Preserve unrelated translation groups and the dormant AIWorkflow contract.
 - Expected files: src/lib/i18n.tsx, implementation_update.md.
+
+Implementation note — Checklist 2 complete: TR now reconstructs exactly `İşletmenizi ileri taşıyan` + `sistemler kuruyoruz.` with support copy `Yapay zekâ, otomasyon ve dijital deneyimleri ayrı araçlar değil, birlikte çalışan bir sistem olarak tasarlıyoruz.` and CTA `Projeyi konuşalım`. EN now reconstructs exactly `Systems that keep your business` + `moving.` with support copy `AI, automation and digital experiences designed to work together — not as separate tools.` and CTA `Start a project`. The existing reassurance values duration, noCommitment, and direct are unchanged. Both languages now have the identical hero.systemCanvas shape with label, aria, and website/messages/ai/crm/calendar/team nodes. Every workflow.* field is unchanged, and no unrelated translation group changed. TypeScript typecheck passed before Checklist 3.
 
 ### 3. Replace image-led Hero with semantic static structure
 
-- [ ] Refactor Hero.tsx to render the approved copy and a semantic two-column Hero structure without the photo frame or image overlay.
-- [ ] Keep one CTA, one reassurance presentation per responsive mode, id="anasayfa", useLanguage(), and onCTAClick.
+- [x] Refactor Hero.tsx to render the approved copy and a semantic two-column Hero structure without the photo frame or image overlay.
+- [x] Keep one CTA, one reassurance presentation per responsive mode, id="anasayfa", useLanguage(), and onCTAClick.
 - Expected files: src/components/Hero.tsx, implementation_update.md.
+
+Implementation note — Checklist 3 complete: Removed the active Hero image and old connected-systems rail from JSX, including all copy.workflow consumption. Added the semantic hero-v2 shell with hero-v2__layout, hero-v2__copy, hero-v2__heading, hero-v2__support, hero-v2__actions, hero-v2__meta, hero-system, hero-system__label, and hero-system__stage hooks. The system figure reads only copy.hero.systemCanvas. The stage is intentionally an empty semantic scaffold; final six-node architecture, connectors, focal AI treatment, and canvas styling remain deferred to Checklist 4. The single native CTA still invokes onCTAClick, section ID anasayfa and App ordering are unchanged, and ContactModal remains App-owned. The Hero no longer renders the image, workflow rail, radial glow, gradient overlay, headline gradient, Hero fade-up classes, or Hero data-reveal wrapper. Reassurance meanings are preserved in one combined responsive meta block; no dedicated Phase 5 mobile restructure was started. No CSS was changed, no new motion was added, and no Phase 4 or Phase 5 scope was started. pnpm typecheck passed.
 
 ### 4. Build the static operational-system canvas
 

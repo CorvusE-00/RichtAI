@@ -7,95 +7,58 @@ interface HeroProps {
 
 export function Hero({ onCTAClick }: HeroProps) {
   const { copy, language } = useLanguage();
-  const connectedSystems = copy.workflow.connectedSystems;
-  return (
-    <section id="anasayfa" className={`hero-section relative overflow-hidden pt-28 pb-3 sm:pt-24 sm:pb-10 lg:pt-36 lg:pb-20 ${language === 'tr' ? 'hero-section--tr' : ''}`}>
-      {/* One restrained atmospheric layer; the visual system carries the hero's detail. */}
-      <div className="absolute inset-0 radial-glow opacity-70 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-950/45 via-navy-950/80 to-navy-950 pointer-events-none" />
 
-      <div data-reveal className="reveal relative z-10 max-w-6xl mx-auto px-5 sm:px-6">
-        <div className="grid items-center gap-3 sm:gap-8 md:gap-14 lg:grid-cols-[0.84fr_1.16fr] xl:gap-16">
-          <div className="hero-copy text-center xl:text-left">
-            {/* Headline */}
-            <h1 className="hero-copy__heading hero-heading mt-0 max-w-[40rem] font-display text-4xl sm:text-5xl xl:text-6xl 2xl:text-7xl font-semibold leading-[1.04] tracking-[-0.04em] text-snow-50 animate-fade-in-up animate-delay-100">
+  return (
+    <section
+      id="anasayfa"
+      className={[
+        'hero-section hero-v2 relative overflow-hidden bg-[var(--v2-surface-carbon)] pt-28 pb-3 sm:pt-24 sm:pb-10 lg:pt-36 lg:pb-20',
+        language === 'tr' ? 'hero-section--tr' : '',
+      ].join(' ')}
+    >
+      <div className="v2-container relative">
+        <div className="hero-v2__layout grid items-center gap-8 md:gap-14 lg:grid-cols-[minmax(0,0.84fr)_minmax(0,1.16fr)] xl:gap-16">
+          <div className="hero-v2__copy text-center xl:text-left">
+            <h1 className="hero-v2__heading max-w-[40rem] font-display text-4xl font-semibold leading-[1.04] tracking-[-0.04em] text-[var(--v2-text-on-dark-primary)] sm:text-5xl xl:text-6xl 2xl:text-7xl">
               <span className="block">{copy.hero.headline}</span>
-              <span className="mt-1 block text-gradient-teal">{copy.hero.headlineAccent}</span>
+              <span className="block">{copy.hero.headlineAccent}</span>
             </h1>
 
-            {/* Supporting copy */}
-            <p className="hero-copy__subheadline max-w-xl text-base sm:mt-6 sm:text-lg text-snow-400 leading-relaxed animate-fade-in-up animate-delay-300">
+            <p className="hero-v2__support mt-4 max-w-xl text-base leading-relaxed text-[var(--v2-text-on-dark-secondary)] sm:mt-6 sm:text-lg">
               {copy.hero.subheadline}
             </p>
 
-            {/* Primary action */}
-            <div className="hero-copy__cta flex flex-col items-center gap-4 sm:mt-8 xl:items-start animate-fade-in-up animate-delay-500">
-              <button onClick={onCTAClick} className="btn-primary group w-full sm:w-auto">
+            <div className="hero-v2__actions mt-6 flex flex-col items-center gap-4 sm:mt-8 xl:items-start">
+              <button onClick={onCTAClick} className="btn-primary w-full sm:w-auto">
                 <span>{copy.hero.cta}</span>
-                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight className="h-5 w-5" />
               </button>
             </div>
 
-            {/* Quiet reassurance and trust information */}
-            <div className="hero-copy__meta hero-meta hero-meta--desktop mt-4 hidden text-center sm:mt-6 sm:block xl:text-left">
-              <span className="text-snow-500 text-xs sm:text-sm">{copy.hero.duration}</span>
-              <div className="hero-meta__reassurance mt-2.5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-snow-500 text-xs sm:text-sm xl:justify-start">
-                <div className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4 text-teal-400/85" />
-                  <span>{copy.hero.noCommitment}</span>
-                </div>
-                <span className="hero-meta__separator hidden h-1 w-1 rounded-full bg-navy-500 sm:block" aria-hidden="true" />
-                <div className="flex items-center gap-1.5">
-                  <UserRound className="w-4 h-4 text-teal-400/85" />
-                  <span>{copy.hero.direct}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="hero-copy__meta hero-meta hero-meta--mobile mt-3 text-center sm:hidden">
-              <div className="hero-meta__mobile-row">
-                <span>{copy.hero.duration}</span>
-                <span aria-hidden="true">·</span>
-                <span>{copy.hero.noCommitment}</span>
-              </div>
-              <div className="hero-meta__mobile-row hero-meta__mobile-row--direct">
-                <span>{copy.hero.direct}</span>
-              </div>
+            <div className="hero-v2__meta mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 border-t border-[var(--v2-border-dark)] pt-3 text-xs text-[var(--v2-text-on-dark-secondary)] sm:mt-6 sm:text-sm xl:justify-start">
+              <span>{copy.hero.duration}</span>
+              <span aria-hidden="true">·</span>
+              <span className="inline-flex items-center gap-1.5">
+                <ShieldCheck className="h-4 w-4 text-[var(--v2-accent-system)]" aria-hidden="true" />
+                {copy.hero.noCommitment}
+              </span>
+              <span aria-hidden="true">·</span>
+              <span className="inline-flex items-center gap-1.5">
+                <UserRound className="h-4 w-4 text-[var(--v2-accent-system)]" aria-hidden="true" />
+                {copy.hero.direct}
+              </span>
             </div>
           </div>
 
-          {/* Visual-led Hero region with one compact operational proof overlay. */}
-          <div className="hero-visual-region" aria-label={copy.workflow.aria}>
-            <div className="hero-visual">
-              <div className="hero-visual__frame">
-                <img
-                  src="/images/ai-operations-hero-v2.png"
-                  alt="AI automation system quietly organizing business operations"
-                />
-              </div>
-
-              <div className="hero-connected-systems" aria-label={copy.workflow.aria}>
-                <div className="hero-connected-systems__header">
-                  <span className="hero-connected-systems__status-dot" aria-hidden="true" />
-                  <span>{copy.workflow.connectedSystemsLabel}</span>
-                </div>
-                <div className="hero-connected-systems__rail">
-                  {connectedSystems.map((system, index) => (
-                    <div key={system} className="hero-connected-systems__segment">
-                      <div className="hero-connected-systems__node">
-                        <span className="hero-connected-systems__node-dot" aria-hidden="true" />
-                        <span>{system}</span>
-                      </div>
-                      {index < connectedSystems.length - 1 && <span className="hero-connected-systems__connector" aria-hidden="true" />}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
+          <figure className="hero-system mt-2 min-w-0 lg:mt-0" aria-label={copy.hero.systemCanvas.aria}>
+            <figcaption className="hero-system__label mb-3 flex items-center gap-2 text-[11px] font-display uppercase tracking-[0.14em] text-[var(--v2-text-on-dark-secondary)]">
+              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--v2-accent-system)]" aria-hidden="true" />
+              {copy.hero.systemCanvas.label}
+            </figcaption>
+            <div className="hero-system__stage min-h-[18rem] rounded-2xl border border-[var(--v2-border-dark)] bg-[var(--v2-surface-graphite)]" aria-hidden="true" />
+          </figure>
         </div>
       </div>
-
     </section>
   );
 }
