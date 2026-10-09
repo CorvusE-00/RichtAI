@@ -25,8 +25,8 @@ export function Hero({ onCTAClick }: HeroProps) {
         <div className="hero-v2__layout">
           <div className="hero-v2__copy">
             <h1 className="hero-v2__heading">
-              <span className="block">{copy.hero.headline}</span>
-              <span className="block">{copy.hero.headlineAccent}</span>
+              <span>{copy.hero.headline}</span>{' '}
+              <span>{copy.hero.headlineAccent}</span>
             </h1>
 
             <p className="hero-v2__support">

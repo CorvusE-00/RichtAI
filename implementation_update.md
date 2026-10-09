@@ -13,7 +13,7 @@ Phase 3 — Static Hero foundation
 → Phase 5 — Mobile Hero refinement  
 → Phase 4 — Motion system pass
 
-This document is the active source of truth for Phase 3.5. Checklist 1 is complete as a visual-audit/documentation step only; Checklists 2–8 remain unchecked, and no visual implementation has started.
+This document is the active source of truth for Phase 3.5. Checklists 1–3 are complete; Checklists 4–8 remain unchecked. No system-canvas redesign, Phase 4 motion, or Phase 5 mobile implementation has started.
 
 ## Objective
 
@@ -378,19 +378,33 @@ The following direction is the target for Checklists 2–6. It is guidance only;
 
 ### 2. Refine headline composition and left-column rhythm
 
-- [ ] Refine headline max width, line breaks, scale balance, and line-height without rewriting approved copy.
-- [ ] Refine the spacing relationship between headline, support copy, CTA, and reassurance.
-- [ ] Keep the headline editorial and strong in both TR and EN without clumsy wrapping.
+- [x] Refine headline max width, line breaks, scale balance, and line-height without rewriting approved copy.
+- [x] Refine the spacing relationship between headline, support copy, CTA, and reassurance.
+- [x] Keep the headline editorial and strong in both TR and EN without clumsy wrapping.
 
 Expected scope: Hero-local source/CSS and `implementation_update.md` only.
+
+Implementation note — Checklist 2 complete: The two approved i18n headline fields now render as inline sentence parts at desktop widths with one semantic whitespace between them, removing the forced independent block behavior and avoiding an isolated final-word beat. Below 1024px the parts remain block-level to preserve the existing mobile/tablet flow. Desktop grid ratio is now `1.02fr / 0.98fr`, giving the copy a modestly wider measure without starving the future canvas. Desktop heading rules are `max-width: 42rem`, `font-size: clamp(3.25rem, 4.15vw, 5.25rem)`, `line-height: 0.98`, and `letter-spacing: -0.045em`; no manual `<br>`, gradient, accent color, or copy change was introduced.
+
+Old versus new wrap behavior:
+
+- Old: TR and EN both rendered four lines at every audited desktop width, with `kuruyoruz.` / `moving.` isolated as the final span beat.
+- New TR: three lines at 1024px, two at 1280px, and three at 1440px and 1536px.
+- New EN: three lines at 1024px, two at 1280px, and three at 1440px and 1536px.
+
+The resulting rhythm is materially less blocky while retaining strong display scale. At all tested desktop widths there was no collision or horizontal overflow. The system canvas markup and architecture were not changed.
 
 ### 3. Refine support-copy hierarchy
 
-- [ ] Tune support-copy width, line length, spacing, and visual weight so it supports the headline rather than forming a paragraph wall.
-- [ ] Preserve the approved TR/EN support copy and existing i18n source.
-- [ ] Verify the copy remains readable at desktop/tablet widths.
+- [x] Tune support-copy width, line length, spacing, and visual weight so it supports the headline rather than forming a paragraph wall.
+- [x] Preserve the approved TR/EN support copy and existing i18n source.
+- [x] Verify the copy remains readable at desktop/tablet widths.
 
 Expected scope: Hero-local source/CSS and `implementation_update.md` only.
+
+Implementation note — Checklist 3 complete: Support copy remains Inter/Steel with the approved TR/EN text unchanged. At 1024px the effective measure is approximately 428px and the copy remains three lines in both languages; at 1280px, 1440px, and 1536px the `max-width: 33rem` rule produces an effective measure of approximately 528px and two readable lines in both languages. Desktop support line-height is tightened to `1.55` (27.9px at the existing 1.125rem size) and the headline-to-support gap is `1.25rem`, keeping the paragraph attached without crowding it.
+
+CTA and reassurance placement were refined only through spacing: CTA margin-top is `1.75rem`, reassurance margin-top is `1.125rem`, and the existing CTA styling, callback, copy, reassurance meanings, and metadata structure remain unchanged. The left column now reads as headline → positioning statement → action → quiet reassurance. The canvas was not modified. Below-desktop checks at 375px and 768px in both languages retained block-level headline parts, readable support copy, reachable CTA/meta, and no horizontal overflow. `pnpm typecheck` PASS; full lint/build remain Checklist 8.
 
 ### 4. Redesign static system-canvas architecture
 
