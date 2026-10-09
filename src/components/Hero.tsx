@@ -6,7 +6,7 @@ interface HeroProps {
 }
 
 export function Hero({ onCTAClick }: HeroProps) {
-  const { copy, language } = useLanguage();
+  const { copy } = useLanguage();
   const systemNodes = [
     { key: 'website', label: copy.hero.systemCanvas.nodes.website, modifier: 'website', column: '1', row: '1' },
     { key: 'messages', label: copy.hero.systemCanvas.nodes.messages, modifier: 'messages', column: '1', row: '2' },
