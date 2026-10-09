@@ -60,14 +60,14 @@ export function Navbar({ onCTAClick }: NavbarProps) {
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="navbar-v2__brand col-start-1 justify-self-start flex items-center gap-2.5 group"
           >
-            <div className={`relative transition-transform duration-500 ${isScrolled ? 'scale-90' : ''}`}>
+            <div className={`navbar-v2__brand-mark relative transition-transform duration-500 ${isScrolled ? 'scale-90' : ''}`}>
               <div className="absolute inset-0 bg-teal-500/30 blur-lg group-hover:bg-teal-500/40 transition-all duration-300 lg:hidden" />
-              <div className="relative w-9 h-9 rounded-lg overflow-hidden border border-teal-400/25">
+              <div className="navbar-v2__brand-mark-frame relative w-9 h-9 rounded-lg overflow-hidden border border-teal-400/25">
                 <MermaidMark className="h-full w-full" />
               </div>
             </div>
-            <span className={`font-display font-semibold text-snow-50 tracking-tight transition-all duration-500 ${isScrolled ? 'text-base' : 'text-lg'}`}>
-              Richt<span className="text-teal-400"> Ai</span>
+            <span className={`navbar-v2__wordmark font-display font-semibold text-snow-50 tracking-tight transition-all duration-500 ${isScrolled ? 'text-base' : 'text-lg'}`}>
+              Richt<span className="navbar-v2__wordmark-accent text-teal-400"> Ai</span>
             </span>
           </button>
 
@@ -89,14 +89,14 @@ export function Navbar({ onCTAClick }: NavbarProps) {
           <div className="navbar-v2__actions col-start-3 hidden lg:flex items-center gap-3 justify-self-end">
             <button
               onClick={toggleLanguage}
-              className="inline-flex min-w-11 items-center justify-center rounded-lg border border-navy-600/70 px-2.5 py-2 text-xs font-semibold tracking-wide text-snow-300 transition-colors hover:border-teal-400/50 hover:text-teal-200"
+              className="navbar-v2__language navbar-v2__language--desktop v2-focus-ring inline-flex min-w-11 items-center justify-center rounded-lg border px-2.5 py-2 text-xs font-semibold tracking-wide"
               aria-label={copy.nav.switchLanguage}
             >
               {language === 'tr' ? 'EN' : 'TR'}
             </button>
             <button
               onClick={handleCTA}
-              className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-gradient-to-r from-teal-500 to-cyan-500 text-navy-950 font-display font-semibold text-sm transition-all duration-300 hover:from-teal-400 hover:to-cyan-400 hover:shadow-[0_0_20px_rgba(20,184,166,0.35)] hover:-translate-y-0.5"
+              className="navbar-v2__cta v2-focus-ring inline-flex items-center justify-center font-display font-semibold text-sm"
             >
               {copy.nav.cta}
             </button>

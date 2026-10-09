@@ -280,6 +280,8 @@ Implementation note: Desktop Navbar styling now uses the V2 Carbon surface and d
 - [ ] Style the CTA with the approved EN/TR labels, compact 8–10px radius, Carbon text on Signal Lime where appropriate, no glow, and no hover lift.
 - [ ] Preserve the existing `onCTAClick` → ContactModal behavior and do not create a global `.v2-button-*` system.
 
+Implementation note: The desktop brand keeps the existing MermaidMark and logo-to-top button while using a crisp restrained frame, quieter Space Grotesk wordmark, primary Richt text, and Signal Lime for the Ai accent without glow. The desktop language control is a compact transparent Carbon-compatible control with V2 border, secondary text, hover, and focus treatment. The desktop CTA now uses the approved translated labels with a Signal Lime fill, Carbon text, compact radius, no gradient, glow, shadow, or hover lift. No arrow/icon was added. `handleCTA` and the App-owned ContactModal callback remain intact. The available 1280px desktop preview was checked in English and Turkish without horizontal overflow; mobile redesign was not started.
+
 ### 6. Rework active and scrolled states without behavioral drift
 
 - [ ] Preserve the active-section observer, current IDs, root margin, thresholds, and `isScrolled` threshold unless a concrete bug is discovered.
@@ -349,7 +351,7 @@ Phase 2 is complete only when:
 - [x] Finalize V2 labels and ID-safe i18n mapping
 - [x] Prepare semantic V2 Navbar structure
 - [x] Apply the desktop Bold Systems visual system
-- [ ] Rework brand, language control, and CTA presentation
+- [x] Rework brand, language control, and CTA presentation
 - [ ] Rework active and scrolled states without behavioral drift
 - [ ] Rebuild the mobile Navbar/menu presentation
 - [ ] Preserve accessibility and restrained motion

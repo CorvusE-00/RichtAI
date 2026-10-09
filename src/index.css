@@ -1540,4 +1540,49 @@
     margin-left: -0.625rem;
     background-color: var(--v2-accent-signal);
   }
+
+  .navbar-v2__brand-mark-frame {
+    border-radius: var(--v2-radius-ui);
+    border-color: var(--v2-border-dark);
+  }
+
+  .navbar-v2__wordmark {
+    font-family: var(--v2-font-display);
+    color: var(--v2-text-on-dark-primary);
+    letter-spacing: -0.02em;
+  }
+
+  .navbar-v2__wordmark-accent {
+    color: var(--v2-accent-signal) !important;
+  }
+
+  .navbar-v2__language--desktop {
+    min-width: 2.75rem;
+    min-height: 2.5rem;
+    border-color: var(--v2-border-dark);
+    border-radius: var(--v2-radius-ui);
+    background-color: transparent;
+    color: var(--v2-text-on-dark-secondary);
+    transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease;
+  }
+
+  .navbar-v2__language--desktop:hover {
+    border-color: var(--v2-accent-system);
+    background-color: var(--v2-hover);
+    color: var(--v2-text-on-dark-primary);
+  }
+
+  .navbar-v2__cta {
+    min-height: 2.5rem;
+    padding: 0.625rem 1.125rem;
+    border: 1px solid var(--v2-accent-signal);
+    border-radius: var(--v2-radius-control);
+    background-color: var(--v2-accent-signal);
+    color: var(--v2-surface-carbon);
+    transition: filter 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  }
+
+  .navbar-v2__cta:hover {
+    filter: brightness(1.08);
+  }
 }
