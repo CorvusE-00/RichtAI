@@ -176,7 +176,7 @@ Implementation note: no Tailwind aliases were added. `tailwind.config.js` remain
 
 ### 7. Run build/type/lint verification
 
-- [ ] Run the actual project verification commands after the token/primitive implementation.
+- [x] Run the actual project verification commands after the token/primitive implementation.
 
 Commands:
 
@@ -187,6 +187,8 @@ pnpm build
 ```
 
 Stop and report any Phase 1-caused failure. Do not fix unrelated issues without review.
+
+Verification note: `pnpm typecheck` **PASS**, `pnpm lint` **PASS**, and `pnpm build` **PASS**. The build reported only the existing informational message that `VITE_SITE_URL` is not set; no CSS, Tailwind, V2 variable/selector, import, or bundling issue appeared. Phase 1 token/primitive additions compile, lint, and build successfully. Git integrity checks showed no source, config, package, lockfile, asset, or generated-file changes during verification.
 
 ### 8. Perform manual V1 visual regression verification
 
@@ -250,6 +252,6 @@ Phase 1 is complete only when:
 - [x] Add minimum `.v2-*` primitive classes
 - [x] Evaluate whether Tailwind semantic aliases are needed
 - [x] Add only justified Tailwind aliases if required
-- [ ] Run build/type/lint verification
+- [x] Run build/type/lint verification
 - [ ] Perform manual V1 visual regression verification
 - [ ] Complete Phase 1 cleanup/readiness review
