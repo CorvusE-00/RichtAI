@@ -101,6 +101,149 @@ Do not modify:
 - [ ] Record any concrete behavior constraints before markup changes.
 - [ ] Do not modify other components during this audit.
 
+#### Checklist 1 audit record
+
+The live source was inspected in `src/components/Navbar.tsx`, `src/lib/i18n.tsx`, `src/App.tsx`, the rendered section components, `src/components/MermaidMark.tsx`, and the global reduced-motion rules. No source file was changed.
+
+#### State contracts
+
+| State | Current contract | Scope / language behavior |
+| --- | --- | --- |
+| `isMenuOpen` | Initial value `false`; toggled by the mobile Menu/X button; `scrollTo()` sets it to `false` after any nav selection. | Used by the mobile menu only; not language-dependent. |
+| `isScrolled` | Initial value `false`; updated by the passive `scroll` listener to `window.scrollY > 24`; listener is removed during effect cleanup. | Affects header padding, nav height, backdrop state, logo scale, and related transitions at all widths; not language-dependent. |
+| `activeSection` | Initial value `'sorun'`; updated by the IntersectionObserver to the most visible intersecting section ID. | Drives `aria-current` and active styling for desktop and mobile links; observer setup is recreated when `navLinks` changes after a language change. |
+
+#### Scroll and observer contracts
+
+- The scroll listener calls `handleScroll()` immediately, then listens with `{ passive: true }`, and removes the listener on cleanup.
+- The frozen threshold is exactly `window.scrollY > 24`.
+- Observer sections are derived from `copy.nav.links`, mapped through `document.getElementById(id)`, and filtered to existing `HTMLElement` targets.
+- The observer uses `rootMargin: '-28% 0px -58% 0px'` and `threshold: [0, 0.2, 0.5, 0.8]`.
+- Intersecting entries are sorted by descending `intersectionRatio`; the first entry becomes `activeSection`.
+- Every observed section is registered, and the observer disconnects during cleanup. The effect depends on `navLinks`.
+- Current observed IDs are `sorun`, `cozum`, `nasil-calisir`, `guven`, and `sss` in both languages.
+
+#### Navigation and CTA contracts
+
+- `scrollTo(id)` calls `document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })`, then closes the mobile menu.
+- Navigation does not change the URL or hash.
+- The logo button calls `window.scrollTo({ top: 0, behavior: 'smooth' })`.
+- `NavbarProps` contains `onCTAClick: () => void`.
+- `handleCTA` is memoized with `useCallback` and invokes `onCTAClick`.
+- Only the desktop action area currently renders the Navbar CTA; the mobile menu contains navigation links only.
+- App owns `isContactOpen`, passes `openContact` to Navbar, and renders ContactModal with App-owned open/close callbacks.
+
+#### Language contract
+
+- Navbar consumes `useLanguage()` for `copy`, `language`, and `toggleLanguage()`.
+- The language control displays `EN` when the current language is Turkish and `TR` when the current language is English.
+- Its `aria-label` is sourced from `copy.nav.switchLanguage`; the same toggle logic is reused on desktop and mobile.
+- `LanguageProvider` owns persistence in `localStorage` under `richtai-language` and calls `applyLanguageMetadata()` for title, description, and language metadata. Navbar does not own persistence or metadata.
+
+#### Responsive and mobile contracts
+
+- The header is fixed with `top-0 left-0 right-0 z-40`.
+- Unscrolled header padding is `py-2` with nav height `h-16`; scrolled state is `py-1` with nav height `h-14`.
+- The nav uses `max-w-6xl mx-auto px-3 sm:px-6` and `grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]`.
+- Desktop navigation and actions use `hidden lg:flex`; mobile controls and mobile menu use `lg:hidden`; `lg` remains the transition boundary.
+- Desktop navigation occupies the center grid region; desktop language and CTA occupy the right region; mobile controls occupy the right grid column.
+- The mobile menu uses Menu/X icons, a full-width dark surface, and nav links only. It uses `max-h-[28rem] opacity-100` when open and `max-h-0 opacity-0 pointer-events-none` when closed, with a 300ms max-height/opacity transition.
+- Body scroll is not locked, Escape does not currently close the menu, and no mobile CTA is rendered inside the menu.
+
+#### Brand contract
+
+- Navbar consumes the shared `MermaidMark` component; it does not reference a source image path directly.
+- The mark is wrapped in a `w-9 h-9 rounded-lg overflow-hidden` bordered shell.
+- The current visual treatment includes a teal blur glow, a scrolled `scale-90` transform, and the `Richt Ai` wordmark with teal `Ai`.
+- The logo button scrolls smoothly to the top of the page.
+- Functional contract: preserve the Mermaid silhouette, wordmark recognition, and logo-to-top action. Visual glow, radius, scale, and color treatment are safe candidates for V2 replacement.
+
+#### Accessibility contract and gaps
+
+| Area | Current status | Phase 2 classification |
+| --- | --- | --- |
+| `header` / `nav` semantics | Present. | PRESERVE |
+| Buttons and CTA semantics | Native buttons are used for logo, links, language, menu, and CTA. | PRESERVE |
+| Active section | `aria-current="page"` is present on the active nav link. | PRESERVE |
+| Language label | `aria-label` comes from the translated `switchLanguage` copy. | PRESERVE |
+| Menu label | `aria-label` comes from translated `copy.nav.menu`. | PRESERVE |
+| `aria-expanded` / `aria-controls` | Not currently present. | IMPROVE IN PHASE 2 |
+| Keyboard focus | Native button focus is available; no Navbar-specific `.v2-focus-ring` is applied. | PRESERVE, then IMPROVE IN PHASE 2 if needed |
+| Escape close | Not currently implemented. | IMPROVE IN PHASE 2 only if safely compatible |
+| Reduced motion | Global reduced-motion rules shorten transitions and disable smooth scrolling; no Navbar-specific rule exists. | PRESERVE and verify |
+
+#### Current visual structure
+
+| Current treatment | Classification |
+| --- | --- |
+| Fixed header, three-column desktop placement, `lg` split, smooth scroll, active underline, and menu transition | BEHAVIOR TO PRESERVE |
+| Backdrop blur and translucent navy surface | VISUAL TO REPLACE |
+| Large shadow in scrolled state | VISUAL TO REPLACE |
+| Teal logo glow | VISUAL TO REPLACE |
+| Teal-to-cyan gradient CTA and hover glow/lift | VISUAL TO REPLACE |
+| Rounded logo shell, rounded controls, and capsule/pill cues | VISUAL TO REPLACE |
+| Existing short active underline treatment | VISUAL TO REPLACE or refine, while preserving active semantics |
+| Mobile full-width dropdown structure and link-only content | BEHAVIOR TO PRESERVE; surface treatment may be replaced |
+
+#### Current copy and Phase 2 staging
+
+| Language | Current nav labels / CTA | Phase 2 labels / CTA | IDs |
+| --- | --- | --- | --- |
+| TR | Sorunlar, Çözüm, Nasıl çalışır?, Güven, S.S.S. / Ücretsiz tanışma görüşmesi | Sorunlar, Sistemler, Süreç, Hakkında, S.S.S. / Projeyi konuşalım | `sorun`, `cozum`, `nasil-calisir`, `guven`, `sss` |
+| EN | Challenges, Solutions, How it works, Trust, FAQ / Book a free introduction call | Challenges, Systems, Process, About, FAQ / Start a project | `sorun`, `cozum`, `nasil-calisir`, `guven`, `sss` |
+
+The first item remains Challenges / Sorunlar in Phase 2. Work / Projeler waits for the future Phase 6 Selected Work section and must not point to `sorun`.
+
+#### Section ID contract
+
+| ID | Owning component | Current section |
+| --- | --- | --- |
+| `sorun` | `src/components/Problem.tsx` | Problem / Challenges |
+| `cozum` | `src/components/Solution.tsx` | Solution / Systems |
+| `nasil-calisir` | `src/components/HowItWorks.tsx` | How It Works / Process |
+| `guven` | `src/components/Trust.tsx` | Trust / Founder |
+| `sss` | `src/components/FAQ.tsx` | FAQ |
+
+### Frozen Navbar contracts
+
+- fixed header positioning;
+- `window.scrollY > 24` scroll threshold and passive listener cleanup;
+- `activeSection` initial value `sorun`;
+- current nav-derived observer IDs;
+- observer root margin `-28% 0px -58% 0px` and thresholds `[0, 0.2, 0.5, 0.8]`;
+- visible-section selection by highest intersection ratio;
+- smooth `scrollIntoView` without URL/hash changes;
+- mobile menu closes after a link selection;
+- language switching through `toggleLanguage()`;
+- CTA callback through `onCTAClick`;
+- ContactModal ownership in App;
+- `lg` desktop/mobile breakpoint;
+- logo-to-top smooth scrolling;
+- active `aria-current` semantics;
+- stable section IDs and existing rendered section order;
+- MermaidMark functional silhouette and wordmark interaction;
+- reduced-motion and keyboard usability.
+
+### Safe visual replacement areas
+
+- blur-heavy translucent header background;
+- large scrolled-state shadow;
+- teal logo glow and scrolled logo scale treatment;
+- gradient CTA, CTA glow, and hover lift;
+- capsule/pill radius cues;
+- old mobile dropdown surface treatment;
+- old active underline styling, provided active semantics remain.
+
+### Top five migration risks
+
+| Rank | Risk | Cause | Likely failure | Guardrail |
+| --- | --- | --- | --- | --- |
+| 1 | Observer breakage | Replacing `navLinks`, IDs, or effect dependencies during markup work. | Active state stops tracking or highlights the wrong section. | Keep current IDs, root margin, thresholds, selection rule, cleanup, and `navLinks` dependency unchanged. |
+| 2 | ID/label mismatch | Introducing Work / Projeler before Selected Work exists. | A visible label promises a destination that is still Challenges / Sorunlar. | Keep Challenges / Sorunlar for `sorun`; defer Work / Projeler to Phase 6 with a new ID. |
+| 3 | Mobile menu regression | Replacing the max-height/opacity structure or forgetting close-after-selection. | Menu cannot open, close, or return focus/useful page state after navigation. | Test Menu/X, link selection, language toggle, overflow, and current body-scroll behavior at 320px and 375px. |
+| 4 | CTA / modal disconnect | Changing the CTA element or callback path while restyling actions. | Navbar CTA no longer opens App-owned ContactModal. | Preserve `onCTAClick`, `handleCTA`, and App ownership; verify opening and closing. |
+| 5 | TR/EN width pressure | Longer Turkish labels and language-dependent CTA widths. | Overlap, wrapping, clipped controls, or a broken 1024px transition. | Test both languages at 320px, 375px, 768px, 1024px, and desktop widths before completion. |
+
 ### 2. Finalize V2 labels and ID-safe i18n mapping
 
 - [ ] Verify the exact Phase 2 EN/TR visible-label mapping documented above against the live source.
@@ -196,7 +339,7 @@ Phase 2 is complete only when:
 
 ## Phase 2 checklist
 
-- [ ] Audit and freeze the current Navbar contracts
+- [x] Audit and freeze the current Navbar contracts
 - [ ] Finalize V2 labels and ID-safe i18n mapping
 - [ ] Prepare semantic V2 Navbar structure
 - [ ] Apply the desktop Bold Systems visual system
