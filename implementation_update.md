@@ -252,6 +252,8 @@ The first item remains Challenges / Sorunlar in Phase 2. Work / Projeler waits f
 - [ ] Keep Work / Projeler staged for the Phase 6 Selected Work handoff; do not create or point to Selected Work during Phase 2.
 - [ ] Do not begin the broader copy rewrite planned for a later phase.
 
+Implementation note: Turkish Navbar labels are Sorunlar, Sistemler, Süreç, Hakkında, and S.S.S., with CTA `Projeyi konuşalım`. English Navbar labels are Challenges, Systems, Process, About, and FAQ, with CTA `Start a project`. Both languages retain exactly five links with the unchanged ID sequence `sorun`, `cozum`, `nasil-calisir`, `guven`, `sss` and unchanged nav array shape. Work / Projeler remains deferred to the Phase 6 Selected Work handoff. The existing Navbar already consumes `copy.nav.links` and `copy.nav.cta`, so no Navbar source change was required; unrelated translation groups, menu labels, language labels, IDs, persistence, and metadata behavior were left unchanged.
+
 ### 3. Prepare semantic V2 Navbar structure
 
 - [ ] Restructure only the Navbar into a clear semantic `header` → `.v2-container` → brand, navigation, and controls hierarchy.
@@ -340,7 +342,7 @@ Phase 2 is complete only when:
 ## Phase 2 checklist
 
 - [x] Audit and freeze the current Navbar contracts
-- [ ] Finalize V2 labels and ID-safe i18n mapping
+- [x] Finalize V2 labels and ID-safe i18n mapping
 - [ ] Prepare semantic V2 Navbar structure
 - [ ] Apply the desktop Bold Systems visual system
 - [ ] Rework brand, language control, and CTA presentation

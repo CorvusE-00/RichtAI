@@ -13,12 +13,12 @@ export const translations = {
     nav: {
       links: [
         { label: 'Sorunlar', id: 'sorun' },
-        { label: 'Çözüm', id: 'cozum' },
-        { label: 'Nasıl çalışır?', id: 'nasil-calisir' },
-        { label: 'Güven', id: 'guven' },
+        { label: 'Sistemler', id: 'cozum' },
+        { label: 'Süreç', id: 'nasil-calisir' },
+        { label: 'Hakkında', id: 'guven' },
         { label: 'S.S.S.', id: 'sss' },
       ],
-      cta: 'Ücretsiz tanışma görüşmesi',
+      cta: 'Projeyi konuşalım',
       menu: 'Menü',
       switchLanguage: 'Switch to English',
     },
@@ -250,12 +250,12 @@ export const translations = {
     nav: {
       links: [
         { label: 'Challenges', id: 'sorun' },
-        { label: 'Solutions', id: 'cozum' },
-        { label: 'How it works', id: 'nasil-calisir' },
-        { label: 'Trust', id: 'guven' },
+        { label: 'Systems', id: 'cozum' },
+        { label: 'Process', id: 'nasil-calisir' },
+        { label: 'About', id: 'guven' },
         { label: 'FAQ', id: 'sss' },
       ],
-      cta: 'Book a free introduction call',
+      cta: 'Start a project',
       menu: 'Menu',
       switchLanguage: 'Türkçeye geç',
     },
