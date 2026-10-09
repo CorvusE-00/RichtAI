@@ -204,6 +204,8 @@ Inspect at 320px, 375px, 768px, 1024px, and 1280px+:
 
 Primary criterion: current V1 output remains visually stable.
 
+Verification note: The local Vite preview was opened in the Codex In-app Browser at `http://localhost:5173/`. Turkish and English were checked at the available `1280 × 720` CSS-pixel viewport: language switching updated copy, `document.title`, the description, and `html[lang]`; Navbar links scrolled to their sections; the Hero, Footer, colors, spacing, typography, images, and section order showed no evident Phase 1 regression; the FAQ accordion opened and closed; the CTA opened the ContactModal and Escape closed it; and horizontal overflow was false. The browser tool did not expose viewport emulation, so the required `320px`, `375px`, `768px`, and `1024px` checks, mobile-menu verification, and `prefers-reduced-motion` emulation could not be completed. Checklist 8 remains unchecked pending those checks.
+
 ### 9. Complete Phase 1 cleanup/readiness review
 
 - [ ] Confirm Phase 1 exit criteria and readiness for Phase 2 Navbar.
