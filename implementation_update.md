@@ -65,7 +65,8 @@ Do not add a dependency or generate a new Hero asset by default. Prefer semantic
 - copy.hero.subheadline is the current V1 supporting copy and must be replaced only with the approved Phase 3 support copy below.
 - copy.hero.cta, duration, noCommitment, and direct drive the Hero CTA and reassurance blocks.
 - The Hero currently reads copy.workflow.aria, copy.workflow.connectedSystemsLabel, and copy.workflow.connectedSystems; the connected-systems array is currently four items: TR Web sitesi, WhatsApp, CRM, Takvim; EN Website, WhatsApp, CRM, Calendar.
-- src/components/AIWorkflow.tsx exists and consumes the broader copy.workflow.* group, but it is not rendered by App.tsx. Phase 3 must not refactor or remove that dormant component or its unrelated workflow fields.
+- src/components/AIWorkflow.tsx exists and consumes the broader copy.workflow.* group, but it is not rendered by App.tsx. Its workflow.aria field is still a live source consumer if the component is rendered later; Phase 3 must not refactor or remove that dormant component or its unrelated workflow fields.
+- Repository usage confirms connectedSystems and connectedSystemsLabel are currently read by Hero.tsx only, while workflow.aria is read by both Hero.tsx and AIWorkflow.tsx. Checklist 2 should therefore prefer a minimal Hero-specific localized canvas extension and should not repurpose workflow.aria without a compatibility decision.
 
 ### Current visual and motion hooks
 
@@ -77,10 +78,12 @@ Do not add a dependency or generate a new Hero asset by default. Prefer semantic
 
 ### Responsive and accessibility baseline
 
-- Current responsive breakpoints include the base/mobile layout, max-width: 420px, max-width: 639px, min-width: 640px, and desktop-oriented min-width: 1024px / min-width: 1280px rules.
-- Below 640px, CSS uses structural ordering for headline, support copy, visual region, CTA, and reassurance. Phase 3 must preserve a usable fallback and leave dedicated order/spacing/typography refinement to Phase 5.
-- The current visual region exposes copy.workflow.aria, the image has a fixed English alt string, the CTA is a native button, and the section uses a normal heading hierarchy beginning with h1.
-- Navbar V2 is fixed with z-40; its current top/scroll states use a 4rem/3.5rem nav height range. Hero’s responsive top padding currently prevents collision and must be rechecked after static composition changes.
+- Base/mobile uses a one-column grid, centered copy, the visual region after the subheadline, CTA after the visual, and compact mobile reassurance last. At max-width: 420px, workflow-event metadata is hidden, Hero meta spacing is increased to 1rem, and the reassurance separator is hidden.
+- At max-width: 639px, hero-copy becomes display: contents; explicit order is heading 1, subheadline 2, visual 3, CTA 4, and meta 5. The connected rail becomes a two-column grid, its connectors are hidden, the Hero heading is 2.15rem with line-height 1, and mobile reassurance uses two rows.
+- At min-width: 640px, the connected rail returns to a horizontal flex arrangement and the sm utility values apply: section pt-24/pb-10, larger heading/support copy, CTA margin-top, and desktop reassurance visibility. There is no Hero-specific min-width: 768px rule; 768px inherits this tablet behavior.
+- At min-width: 1024px, lg utilities apply: section pt-36/pb-20, the two-column grid is lg 0.84fr/1.16fr, copy remains centered until xl, and the visual stays in the right grid column. At min-width: 1280px, the visual receives 1.5rem left padding, Turkish reassurance is forced to one line, and a vertical visual separator is added. No current hero-section--tr min-height or padding override exists.
+- The current visual region exposes copy.workflow.aria; the image has a fixed English alt string; the CTA is a native button; the outer visual region and inner connected-systems rail both carry the same aria-label; and the section uses one h1.
+- Navbar V2 is fixed with z-40. Base/sm JSX states use py-2 + h-16 at the top (80px total) and py-1 + h-14 when scrolled (64px total). At min-width: 1024px, CSS overrides both states to 0.5rem vertical padding and a 4rem inner height (80px total), so desktop scroll does not change effective header height. Hero top padding is 7rem base, 6rem at sm, and 9rem at lg+, which currently clears the fixed header; this clearance must be preserved without modifying Navbar.
 
 ## Frozen functional contracts
 
@@ -93,6 +96,8 @@ Do not add a dependency or generate a new Hero asset by default. Prefer semantic
 - Preserve a single CTA and a single reassurance/meta block per responsive presentation; do not duplicate content to solve layout.
 - Keep existing language persistence and unrelated translation groups unchanged.
 - Retain global reduced-motion behavior for any remaining static-state transitions; Phase 3 adds no continuous motion.
+- Leave Navbar source and CSS untouched, preserve safe fixed-header clearance, add no dependencies, and leave the existing Hero asset physically intact even after removing it from active usage.
+- Do not begin Phase 4 motion or the dedicated Phase 5 mobile redesign from this phase.
 
 ## Approved TR/EN Hero copy
 
@@ -221,13 +226,15 @@ Implement exactly one checklist item per Codex run. Stop after each item and upd
 
 ### 1. Audit and freeze Hero contracts
 
-- [ ] Confirm the current Hero props, App callback ownership, section ID, render order, Navbar clearance, i18n dependencies, CSS hooks, asset dependency, breakpoints, and reveal/motion consumers against source.
+- [x] Confirm the current Hero props, App callback ownership, section ID, render order, Navbar clearance, i18n dependencies, CSS hooks, asset dependency, breakpoints, and reveal/motion consumers against source.
 - Expected files: implementation_update.md only.
+
+Audit note — Checklist 1 complete: HeroProps is exactly HeroProps { onCTAClick: () => void }; Hero has no local state and destructures copy and language from useLanguage(). It consumes copy.hero.headline, headlineAccent, subheadline, cta, duration, noCommitment, and direct, plus copy.workflow.aria, connectedSystemsLabel, and connectedSystems. The CTA directly invokes onCTAClick; App owns openContact, closeContact, isContactOpen, and ContactModal. The stable section ID is anasayfa and the frozen App order is Navbar → Hero → StatisticsStrip → Problem → Solution → HowItWorks → Trust → FAQ → FinalCTA → Footer → ContactModal. The Hero uses the two-span headline, separate desktop/mobile reassurance blocks, an image frame at /images/ai-operations-hero-v2.png, a connected-systems rail, duplicate visual aria-labels, a fixed English image alt, data-reveal/reveal, and animate-fade-in-up/animate-delay classes. Workflow consumer audit found AIWorkflow.tsx is not rendered by App, but it consumes workflow.aria; connectedSystems and connectedSystemsLabel are currently Hero-only consumers. Checklist 2 must prefer Hero-specific canvas translations unless compatibility is proven. CSS classification is: hero-section, hero-section--tr, hero-copy*, hero-heading, hero-meta*, hero-visual*, hero-connected-systems*, and connected-status-pulse/connected-node-pulse/connected-signal-sweep are Hero-only; radial-glow is currently Hero-only; text-gradient-teal is shared by Hero, Solution, and FinalCTA; reveal is shared by multiple sections through useRevealObserver; animate-fade-in-up and animate-delay-* are shared by AIWorkflow and ContactModal and must be preserved; uncertain selectors must be preserved until usage search proves otherwise. The Hero asset is referenced only by Hero.tsx and remains physically untouched. Current responsive behavior is preserved as documented above, and Navbar clearance is safe at base/sm and lg+ under current source rules. StatisticsStrip is immediately adjacent with its own observer/counters and remains untouched. Accessibility baseline is one h1, native CTA, static non-interactive rail, duplicate aria-labels on visual wrappers, decorative dots/connectors partly aria-hidden, and inherited CTA focus styling. No source/config/package/asset file changed.
 
 ### 2. Finalize approved Hero copy and i18n scope
 
 - [ ] Update only the approved Hero headline/support fields and the narrowly-scoped Hero CTA alignment.
-- [ ] Define localized static canvas labels through the existing connected-system translation source or a minimal Hero-specific extension only if required.
+- [ ] Prefer a minimal Hero-specific localized canvas extension; change connected-system workflow labels only if repository compatibility is explicitly proven, and do not repurpose workflow.aria without auditing AIWorkflow.
 - [ ] Preserve unrelated translation groups and the dormant AIWorkflow contract.
 - Expected files: src/lib/i18n.tsx, implementation_update.md.
 
