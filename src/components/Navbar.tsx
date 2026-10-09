@@ -49,24 +49,34 @@ export function Navbar({ onCTAClick }: NavbarProps) {
     };
   }, [navLinks]);
 
-  return (
-    <header data-scrolled={isScrolled ? 'true' : 'false'} className={`navbar-v2 fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${isScrolled ? 'py-1' : 'py-2'}`}>
-      <div className="navbar-v2__shell relative">
-        <div className={`navbar-v2__surface absolute inset-0 backdrop-blur-md border-b transition-all duration-500 ${isScrolled ? 'bg-navy-950/92 border-navy-600/70 shadow-[0_10px_40px_rgba(2,8,23,0.25)]' : 'bg-navy-950/45 border-navy-600/35'}`} />
+  useEffect(() => {
+    if (!isMenuOpen) return;
 
-        <nav className={`navbar-v2__inner v2-container relative grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center transition-all duration-500 ${isScrolled ? 'h-14' : 'h-16'}`}>
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsMenuOpen(false);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isMenuOpen]);
+
+  return (
+    <header data-scrolled={isScrolled ? 'true' : 'false'} className={`navbar-v2 fixed top-0 left-0 right-0 z-40 transition-[padding] duration-200 ${isScrolled ? 'py-1' : 'py-2'}`}>
+      <div className="navbar-v2__shell relative">
+        <div className={`navbar-v2__surface absolute inset-0 border-b ${isScrolled ? 'bg-navy-950/92 border-navy-600/70 shadow-[0_10px_40px_rgba(2,8,23,0.25)]' : 'bg-navy-950/45 border-navy-600/35'}`} />
+
+        <nav className={`navbar-v2__inner v2-container relative grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center transition-[height] duration-200 ${isScrolled ? 'h-14' : 'h-16'}`}>
           {/* Logo */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="navbar-v2__brand col-start-1 justify-self-start flex items-center gap-2.5 group"
+            className="navbar-v2__brand v2-focus-ring col-start-1 justify-self-start flex items-center gap-2.5"
           >
-            <div className={`navbar-v2__brand-mark relative transition-transform duration-500 ${isScrolled ? 'scale-90' : ''}`}>
-              <div className="hidden absolute inset-0 bg-teal-500/30 blur-lg group-hover:bg-teal-500/40 transition-all duration-300" />
+            <div className="navbar-v2__brand-mark relative">
               <div className="navbar-v2__brand-mark-frame relative w-9 h-9 rounded-lg overflow-hidden border border-teal-400/25">
                 <MermaidMark className="h-full w-full" />
               </div>
             </div>
-            <span className={`navbar-v2__wordmark font-display font-semibold text-snow-50 tracking-tight transition-all duration-500 ${isScrolled ? 'text-base' : 'text-lg'}`}>
+            <span className="navbar-v2__wordmark font-display font-semibold text-snow-50 tracking-tight">
               Richt<span className="navbar-v2__wordmark-accent text-teal-400"> Ai</span>
             </span>
           </button>
@@ -78,7 +88,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
                 key={link.id}
                 onClick={() => scrollTo(link.id)}
                 aria-current={activeSection === link.id ? 'page' : undefined}
-                className={`navbar-v2__nav-link relative px-3 py-2 text-sm transition-colors duration-200 font-display after:absolute after:left-3 after:right-3 after:-bottom-0.5 after:h-px after:origin-left after:rounded-full after:transition-transform after:duration-300 ${activeSection === link.id ? 'after:scale-x-100' : 'after:scale-x-0'}`}
+                className={`navbar-v2__nav-link v2-focus-ring relative px-3 py-2 text-sm transition-colors duration-200 font-display after:absolute after:left-3 after:right-3 after:-bottom-0.5 after:h-px after:origin-left after:rounded-full after:transition-transform after:duration-200 ${activeSection === link.id ? 'after:scale-x-100' : 'after:scale-x-0'}`}
               >
                 {link.label}
               </button>
@@ -115,6 +125,8 @@ export function Navbar({ onCTAClick }: NavbarProps) {
               onClick={() => setIsMenuOpen((prev) => !prev)}
               className="navbar-v2__menu-toggle v2-focus-ring p-2 rounded-lg transition-colors duration-200"
               aria-label={copy.nav.menu}
+              aria-expanded={isMenuOpen}
+              aria-controls="navbar-mobile-menu"
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -122,14 +134,19 @@ export function Navbar({ onCTAClick }: NavbarProps) {
         </nav>
 
         {/* Mobile Menu */}
-        <div className={`navbar-v2__menu lg:hidden relative overflow-hidden border-b transition-[max-height,opacity] duration-300 ${isMenuOpen ? 'max-h-[28rem] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}`}>
+        <div
+          id="navbar-mobile-menu"
+          aria-hidden={!isMenuOpen}
+          className={`navbar-v2__menu lg:hidden relative overflow-hidden border-b transition-[max-height,opacity] duration-200 ${isMenuOpen ? 'max-h-[28rem] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}`}
+        >
           <div className="navbar-v2__menu-inner px-5 py-4 space-y-1">
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => scrollTo(link.id)}
                 aria-current={activeSection === link.id ? 'page' : undefined}
-                className={`navbar-v2__menu-link block w-full text-left px-4 py-3 rounded-lg transition-colors duration-200 font-display text-sm ${activeSection === link.id ? 'text-teal-300' : 'text-snow-300'}`}
+                tabIndex={isMenuOpen ? 0 : -1}
+                className={`navbar-v2__menu-link v2-focus-ring block w-full text-left px-4 py-3 rounded-lg transition-colors duration-200 font-display text-sm ${activeSection === link.id ? 'text-teal-300' : 'text-snow-300'}`}
               >
                 {link.label}
               </button>
@@ -139,6 +156,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
                 setIsMenuOpen(false);
                 handleCTA();
               }}
+              tabIndex={isMenuOpen ? 0 : -1}
               className="navbar-v2__mobile-cta v2-focus-ring inline-flex w-full items-center justify-center font-display font-semibold text-sm"
             >
               {copy.nav.cta}

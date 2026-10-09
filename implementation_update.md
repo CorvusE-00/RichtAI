@@ -307,6 +307,8 @@ Implementation note: The mobile top bar now uses the Carbon/Graphite surface dir
 - [ ] Limit motion to color/border transitions, active-rule movement, menu transition, and a restrained 3–4px arrow shift if used.
 - [ ] Respect `prefers-reduced-motion`; do not add glow pulses, bounce, spring physics, gradients, scramble text, or reveal systems.
 
+Implementation note: The mobile Menu/X button now exposes `aria-expanded` and `aria-controls="navbar-mobile-menu"`; the menu has that stable ID and uses `aria-hidden` while closed. Escape closes only an open mobile menu through a cleaned-up keyboard listener. The brand, desktop/mobile nav links, language controls, menu toggle, desktop CTA, and mobile CTA use the existing `.v2-focus-ring` primitive. Mobile language/menu controls now use 2.75rem minimum touch dimensions; menu rows and CTA remain 2.75rem. Closed-menu links and CTA receive `tabIndex={-1}` and the menu is `aria-hidden`, preventing hidden controls from entering the keyboard sequence while preserving the max-height/opacity transition. Existing global `prefers-reduced-motion` handling is sufficient; no Navbar-specific reduced-motion CSS was needed. The motion audit removed the hidden glow and obsolete brand scale/wordmark-size transitions, shortened state and menu transitions, and kept only restrained color, border, active-marker, max-height, opacity, and small padding/height transitions. Relevant checks performed at the available 467px mobile and 1280px desktop previews: focus hooks present, ARIA relationship present, closed menu not tabbable by explicit tab indices, menu navigation closes after selection, Escape closes the menu, CTA closes the menu and opens ContactModal, language toggle works, active `aria-current` remains, no overflow, and body scroll remains unlocked. Observer/scroll/CTA/language contracts remain unchanged; Checklist 9 full verification was not started.
+
 ### 9. Verify functional contracts and run project checks
 
 - [ ] Verify desktop and mobile nav links, active state, scroll state, language switch, CTA → ContactModal, menu open/close, close-after-selection, section scrolling, body-scroll behavior, and Hero clearance.
@@ -358,6 +360,6 @@ Phase 2 is complete only when:
 - [x] Rework brand, language control, and CTA presentation
 - [x] Rework active and scrolled states without behavioral drift
 - [x] Rebuild the mobile Navbar/menu presentation
-- [ ] Preserve accessibility and restrained motion
+- [x] Preserve accessibility and restrained motion
 - [ ] Verify functional contracts and run project checks
 - [ ] Perform bilingual responsive QA and final Phase 2 readiness review

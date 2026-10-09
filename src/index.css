@@ -1647,7 +1647,7 @@
 
   .navbar-v2__language--mobile {
     min-width: 2.75rem;
-    min-height: 2.5rem;
+    min-height: 2.75rem;
     border-color: var(--v2-border-dark);
     border-radius: var(--v2-radius-ui);
     background-color: transparent;
@@ -1662,8 +1662,8 @@
   }
 
   .navbar-v2__menu-toggle {
-    min-width: 2.5rem;
-    min-height: 2.5rem;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
     border-radius: var(--v2-radius-ui);
     color: var(--v2-text-on-dark-secondary);
   }
