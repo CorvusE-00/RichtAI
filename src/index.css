@@ -111,6 +111,27 @@
   .v2-radius-control { border-radius: var(--v2-radius-control); }
   .v2-radius-ui { border-radius: var(--v2-radius-ui); }
 
+  .v2-container {
+    width: 100%;
+    max-width: var(--v2-content-max);
+    margin-inline: auto;
+    padding-inline: var(--v2-gutter-mobile);
+  }
+
+  .v2-label {
+    font-family: var(--v2-font-label);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--v2-current-text-secondary, var(--v2-text-on-dark-secondary));
+  }
+
+  .v2-focus-ring:focus-visible {
+    outline: 2px solid var(--v2-current-focus, var(--v2-focus));
+    outline-offset: 3px;
+  }
+
   /* Teal is the primary brand signal; cyan remains available for secondary workflow states. */
   .text-gradient-teal {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-teal-300 via-teal-400 to-teal-300;
@@ -118,6 +139,24 @@
 
   .section-tone {
     background-color: #070f1c;
+  }
+
+  @media (min-width: 768px) {
+    .v2-container {
+      padding-inline: var(--v2-gutter-tablet);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .v2-container {
+      padding-inline: var(--v2-gutter-desktop);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .v2-container {
+      padding-inline: var(--v2-gutter-desktop-wide);
+    }
   }
 
   .section-tone--stats {

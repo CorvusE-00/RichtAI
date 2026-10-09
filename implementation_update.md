@@ -142,7 +142,7 @@ Implementation note: added `.v2-type-display`, `.v2-type-heading`, `.v2-type-bod
 
 ### 4. Add the minimum V2 primitives
 
-- [ ] Add only the five Phase 1 primitives below, with strict `v2` namespacing.
+- [x] Add only the five Phase 1 primitives below, with strict `v2` namespacing.
 
 | Primitive | Responsibility | Must not style | Future consumers |
 |---|---|---|---|
@@ -153,6 +153,8 @@ Implementation note: added `.v2-type-display`, `.v2-type-heading`, `.v2-type-bod
 | `.v2-focus-ring` | Opt-in accessible focus contract | Existing focus styles on V1 controls | Future V2 controls |
 
 Do not create button primitives, cards, workflow nodes, capability shells, Hero helpers, Navbar helpers, or other abstractions before real component usage proves the need.
+
+Implementation note: added `.v2-container` with responsive semantic gutters and the existing max-width token, `.v2-label` with minimal editorial/system label styling, and `.v2-focus-ring` with a visible `:focus-visible` outline. The existing surface primitives were preserved, no current consumer exists, V1 output remains unaffected, and `tailwind.config.js` remains untouched.
 
 ### 5. Evaluate Tailwind semantic aliases
 
@@ -241,7 +243,7 @@ Phase 1 is complete only when:
 - [x] Add semantic V2 CSS variables
 - [x] Add dark/light surface contracts
 - [x] Add typography, shape, and layout semantic roles
-- [ ] Add minimum `.v2-*` primitive classes
+- [x] Add minimum `.v2-*` primitive classes
 - [ ] Evaluate whether Tailwind semantic aliases are needed
 - [ ] Add only justified Tailwind aliases if required
 - [ ] Run build/type/lint verification
