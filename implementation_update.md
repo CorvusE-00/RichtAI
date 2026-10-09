@@ -113,13 +113,15 @@ Implementation note: `src/index.css` now contains the isolated `--v2-` variable 
 
 ### 2. Add dark/light surface contracts
 
-- [ ] Add opt-in `.v2-section-dark` and `.v2-section-light` contracts.
+- [x] Add opt-in `.v2-section-dark` and `.v2-section-light` contracts.
 
 `.v2-section-dark` should establish Carbon/Graphite surfaces, Bone White primary text, Steel secondary text, dark borders, Signal Lime primary accents, and Electric Cyan system/focus accents.
 
 `.v2-section-light` should establish Bone White, Carbon primary text, Muted secondary text, light borders, Signal Lime primary accents, and Electric Cyan system/focus accents.
 
 Light descendants must explicitly define their text, icon, border, focus, hover, pressed, disabled, and selection roles instead of inheriting V1 `snow`/`navy` assumptions.
+
+Implementation note: added `.v2-section-dark` and `.v2-section-light` with scoped `--v2-current-*` semantic aliases. Neither class has a current source consumer, existing V1 selectors remain unchanged, and `tailwind.config.js` remains untouched.
 
 ### 3. Add typography, shape, and layout roles
 
@@ -235,7 +237,7 @@ Phase 1 is complete only when:
 ## Phase 1 checklist
 
 - [x] Add semantic V2 CSS variables
-- [ ] Add dark/light surface contracts
+- [x] Add dark/light surface contracts
 - [ ] Add typography, shape, and layout semantic roles
 - [ ] Add minimum `.v2-*` primitive classes
 - [ ] Evaluate whether Tailwind semantic aliases are needed

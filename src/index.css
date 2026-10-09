@@ -69,6 +69,37 @@
 }
 
 @layer components {
+  /* V2 surface contracts — opt-in only; no current section consumes these. */
+  .v2-section-dark {
+    background-color: var(--v2-surface-carbon);
+    color: var(--v2-text-on-dark-primary);
+    border-color: var(--v2-border-dark);
+    --v2-current-text-primary: var(--v2-text-on-dark-primary);
+    --v2-current-text-secondary: var(--v2-text-on-dark-secondary);
+    --v2-current-border: var(--v2-border-dark);
+    --v2-current-accent-primary: var(--v2-accent-signal);
+    --v2-current-accent-system: var(--v2-accent-system);
+    --v2-current-focus: var(--v2-focus);
+    --v2-current-hover: var(--v2-hover);
+    --v2-current-pressed: var(--v2-pressed);
+    --v2-current-disabled: var(--v2-disabled);
+  }
+
+  .v2-section-light {
+    background-color: var(--v2-surface-bone);
+    color: var(--v2-text-on-light-primary);
+    border-color: var(--v2-border-light);
+    --v2-current-text-primary: var(--v2-text-on-light-primary);
+    --v2-current-text-secondary: var(--v2-text-on-light-secondary);
+    --v2-current-border: var(--v2-border-light);
+    --v2-current-accent-primary: var(--v2-accent-signal);
+    --v2-current-accent-system: var(--v2-accent-system);
+    --v2-current-focus: var(--v2-focus);
+    --v2-current-hover: var(--v2-hover);
+    --v2-current-pressed: var(--v2-pressed);
+    --v2-current-disabled: var(--v2-disabled);
+  }
+
   /* Teal is the primary brand signal; cyan remains available for secondary workflow states. */
   .text-gradient-teal {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-teal-300 via-teal-400 to-teal-300;
