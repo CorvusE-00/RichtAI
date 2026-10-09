@@ -192,7 +192,7 @@ Verification note: `pnpm typecheck` **PASS**, `pnpm lint` **PASS**, and `pnpm bu
 
 ### 8. Perform manual V1 visual regression verification
 
-- [ ] Verify the unchanged V1 page manually in Turkish and English.
+- [x] Verify the unchanged V1 page manually in Turkish and English.
 
 Inspect at 320px, 375px, 768px, 1024px, and 1280px+:
 
@@ -204,7 +204,7 @@ Inspect at 320px, 375px, 768px, 1024px, and 1280px+:
 
 Primary criterion: current V1 output remains visually stable.
 
-Verification note: The local Vite preview was opened in the Codex In-app Browser at `http://localhost:5173/`. Turkish and English were checked at the available `1280 × 720` CSS-pixel viewport: language switching updated copy, `document.title`, the description, and `html[lang]`; Navbar links scrolled to their sections; the Hero, Footer, colors, spacing, typography, images, and section order showed no evident Phase 1 regression; the FAQ accordion opened and closed; the CTA opened the ContactModal and Escape closed it; and horizontal overflow was false. A fresh visible preview also provided a narrow `467 × 1244` CSS-pixel viewport: the mobile language control remained visible, the hamburger menu opened and closed, selecting a mobile section link scrolled and closed the menu, the page remained overflow-free, and the ContactModal fit the viewport without submitting data. Exact `320px`, `375px`, `768px`, and `1024px` viewport emulation and `prefers-reduced-motion: reduce` emulation remain unavailable in the browser tool, so those checks could not be completed. Checklist 8 remains unchecked pending the missing checks.
+Verification note: Codex browser checks used the local Vite preview at `http://localhost:5173/`. At `1280 × 720`, Turkish and English passed language switching, metadata updates, Navbar anchors, Hero/Footer stability, FAQ interaction, ContactModal open/Escape close, and no horizontal overflow. At the available narrow `467 × 1244` viewport, the mobile language control remained visible, the hamburger menu opened and closed, a mobile section link scrolled and closed the menu, the page remained overflow-free, and the ContactModal fit without submitting data. The user then manually verified the remaining `320px`, `375px`, `768px`, and `1024px` viewports and `prefers-reduced-motion: reduce`; the user reported no evident issue or visible regression. Across the Codex and user checks, no evident V1 visual or behavior regression was caused by Phase 1.
 
 ### 9. Complete Phase 1 cleanup/readiness review
 
@@ -255,5 +255,5 @@ Phase 1 is complete only when:
 - [x] Evaluate whether Tailwind semantic aliases are needed
 - [x] Add only justified Tailwind aliases if required
 - [x] Run build/type/lint verification
-- [ ] Perform manual V1 visual regression verification
+- [x] Perform manual V1 visual regression verification
 - [ ] Complete Phase 1 cleanup/readiness review
