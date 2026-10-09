@@ -208,7 +208,7 @@ Verification note: Codex browser checks used the local Vite preview at `http://l
 
 ### 9. Complete Phase 1 cleanup/readiness review
 
-- [ ] Confirm Phase 1 exit criteria and readiness for Phase 2 Navbar.
+- [x] Confirm Phase 1 exit criteria and readiness for Phase 2 Navbar.
 
 Review:
 
@@ -219,6 +219,12 @@ Review:
 - no unnecessary abstraction was introduced;
 - `tailwind.config.js` stayed untouched unless Checklist 5 explicitly approved aliases;
 - Phase 2 Navbar can begin safely.
+
+Verification note: Phase 1 exit criteria are satisfied. The implemented foundation contains the V2 surface, text, accent, border, interaction, radius, layout, and font-family variables; dark/light surface contracts; typography and shape roles; and the minimum `.v2-container`, `.v2-label`, and `.v2-focus-ring` primitives. Git history shows only the intended Phase 1 implementation file (`src/index.css`) and documentation file changed; no component, App, i18n, metadata, asset, package, lockfile, or build-config file changed. No rendered V1 component consumes `.v2-*`, and the existing V1 selectors, body defaults, palette, section tones, `.btn-primary`, ContactModal, MermaidMark, Hero, Navbar, FAQ, and Footer remain outside the Phase 1 implementation diff. `tailwind.config.js` remains untouched with no aliases, plugins, or legacy token remapping. The recorded typecheck, lint, build, Codex browser, and user manual checks support a conclusion of no evident Phase 1 regression. The foundation remains appropriately minimal: no new button/card/workflow/Hero/Navbar/capability system, animation system, library, or Tailwind alias layer was introduced. Remaining Phase 2 risks are limited to preserving fixed-header spacing, active-section observer behavior, mobile menu behavior, TR/EN label-width differences, CTA callback wiring, and visual coexistence during Navbar migration. Decision: **A — PHASE 1 COMPLETE — READY FOR PHASE 2**.
+
+## Phase 1 handoff
+
+Phase 1 established an additive, opt-in V2 design foundation without changing the active V1 page. V1 components, copy, section order and IDs, metadata, assets, dependencies, Tailwind configuration, navigation behavior, language provider, and ContactModal callback remain untouched. Typecheck, lint, and build passed; combined Codex browser and user manual checks found no evident V1 visual or behavior regression. Tailwind semantic aliases were intentionally not added because the existing CSS variables and primitives are sufficient. Phase 2 may begin, but it must start with **PLAN ONLY** before any Navbar implementation.
 
 ## Implementation discipline
 
@@ -256,4 +262,4 @@ Phase 1 is complete only when:
 - [x] Add only justified Tailwind aliases if required
 - [x] Run build/type/lint verification
 - [x] Perform manual V1 visual regression verification
-- [ ] Complete Phase 1 cleanup/readiness review
+- [x] Complete Phase 1 cleanup/readiness review
