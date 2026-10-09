@@ -250,15 +250,19 @@ Implementation note — Checklist 3 complete: Removed the active Hero image and 
 
 ### 4. Build the static operational-system canvas
 
-- [ ] Implement the six-node Website → Messages → AI → CRM → Calendar → Team canvas with static connectors, localized labels, one status label, and accessible grouping.
-- [ ] Keep decorative lines/dots non-interactive and static.
+- [x] Implement the six-node Website → Messages → AI → CRM → Calendar → Team canvas with static connectors, localized labels, one status label, and accessible grouping.
+- [x] Keep decorative lines/dots non-interactive and static.
 - Expected files: src/components/Hero.tsx, src/index.css, implementation_update.md.
+
+Implementation note — Checklist 4 complete: Hero now renders a reusable six-node semantic `ol`/`li` route sourced from `copy.hero.systemCanvas.nodes`, preserving the localized sequence Website → Messages → AI → CRM → Calendar → Team (Web sitesi → Mesajlar → Yapay zekâ → CRM → Takvim → Ekip in Turkish). The asymmetric 3×3 placement gives Website upper-left, Messages left, AI center, CRM upper-right, Calendar right, and Team lower-center. A single translated figcaption remains the canvas label, while decorative SVG connectors use `aria-hidden="true"` and `focusable="false"`; nodes are not interactive or focusable. AI is the static Signal Lime focal node, with restrained Electric Cyan secondary detail and Team handoff emphasis. No hardcoded labels, assets, `copy.workflow.*` dependencies, animation, or moving signal were introduced.
 
 ### 5. Apply desktop/tablet V2 composition and typography
 
-- [ ] Align Hero surfaces and container geometry with Navbar V2 and Phase 1 tokens.
-- [ ] Establish the editorial left-copy/right-canvas composition, bilingual-safe headline scale, support-copy width, CTA prominence, and deliberate whitespace at 1024px, 1280px, and 1440px+.
+- [x] Align Hero surfaces and container geometry with Navbar V2 and Phase 1 tokens.
+- [x] Establish the editorial left-copy/right-canvas composition, bilingual-safe headline scale, support-copy width, CTA prominence, and deliberate whitespace at 1024px, 1280px, and 1440px+.
 - Expected files: src/components/Hero.tsx, src/index.css, implementation_update.md.
+
+Implementation note — Checklist 5 complete: The Hero uses the shared `.v2-container`, Carbon Black field, and an intentional `0.92fr / 1.08fr` left-copy/right-canvas grid from `lg` onward. Responsive spacing remains 7rem base, 6rem at `sm`, and 9rem at `lg` on top with restrained bottom padding. The headline uses Space Grotesk, Bone White, fluid sizing, controlled line-height, and no gradient or manual line break; support copy remains Inter/Steel with a 34rem desktop cap. The Graphite canvas uses a restrained 16px surface, contained route, and borders over shadows. Below `lg`, the existing stacked fallback remains contained without starting the dedicated Phase 5 mobile redesign. QA covered EN at approximately 1280px desktop-style and TR at approximately 467px mobile-style; exact 1024px and 1440px emulation was unavailable. Navbar clearance and canvas containment were visually safe, no Phase 4 motion was added, and `pnpm typecheck` passed.
 
 ### 6. Refine CTA and reassurance presentation
 

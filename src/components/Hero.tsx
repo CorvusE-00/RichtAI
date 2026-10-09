@@ -7,35 +7,43 @@ interface HeroProps {
 
 export function Hero({ onCTAClick }: HeroProps) {
   const { copy, language } = useLanguage();
+  const systemNodes = [
+    { key: 'website', label: copy.hero.systemCanvas.nodes.website, modifier: 'website', column: '1', row: '1' },
+    { key: 'messages', label: copy.hero.systemCanvas.nodes.messages, modifier: 'messages', column: '1', row: '2' },
+    { key: 'ai', label: copy.hero.systemCanvas.nodes.ai, modifier: 'ai', column: '2', row: '2' },
+    { key: 'crm', label: copy.hero.systemCanvas.nodes.crm, modifier: 'crm', column: '3', row: '1' },
+    { key: 'calendar', label: copy.hero.systemCanvas.nodes.calendar, modifier: 'calendar', column: '3', row: '2' },
+    { key: 'team', label: copy.hero.systemCanvas.nodes.team, modifier: 'team', column: '2', row: '3' },
+  ] as const;
 
   return (
     <section
       id="anasayfa"
       className={[
-        'hero-section hero-v2 relative overflow-hidden bg-[var(--v2-surface-carbon)] pt-28 pb-3 sm:pt-24 sm:pb-10 lg:pt-36 lg:pb-20',
+        'hero-section hero-v2 v2-section-dark relative overflow-hidden',
         language === 'tr' ? 'hero-section--tr' : '',
       ].join(' ')}
     >
       <div className="v2-container relative">
-        <div className="hero-v2__layout grid items-center gap-8 md:gap-14 lg:grid-cols-[minmax(0,0.84fr)_minmax(0,1.16fr)] xl:gap-16">
-          <div className="hero-v2__copy text-center xl:text-left">
-            <h1 className="hero-v2__heading max-w-[40rem] font-display text-4xl font-semibold leading-[1.04] tracking-[-0.04em] text-[var(--v2-text-on-dark-primary)] sm:text-5xl xl:text-6xl 2xl:text-7xl">
+        <div className="hero-v2__layout">
+          <div className="hero-v2__copy">
+            <h1 className="hero-v2__heading">
               <span className="block">{copy.hero.headline}</span>
               <span className="block">{copy.hero.headlineAccent}</span>
             </h1>
 
-            <p className="hero-v2__support mt-4 max-w-xl text-base leading-relaxed text-[var(--v2-text-on-dark-secondary)] sm:mt-6 sm:text-lg">
+            <p className="hero-v2__support">
               {copy.hero.subheadline}
             </p>
 
-            <div className="hero-v2__actions mt-6 flex flex-col items-center gap-4 sm:mt-8 xl:items-start">
+            <div className="hero-v2__actions">
               <button onClick={onCTAClick} className="btn-primary w-full sm:w-auto">
                 <span>{copy.hero.cta}</span>
                 <ArrowRight className="h-5 w-5" />
               </button>
             </div>
 
-            <div className="hero-v2__meta mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 border-t border-[var(--v2-border-dark)] pt-3 text-xs text-[var(--v2-text-on-dark-secondary)] sm:mt-6 sm:text-sm xl:justify-start">
+            <div className="hero-v2__meta">
               <span>{copy.hero.duration}</span>
               <span aria-hidden="true">·</span>
               <span className="inline-flex items-center gap-1.5">
@@ -50,12 +58,34 @@ export function Hero({ onCTAClick }: HeroProps) {
             </div>
           </div>
 
-          <figure className="hero-system mt-2 min-w-0 lg:mt-0" aria-label={copy.hero.systemCanvas.aria}>
-            <figcaption className="hero-system__label mb-3 flex items-center gap-2 text-[11px] font-display uppercase tracking-[0.14em] text-[var(--v2-text-on-dark-secondary)]">
-              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--v2-accent-system)]" aria-hidden="true" />
+          <figure className="hero-system" aria-label={copy.hero.systemCanvas.aria}>
+            <figcaption className="hero-system__label">
+              <span className="hero-system__label-marker" aria-hidden="true" />
               {copy.hero.systemCanvas.label}
             </figcaption>
-            <div className="hero-system__stage min-h-[18rem] rounded-2xl border border-[var(--v2-border-dark)] bg-[var(--v2-surface-graphite)]" aria-hidden="true" />
+            <div className="hero-system__stage">
+              <svg className="hero-system__connectors" viewBox="0 0 600 320" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path className="hero-system__connector" d="M 100 62 V 160" />
+                <path className="hero-system__connector hero-system__connector--signal" d="M 100 160 L 300 160" />
+                <path className="hero-system__connector" d="M 300 160 L 500 62" />
+                <path className="hero-system__connector" d="M 500 62 V 160" />
+                <path className="hero-system__connector hero-system__connector--signal" d="M 500 160 L 300 258" />
+              </svg>
+              <ol className="hero-system__route">
+                {systemNodes.map((node) => (
+                  <li
+                    key={node.key}
+                    className={`hero-system__item hero-system__item--${node.modifier}`}
+                    style={{ gridColumn: node.column, gridRow: node.row }}
+                  >
+                    <div className={`hero-system__node hero-system__node--${node.modifier}`}>
+                      <span className="hero-system__marker" aria-hidden="true" />
+                      <span className="hero-system__node-label">{node.label}</span>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </figure>
         </div>
       </div>
