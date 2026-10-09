@@ -328,6 +328,8 @@ Verification note — B. CHECKLIST 9 PASS WITH DOCUMENTED ENVIRONMENT LIMITATION
 - [ ] Confirm functionality, accessibility, reduced motion, typecheck, lint, and build results are recorded.
 - [ ] Confirm readiness for Phase 3 Hero static without starting Phase 3.
 
+Verification note — B. PHASE 2 COMPLETE WITH EXPLICIT MANUAL FOLLOW-UP: Available Codex In-app Browser coverage passed at the available 467px mobile-style viewport and 1280px desktop viewport in both English and Turkish. The checks covered brand alignment, header/nav density, language control, menu open/close, Escape-to-close, mobile CTA-to-ContactModal behavior, active navigation, Hero clearance, bilingual CTA/label fit, scrolled state, and `scrollWidth <= clientWidth` with no evident horizontal overflow. The source confirms the `lg` desktop boundary at 1024px and the desktop/mobile visibility contracts; exact 320px, 375px, 430px, 768px, 1023px/1024px, and 1440px+ visual emulation was unavailable. Reduced-motion emulation was also unavailable; the global `prefers-reduced-motion` rules remain present and the remaining manual check is explicitly recorded below. TR labels are `Sorunlar`, `Sistemler`, `Süreç`, `Hakkında`, `S.S.S.`, with CTA `Projeyi konuşalım`; EN labels are `Challenges`, `Systems`, `Process`, `About`, `FAQ`, with CTA `Start a project`. IDs and array order remain unchanged, and Work / Projeler remains deferred to Phase 6. Locked sections, App/ContactModal ownership, metadata, assets, packages, Tailwind, and other non-Navbar files were not changed. Checklist 9 results remain `pnpm typecheck` PASS, `pnpm lint` PASS, and `pnpm build` PASS with only the informational `VITE_SITE_URL is not set` message. Phase 2 is implementation-ready, with the remaining manual checks required before treating responsive coverage as fully complete.
+
 ## Phase 2 exit criteria
 
 Phase 2 is complete only when:
@@ -364,4 +366,15 @@ Phase 2 is complete only when:
 - [x] Rebuild the mobile Navbar/menu presentation
 - [x] Preserve accessibility and restrained motion
 - [x] Verify functional contracts and run project checks
-- [ ] Perform bilingual responsive QA and final Phase 2 readiness review
+- [x] Perform bilingual responsive QA and final Phase 2 readiness review
+
+## Phase 2 handoff
+
+- **Current Navbar V2:** The Navbar uses the approved Carbon/Graphite visual system, centered desktop navigation, right-side language and CTA actions, and a mobile brand/language/menu layout with a restrained full-width menu.
+- **Frozen behavior contracts:** Stable section IDs, `lg` breakpoint, `window.scrollY > 24` scroll threshold, observer root margin/thresholds and cleanup, active `aria-current`, smooth section scrolling without URL hashes, language persistence, menu close-after-selection, Escape-to-close, logo-to-top behavior, CTA callback flow, and App-owned ContactModal ownership remain intact.
+- **Current labels:** EN is `Challenges`, `Systems`, `Process`, `About`, `FAQ` with `Start a project`; TR is `Sorunlar`, `Sistemler`, `Süreç`, `Hakkında`, `S.S.S.` with `Projeyi konuşalım`. Work / Projeler remains deferred to Phase 6 until a real Selected Work section and stable ID exist.
+- **Accessibility and motion:** Native button/nav semantics, visible V2 focus rings, language labels, `aria-expanded`, `aria-controls`, `aria-hidden`, closed-menu `tabIndex=-1`, Escape close, practical mobile targets, and global reduced-motion handling are preserved. No glow, bounce, spring, scramble, or gradient motion was added.
+- **Health:** `pnpm typecheck`, `pnpm lint`, and `pnpm build` passed; build emitted only the informational `VITE_SITE_URL is not set` message.
+- **Responsive QA status:** Codex browser checks passed at available 467px mobile-style and 1280px desktop widths in both languages, with no evident overflow or Navbar regression. Exact 320px, 375px, 430px, 768px, 1023px/1024px, and 1440px+ visual checks were unavailable in the current browser environment.
+- **Remaining manual checks:** Manually inspect the listed unavailable widths in both languages, verify the exact 1023px/1024px transition and 1440px+ balance, and enable reduced-motion to confirm transition shortening and disabled smooth scrolling.
+- **Phase 3 status:** Phase 3 may begin after those explicit manual follow-ups; no Phase 3 plan or implementation was started in this run.
