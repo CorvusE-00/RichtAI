@@ -50,7 +50,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
   }, [navLinks]);
 
   return (
-    <header className={`navbar-v2 fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${isScrolled ? 'py-1' : 'py-2'}`}>
+    <header data-scrolled={isScrolled ? 'true' : 'false'} className={`navbar-v2 fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${isScrolled ? 'py-1' : 'py-2'}`}>
       <div className="navbar-v2__shell relative">
         <div className={`navbar-v2__surface absolute inset-0 backdrop-blur-md border-b transition-all duration-500 ${isScrolled ? 'bg-navy-950/92 border-navy-600/70 shadow-[0_10px_40px_rgba(2,8,23,0.25)]' : 'bg-navy-950/45 border-navy-600/35'}`} />
 
@@ -78,7 +78,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
                 key={link.id}
                 onClick={() => scrollTo(link.id)}
                 aria-current={activeSection === link.id ? 'page' : undefined}
-                className={`navbar-v2__nav-link relative px-3 py-2 text-sm transition-colors duration-200 font-display after:absolute after:left-3 after:right-3 after:-bottom-0.5 after:h-px after:origin-left after:rounded-full after:transition-transform after:duration-300 ${activeSection === link.id ? 'after:scale-x-100' : 'after:scale-x-0 hover:after:scale-x-50'}`}
+                className={`navbar-v2__nav-link relative px-3 py-2 text-sm transition-colors duration-200 font-display after:absolute after:left-3 after:right-3 after:-bottom-0.5 after:h-px after:origin-left after:rounded-full after:transition-transform after:duration-300 ${activeSection === link.id ? 'after:scale-x-100' : 'after:scale-x-0'}`}
               >
                 {link.label}
               </button>

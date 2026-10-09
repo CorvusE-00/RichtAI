@@ -288,6 +288,8 @@ Implementation note: The desktop brand keeps the existing MermaidMark and logo-t
 - [ ] Add only a small visual difference between top-of-page and scrolled states through border, background density, or restrained height/padding changes.
 - [ ] Avoid transform jumps, large shrink animations, blur-heavy transitions, dramatic shadows, or changes that destabilize Hero clearance.
 
+Implementation note: The active desktop item remains primary on-dark text with a centered 1.25rem Signal Lime marker; inactive links use secondary text and hover now strengthens text only, so hover cannot compete with the active rule. The top state uses Carbon with a restrained border, while `data-scrolled="true"` changes only the desktop surface to Graphite with the same restrained border. Desktop header height/padding is normalized to a stable 4rem / 0.5rem treatment, and the desktop mark and wordmark no longer scale or change size on scroll; mobile state styling remains outside this pass. The IntersectionObserver logic, IDs, root margin, thresholds, cleanup, and `navLinks` dependency are unchanged. The scroll threshold remains exactly `window.scrollY > 24`. English and Turkish were checked at the available 1280px desktop width with no overflow; 1024px and 1440px+ were not available in this run. Checklist 7 mobile redesign was not started.
+
 ### 7. Rebuild the mobile Navbar/menu presentation
 
 - [ ] Create an intentional mobile top bar containing brand, language control, menu control, and CTA access without horizontal overflow at 320px.
@@ -352,7 +354,7 @@ Phase 2 is complete only when:
 - [x] Prepare semantic V2 Navbar structure
 - [x] Apply the desktop Bold Systems visual system
 - [x] Rework brand, language control, and CTA presentation
-- [ ] Rework active and scrolled states without behavioral drift
+- [x] Rework active and scrolled states without behavioral drift
 - [ ] Rebuild the mobile Navbar/menu presentation
 - [ ] Preserve accessibility and restrained motion
 - [ ] Verify functional contracts and run project checks

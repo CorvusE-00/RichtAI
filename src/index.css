@@ -1519,6 +1519,30 @@
     box-shadow: none !important;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    transition: background-color 200ms ease, border-color 200ms ease;
+  }
+
+  .navbar-v2[data-scrolled='true'] .navbar-v2__surface {
+    background-color: var(--v2-surface-graphite) !important;
+    border-color: var(--v2-border-dark) !important;
+  }
+
+  .navbar-v2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .navbar-v2__inner {
+    height: 4rem !important;
+    transition: none;
+  }
+
+  .navbar-v2__brand-mark {
+    transform: none !important;
+  }
+
+  .navbar-v2__wordmark {
+    font-size: 1.125rem !important;
   }
 
   .navbar-v2__nav-link {
