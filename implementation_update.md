@@ -12,10 +12,17 @@ Do not modify Hero or any later homepage section during Phase 2.
 
 Use a full-width fixed header with a Carbon/near-Carbon surface, restrained border, compact confident navigation, minimal radius, and a subtle scrolled-state change. Prefer borders over large shadows and reserve Signal Lime for high-value emphasis. Electric Cyan remains a secondary/system signal.
 
-Desktop visible labels:
+Final intended V2 visible labels:
 
 - EN: Work, Systems, Process, About, FAQ
 - TR: Projeler, Sistemler, Süreç, Hakkında, S.S.S.
+
+Phase 2 uses a temporary first-item label until the Phase 6 Selected Work section exists:
+
+- EN: Challenges
+- TR: Sorunlar
+
+The remaining four V2 labels are safe to introduce during Phase 2.
 
 Navbar CTA labels:
 
@@ -40,22 +47,24 @@ Visible labels may change, but section-anchor IDs must remain stable in this pha
 
 ## Stable navigation ID and visible-label mapping
 
-The current source contract maps the V2 labels to existing section IDs as follows:
+The Phase 2 source contract maps visible labels to the existing section IDs as follows:
 
-| Visible language | Visible label | Existing target ID | Current section |
+| Language | Phase 2 visible label | Existing target ID |
 | --- | --- | --- | --- |
-| EN | Work | `sorun` | current Challenges section |
-| EN | Systems | `cozum` | current Solutions section |
-| EN | Process | `nasil-calisir` | current How It Works section |
-| EN | About | `guven` | current Trust / Founder section |
-| EN | FAQ | `sss` | current FAQ section |
-| TR | Projeler | `sorun` | current Sorunlar section |
-| TR | Sistemler | `cozum` | current Çözüm section |
-| TR | Süreç | `nasil-calisir` | current Nasıl çalışır? section |
-| TR | Hakkında | `guven` | current Güven / Kurucu section |
-| TR | S.S.S. | `sss` | current S.S.S. section |
+| EN | Challenges | `sorun` |
+| EN | Systems | `cozum` |
+| EN | Process | `nasil-calisir` |
+| EN | About | `guven` |
+| EN | FAQ | `sss` |
+| TR | Sorunlar | `sorun` |
+| TR | Sistemler | `cozum` |
+| TR | Süreç | `nasil-calisir` |
+| TR | Hakkında | `guven` |
+| TR | S.S.S. | `sss` |
 
-Do not rename these IDs or change the rendered section order. Any copy update must remain limited to Navbar-visible navigation labels and CTA labels, preserve the nav array shape, and maintain TR/EN parity.
+Do not rename these IDs or change the rendered section order. Any Phase 2 copy update must preserve Challenges / Sorunlar for `sorun`, migrate only the four safe labels, preserve the nav array shape, and maintain TR/EN parity.
+
+Future Phase 6 handoff: Work / Projeler must point to a new Selected Work section ID only after that section is created, its final position and anchor behavior are verified, and the first Navbar item is changed atomically from Challenges / Sorunlar to Work / Projeler. Do not reuse `sorun` for Work.
 
 ## Expected file boundary
 
@@ -94,8 +103,10 @@ Do not modify:
 
 ### 2. Finalize V2 labels and ID-safe i18n mapping
 
-- [ ] Verify the exact EN/TR visible-label mapping documented above against the live source.
-- [ ] Update only Navbar-visible labels and CTA copy if required, preserving `copy.nav.links`, IDs, language parity, and persistence behavior.
+- [ ] Verify the exact Phase 2 EN/TR visible-label mapping documented above against the live source.
+- [ ] Preserve Challenges / Sorunlar for `sorun` and migrate only Systems / Sistemler, Process / Süreç, About / Hakkında, and FAQ / S.S.S.
+- [ ] Migrate CTA copy only to EN `Start a project` and TR `Projeyi konuşalım`, preserving `copy.nav.links`, array shape, IDs, language parity, and persistence behavior.
+- [ ] Keep Work / Projeler staged for the Phase 6 Selected Work handoff; do not create or point to Selected Work during Phase 2.
 - [ ] Do not begin the broader copy rewrite planned for a later phase.
 
 ### 3. Prepare semantic V2 Navbar structure
