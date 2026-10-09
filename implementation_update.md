@@ -318,6 +318,8 @@ Implementation note: The mobile Menu/X button now exposes `aria-expanded` and `a
 - [ ] Run `pnpm build`.
 - [ ] Record exact outcomes and stop on Phase 2-caused failures rather than fixing unrelated issues.
 
+Verification note — B. CHECKLIST 9 PASS WITH DOCUMENTED ENVIRONMENT LIMITATIONS: Source contracts remain intact: `window.scrollY > 24`, passive/immediate scroll handling and cleanup, `activeSection` initial `sorun`, nav-derived IDs, `document.getElementById`, observer `rootMargin: '-28% 0px -58% 0px'`, thresholds `[0, 0.2, 0.5, 0.8]`, intersection-ratio ordering, cleanup, and `navLinks` dependency all verified. Browser checks passed at the available 467px mobile and 1280px desktop previews: desktop/mobile nav visibility, correct section scrolling with no URL/hash mutation, active state updates, mobile close-after-selection and reopen, logo-to-top, TR → EN and EN → TR labels/CTA/language control, CTA opening the App-owned ContactModal, mobile CTA closing the menu first, `aria-expanded`/`aria-controls`, closed-menu `tabIndex=-1`, Escape-to-close, focus-ring hooks, unlocked body scroll, no horizontal overflow, and usable Hero clearance. Section IDs remain `sorun`, `cozum`, `nasil-calisir`, `guven`, `sss`; all owning sections exist and Work / Projeler was not introduced. The `lg` boundary and desktop/mobile control visibility were confirmed from source and browser. Motion remains limited to restrained color, border, background, active-marker, menu max-height/opacity, and small padding/height transitions; global reduced-motion handling remains in place. Locked areas and App/ContactModal ownership were unchanged. `pnpm typecheck` PASS, `pnpm lint` PASS, and `pnpm build` PASS; build emitted only the informational `VITE_SITE_URL is not set` message. Exact 1023px/1024px emulation and reduced-motion emulation were unavailable; no source/config/package files changed during verification.
+
 ### 10. Perform bilingual responsive QA and final Phase 2 readiness review
 
 - [ ] Inspect EN and TR at 320px, 375px, 430px, 768px, 1024px, 1280px, and 1440px+.
@@ -361,5 +363,5 @@ Phase 2 is complete only when:
 - [x] Rework active and scrolled states without behavioral drift
 - [x] Rebuild the mobile Navbar/menu presentation
 - [x] Preserve accessibility and restrained motion
-- [ ] Verify functional contracts and run project checks
+- [x] Verify functional contracts and run project checks
 - [ ] Perform bilingual responsive QA and final Phase 2 readiness review
