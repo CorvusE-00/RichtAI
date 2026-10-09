@@ -1862,16 +1862,345 @@ The reason is concrete: the current Hero uses explicit mobile ordering and `disp
 
 ## Phase 1 readiness
 
-Conclude the audit with a precise readiness boundary covering:
+### Phase 1 purpose
 
-- files Phase 1 will likely touch
-- files Phase 1 must not touch
-- design tokens that can be migrated safely first
-- whether temporary compatibility tokens are needed
-- biggest regression risks
-- what should be visually checked after Phase 1
+Phase 1 — Design foundation is responsible for establishing the additive Bold Systems foundation: semantic values, scoped surface contracts, a minimal set of reusable primitives, and compatibility boundaries for later section migration. It is infrastructure and token work, not a visible homepage section rebuild.
 
-This section must give enough information to create the later Phase 1 implementation plan.
+Phase 1 must not materially redesign the Navbar, Hero, Problem, Solution, How We Work, Trust, FAQ, Final CTA, Footer, or any other current section. Existing V1 output remains the reference baseline until later phases explicitly opt a section into V2.
+
+### Phase 1 allowed scope
+
+Phase 1 may add the following, provided every addition is opt-in and does not alter an existing selector's behavior:
+
+- semantic CSS variables for V2 surfaces, text, borders, accents, interaction states, typography roles, shape, spacing, and layout;
+- V2 surface contracts for Carbon, Graphite, Elevated Graphite, and Bone White;
+- Signal Lime and Electric Cyan roles with explicit usage boundaries;
+- semantic typography roles that map to the existing Space Grotesk and Inter fonts;
+- page-gutter, container, section-spacing, and component-spacing values;
+- additive V2 helper/surface/primitive classes used by future V2 sections;
+- compatibility utilities that allow V1 and V2 classes to coexist without remapping the legacy palette;
+- minimal focus/hover/pressed/disabled contracts that future components can consume.
+
+Everything must be additive. No V1 selector may change behavior unless a later, section-specific migration proves that change safe.
+
+### Must NOT change in Phase 1
+
+Phase 1 must not change:
+
+- existing `navy`, `teal`, `cyan`, or `snow` values;
+- `body` background, text, font, line-height, or letter-spacing defaults;
+- `.section-tone-*`, `.section-surface-*`, `.btn-primary`, `.section-label`, `.text-gradient-teal`, `.reveal`, `.input-premium`, or `.mermaid-mark*` behavior;
+- ContactModal styling, behavior, focus/scroll handling, validation, or Supabase submission;
+- MermaidMark geometry, mask, gradient, size, or visual treatment;
+- Hero, Navbar, Problem, Solution, HowItWorks, Trust, FAQ, FinalCTA, or Footer markup/structure;
+- AIWorkflow, StatisticsStrip, or any other existing component render behavior;
+- copy, i18n structures, translation keys, metadata, SEO values, or section IDs;
+- navigation behavior, active-section observation, smooth scrolling, CTA callbacks, or mobile menu behavior;
+- motion timing, reveal behavior, animation ownership, or reduced-motion behavior;
+- responsive breakpoints, existing responsive ordering, or current overflow behavior;
+- assets, image paths, crops, public files, or manifest/icon references;
+- Supabase configuration, package files, lockfiles, Vite/PostCSS/Tailwind build behavior, or App section order;
+- any new dependency, plugin, router, state library, form library, icon library, or animation library.
+
+### Likely Phase 1 files
+
+| File | Why it may be touched | Allowed change |
+|---|---|---|
+| `src/index.css` | It is the current global CSS boundary and already owns shared helpers, section surfaces, reduced-motion rules, and global layers. | Add a clearly namespaced V2 variable block and only the minimal opt-in `.v2-*` primitives/contracts. Do not edit existing V1 selector behavior. |
+| `tailwind.config.js` | It is the existing theme source if generated semantic utility aliases prove useful to later V2 sections. | Optional additive aliases only; preserve every existing `navy`, `teal`, `cyan`, `snow`, font, animation, content-glob, and keyframe value. The smallest initial implementation may avoid touching this file if CSS variables and scoped classes are sufficient. |
+| `implementation_update.md` | Tracks the approved Phase 1 plan and checklist. | Documentation only. |
+
+`src/index.css` is the smallest required implementation surface. `tailwind.config.js` does not need to change merely to declare the initial tokens; it should be touched only if actual V2 usage demonstrates that semantic Tailwind aliases materially improve consistency without broadening the diff.
+
+### Files Phase 1 must not touch
+
+The following are locked during Phase 1:
+
+- `src/App.tsx`
+- `src/main.tsx`
+- `src/components/Navbar.tsx`
+- `src/components/Hero.tsx`
+- `src/components/Problem.tsx`
+- `src/components/Solution.tsx`
+- `src/components/HowItWorks.tsx`
+- `src/components/Trust.tsx`
+- `src/components/FAQ.tsx`
+- `src/components/FinalCTA.tsx`
+- `src/components/Footer.tsx`
+- `src/components/ContactModal.tsx`
+- `src/components/MermaidMark.tsx`
+- `src/components/StatisticsStrip.tsx`
+- `src/components/AIWorkflow.tsx`
+- `src/lib/i18n.tsx`
+- `src/lib/siteMetadata.ts`
+- `src/lib/supabase.ts`
+- `src/hooks/useRevealObserver.ts`
+- all other component, hook, provider, and source files unless a later approved plan explicitly expands scope;
+- all of `public/`, including image files, manifest, robots, and social assets;
+- `package.json`, `package-lock.json`, `pnpm-lock.yaml`, and `node_modules` state;
+- `vite.config.ts`, `postcss.config.js`, `tsconfig*.json`, `eslint.config.js`, and build scripts;
+- Supabase configuration, environment contracts, and App section order.
+
+### Exact initial token set
+
+These are conceptual Phase 1 roles, not implemented declarations. The set is intentionally small.
+
+#### Surfaces
+
+| Role | Initial value |
+|---|---|
+| Carbon | `#080A0D` |
+| Graphite | `#10141A` |
+| Elevated Graphite | `#171C23` |
+| Bone White | `#F4F2EB` |
+
+#### Accents
+
+| Role | Initial value |
+|---|---|
+| Signal Lime | `#C7FF4A` |
+| Electric Cyan | `#50DFFF` |
+
+#### Text
+
+| Role | Initial value / source |
+|---|---|
+| On-dark primary | Bone White `#F4F2EB` |
+| On-dark secondary | Steel `#89939E` |
+| On-light primary | Carbon `#080A0D` |
+| On-light secondary | Muted `#626B75` |
+
+#### Borders
+
+| Role | Initial value |
+|---|---|
+| Dark-surface border | `rgba(244, 242, 235, 0.14)` |
+| Light-surface border | `rgba(8, 10, 13, 0.16)` |
+| Accent/active border | Signal Lime `#C7FF4A` or Electric Cyan `#50DFFF` according to the semantic state |
+
+#### Interaction
+
+| Role | Initial value / intent |
+|---|---|
+| Focus | Electric Cyan `#50DFFF`, with a visible outline/offset |
+| Hover | A restrained surface or accent tint, never a global glow |
+| Pressed | A stronger surface/accent tint with no layout shift requirement |
+| Disabled | Reduced contrast and interaction without becoming invisible |
+
+Hover, pressed, and disabled are semantic roles rather than permission to introduce a new global button style in Phase 1.
+
+#### Typography
+
+| Role | Initial mapping |
+|---|---|
+| Display | Existing Space Grotesk display family |
+| Section heading | Existing Space Grotesk display family |
+| Body | Existing Inter body family |
+| Label | Existing Space Grotesk/body pairing, with explicit tracking defined only when used |
+| System/mono | System monospace stack for technical/status content; no new font asset |
+
+#### Shape
+
+| Role | Initial value |
+|---|---:|
+| Large system surface radius | `16px` |
+| Control radius | `8px` |
+| Small UI radius | `6px` |
+
+Editorial surfaces may use radius `0` when a real V2 section proves that a flat edge is the intended composition; that exception should not become a fourth global radius token.
+
+#### Layout
+
+| Role | Initial direction |
+|---|---|
+| Page gutter | `20px` mobile, `32px` tablet, `64–80px` desktop |
+| Content max width | Approximately `1280px` / `80rem` |
+| Section spacing | A semantic large interval, approximately `96px` desktop, scaled down responsively |
+| Component spacing | A semantic medium interval, approximately `32px`, with smaller local gaps introduced only by real component use |
+
+These values are opt-in targets, not instructions to force existing sections onto a new grid in Phase 1.
+
+### Token architecture recommendation
+
+Choose **C — CSS variables + Tailwind semantic aliases**.
+
+- CSS variables are the semantic source of truth and make dark/light surface roles explicit without rewriting the existing Tailwind palette.
+- Optional Tailwind semantic aliases provide consistent utility ergonomics when a real V2 component needs them.
+- V1 `navy`, `teal`, `cyan`, and `snow` values remain unchanged and continue serving current components.
+- The initial implementation should prefer `src/index.css` scoped variables/classes; `tailwind.config.js` is optional and should change only if actual usage proves aliases necessary.
+- No alias may redefine or silently remap a legacy token. A V2 role must be visibly and semantically namespaced.
+
+### V1/V2 coexistence contract
+
+- V1 sections continue using their current utilities, global section-tone/surface selectors, `.btn-primary`, body defaults, and existing motion helpers.
+- V2 sections explicitly opt into V2 variables and classes at the section or component boundary.
+- There is no global alias from the legacy palette to the V2 palette and no body-wide switch.
+- No destructive rename of current classes, translation keys, IDs, or assets is allowed.
+- A compatibility token means a temporary, explicitly named bridge that lets a new V2 primitive coexist with an unchanged V1 consumer; it is not a redefinition of `navy`, `teal`, `cyan`, or `snow`.
+- Old classes, variables, and helpers are removed only after all source consumers disappear, replacement output passes visual/behavior checks, and rollback references are understood.
+
+### Phase 1 class and primitive boundary
+
+The following five primitives are justified before Phase 2 because they express stable cross-section contracts without assuming a final component design:
+
+1. `.v2-section-dark` — opt-in Carbon/Graphite surface and on-dark role boundary.
+2. `.v2-section-light` — opt-in Bone White surface and on-light role boundary.
+3. `.v2-container` — opt-in max-width and responsive page-gutter contract.
+4. `.v2-label` — opt-in label/eyebrow typography role, without changing `.section-label`.
+5. `.v2-focus-ring` — shared accessible focus contract for future V2 controls.
+
+Wait until real component usage proves the need for `.v2-button-*`, card primitives, workflow nodes, capability-specific visuals, grid helpers, or detailed state components. Creating those before Phase 2 would overbuild around unverified composition decisions.
+
+### Typography foundation boundary
+
+- Keep Space Grotesk for display/heading roles.
+- Keep Inter for body/interface roles.
+- Add semantic V2 typography roles as opt-in variables/classes.
+- Do not change the body font, global heading output, font sizes, line heights, tracking, or existing language-specific typography in Phase 1.
+- Do not add fonts or assets.
+
+The typography foundation should name roles for later sections, not redesign the current page.
+
+### Container and spacing foundation
+
+Phase 1 may introduce opt-in max-width, gutter, section-spacing, and component-spacing roles because the current architecture already uses a repeated `max-w-6xl`/responsive-px pattern. The target direction is approximately 1280px desktop content width, 64–80px desktop outer margins, 32px tablet gutters, and 20px mobile gutters.
+
+These values must not be applied globally. Existing Hero, Navbar, and section spacing remain unchanged until their dedicated phases adopt the V2 contract and pass language/viewport checks.
+
+### Radius, border, and depth foundation
+
+Phase 1 may encode the minimal radius roles and dark/light/active border roles listed above. It may also encode restrained surface depth as a semantic boundary, but should not globally alter shadows.
+
+- Large system surfaces target approximately 16px.
+- Buttons target approximately 8–10px when a later button phase proves the need.
+- Small controls target approximately 6–8px.
+- Editorial surfaces may use radius 0.
+- Borders are preferred over heavy shadows.
+- Shadows remain restrained and section-specific.
+- No glassmorphism, blur-heavy surface system, or universal glow should be introduced.
+
+Detailed card, button, workflow, and section depth decisions wait for the relevant component phase.
+
+### Color values validation
+
+| Proposed value | Status | Boundary |
+|---|---|---|
+| Carbon Black `#080A0D` | **APPROVED FOR PHASE 1** | Dark primary surface; pair with explicit on-dark text and borders. |
+| Graphite `#10141A` | **APPROVED FOR PHASE 1** | Base elevated dark surface; do not replace legacy navy globally. |
+| Elevated Graphite `#171C23` | **APPROVED FOR PHASE 1** | Raised/interactive dark surface; use sparingly. |
+| Bone White `#F4F2EB` | **APPROVED FOR PHASE 1** | Light editorial surface; always declare explicit dark text, borders, icons, focus, and selection. |
+| Signal Lime `#C7FF4A` | **APPROVED FOR PHASE 1** | Primary action/active/confirmed signal; use for accents and fills, not long text or every border. |
+| Electric Cyan `#50DFFF` | **APPROVED FOR PHASE 1** | Secondary system/data/focus signal; do not turn it into a second primary CTA color. |
+| Steel `#89939E` | **APPROVED FOR PHASE 1** | On-dark secondary text and restrained metadata; recheck for small-text contrast at each use. |
+| Muted `#626B75` | **APPROVED FOR PHASE 1** | On-light secondary text and non-primary metadata; never use as the only dark-surface body text without a contrast check. |
+
+The proposed palette is safe as a semantic, opt-in starting point. It is not permission to replace the current V1 palette or to use Signal Lime/Cyan indiscriminately.
+
+### Light / dark surface contract
+
+#### Dark V2 surface
+
+- Background: Carbon for the primary section, Graphite/Elevated Graphite only for intentional hierarchy.
+- Primary text: Bone White.
+- Secondary text: Steel.
+- Border: dark-surface border.
+- Accent: Signal Lime for primary/active meaning; Electric Cyan for system/data meaning.
+- Focus: Electric Cyan outline with sufficient offset and visible contrast.
+
+#### Light V2 surface
+
+- Background: Bone White.
+- Primary text: Carbon.
+- Secondary text: Muted.
+- Border: light-surface border.
+- Accent: Signal Lime for primary/active meaning, with dark text or dark control treatment as required for contrast; Electric Cyan only for secondary system signals.
+- Focus: Electric Cyan or a dark outline treatment that remains visible on Bone White; each control must verify keyboard contrast.
+
+Every light surface must set its own child text, icon, border, control, focus, hover, pressed, disabled, and selection roles. It must not inherit V1 `text-snow-*`, `border-navy-*`, or dark-body assumptions.
+
+### Phase 1 verification plan
+
+After implementation, run the actual package scripts:
+
+```text
+pnpm typecheck
+pnpm lint
+pnpm build
+```
+
+Also verify:
+
+- the app still starts/builds and no source imports or aliases break;
+- the current homepage remains visually unchanged or intentionally near-identical;
+- Navbar layout, links, active underline, language switch, and mobile menu are unchanged;
+- Hero structure, copy, CTA, workflow, image, and mobile order are unchanged;
+- ContactModal opens, closes, traps/returns scroll behavior, submits/error-states correctly, and retains focus affordances;
+- TR/EN switching still changes rendered copy and metadata;
+- metadata title, description, canonical, OG/Twitter, and JSON-LD updates still work;
+- no horizontal overflow appears at 320px, 375px, 768px, 1024px, or 1280px+;
+- reduced-motion behavior and reveal fallback remain unchanged;
+- no asset, package, lockfile, metadata, or configuration files changed;
+- no existing class output changed unintentionally outside explicitly unused V2 primitives.
+
+The strongest Phase 1 success criterion is explicit: **the current V1 page should not visually change.**
+
+### Visual regression checkpoints
+
+Manually inspect at widths `320px`, `375px`, `768px`, `1024px`, and `1280px+` in both Turkish and English. At minimum inspect Navbar, Hero, FAQ, ContactModal, and Footer, including language switching, anchor navigation, accordion behavior, modal open/close, keyboard focus, and reduced-motion mode. This is a regression check, not the full V2 visual review.
+
+### Build and test commands
+
+The available Phase 1 verification commands are:
+
+- `pnpm typecheck`
+- `pnpm lint`
+- `pnpm build`
+
+No test, preview, or browser automation script is declared in `package.json`; manual viewport checks remain required.
+
+### Phase 1 regression risks
+
+| Rank | Risk | Cause | Likely failure | Guardrail |
+|---:|---|---|---|---|
+| 1 | Global color variable leakage | A new semantic variable or alias is attached to `body` or a legacy selector. | Existing V1 sections, Navbar, Hero, or modal recolor unexpectedly. | Namespace V2 roles and attach them only to `.v2-*` opt-in scopes; do not remap legacy palette values. |
+| 2 | Tailwind legacy token modification | Existing `navy`, `teal`, `cyan`, `snow`, animations, or config globs are edited. | Many generated utilities change at once or classes are purged. | Add only semantic aliases if needed; preserve legacy theme values, content globs, and keyframes. |
+| 3 | Broad selector collision | A helper such as `.label`, `.container`, or `.surface` overlaps current global/component classes. | Typography, widths, borders, or section surfaces change outside V2. | Use a strict `.v2-` namespace and verify generated output/search for selector collisions. |
+| 4 | Body/light-surface inheritance | Bone White is introduced without explicit text, icon, focus, and border roles. | Pale text or dark-surface borders become unreadable on light sections. | Require complete dark/light surface contracts and keep body defaults unchanged. |
+| 5 | Premature abstraction or shared control migration | Button/card/workflow primitives are created before actual component usage. | Unused APIs grow, `.btn-primary` is accidentally restyled, or later phases fight the abstraction. | Limit Phase 1 to five justified primitives; defer buttons, cards, nodes, and section-specific visuals. |
+
+### Phase 1 exit criteria
+
+Phase 1 is complete only when:
+
+- additive semantic tokens exist without changing V1 token values;
+- dark/light V2 surface contracts are explicit;
+- the minimum justified primitives exist and are namespaced;
+- compatibility behavior is documented and no legacy class is destructively renamed;
+- no section redesign, copy migration, asset change, dependency change, or App order change has started;
+- `pnpm typecheck`, `pnpm lint`, and `pnpm build` pass;
+- the required TR/EN and viewport regression checks pass;
+- Navbar, Hero, ContactModal, FAQ, Footer, reduced motion, metadata, and anchors remain functional;
+- no unintended existing class output changed;
+- this implementation document can be replaced by the Phase 2 plan without unresolved Phase 1 boundary questions.
+
+### Phase 0 final decision
+
+**READY WITH CONDITIONS**
+
+The repository is ready to begin Phase 1 because the architecture, assets, dependencies, motion, responsive behavior, i18n, and migration order have been audited. The conditions are strict: Phase 1 must remain additive, must use the V2 namespace/opt-in contract, must leave all current V1 output and behavior stable, and must not touch components, copy, assets, metadata, dependencies, build configuration, or App order.
+
+### Final Phase 0 summary
+
+- **Architecture:** Current App composition, ownership boundaries, anchors, overlays, and non-rendered legacy components are documented.
+- **Migration strategy:** Preserve V1, add V2 contracts, migrate section-by-section, and remove old code only after replacement verification.
+- **Token strategy:** CSS variables as semantic source values with optional Tailwind semantic aliases; no legacy palette remap.
+- **Responsive strategy:** Per-phase responsive implementation and QA, with final cross-section QA later; Hero mobile structure precedes Hero motion.
+- **Motion strategy:** Keep CSS/React/observer primitives, preserve reduced motion, and defer global motion cleanup until sections stabilize.
+- **Copy strategy:** Structural TR/EN migration happens with each section; final wording and metadata polish remains late.
+- **Asset strategy:** Protect Mermaid, founder, Luma prototype, OG preview, and current fallbacks; no asset changes in Phase 1.
+- **Dependency strategy:** Keep the current stack; no new library or lockfile/build change is needed.
+- **Roadmap adjustment:** Only the Hero execution sub-order changes to static → mobile structure → motion; all other phase positions remain.
+- **Phase 1 scope:** Add the minimum namespaced tokens/primitives and verify that the current V1 page does not visually change.
 
 ## Phase 0 checklist
 
@@ -1890,7 +2219,7 @@ This section must give enough information to create the later Phase 1 implementa
 - [x] Inventory relevant assets
 - [x] Audit relevant dependencies
 - [x] Validate V2 migration order against current architecture
-- [ ] Define Phase 1 readiness and risk boundaries
+- [x] Define Phase 1 readiness and risk boundaries
 
 ## Phase 0 scope lock
 
