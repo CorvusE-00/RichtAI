@@ -1,265 +1,197 @@
-# Richt Ai V2 — Phase 1: Design Foundation
+# Richt Ai V2 — Phase 2: Navbar V2
 
-## Plan status
+## Objective
 
-Plan only. No Phase 1 implementation has started.
+Rebuild only the Richt Ai Navbar into the V2 “Bold Systems” direction while preserving every existing navigation, language, modal, observer, accessibility, and responsive behavior contract.
 
-This file is the single source of truth for Phase 1. Previous Phase 0 audit history and checklists are intentionally not carried forward.
+The result should feel editorial, deliberate, premium, operational, and founder-led rather than glassy, capsule-driven, neon, or template-like.
 
-## Phase 1 objective
+Do not modify Hero or any later homepage section during Phase 2.
 
-Establish the additive Richt Ai V2 “Bold Systems” foundation without visually changing the current V1 homepage.
+## V2 Navbar direction
 
-Phase 1 is infrastructure only. It introduces semantic V2 tokens, dark/light surface contracts, a minimal primitive layer, layout/spacing roles, typography roles, radius/border roles, and focus/state roles.
+Use a full-width fixed header with a Carbon/near-Carbon surface, restrained border, compact confident navigation, minimal radius, and a subtle scrolled-state change. Prefer borders over large shadows and reserve Signal Lime for high-value emphasis. Electric Cyan remains a secondary/system signal.
 
-It must not redesign any existing section.
+Desktop visible labels:
 
-Primary success criterion:
+- EN: Work, Systems, Process, About, FAQ
+- TR: Projeler, Sistemler, Süreç, Hakkında, S.S.S.
 
-> The current V1 page remains visually unchanged.
+Navbar CTA labels:
 
-## Approved V2 palette
+- EN: Start a project
+- TR: Projeyi konuşalım
 
-The following values are approved for the Phase 1 plan:
+Visible labels may change, but section-anchor IDs must remain stable in this phase.
 
-| Role | Value |
-|---|---|
-| Carbon Black | `#080A0D` |
-| Graphite | `#10141A` |
-| Elevated Graphite | `#171C23` |
-| Bone White | `#F4F2EB` |
-| Signal Lime | `#C7FF4A` |
-| Electric Cyan | `#50DFFF` |
-| Steel | `#89939E` |
-| Muted | `#626B75` |
+## Existing behavior contracts to preserve
 
-Do not replace these values unless a concrete implementation constraint is discovered and explicitly reviewed.
+- fixed header behavior;
+- `isScrolled = window.scrollY > 24` unless a concrete implementation finding requires review;
+- the current desktop/mobile breakpoint around `lg`;
+- `copy.nav.links` shape and the existing language provider contract;
+- `toggleLanguage()` and language persistence behavior;
+- smooth `scrollIntoView` navigation;
+- mobile menu open/close behavior and close-after-selection behavior;
+- CTA calls the existing `onCTAClick` callback, with App retaining ContactModal ownership;
+- active-section observer behavior, including current IDs, root margin, and thresholds unless a concrete bug is found;
+- valid logo/brand interaction and protected MermaidMark silhouette;
+- reduced-motion accessibility and keyboard usability.
 
-## Token architecture
+## Stable navigation ID and visible-label mapping
 
-Use **CSS variables plus optional Tailwind semantic aliases**.
+The current source contract maps the V2 labels to existing section IDs as follows:
 
-- CSS variables are the semantic source of truth.
-- Existing V1 Tailwind tokens remain unchanged.
-- Tailwind aliases are optional and may be added only if Checklist 5 proves real ergonomic value for Phase 2+.
-- All V2 variables, classes, and aliases must use a clear `v2` namespace.
-- No legacy token may be remapped, renamed, or globally aliased.
+| Visible language | Visible label | Existing target ID | Current section |
+| --- | --- | --- | --- |
+| EN | Work | `sorun` | current Challenges section |
+| EN | Systems | `cozum` | current Solutions section |
+| EN | Process | `nasil-calisir` | current How It Works section |
+| EN | About | `guven` | current Trust / Founder section |
+| EN | FAQ | `sss` | current FAQ section |
+| TR | Projeler | `sorun` | current Sorunlar section |
+| TR | Sistemler | `cozum` | current Çözüm section |
+| TR | Süreç | `nasil-calisir` | current Nasıl çalışır? section |
+| TR | Hakkında | `guven` | current Güven / Kurucu section |
+| TR | S.S.S. | `sss` | current S.S.S. section |
 
-## V1/V2 coexistence contract
+Do not rename these IDs or change the rendered section order. Any copy update must remain limited to Navbar-visible navigation labels and CTA labels, preserve the nav array shape, and maintain TR/EN parity.
 
-- V1 continues using `navy`, `teal`, `cyan`, `snow`, body defaults, `.section-tone-*`, `.section-surface-*`, `.btn-primary`, and all current component selectors.
-- V2 is opt-in only through explicitly named variables/classes.
-- There is no body-wide V2 switch and no global palette replacement.
-- Existing markup, copy, IDs, assets, metadata, dependencies, and behavior remain unchanged.
-- A compatibility token is a temporary, explicitly named bridge for an unchanged V1 consumer and a new V2 primitive; it must not redefine a legacy token.
-- Legacy classes are removed only after all consumers disappear and replacement output passes regression checks.
+## Expected file boundary
 
-## Allowed implementation files
+Likely implementation files:
 
-### `src/index.css`
+- `src/components/Navbar.tsx`
+- `src/index.css`
+- `src/lib/i18n.tsx` only if the visible Navbar labels and CTA copy require translation updates.
 
-Primary implementation file. It may receive an isolated V2 variable block and minimal namespaced primitives/contracts. Existing selectors and output must remain unchanged.
-
-### `tailwind.config.js`
-
-Optional only. Keep untouched unless Checklist 5 proves semantic aliases are necessary. If changed, additions must be namespaced, reference CSS variables, preserve every legacy token/font/animation/content glob, and add no plugins.
-
-No other source/config/asset file is part of the Phase 1 implementation scope.
+No new dependency or Tailwind configuration change is expected. Prefer existing V2 variables, `.v2-container`, `.v2-label`, `.v2-focus-ring`, typography roles, and radius roles only where they improve the Navbar implementation. Do not create a global button system or speculative primitives.
 
 ## Locked files and areas
 
-Phase 1 must not touch:
+Do not modify:
 
-- `src/App.tsx` or any file in `src/components/`
-- `src/lib/i18n.tsx`
-- `src/lib/siteMetadata.ts`
-- `src/lib/supabase.ts`
-- `src/hooks/useRevealObserver.ts`
-- `public/*` or any asset
-- `package.json`, `package-lock.json`, `pnpm-lock.yaml`, or `node_modules`
-- `vite.config.ts`
-- `postcss.config.js`
-- `tsconfig*.json`
-- `eslint.config.js`
-- build scripts or metadata files
-- App section order, copy, section IDs, navigation, motion, responsive breakpoints, or runtime behavior
+- `src/components/Hero.tsx`
+- `src/components/Problem.tsx`
+- `src/components/Solution.tsx`
+- `src/components/HowItWorks.tsx`
+- `src/components/Trust.tsx`
+- `src/components/FAQ.tsx`
+- `src/components/FinalCTA.tsx`
+- `src/components/Footer.tsx`
+- `src/components/ContactModal.tsx`
+- `src/components/MermaidMark.tsx` unless a real Navbar compatibility issue is proven;
+- `src/App.tsx` unless an existing Navbar contract concretely requires it;
+- site metadata, Supabase, assets, package files, lockfiles, Vite/PostCSS config, and `tailwind.config.js`.
 
-## No visual redesign rule
+## Phase 2 implementation checklist
 
-Phase 1 must not make the current homepage “look more V2.” Do not recolor existing sections, change current spacing/radius/typography output, restyle buttons/glows/shadows, change Hero/Navbar/Footer/ContactModal, or apply new primitives to rendered V1 sections.
+### 1. Audit and freeze the current Navbar contracts
 
-The new foundation may exist unused until Phase 2.
+- [ ] Inspect `src/components/Navbar.tsx`, the translation nav structure, current section IDs, active observer, scroll state, mobile menu state, CTA callback, language toggle, and MermaidMark usage.
+- [ ] Record any concrete behavior constraints before markup changes.
+- [ ] Do not modify other components during this audit.
 
-## Ordered Phase 1 implementation checklist
+### 2. Finalize V2 labels and ID-safe i18n mapping
 
-### 1. Add semantic V2 CSS variables
+- [ ] Verify the exact EN/TR visible-label mapping documented above against the live source.
+- [ ] Update only Navbar-visible labels and CTA copy if required, preserving `copy.nav.links`, IDs, language parity, and persistence behavior.
+- [ ] Do not begin the broader copy rewrite planned for a later phase.
 
-- [x] Add an isolated, namespaced variable layer in `src/index.css`.
+### 3. Prepare semantic V2 Navbar structure
 
-Plan the minimum groups only:
+- [ ] Restructure only the Navbar into a clear semantic `header` → `.v2-container` → brand, navigation, and controls hierarchy.
+- [ ] Keep the MermaidMark plus wordmark arrangement recognizable.
+- [ ] Avoid excessive wrappers, dashboard-like surfaces, and duplicated controls.
+- [ ] Preserve desktop and mobile behavior contracts while changing presentation.
 
-- Surfaces: Carbon, Graphite, Elevated Graphite, Bone White.
-- Text: on-dark primary/secondary and on-light primary/secondary.
-- Accents: Signal Lime and Electric Cyan.
-- Borders: dark, light, and active/accent.
-- Interaction: focus, hover, pressed, disabled.
-- Shape: surface radius, control radius, small UI radius.
-- Layout: page gutter, content max width, section spacing, component spacing.
-- Typography: display, heading, body, label, system/mono families.
+### 4. Apply the desktop Bold Systems visual system
 
-Use the approved palette values. Do not change existing V1 variables, Tailwind colors, body defaults, or rendered output.
+- [ ] Use a full-width fixed Carbon/near-Carbon header with a thin restrained border.
+- [ ] Remove the floating glass-pill, heavy blur, large shadow, gradient-border, neon, and capsule-driven treatment from the Navbar only.
+- [ ] Use compact spacing, minimal radius, strong wordmark presence, and precise navigation density.
+- [ ] Use Signal Lime sparingly for high-value emphasis and Electric Cyan only for secondary/system states.
+- [ ] Keep the active state precise through a short rule, marker, or stronger text rather than decorative glow.
 
-Implementation note: `src/index.css` now contains the isolated `--v2-` variable block covering surfaces, text, accents, borders, interaction, shape, layout, and font-family roles. The collision search found no prior `--v2-*` variables or proposed names, and no V1 selector consumes the new variables. `tailwind.config.js` and all other files remained untouched.
+### 5. Rework brand, language control, and CTA presentation
 
-### 2. Add dark/light surface contracts
+- [ ] Preserve MermaidMark silhouette geometry and brand recognition; do not create or recolor a source asset.
+- [ ] Design the language control as a compact, obvious, keyboard-usable control that is not visually dominant.
+- [ ] Style the CTA with the approved EN/TR labels, compact 8–10px radius, Carbon text on Signal Lime where appropriate, no glow, and no hover lift.
+- [ ] Preserve the existing `onCTAClick` → ContactModal behavior and do not create a global `.v2-button-*` system.
 
-- [x] Add opt-in `.v2-section-dark` and `.v2-section-light` contracts.
+### 6. Rework active and scrolled states without behavioral drift
 
-`.v2-section-dark` should establish Carbon/Graphite surfaces, Bone White primary text, Steel secondary text, dark borders, Signal Lime primary accents, and Electric Cyan system/focus accents.
+- [ ] Preserve the active-section observer, current IDs, root margin, thresholds, and `isScrolled` threshold unless a concrete bug is discovered.
+- [ ] Add only a small visual difference between top-of-page and scrolled states through border, background density, or restrained height/padding changes.
+- [ ] Avoid transform jumps, large shrink animations, blur-heavy transitions, dramatic shadows, or changes that destabilize Hero clearance.
 
-`.v2-section-light` should establish Bone White, Carbon primary text, Muted secondary text, light borders, Signal Lime primary accents, and Electric Cyan system/focus accents.
+### 7. Rebuild the mobile Navbar/menu presentation
 
-Light descendants must explicitly define their text, icon, border, focus, hover, pressed, disabled, and selection roles instead of inheriting V1 `snow`/`navy` assumptions.
+- [ ] Create an intentional mobile top bar containing brand, language control, menu control, and CTA access without horizontal overflow at 320px.
+- [ ] Present the mobile menu as part of the system, not a generic floating dropdown card or stacked-chip surface.
+- [ ] Preserve menu open/close, menu-link scrolling, close-after-selection, language switching, CTA access, and body-scroll behavior.
+- [ ] Keep mobile tap targets approximately 44px where practical and avoid excessive radius or glass-modal treatment.
 
-Implementation note: added `.v2-section-dark` and `.v2-section-light` with scoped `--v2-current-*` semantic aliases. Neither class has a current source consumer, existing V1 selectors remain unchanged, and `tailwind.config.js` remains untouched.
+### 8. Preserve accessibility and restrained motion
 
-### 3. Add typography, shape, and layout roles
+- [ ] Preserve semantic `nav`, button semantics, visible focus, keyboard navigation, sufficient contrast, and usable language controls.
+- [ ] Add or preserve `aria-expanded` and `aria-controls` where useful without broad accessibility refactoring outside Navbar.
+- [ ] Preserve or safely add Escape-to-close only if it fits the existing behavior contract.
+- [ ] Limit motion to color/border transitions, active-rule movement, menu transition, and a restrained 3–4px arrow shift if used.
+- [ ] Respect `prefers-reduced-motion`; do not add glow pulses, bounce, spring physics, gradients, scramble text, or reveal systems.
 
-- [x] Add opt-in semantic roles without changing current typography or containers.
+### 9. Verify functional contracts and run project checks
 
-Plan:
+- [ ] Verify desktop and mobile nav links, active state, scroll state, language switch, CTA → ContactModal, menu open/close, close-after-selection, section scrolling, body-scroll behavior, and Hero clearance.
+- [ ] Verify no horizontal overflow and no changes to Hero or any other section.
+- [ ] Run `pnpm typecheck`.
+- [ ] Run `pnpm lint`.
+- [ ] Run `pnpm build`.
+- [ ] Record exact outcomes and stop on Phase 2-caused failures rather than fixing unrelated issues.
 
-- Keep Space Grotesk for display/heading roles.
-- Keep Inter for body/interface roles.
-- Use a system monospace stack for system/technical labels; add no font asset.
-- Encode approximately 16px surface radius, 8px control radius, and 6px small UI radius.
-- Encode approximately 20px mobile, 32px tablet, and 64–80px desktop page gutters.
-- Encode approximately 1280px content max width, 96px large section spacing, and 32px component spacing.
+### 10. Perform bilingual responsive QA and final Phase 2 readiness review
 
-These roles remain opt-in. Do not migrate V1 containers, global headings, body font, or section spacing.
+- [ ] Inspect EN and TR at 320px, 375px, 430px, 768px, 1024px, 1280px, and 1440px+.
+- [ ] Check brand alignment, header height, nav density, active state, CTA, language control, mobile menu, Hero clearance, TR/EN width pressure, and absence of overflow.
+- [ ] Confirm the Navbar is the only redesigned area and all locked files remain unchanged.
+- [ ] Confirm functionality, accessibility, reduced motion, typecheck, lint, and build results are recorded.
+- [ ] Confirm readiness for Phase 3 Hero static without starting Phase 3.
 
-Implementation note: added `.v2-type-display`, `.v2-type-heading`, `.v2-type-body`, `.v2-type-label`, `.v2-type-system`, `.v2-radius-surface`, `.v2-radius-control`, and `.v2-radius-ui`. No layout classes were added; layout tokens remain available until `.v2-container` is introduced in Checklist 4. No current source consumer uses these roles, V1 output remains unaffected, and `tailwind.config.js` remains untouched.
+## Phase 2 exit criteria
 
-### 4. Add the minimum V2 primitives
+Phase 2 is complete only when:
 
-- [x] Add only the five Phase 1 primitives below, with strict `v2` namespacing.
-
-| Primitive | Responsibility | Must not style | Future consumers |
-|---|---|---|---|
-| `.v2-section-dark` | Opt-in dark surface/text/border boundary | Existing section tones or body defaults | V2 dark sections |
-| `.v2-section-light` | Opt-in Bone White surface/text/border boundary | Existing light/dark section output | V2 editorial sections |
-| `.v2-container` | Opt-in max-width and responsive gutter | Existing containers or App layout | Future V2 sections |
-| `.v2-label` | Opt-in label/eyebrow typography role | `.section-label` or global text | Section labels after migration |
-| `.v2-focus-ring` | Opt-in accessible focus contract | Existing focus styles on V1 controls | Future V2 controls |
-
-Do not create button primitives, cards, workflow nodes, capability shells, Hero helpers, Navbar helpers, or other abstractions before real component usage proves the need.
-
-Implementation note: added `.v2-container` with responsive semantic gutters and the existing max-width token, `.v2-label` with minimal editorial/system label styling, and `.v2-focus-ring` with a visible `:focus-visible` outline. The existing surface primitives were preserved, no current consumer exists, V1 output remains unaffected, and `tailwind.config.js` remains untouched.
-
-### 5. Evaluate Tailwind semantic aliases
-
-- [x] Review whether Phase 1 actually needs Tailwind aliases before editing `tailwind.config.js`.
-
-Default decision: no Tailwind config change. CSS variables and scoped CSS primitives are preferred unless a real Phase 2+ usage demonstrates that aliases materially improve ergonomics.
-
-If aliases are justified, confirm that they are additive, namespaced, backed by CSS variables, and do not alter legacy colors, fonts, animations, content globs, or plugins. Record the decision before implementation.
-
-Implementation note: decision **B — TAILWIND ALIASES NOT NEEDED YET**. Surfaces, text, accents, borders, radii, spacing, and fonts are each covered by the existing CSS variables and opt-in `.v2-*` classes; no category passes the minimum-necessity threshold now. Phase 2 Navbar can proceed with those primitives, component-local Tailwind utilities, and small scoped CSS if needed. `tailwind.config.js` remains untouched. Revisit aliases only when multiple upcoming V2 components repeat raw `var(--v2-...)` values or require the same semantic utility and the CSS primitive layer would otherwise be duplicated.
-
-### 6. Add only approved Tailwind aliases, if required
-
-- [x] Add only the aliases explicitly approved by Checklist 5, or record that `tailwind.config.js` remains untouched.
-
-If no aliases are needed, this checklist item is satisfied by documenting the no-change decision. If aliases are added, keep them semantic and minimal; do not introduce a new plugin or duplicate the full token system in Tailwind config.
-
-Implementation note: no Tailwind aliases were added. `tailwind.config.js` remains untouched, and existing V1 colors, fonts, animations, content globs, and plugins remain unchanged. Phase 2 Navbar does not require aliases and can use the current CSS variables, V2 primitives, existing utilities, and scoped CSS. Revisit aliases only when repeated real usage across multiple V2 components proves that shared `var(--v2-...)` mappings are being duplicated or are unclear.
-
-### 7. Run build/type/lint verification
-
-- [x] Run the actual project verification commands after the token/primitive implementation.
-
-Commands:
-
-```text
-pnpm typecheck
-pnpm lint
-pnpm build
-```
-
-Stop and report any Phase 1-caused failure. Do not fix unrelated issues without review.
-
-Verification note: `pnpm typecheck` **PASS**, `pnpm lint` **PASS**, and `pnpm build` **PASS**. The build reported only the existing informational message that `VITE_SITE_URL` is not set; no CSS, Tailwind, V2 variable/selector, import, or bundling issue appeared. Phase 1 token/primitive additions compile, lint, and build successfully. Git integrity checks showed no source, config, package, lockfile, asset, or generated-file changes during verification.
-
-### 8. Perform manual V1 visual regression verification
-
-- [x] Verify the unchanged V1 page manually in Turkish and English.
-
-Inspect at 320px, 375px, 768px, 1024px, and 1280px+:
-
-- Navbar, Hero, FAQ, ContactModal, and Footer;
-- language switching, section anchors, FAQ accordion, and modal open/close;
-- keyboard focus and reduced-motion behavior;
-- metadata updates and no horizontal overflow;
-- unchanged colors, spacing, typography, buttons, glows, shadows, image treatment, and section order.
-
-Primary criterion: current V1 output remains visually stable.
-
-Verification note: Codex browser checks used the local Vite preview at `http://localhost:5173/`. At `1280 × 720`, Turkish and English passed language switching, metadata updates, Navbar anchors, Hero/Footer stability, FAQ interaction, ContactModal open/Escape close, and no horizontal overflow. At the available narrow `467 × 1244` viewport, the mobile language control remained visible, the hamburger menu opened and closed, a mobile section link scrolled and closed the menu, the page remained overflow-free, and the ContactModal fit without submitting data. The user then manually verified the remaining `320px`, `375px`, `768px`, and `1024px` viewports and `prefers-reduced-motion: reduce`; the user reported no evident issue or visible regression. Across the Codex and user checks, no evident V1 visual or behavior regression was caused by Phase 1.
-
-### 9. Complete Phase 1 cleanup/readiness review
-
-- [x] Confirm Phase 1 exit criteria and readiness for Phase 2 Navbar.
-
-Review:
-
-- all V2 tokens/classes are additive and namespaced;
-- only intended files changed;
-- no V1 visual or behavior regression exists;
-- no package, asset, copy, metadata, component, dependency, or build-config changes occurred;
-- no unnecessary abstraction was introduced;
-- `tailwind.config.js` stayed untouched unless Checklist 5 explicitly approved aliases;
-- Phase 2 Navbar can begin safely.
-
-Verification note: Phase 1 exit criteria are satisfied. The implemented foundation contains the V2 surface, text, accent, border, interaction, radius, layout, and font-family variables; dark/light surface contracts; typography and shape roles; and the minimum `.v2-container`, `.v2-label`, and `.v2-focus-ring` primitives. Git history shows only the intended Phase 1 implementation file (`src/index.css`) and documentation file changed; no component, App, i18n, metadata, asset, package, lockfile, or build-config file changed. No rendered V1 component consumes `.v2-*`, and the existing V1 selectors, body defaults, palette, section tones, `.btn-primary`, ContactModal, MermaidMark, Hero, Navbar, FAQ, and Footer remain outside the Phase 1 implementation diff. `tailwind.config.js` remains untouched with no aliases, plugins, or legacy token remapping. The recorded typecheck, lint, build, Codex browser, and user manual checks support a conclusion of no evident Phase 1 regression. The foundation remains appropriately minimal: no new button/card/workflow/Hero/Navbar/capability system, animation system, library, or Tailwind alias layer was introduced. Remaining Phase 2 risks are limited to preserving fixed-header spacing, active-section observer behavior, mobile menu behavior, TR/EN label-width differences, CTA callback wiring, and visual coexistence during Navbar migration. Decision: **A — PHASE 1 COMPLETE — READY FOR PHASE 2**.
-
-## Phase 1 handoff
-
-Phase 1 established an additive, opt-in V2 design foundation without changing the active V1 page. V1 components, copy, section order and IDs, metadata, assets, dependencies, Tailwind configuration, navigation behavior, language provider, and ContactModal callback remain untouched. Typecheck, lint, and build passed; combined Codex browser and user manual checks found no evident V1 visual or behavior regression. Tailwind semantic aliases were intentionally not added because the existing CSS variables and primitives are sufficient. Phase 2 may begin, but it must start with **PLAN ONLY** before any Navbar implementation.
+- Navbar V2 visuals are implemented;
+- existing navigation, observer, mobile menu, language, CTA, modal, and anchor contracts work;
+- section IDs remain stable;
+- Hero and every later section remain untouched;
+- reduced-motion and keyboard behavior remain usable;
+- typecheck, lint, and build pass;
+- bilingual responsive QA passes at the required widths;
+- no unrelated files or abstractions were added;
+- the repository is ready for Phase 3 Hero static.
 
 ## Implementation discipline
 
-- Implement exactly one checklist item per run.
+- Implement exactly one checklist item per Codex run.
 - Stop after each item.
 - Update `implementation_update.md` after each completed item.
 - Mark only the completed item `[x]`.
 - Do not auto-start the next item.
 - Show changed files after each run.
-- Run only verification relevant to the completed item.
+- Perform only verification relevant to the completed item.
 - Wait for explicit user approval before continuing.
 
-## Phase 1 exit criteria
+## Phase 2 checklist
 
-Phase 1 is complete only when:
-
-- the semantic token layer exists;
-- dark/light surface contracts exist;
-- the five minimum primitives exist;
-- V1 output remains unchanged;
-- `pnpm typecheck`, `pnpm lint`, and `pnpm build` pass;
-- manual TR/EN regression checks pass at all required widths;
-- no forbidden files changed;
-- no copy, asset, metadata, dependency, or App-order change occurred;
-- no unnecessary abstraction was added;
-- the project is ready for Phase 2 Navbar implementation.
-
-## Phase 1 checklist
-
-- [x] Add semantic V2 CSS variables
-- [x] Add dark/light surface contracts
-- [x] Add typography, shape, and layout semantic roles
-- [x] Add minimum `.v2-*` primitive classes
-- [x] Evaluate whether Tailwind semantic aliases are needed
-- [x] Add only justified Tailwind aliases if required
-- [x] Run build/type/lint verification
-- [x] Perform manual V1 visual regression verification
-- [x] Complete Phase 1 cleanup/readiness review
+- [ ] Audit and freeze the current Navbar contracts
+- [ ] Finalize V2 labels and ID-safe i18n mapping
+- [ ] Prepare semantic V2 Navbar structure
+- [ ] Apply the desktop Bold Systems visual system
+- [ ] Rework brand, language control, and CTA presentation
+- [ ] Rework active and scrolled states without behavioral drift
+- [ ] Rebuild the mobile Navbar/menu presentation
+- [ ] Preserve accessibility and restrained motion
+- [ ] Verify functional contracts and run project checks
+- [ ] Perform bilingual responsive QA and final Phase 2 readiness review
