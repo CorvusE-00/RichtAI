@@ -1692,31 +1692,173 @@ Do not install, remove, update, or reconfigure dependencies during this audit.
 
 ## V2 migration-order validation
 
-Validate the planned phase order against the actual current architecture:
+### Architecture evidence used for validation
 
-1. Phase 1 — Design foundation
-2. Phase 2 — Navbar
-3. Phase 3 — Hero static
-4. Phase 4 — Hero motion
-5. Phase 5 — Hero mobile
-6. Phase 6 — Selected Work
-7. Phase 7 — What We Build foundation
-8. Phase 8 — AI Systems
-9. Phase 9 — Automation & Operations
-10. Phase 10 — Digital Experiences
-11. Phase 11 — Live System Demo
-12. Phase 12 — Problem
-13. Phase 13 — How We Work
-14. Phase 14 — Founder / Trust merge
-15. Phase 15 — FAQ
-16. Phase 16 — Final CTA + Footer
-17. Phase 17 — Copy audit
-18. Phase 18 — Global motion
-19. Phase 19 — Responsive QA
-20. Phase 20 — Accessibility and performance
-21. Phase 21 — Final visual QA
+- `src/App.tsx` currently owns the homepage composition: `Navbar`, `Hero`, `StatisticsStrip`, `Problem`, `Solution`, `HowItWorks`, `Trust`, `FAQ`, `FinalCTA`, `Footer`, and the global `ContactModal` overlay. `LanguageProvider` wraps the application from `src/main.tsx`.
+- The current navbar links to stable section IDs and uses the same IDs for active-section observation. The Hero owns `anasayfa`; the downstream anchors remain `sorun`, `cozum`, `nasil-calisir`, `guven`, and `sss`.
+- Hero mobile is not a neutral collapse: it uses explicit responsive ordering and `display: contents` behavior in the existing CSS, with a distinct mobile workflow/meta composition. V2 motion geometry therefore depends on the final mobile structure.
+- `Solution.tsx` still couples array indexes to three different visual branches, including the Luma prototype at `index === 2`. The new capability phases must establish a typed data/visual contract before old branches are removed.
+- `Trust.tsx` currently combines founder proof, a four-step process, and `systemProof`; `AIWorkflow.tsx` exists but is not in the active App render tree. Its related workflow copy is still consumed by Hero, so component removal and copy cleanup are separate decisions.
+- `StatisticsStrip` uses animated counters and remains rendered between Hero and Problem. It has no standalone navigation link, but it is part of the current first-screen and proof rhythm.
+- The current dependency audit found no need for a new router, state library, icon library, or animation library. The migration can stay within the current React/CSS/observer stack.
 
-Determine whether current architecture creates a dependency that requires changing this order. If yes, recommend the smallest possible adjustment and explain the concrete technical reason. Do not rewrite the roadmap without evidence.
+### Phase-by-phase validation
+
+#### Phase 1 — Design foundation: KEEP ORDER
+
+Safe to do first. It can be additive and token-based while preserving current utility classes, image paths, copy keys, responsive rules, motion behavior, and package/config contracts. It should not replace the global palette or rewrite motion/responsive systems before sections opt in. Temporary compatibility tokens are the smallest-risk bridge.
+
+#### Phase 2 — Navbar before Phase 3 — Hero static: KEEP ORDER
+
+The Navbar owns the fixed-header clearance, navigation labels/IDs, mobile menu, language switch, CTA callback, and active-section observer. Building it before the Hero is technically safe even if it creates a temporary visual mismatch. Hero depends on the `anasayfa` anchor, header spacing, and CTA callback contract, not on the Navbar's internal markup. The smallest-risk approach is to stabilize those external contracts first, then build the static Hero against them.
+
+#### Phase 3 — Hero static / Phase 4 — Hero motion / Phase 5 — Hero mobile: MINOR SEQUENCING ADJUSTMENT
+
+The current `STATIC → MOTION → MOBILE` order is workable for the desktop-only implementation, but it is not the safest order for V2. Mobile has explicit ordering and layout semantics, and the connected-systems visual will have a different mobile composition. Motion authored before that geometry settles can target the wrong dimensions or create desktop/mobile divergence.
+
+Safer execution order:
+
+1. Phase 3 — Hero static foundation
+2. Phase 5 — Hero mobile structure, currently labeled Phase 5
+3. Phase 4 — Hero motion, currently labeled Phase 4
+
+This is an execution-order adjustment, not a new master phase: establish desktop and mobile geometry first, then add motion against both stable layouts. Preserve the existing reduced-motion behavior and keep Hero motion scoped to the Hero.
+
+#### Phase 6 — Selected Work: KEEP POSITION
+
+Selected Work can safely precede the capability sections. The Luma preview already exists, matches a 16/9 project frame, and can be presented as prototype/example proof. It has no dependency on removing the current Solution render and should not imply verified client performance. Navigation can be introduced only with a stable section ID; no current anchor needs to be broken.
+
+#### Phase 7 — What We Build foundation / Phases 8–10 — capabilities: KEEP SPLIT
+
+The shared shell first, then capability-specific implementations, matches the current architecture. The shell should establish the shared outer responsive layout, borders, typography, and data contract. AI Systems, Automation & Operations, and Digital Experiences have different intrinsic visual types and should remain separate implementation phases. The current index-based `solution.capabilities` branches and Luma prototype make an explicit data/visual split a prerequisite, but do not justify merging the four phases.
+
+#### Phase 11 — Live System Demo: KEEP POSITION
+
+It should remain after What We Build and the three capability implementations. The live demo can reuse system visual primitives, semantic motion rules, and future system copy groups established there. It must be completed before old Trust `systemProof` or the legacy AIWorkflow boundary is removed, but moving it earlier would force premature primitives and copy contracts.
+
+#### Phase 12 — Problem after Phase 11: KEEP POSITION
+
+Moving the Problem redesign later is safe. The existing Problem section remains rendered until its replacement is verified, and its `sorun` ID continues to satisfy Navbar links and the active observer. The V2 Problem can be simplified after the live demo without removing the old section early.
+
+#### Phase 13 — How We Work before Phase 14 — Founder / Trust merge: KEEP ORDER
+
+`HowItWorks` is already a standalone process section, while Trust contains a second process list plus `systemProof` and founder content. Completing the intended How We Work destination first gives Trust a clear handoff target and prevents both sections from being removed or merged simultaneously without a replacement.
+
+#### Phase 14 — Founder / Trust merge: KEEP POSITION WITH INTERNAL SEQUENCING
+
+Use this internal order:
+
+1. Extract or establish the Founder destination while preserving the real portrait, alt-text contract, and `guven` anchor strategy.
+2. Hand the intended process content to How We Work and confirm no required step is lost.
+3. Hand `systemProof` to the Live System Demo or its approved replacement.
+4. Verify translated copy, active navigation, reveal behavior, and responsive layout.
+5. Remove the old Trust render only after all destinations are live and verified.
+
+No new master phase is required; the dependency is internal to Phase 14.
+
+#### Phase 15 — FAQ: KEEP POSITION
+
+The current FAQ structure is reusable: accordion state, generated IDs, ARIA relationships, and translated question/answer arrays are already isolated. It can receive the V2 light-section treatment while behavior remains protected. Final wording belongs to Phase 17.
+
+#### Phase 16 — Final CTA + Footer: KEEP TOGETHER
+
+They share the end-of-page rhythm and can be migrated together. Preserve the ContactModal callback contract, Footer reuse of navigation labels/IDs, social placeholders, and the CTA/Carbon Footer contrast. Splitting them would not remove a current technical dependency and would increase end-of-page visual drift.
+
+#### Phase 17 — Full bilingual copy audit: KEEP POSITION, SPLIT THE COPY WORK INTERNALLY
+
+Final copy polish belongs late because final wording depends on the stabilized section architecture and proof boundaries. Structural copy migration cannot wait: each earlier phase must introduce the minimum typed TR/EN keys needed by its new section, preserve navigation IDs, and keep prototype claims honest. Phase 17 should then perform the final bilingual wording, consistency, SEO, and metadata pass rather than being the first time copy is made structurally compatible.
+
+#### Phase 18 — Global motion refinement: KEEP POSITION
+
+Global reveal cleanup is safest after all major sections exist. Hero motion and any Live System Demo motion remain dedicated earlier work; Phase 18 should unify timing, easing, reduced-motion behavior, and reveal ownership without reopening section architecture.
+
+#### Phase 19 — Responsive QA: KEEP POSITION WITH PER-PHASE QA
+
+The final cross-section responsive pass belongs near the end, but every implementation phase must verify its own desktop, tablet, 375px, and 320px behavior where applicable. Phase 19 should find cross-section conflicts, not be the first time mobile layout is considered.
+
+#### Phase 20 — Accessibility and performance: KEEP POSITION WITH CONTINUOUS REQUIREMENTS
+
+The final audit remains valid, but mandatory accessibility applies in every phase: semantic buttons, focus states, alt text, reduced motion, modal escape/scroll behavior, FAQ ARIA, keyboard navigation, and no new overflow. Phase 20 consolidates the audit, performance measurements, and remaining fixes after the structure stabilizes.
+
+#### Phase 21 — Final visual QA: KEEP LAST
+
+It should remain final and verify the complete page across approved widths, languages, motion preferences, anchor navigation, overlays, proof labeling, visual rhythm, and replacement-before-removal completeness.
+
+### 21-phase dependency graph
+
+| Phase | Depends on | Must preserve | Can safely remove after |
+|---:|---|---|---|
+| 1 Design foundation | Current tokens, CSS, assets, runtime | Existing classes, copy, assets, behavior | Compatibility tokens after all opt-in sections migrate |
+| 2 Navbar | Phase 1; stable section IDs | Header clearance, labels/IDs, CTA, language, menu, observer | Old Navbar markup after new anchors and controls pass QA |
+| 3 Hero static | Phases 1–2 | `anasayfa`, CTA callback, Hero copy, fallback visual | Old static Hero structure after responsive structure is live |
+| 4 Hero motion | Phase 3 plus finalized mobile geometry | Reduced motion, reveal ownership, CTA and workflow semantics | Old Hero animation rules after new motion passes desktop/mobile QA |
+| 5 Hero mobile | Phase 3; should execute before Phase 4 motion | Explicit mobile order, no overflow, single CTA/workflow/meta | Prior mobile layout rules after new geometry is verified |
+| 6 Selected Work | Phase 1; Luma asset and prototype framing | Prototype disclaimer, image ratio, truthful proof | Legacy project placeholder after replacement framing is live |
+| 7 What We Build foundation | Phases 1 and 6 | Shared shell, responsive contract, typed capability boundary | Old shared Solution shell after all three capability replacements exist |
+| 8 AI Systems | Phase 7 | System semantics, i18n shape, visual contract | Old first capability branch after new AI Systems visual/data passes |
+| 9 Automation & Operations | Phase 7 | Automation semantics, motion/accessibility | Old second capability branch after replacement passes |
+| 10 Digital Experiences | Phase 7; Luma framing | Luma prototype label, 16/9 treatment, truthful proof | Old index-2 prototype branch after replacement is live |
+| 11 Live System Demo | Phases 7–10 | System primitives, semantic motion, future copy group | Trust `systemProof`/legacy workflow render after demo replacement passes |
+| 12 Problem | Navbar IDs; Phase 1 | `sorun` anchor, evidence intent, responsive stacking | Old Problem render after V2 Problem is linked and verified |
+| 13 How We Work | Phase 1; current process behavior | Process clarity, translated steps, reveal/accessibility | Duplicate process source after Trust handoff is complete |
+| 14 Founder / Trust merge | Phases 11 and 13 | Founder portrait, `guven`, process and system proof destinations | Old Trust render after all three handoffs and QA |
+| 15 FAQ | Phase 1; stable copy structure | Accordion state, generated IDs, ARIA, language parity | Old FAQ styling/markup after replacement behavior passes |
+| 16 Final CTA + Footer | Navbar, ContactModal, final anchors | CTA callback, Footer links, modal, social continuity | Old end-of-page render after both replacements pass together |
+| 17 Copy audit | All section structures and proof boundaries | TR/EN shape, IDs, prototype honesty, metadata contract | Legacy copy keys after all consumers migrate and parity passes |
+| 18 Global motion | All major sections and Hero/Live Demo motion | Reduced motion, reveal timing, no duplicate animation ownership | Old global reveal rules after unified motion QA |
+| 19 Responsive QA | All section implementations | Per-section mobile fixes, no overflow, breakpoint contracts | Temporary responsive overrides after full-width QA |
+| 20 Accessibility/performance | Stable visual/function structure | Semantics and behavior throughout; final metrics | Temporary diagnostics/polyfills only after measurements and fixes |
+| 21 Final visual QA | All prior phases | Complete page coherence, language, anchors, proof labels | Legacy migration artifacts after final release sign-off |
+
+### Replacement-before-removal rules
+
+- **StatisticsStrip:** Keep it until any V2 proof/statistics replacement is rendered in the same App position, has a deliberate first-screen relationship, preserves accessible labels, and passes TR/EN and reduced-motion checks.
+- **Old Hero image:** Keep `ai-operations-hero-v2.png` until the new system visual or static fallback exists at desktop/mobile ratios, supports the Hero loading/error path, and passes the Hero motion and responsive checkpoints. The wide legacy image remains reference-only until external path usage is ruled out.
+- **Old Solution visuals:** Replace each index-coupled visual with its typed capability visual/data contract first. Preserve Luma's prototype label and verify all three capability states before removing the old branches.
+- **Trust:** Founder presentation, How We Work process handoff, Live System Demo/system proof, `guven` anchor, translated copy, and responsive behavior must all exist before old Trust render/data is removed.
+- **AIWorkflow:** It is not actively rendered in `App.tsx`, but its component and related workflow copy still have legacy/reference relationships. Remove the component only after source imports are absent and Hero/system copy no longer depends on its contract.
+- **Old section-tone classes:** New section surfaces must render with equivalent contrast, spacing, responsive behavior, and reduced-motion/accessibility behavior before old tone selectors are removed.
+- **Old copy groups:** New typed TR/EN groups must have migrated every consumer, preserved IDs and semantic labels, maintained array parity, and passed metadata/SEO checks before obsolete keys are deleted.
+- **Old assets:** Source references, static metadata, manifest/icon references, deployed/external path usage, and rollback needs must be checked before deprecating or deleting any asset.
+
+### Recommended roadmap adjustment
+
+**MINOR ADJUSTMENT**
+
+Only the Hero sub-order should change:
+
+- Current execution order: `Phase 3 Hero static → Phase 4 Hero motion → Phase 5 Hero mobile`.
+- Recommended execution order: `Phase 3 Hero static → Phase 5 Hero mobile structure → Phase 4 Hero motion`.
+
+The reason is concrete: the current Hero uses explicit mobile ordering and `display: contents`, and the V2 connected-systems visual is expected to compose differently on mobile. Finalizing responsive geometry before choreography reduces motion rework and prevents desktop assumptions from leaking into mobile. No other phase needs to move, merge, or split; the phase labels can remain as roadmap labels while implementation follows this dependency order.
+
+### Migration checkpoints
+
+1. **After Phase 1:** Existing page remains visually coherent; tokens are additive; no assets, copy contracts, dependencies, or behavior regressions.
+2. **After Navbar + Hero:** Desktop/mobile anchors, language switch, CTA callback, Hero `anasayfa`, Hero image/fallback, and reduced motion pass in both languages.
+3. **After Selected Work + capabilities:** Luma is clearly a prototype; all capability states render without index/data mismatch; no overflow at 320px/375px.
+4. **After Live Demo + Problem:** New system proof is live before old proof removal; `sorun` navigation and active observer remain valid.
+5. **After How We Work + Trust decomposition:** No duplicate process story; founder portrait and system proof have destinations; `guven` and translated content remain valid.
+6. **After Final CTA + Footer:** ContactModal, Footer links, social continuity, FAQ behavior, and end-of-page rhythm pass together.
+7. **Before final QA:** Copy parity, global motion, responsive, accessibility, performance, and replacement-before-removal checks are complete across TR/EN and required viewport widths.
+
+### Highest ordering risks
+
+| Rank | Phase relationship | Risk | Likely failure | Guardrail |
+|---:|---|---|---|---|
+| 1 | Hero motion before mobile structure | Motion is authored against incomplete responsive geometry. | Workflow/CTA/meta collide or motion distances differ between desktop and mobile. | Execute mobile structure before Hero motion; test reduced motion and 320px/375px before finalizing choreography. |
+| 2 | Trust removal before destinations exist | Founder, process, and system proof are currently co-located. | A Navbar target or proof story disappears while new sections are incomplete. | Complete Founder, How We Work, and Live Demo handoffs before removing old Trust render/data. |
+| 3 | Solution data split before capability replacements | Current indexes select visual branches and reveal delays. | Wrong visual appears for a capability or TR/EN array changes break layout semantics. | Establish typed groups and migrate each capability before deleting index-coupled branches. |
+| 4 | Copy cleanup before consumers migrate | Shared translation groups feed multiple active and legacy consumers. | Missing labels, broken IDs, metadata drift, or prototype claims become inconsistent. | Perform structural copy migration per section; reserve deletion/final wording for Phase 17 after consumer inventory. |
+| 5 | Global token changes before section opt-in | Current sections mix Tailwind utilities and global selector families. | Palette, contrast, spacing, or responsive behavior changes globally before visual QA. | Use additive compatibility tokens in Phase 1 and migrate section-by-section with checkpoints. |
+
+### Migration-order conclusion
+
+- The roadmap is fundamentally sound against the current architecture.
+- One minor adjustment is required: execute Hero mobile structure before Hero motion, while keeping all other phase positions unchanged.
+- Replacement-before-removal must govern the Hero visual, Solution branches, Trust/system proof, AIWorkflow boundary, section-tone classes, copy groups, StatisticsStrip, and legacy assets.
+- Architecture-critical phases are Phase 1, Navbar/Hero sequencing, the capability shell and split, Live System Demo, Trust handoffs, and the final copy/motion/responsive/accessibility audits.
+- Phase 1 can begin after Checklist 12 (`Define Phase 1 readiness and risk boundaries`) is completed; this checklist only validates the order and does not authorize implementation.
 
 ## Phase 1 readiness
 
@@ -1747,7 +1889,7 @@ This section must give enough information to create the later Phase 1 implementa
 - [x] Audit i18n and copy architecture
 - [x] Inventory relevant assets
 - [x] Audit relevant dependencies
-- [ ] Validate V2 migration order against current architecture
+- [x] Validate V2 migration order against current architecture
 - [ ] Define Phase 1 readiness and risk boundaries
 
 ## Phase 0 scope lock
