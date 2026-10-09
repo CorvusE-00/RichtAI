@@ -298,15 +298,62 @@ Implementation note — Checklist 9 complete — decision A: CHECKLIST 9 PASS �
 
 ### 10. Perform bilingual desktop/tablet and responsive-fallback QA
 
-- [ ] Inspect TR and EN at 1024px, 1280px, and 1440px+ for copy wrapping, hierarchy, canvas balance, CTA placement, Navbar clearance, and overflow.
-- [ ] Check the existing below-desktop fallback at representative widths without beginning the dedicated Phase 5 mobile redesign.
+- [x] Inspect TR and EN at 1024px, 1280px, and 1440px+ for copy wrapping, hierarchy, canvas balance, CTA placement, Navbar clearance, and overflow.
+- [x] Check the existing below-desktop fallback at representative widths without beginning the dedicated Phase 5 mobile redesign.
 - Expected files: implementation_update.md only.
+
+QA note — Checklist 10 complete — decision A: CHECKLIST 10 PASS — BILINGUAL RESPONSIVE QA COMPLETE. Codex In-app Browser checks were performed at exact 1024×900, 1280×900, 1440×900, and 1536×900 desktop/tablet widths in both TR and EN, plus 768×1000 and 375×900 responsive-fallback widths in both languages. At 1024px, Navbar/Hero alignment, fixed-header clearance, two-column activation, bilingual wrapping, CTA/meta placement, six-node canvas containment, and StatisticsStrip adjacency passed. At 1280px and 1440px+, editorial scale, 0.92fr/1.08fr balance, support-copy width, CTA hierarchy, canvas focal AI/Team endpoint, restrained accents, and whitespace passed. At 1536px, both languages remained contained and balanced with no overflow or Hero/StatisticsStrip gap issue. TR and EN approved Hero headline/support/CTA copy remained exact; no manual line breaks or copy changes were introduced. The existing 768px and 375px single-column fallbacks remained understandable, contained, readable, and free of clipping, fixed-Navbar collision, and horizontal overflow; no Phase 5 redesign was started. `document.documentElement.scrollWidth <= document.documentElement.clientWidth` returned PASS at every tested viewport. Locked-area/source review found no Navbar, StatisticsStrip, Problem, Solution, HowItWorks, Trust, FAQ, FinalCTA, Footer, ContactModal, App ownership/order, or asset changes in this QA turn.
 
 ### 11. Complete Phase 3 readiness and handoff
 
-- [ ] Confirm the static Hero is approved, V1-only artifacts are safely removed, locked areas remain untouched, and the next step is Phase 5 mobile planning/execution before Phase 4 motion.
-- [ ] Record the Phase 4 and Phase 5 handoff boundaries and mark Phase 3 complete only when every exit criterion is satisfied.
+- [x] Confirm the static Hero is approved, V1-only artifacts are safely removed, locked areas remain untouched, and the next step is Phase 5 mobile planning/execution before Phase 4 motion.
+- [x] Record the Phase 4 and Phase 5 handoff boundaries and mark Phase 3 complete only when every exit criterion is satisfied.
 - Expected files: implementation_update.md only.
+
+Handoff note — Checklist 11 complete — decision A: PHASE 3 COMPLETE — READY FOR PHASE 5 MOBILE. All Phase 3 exit criteria are satisfied: approved bilingual static Hero copy and canvas are implemented; the V1 image-led Hero and Hero-only artifacts were removed safely; CTA/App ContactModal ownership, `id="anasayfa"`, App order, i18n parity, accessibility, no-motion state, static fallback, and locked-area boundaries remain intact; `pnpm typecheck`, `pnpm lint`, and `pnpm build` passed. The build retained only the informational `VITE_SITE_URL is not set; keeping robots.txt without a sitemap URL.` note. No unrelated source/config/dependency/asset changes were made in this QA turn.
+
+## Phase 3 handoff
+
+### Static Hero V2
+
+- Approved TR/EN headline, support copy, and CTA are implemented and verified at desktop/tablet and fallback widths.
+- One semantic static V2 system canvas contains Website → Messages → AI → CRM → Calendar → Team with localized labels, restrained static connectors, AI focal treatment, and Team endpoint.
+- Desktop/tablet composition uses the controlled V2 container, editorial left copy, right canvas, stable Navbar clearance, and natural StatisticsStrip adjacency.
+- CTA remains a compact native button; reassurance remains secondary and localized.
+- Canvas naming, description, node order, decorative connector semantics, one `h1`, focus styling, and non-interactive behavior are preserved.
+- Hero remains static with no continuous motion, animation, parallax, or Phase 4 behavior.
+
+### Frozen contracts
+
+- `Hero({ onCTAClick })`
+- App-owned ContactModal
+- `id="anasayfa"`
+- Existing App render order
+- Navbar untouched
+- StatisticsStrip adjacency
+- `useLanguage()` / i18n source
+- No route or hash behavior
+
+### Phase 5 handoff
+
+Phase 5 owns the mobile implementation pass: mobile content order, mobile system-canvas simplification, narrow-screen typography, mobile CTA/reassurance placement, mobile vertical spacing and Hero height, and mobile-specific visual hierarchy. The current fallback is usable and contains no known defect; do not treat this handoff as Phase 5 implementation.
+
+### Phase 4 handoff
+
+Phase 4 may later animate only the approved static system canvas through connector travel, node activation, and subtle operational state transitions. It must not redesign the static hierarchy, change copy, add generic decorative motion, or introduce particles, glows, or parallax.
+
+### Health
+
+- `pnpm typecheck` PASS
+- `pnpm lint` PASS
+- `pnpm build` PASS
+- Informational build note: `VITE_SITE_URL is not set; keeping robots.txt without a sitemap URL.`
+
+### QA status
+
+- Codex In-app Browser: TR and EN at 1024×900, 1280×900, 1440×900, 1536×900, 768×1000, and 375×900.
+- All tested widths passed bilingual layout, copy wrapping, canvas containment, CTA/reassurance placement, Navbar clearance, and horizontal-overflow checks.
+- No manual follow-up is required for Phase 3 QA; the next approved phase is Phase 5 mobile execution, followed later by Phase 4 motion.
 
 ## Phase 3 exit criteria
 
