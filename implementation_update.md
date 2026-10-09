@@ -1385,23 +1385,152 @@ Separate capability subgroups under `systems` are safer for component isolation 
 
 ## Asset inventory
 
-Inventory relevant existing assets and group them as:
+### Asset tree and inspection boundary
 
-- KEEP
-- POTENTIALLY REUSE
-- REPLACE LATER
-- OBSOLETE AFTER V2
+- The relevant visual asset tree is `public/images/`; it contains six PNG assets and no additional image directory under `src/`.
+- No separate SVG wordmark, favicon, Apple touch icon, project screenshot, decorative illustration, font asset, or alternate social-preview file was found.
+- `public/site.webmanifest` is relevant because both declared app-icon sizes point to the Mermaid mark. `public/robots.txt` is not a visual asset and is outside this inventory.
+- Dimensions and file sizes were read from the actual PNG headers/files:
 
-At minimum inspect:
+| Asset | Dimensions | File size |
+|---|---:|---:|
+| `public/images/mermaid-mark.png` | 197 × 186 | 27,858 bytes |
+| `public/images/emre-kocaaliler-portrait.png` | 1,254 × 1,254 | 1,792,740 bytes |
+| `public/images/luma-dental-prototype-preview.png` | 1,600 × 900 | 729,874 bytes |
+| `public/images/ai-operations-hero-v2.png` | 1,536 × 1,024 | 1,810,688 bytes |
+| `public/images/ai-operations-hero.png` | 1,916 × 821 | 1,500,533 bytes |
+| `public/images/og-richtai.png` | 1,200 × 630 | 104,458 bytes |
 
-- mermaid logo
-- founder portrait
-- Luma project/prototype imagery
-- current Hero image
-- Open Graph/social images
-- additional project imagery
+### Brand assets
 
-Do not delete or modify assets.
+| Asset | Current usage | Active / metadata usage | V2 classification | Reason and migration risk |
+|---|---|---|---|---|
+| `public/images/mermaid-mark.png` | Consumed by `src/components/MermaidMark.tsx`, rendered by `Navbar.tsx` and `Footer.tsx`; also used as the CSS mask in `.mermaid-mark__silhouette`. | Actively rendered in Navbar/Footer. Also referenced by `index.html` favicon and Apple touch links, `public/site.webmanifest` at 192px and 512px, and `src/lib/siteMetadata.ts` as the logo URL. | **KEEP** | Protected brand silhouette and the only current identity mark. Its source geometry should not be replaced; the CSS treatment can change independently because the image is used as a mask beneath a gradient/black treatment. Main risk is breaking Navbar/Footer identity or all icon surfaces at once. |
+| Wordmark asset | None found. `Richt Ai` is rendered as text in Navbar/Footer. | No image or metadata reference. | **KEEP** | No separate asset needs migration. A future wordmark should not be introduced merely to replace working text without a typographic decision. |
+| Favicon / Apple touch / manifest icon variants | No separate files found; all point to `mermaid-mark.png`. | Metadata/app-shell use only. | **KEEP** | This is a shared dependency of browser identity, install surfaces, and social/SEO continuity. Any future replacement must update all three references together. |
+
+The Mermaid silhouette is a protected identity contract. Geometry must remain stable during V2; color, size, border, background, and mask treatment may evolve independently.
+
+### Founder assets
+
+| Asset | Current consumer | Active behavior and assumptions | V2 classification | Reason and migration risk |
+|---|---|---|---|---|
+| `public/images/emre-kocaaliler-portrait.png` | `src/components/Trust.tsx` founder block, rendered with `loading="lazy"`, `object-cover`, `object-center`, and a `4/5` portrait frame. | Actively rendered. Alt text comes from `copy.trust.founder.alt` in `src/lib/i18n.tsx`. The square source is intentionally cropped by the 4/5 presentation. No duplicate founder image was found. | **KEEP** | Real founder identity/proof, not decorative stock art. Preserve authenticity and the source path while the Founder/Trust composition changes. Risk is accidental crop, removal, or replacing the translated alt contract during section migration. |
+
+### Luma / project assets
+
+| Asset | Current consumer | Aspect / proof status | V2 classification | Reason and migration risk |
+|---|---|---|---|---|
+| `public/images/luma-dental-prototype-preview.png` | `src/components/Solution.tsx`, only in the capability with `index === 2`, inside `.capability-prototype__viewport`. | 16/9 source matches the CSS 16/9 viewport and uses `object-cover`. It is actively rendered as the Digital Experiences visual. The image itself is a prototype preview, not verified client-performance evidence. | **KEEP** | Strong candidate for V2 Selected Work as a clearly labeled prototype/example system. The current `Prototype build` frame and `Luma Dental prototype website preview` alt text are framing/disclaimer dependencies. Risk is presenting it as a real client result or dropping its prototype label during migration. |
+
+No other Luma, project, screenshot, or client-proof image exists in the repository. No real-world performance claim is supported by the current asset tree.
+
+### Hero assets
+
+| Asset | Current consumer | Aspect / status | V2 classification | Reason and migration risk |
+|---|---|---|---|---|
+| `public/images/ai-operations-hero-v2.png` | `src/components/Hero.tsx`, the only Hero `<img>` source. | 3/2 source matches `.hero-visual__frame`'s 3/2 aspect ratio and is displayed with `object-cover`. It is actively rendered and currently shows an AI-operations workspace visual. | **POTENTIALLY REUSE** | It is the current working fallback/reference and should not be deleted before the Hero migration is complete. V2 direction is not image-led, so it may be reduced to a supporting or fallback role later. Risk is treating a generic illustrative operations image as the primary proof of capability. |
+| `public/images/ai-operations-hero.png` | No source reference found in `src/`, `index.html`, or metadata. | 1,916 × 821 wide predecessor; unlike the active v2 asset, it does not match the current 3/2 frame and would be cropped if substituted without a layout decision. | **OBSOLETE AFTER V2** | This is a legacy/duplicate Hero concept and is not currently rendered or used in metadata. Keep it temporarily for reference and rollback; it is safe to deprecate later after confirming no external deployment or content workflow still expects the path. |
+
+The active Hero dependency is `ai-operations-hero-v2.png`. The older wide Hero image has no active source consumer. Neither should be deleted during Phase 0.
+
+### Social / SEO assets
+
+| Asset | Static usage | Dynamic usage | V2 classification | Reason and migration risk |
+|---|---|---|---|---|
+| `public/images/og-richtai.png` | `index.html` sets it for `og:image`, `og:image:secure_url`, and `twitter:image`. | `src/lib/siteMetadata.ts` uses it as `siteMetadata.imagePath` for language metadata updates and JSON-LD/OG/Twitter image values. | **KEEP** | 1,200 × 630 is a suitable social-preview ratio and maintains current sharing continuity. It reflects the current Richt Ai visual language, but may need a later V2 social-preview redesign. Risk is changing or removing it before a replacement is available, leaving stale or missing previews. |
+| Favicon / Apple touch / manifest icons | `index.html` references the Mermaid mark for favicon and Apple touch; `public/site.webmanifest` declares the same PNG for 192px and 512px icons. | Browser/app identity only; `siteMetadata.ts` uses the same mark as logo, not as the OG image. | **KEEP** | There are no separate social icon variants to migrate. Any new icon set must preserve the current brand fallback and update static references plus manifest together. |
+
+### Other visual assets
+
+The audit found no additional screenshots, decorative backgrounds, generated illustrations, old logo variants, placeholder images, prototype screenshots, or unused project images beyond the two Hero versions documented above. Icons used elsewhere are sourced from `lucide-react` or inline SVG/CSS, not repository image files.
+
+### Active versus unused asset table
+
+| Asset | Active render | Metadata use | Legacy/unused | V2 classification |
+|---|---|---|---|---|
+| `mermaid-mark.png` | Yes — Navbar and Footer through `MermaidMark`/CSS mask | Yes — favicon, Apple touch, manifest, dynamic logo URL | No | **KEEP** |
+| `emre-kocaaliler-portrait.png` | Yes — Trust founder block | No | No | **KEEP** |
+| `luma-dental-prototype-preview.png` | Yes — Solution capability visual | No | No | **KEEP** |
+| `ai-operations-hero-v2.png` | Yes — Hero image | No | No | **POTENTIALLY REUSE** |
+| `ai-operations-hero.png` | No source consumer found | No | Yes — legacy Hero version | **OBSOLETE AFTER V2** |
+| `og-richtai.png` | No page-body render | Yes — static and dynamic OG/Twitter image | No | **KEEP** |
+
+### Duplicate and legacy asset audit
+
+- The two `ai-operations-hero` files are duplicate conceptual Hero assets. Keep both temporarily: the v2 file is active, while the wide file is an unreferenced legacy fallback/reference. The older file is safe to deprecate later only after external path usage is ruled out.
+- No duplicate Mermaid mark, wordmark, founder portrait, Luma preview, or social-preview variant was found.
+- The manifest's two icon-size declarations intentionally reuse one source rather than representing duplicate files.
+
+### Image quality and V2 fitness
+
+| Asset | Fitness assessment | Basis |
+|---|---|---|
+| Mermaid mark | **GOOD FOR V2** | Authentic protected identity geometry, clear silhouette, and flexible mask/color treatment. Source resolution is adequate for current small UI/icon use. |
+| Founder portrait | **GOOD FOR V2** | Authentic founder proof, high-resolution square source, and enough detail for the current cropped portrait frame. Preserve the real-image treatment. |
+| Luma preview | **GOOD FOR V2** | Clean 16/9 prototype screenshot suitable for Selected Work when explicitly labeled as prototype/example proof. Not evidence of verified client outcomes. |
+| Hero v2 image | **TEMPORARY** | Current 3/2 frame fit and usable supporting visual, but V2 is not image-led and the image reads as illustrative rather than product proof. |
+| OG image | **GOOD FOR V2** | Correct 1,200 × 630 social ratio and current brand continuity; may be replaced later when the V2 social story is finalized. |
+
+### Protected asset contracts
+
+- **Mermaid silhouette:** must remain available to `MermaidMark`, Navbar, Footer, favicon, Apple touch, manifest, and dynamic logo metadata. Do not replace its geometry during migration.
+- **Founder portrait:** must remain available to the Trust/Founder presentation with a truthful translated alt-text contract and an intentional crop.
+- **Luma prototype preview:** must remain available to the project/capability presentation while its `Prototype build` framing and prototype alt text are preserved. It must not be presented as verified client performance.
+- **OG preview:** must remain available to static and dynamic social metadata until a replacement has been created, wired, and tested.
+
+### Future V2 asset needs
+
+No new asset is required for the first design-foundation phase. Later V2 work may need:
+
+- a Selected Work presentation system that can frame prototype and verified work differently;
+- verified project screenshots or recordings, if real client proof becomes available;
+- a non-image Hero system canvas or static fallback only if the new Hero motion needs one;
+- a refined V2 social preview that reflects the Bold Systems direction;
+- optional founder supporting imagery only if it adds authentic context rather than decoration;
+- capability-specific visuals for AI Systems, Automation & Operations, and Digital Experiences that are not generic AI stock art.
+
+### V2 asset guardrails
+
+- Prefer real proof before decorative imagery.
+- Never present a prototype screenshot as a verified client result.
+- Do not add unsupported outcomes, metrics, or client claims to image framing.
+- Keep the founder portrait authentic and avoid artificial replacement treatments.
+- Avoid generic AI stock art as the primary evidence of capability.
+- Do not replace a working brand mark unless its geometry and all consumers are intentionally preserved.
+- Preserve OG/social preview continuity until a tested replacement exists.
+- Do not delete legacy assets before source and external path references are removed or explicitly deprecated.
+- Defer optimization/compression until final usage, crop, and responsive dimensions are known.
+
+### Asset migration risk map
+
+| Rank | Asset / area | Risk | Likely failure | Guardrail |
+|---:|---|---|---|---|
+| 1 | Mermaid mark | Brand identity is coupled across UI, CSS mask, favicon, Apple touch, manifest, and metadata. | New visual treatment or path breaks the silhouette, browser icon, or Navbar/Footer identity. | Preserve source geometry and update every consumer as one contract; keep the current asset until replacement QA is complete. |
+| 2 | Founder portrait | Real identity proof may be treated like decorative imagery during Trust/Founder restructuring. | Portrait disappears, is replaced, or is cropped/alt-labeled inaccurately. | Keep the source path, translated alt contract, and intentional aspect-ratio crop. |
+| 3 | Luma preview | Prototype proof can be mistaken for real client proof. | V2 Selected Work implies performance, ownership, or verified results not supported by the repository. | Preserve explicit prototype framing and separate prototype examples from verified work. |
+| 4 | OG image and app icons | Static and dynamic metadata have overlapping asset references. | Social previews or installed-app/browser identity becomes stale, missing, or inconsistent after a V2 visual update. | Keep current assets until a replacement is wired in both `index.html`, manifest, and `siteMetadata.ts`, then test previews. |
+| 5 | Hero image migration | The active image is coupled to a 3/2 CSS frame while V2 direction is not image-led; the legacy file has a different ratio. | Image is over-promoted, awkwardly cropped, or removed before the new system visual/fallback exists. | Treat v2 image as temporary supporting proof, preserve the 3/2 assumption, and migrate the Hero visual system before deprecating either file. |
+
+### Asset classification summary
+
+Counts cover the six relevant PNG assets audited above:
+
+| Classification | Count | Assets |
+|---|---:|---|
+| KEEP | 4 | Mermaid mark, founder portrait, Luma prototype preview, OG preview |
+| POTENTIALLY REUSE | 1 | Active `ai-operations-hero-v2.png` |
+| REPLACE LATER | 0 | No current asset requires replacement before V2 foundation work |
+| OBSOLETE AFTER V2 | 1 | Unreferenced `ai-operations-hero.png` |
+
+### Phase 1 asset boundary
+
+- Phase 1 should not touch the Mermaid mark, founder portrait, Luma preview, active Hero image, legacy Hero image, OG preview, favicon/Apple touch references, or manifest icon references.
+- Phase 1 needs no new assets and can proceed with zero asset changes.
+- Phase 1 may introduce design tokens and compatibility styling without changing image paths, crops, metadata references, or asset files.
+- No current image must change before Navbar or Hero work begins. Hero work should first establish the replacement system visual/fallback contract before retiring the current image.
+
+Do not modify, rename, delete, optimize, or regenerate assets during this audit.
 
 ## Dependency audit
 
@@ -1479,7 +1608,7 @@ This section must give enough information to create the later Phase 1 implementa
 - [x] Audit animation systems
 - [x] Audit responsive architecture
 - [x] Audit i18n and copy architecture
-- [ ] Inventory relevant assets
+- [x] Inventory relevant assets
 - [ ] Audit relevant dependencies
 - [ ] Validate V2 migration order against current architecture
 - [ ] Define Phase 1 readiness and risk boundaries
