@@ -158,11 +158,13 @@ Implementation note: added `.v2-container` with responsive semantic gutters and 
 
 ### 5. Evaluate Tailwind semantic aliases
 
-- [ ] Review whether Phase 1 actually needs Tailwind aliases before editing `tailwind.config.js`.
+- [x] Review whether Phase 1 actually needs Tailwind aliases before editing `tailwind.config.js`.
 
 Default decision: no Tailwind config change. CSS variables and scoped CSS primitives are preferred unless a real Phase 2+ usage demonstrates that aliases materially improve ergonomics.
 
 If aliases are justified, confirm that they are additive, namespaced, backed by CSS variables, and do not alter legacy colors, fonts, animations, content globs, or plugins. Record the decision before implementation.
+
+Implementation note: decision **B — TAILWIND ALIASES NOT NEEDED YET**. Surfaces, text, accents, borders, radii, spacing, and fonts are each covered by the existing CSS variables and opt-in `.v2-*` classes; no category passes the minimum-necessity threshold now. Phase 2 Navbar can proceed with those primitives, component-local Tailwind utilities, and small scoped CSS if needed. `tailwind.config.js` remains untouched. Revisit aliases only when multiple upcoming V2 components repeat raw `var(--v2-...)` values or require the same semantic utility and the CSS primitive layer would otherwise be duplicated.
 
 ### 6. Add only approved Tailwind aliases, if required
 
@@ -244,7 +246,7 @@ Phase 1 is complete only when:
 - [x] Add dark/light surface contracts
 - [x] Add typography, shape, and layout semantic roles
 - [x] Add minimum `.v2-*` primitive classes
-- [ ] Evaluate whether Tailwind semantic aliases are needed
+- [x] Evaluate whether Tailwind semantic aliases are needed
 - [ ] Add only justified Tailwind aliases if required
 - [ ] Run build/type/lint verification
 - [ ] Perform manual V1 visual regression verification
