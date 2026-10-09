@@ -1,380 +1,316 @@
-# Richt Ai V2 — Phase 2: Navbar V2
+# Richt Ai V2 — Phase 3: Hero Static
 
-## Objective
+## Phase 3 objective
 
-Rebuild only the Richt Ai Navbar into the V2 “Bold Systems” direction while preserving every existing navigation, language, modal, observer, accessibility, and responsive behavior contract.
+Replace the current V1 image-led Hero with the static foundation of the Richt Ai V2 Bold Systems direction.
 
-The result should feel editorial, deliberate, premium, operational, and founder-led rather than glassy, capsule-driven, neon, or template-like.
+The Hero should communicate:
 
-Do not modify Hero or any later homepage section during Phase 2.
+> Richt builds connected digital systems that move work forward.
 
-## V2 Navbar direction
+The static Hero will present the customer-facing and operational path as one connected system:
 
-Use a full-width fixed header with a Carbon/near-Carbon surface, restrained border, compact confident navigation, minimal radius, and a subtle scrolled-state change. Prefer borders over large shadows and reserve Signal Lime for high-value emphasis. Electric Cyan remains a secondary/system signal.
+Website → Messages → AI → CRM → Calendar → Team
 
-Final intended V2 visible labels:
+Phase 3 owns the Hero’s static architecture, copy, desktop/tablet composition, system canvas, surfaces, spacing, typography, CTA/reassurance presentation, and removal of obsolete Hero-only V1 visual language.
 
-- EN: Work, Systems, Process, About, FAQ
-- TR: Projeler, Sistemler, Süreç, Hakkında, S.S.S.
+Phase 3 does not implement Hero motion, kinetic node transitions, pulsing or flowing signals, scroll choreography, a dedicated mobile redesign, Selected Work, or later homepage sections.
 
-Phase 2 uses a temporary first-item label until the Phase 6 Selected Work section exists:
+Execution order remains:
 
-- EN: Challenges
-- TR: Sorunlar
+Phase 3 static → Phase 5 mobile → Phase 4 motion
 
-The remaining four V2 labels are safe to introduce during Phase 2.
+## Locked boundaries
 
-Navbar CTA labels:
+Do not change:
 
-- EN: Start a project
-- TR: Projeyi konuşalım
+- Navbar V2 behavior or visual system;
+- App.tsx ownership, page order, routing, or modal ownership unless the audit proves a genuine integration defect;
+- Problem, StatisticsStrip, Solution, How It Works, Trust, Founder, FAQ, Final CTA, Footer, or ContactModal;
+- section ID anasayfa;
+- Hero({ onCTAClick }) callback contract;
+- the App-owned ContactModal flow;
+- metadata, Supabase, packages, lockfiles, Vite/PostCSS/Tailwind configuration, or unrelated assets;
+- Phase 4 motion scope;
+- Phase 5 dedicated mobile structure and refinement scope.
 
-Visible labels may change, but section-anchor IDs must remain stable in this phase.
+Do not add a dependency or generate a new Hero asset by default. Prefer semantic HTML, CSS, existing iconography, and the V2 foundation already present in the repository.
 
-## Existing behavior contracts to preserve
+## Current Hero audit
 
-- fixed header behavior;
-- `isScrolled = window.scrollY > 24` unless a concrete implementation finding requires review;
-- the current desktop/mobile breakpoint around `lg`;
-- `copy.nav.links` shape and the existing language provider contract;
-- `toggleLanguage()` and language persistence behavior;
-- smooth `scrollIntoView` navigation;
-- mobile menu open/close behavior and close-after-selection behavior;
-- CTA calls the existing `onCTAClick` callback, with App retaining ContactModal ownership;
-- active-section observer behavior, including current IDs, root margin, and thresholds unless a concrete bug is found;
-- valid logo/brand interaction and protected MermaidMark silhouette;
-- reduced-motion accessibility and keyboard usability.
+### Rendering and ownership
 
-## Stable navigation ID and visible-label mapping
+- Component: src/components/Hero.tsx.
+- Props: HeroProps { onCTAClick: () => void }.
+- The component calls useLanguage() and reads copy, language, and copy.workflow.connectedSystems.
+- src/App.tsx owns the contact modal state and passes the stable openContact callback to both Navbar and Hero. Hero has no modal-local state and does not route or mutate the URL.
+- Current page order is: Navbar → Hero#anasayfa → StatisticsStrip#istatistik → Problem#sorun → Solution#cozum → HowItWorks#nasil-calisir → Trust#guven → FAQ#sss → FinalCTA#final-cta → Footer → ContactModal.
+- StatisticsStrip renders immediately after Hero and owns its own counter IntersectionObserver; Phase 3 must not alter that relationship.
+- useRevealObserver(language) is initialized by App.tsx for the page-wide [data-reveal] system. Hero currently participates through a data-reveal/reveal wrapper.
 
-The Phase 2 source contract maps visible labels to the existing section IDs as follows:
+### Current structure and layout
 
-| Language | Phase 2 visible label | Existing target ID |
-| --- | --- | --- | --- |
-| EN | Challenges | `sorun` |
-| EN | Systems | `cozum` |
-| EN | Process | `nasil-calisir` |
-| EN | About | `guven` |
-| EN | FAQ | `sss` |
-| TR | Sorunlar | `sorun` |
-| TR | Sistemler | `cozum` |
-| TR | Süreç | `nasil-calisir` |
-| TR | Hakkında | `guven` |
-| TR | S.S.S. | `sss` |
+- Hero section ID is anasayfa.
+- Current section classes include hero-section, relative, overflow-hidden, responsive top/bottom padding, and the conditional hero-section--tr class when language === 'tr'.
+- Current top/bottom spacing is pt-28 pb-3, sm:pt-24 sm:pb-10, and lg:pt-36 lg:pb-20; the large top padding provides clearance below the fixed Navbar.
+- The content wrapper is data-reveal reveal relative z-10 max-w-6xl mx-auto px-5 sm:px-6.
+- The content grid uses items-center, responsive gaps, and lg:grid-cols-[0.84fr_1.16fr]; at xl it gains a larger gap.
+- The left copy is centered until xl, then left-aligned. It contains the headline, support copy, CTA, desktop reassurance, and a compact mobile reassurance block.
+- The right region is an image frame followed by a connected-systems rail. The image is /images/ai-operations-hero-v2.png; the asset remains in the repository but is planned for removal from active Hero usage.
 
-Do not rename these IDs or change the rendered section order. Any Phase 2 copy update must preserve Challenges / Sorunlar for `sorun`, migrate only the four safe labels, preserve the nav array shape, and maintain TR/EN parity.
+### Current copy and dependencies
 
-Future Phase 6 handoff: Work / Projeler must point to a new Selected Work section ID only after that section is created, its final position and anchor behavior are verified, and the first Navbar item is changed atomically from Challenges / Sorunlar to Work / Projeler. Do not reuse `sorun` for Work.
+- TR copy.hero.headline is İşletmenizin dijital iletişimini; TR headlineAccent is daha akıllı hâle getirin..
+- EN copy.hero.headline is Make your business communication; EN headlineAccent is smarter by design..
+- copy.hero.subheadline is the current V1 supporting copy and must be replaced only with the approved Phase 3 support copy below.
+- copy.hero.cta, duration, noCommitment, and direct drive the Hero CTA and reassurance blocks.
+- The Hero currently reads copy.workflow.aria, copy.workflow.connectedSystemsLabel, and copy.workflow.connectedSystems; the connected-systems array is currently four items: TR Web sitesi, WhatsApp, CRM, Takvim; EN Website, WhatsApp, CRM, Calendar.
+- src/components/AIWorkflow.tsx exists and consumes the broader copy.workflow.* group, but it is not rendered by App.tsx. Phase 3 must not refactor or remove that dormant component or its unrelated workflow fields.
 
-## Expected file boundary
+### Current visual and motion hooks
 
-Likely implementation files:
+- V1 visual language includes the .hero-visual, .hero-visual__frame, .hero-visual__frame img, and .hero-connected-systems* selector family.
+- The Hero uses a radial-glow layer, a bg-gradient-to-b overlay, text-gradient-teal, image-frame shadow/radius treatment, and the existing V1 navy/teal palette.
+- The Hero uses animate-fade-in-up and animate-delay-* classes on copy elements, plus the shared [data-reveal] wrapper.
+- The connected rail currently uses connected-status-pulse, connected-node-pulse, and connected-signal-sweep animations, with a reduced-motion override.
+- Hero-specific selectors and keyframes must be usage-searched before removal. Shared .reveal, global animation helpers, and any selector consumed by another section must remain unless separately proven unused.
 
-- `src/components/Navbar.tsx`
-- `src/index.css`
-- `src/lib/i18n.tsx` only if the visible Navbar labels and CTA copy require translation updates.
+### Responsive and accessibility baseline
 
-No new dependency or Tailwind configuration change is expected. Prefer existing V2 variables, `.v2-container`, `.v2-label`, `.v2-focus-ring`, typography roles, and radius roles only where they improve the Navbar implementation. Do not create a global button system or speculative primitives.
+- Current responsive breakpoints include the base/mobile layout, max-width: 420px, max-width: 639px, min-width: 640px, and desktop-oriented min-width: 1024px / min-width: 1280px rules.
+- Below 640px, CSS uses structural ordering for headline, support copy, visual region, CTA, and reassurance. Phase 3 must preserve a usable fallback and leave dedicated order/spacing/typography refinement to Phase 5.
+- The current visual region exposes copy.workflow.aria, the image has a fixed English alt string, the CTA is a native button, and the section uses a normal heading hierarchy beginning with h1.
+- Navbar V2 is fixed with z-40; its current top/scroll states use a 4rem/3.5rem nav height range. Hero’s responsive top padding currently prevents collision and must be rechecked after static composition changes.
 
-## Locked files and areas
+## Frozen functional contracts
 
-Do not modify:
+- Keep Hero({ onCTAClick }) and invoke the callback from the single primary Hero CTA.
+- Keep ContactModal state and ownership in App.tsx; do not introduce Hero-local modal state.
+- Do not add routing, URL/hash mutation, or navigation side effects.
+- Keep section ID anasayfa and the existing App render order.
+- Keep useLanguage() as the Hero translation source and preserve TR/EN parity.
+- Preserve Navbar fixed-header clearance and the immediate StatisticsStrip relationship.
+- Preserve a single CTA and a single reassurance/meta block per responsive presentation; do not duplicate content to solve layout.
+- Keep existing language persistence and unrelated translation groups unchanged.
+- Retain global reduced-motion behavior for any remaining static-state transitions; Phase 3 adds no continuous motion.
 
-- `src/components/Hero.tsx`
-- `src/components/Problem.tsx`
-- `src/components/Solution.tsx`
-- `src/components/HowItWorks.tsx`
-- `src/components/Trust.tsx`
-- `src/components/FAQ.tsx`
-- `src/components/FinalCTA.tsx`
-- `src/components/Footer.tsx`
-- `src/components/ContactModal.tsx`
-- `src/components/MermaidMark.tsx` unless a real Navbar compatibility issue is proven;
-- `src/App.tsx` unless an existing Navbar contract concretely requires it;
-- site metadata, Supabase, assets, package files, lockfiles, Vite/PostCSS config, and `tailwind.config.js`.
+## Approved TR/EN Hero copy
 
-## Phase 2 implementation checklist
+The following copy is mandatory for the Phase 3 Hero:
 
-### 1. Audit and freeze the current Navbar contracts
+### English
 
-- [ ] Inspect `src/components/Navbar.tsx`, the translation nav structure, current section IDs, active observer, scroll state, mobile menu state, CTA callback, language toggle, and MermaidMark usage.
-- [ ] Record any concrete behavior constraints before markup changes.
-- [ ] Do not modify other components during this audit.
+Headline: Systems that keep your business moving.
 
-#### Checklist 1 audit record
+Supporting copy: AI, automation and digital experiences designed to work together — not as separate tools.
 
-The live source was inspected in `src/components/Navbar.tsx`, `src/lib/i18n.tsx`, `src/App.tsx`, the rendered section components, `src/components/MermaidMark.tsx`, and the global reduced-motion rules. No source file was changed.
+### Turkish
 
-#### State contracts
+Headline: İşletmenizi ileri taşıyan sistemler kuruyoruz.
 
-| State | Current contract | Scope / language behavior |
-| --- | --- | --- |
-| `isMenuOpen` | Initial value `false`; toggled by the mobile Menu/X button; `scrollTo()` sets it to `false` after any nav selection. | Used by the mobile menu only; not language-dependent. |
-| `isScrolled` | Initial value `false`; updated by the passive `scroll` listener to `window.scrollY > 24`; listener is removed during effect cleanup. | Affects header padding, nav height, backdrop state, logo scale, and related transitions at all widths; not language-dependent. |
-| `activeSection` | Initial value `'sorun'`; updated by the IntersectionObserver to the most visible intersecting section ID. | Drives `aria-current` and active styling for desktop and mobile links; observer setup is recreated when `navLinks` changes after a language change. |
+Supporting copy: Yapay zekâ, otomasyon ve dijital deneyimleri ayrı araçlar değil, birlikte çalışan bir sistem olarak tasarlıyoruz.
 
-#### Scroll and observer contracts
+The implementation should preserve the existing two-field headline rendering if practical by splitting each exact sentence across the existing headline and headlineAccent fields without changing the displayed sentence. Do not add manual br elements unless bilingual testing proves a strong, stable reason.
 
-- The scroll listener calls `handleScroll()` immediately, then listens with `{ passive: true }`, and removes the listener on cleanup.
-- The frozen threshold is exactly `window.scrollY > 24`.
-- Observer sections are derived from `copy.nav.links`, mapped through `document.getElementById(id)`, and filtered to existing `HTMLElement` targets.
-- The observer uses `rootMargin: '-28% 0px -58% 0px'` and `threshold: [0, 0.2, 0.5, 0.8]`.
-- Intersecting entries are sorted by descending `intersectionRatio`; the first entry becomes `activeSection`.
-- Every observed section is registered, and the observer disconnects during cleanup. The effect depends on `navLinks`.
-- Current observed IDs are `sorun`, `cozum`, `nasil-calisir`, `guven`, and `sss` in both languages.
+## CTA and reassurance copy decision
 
-#### Navigation and CTA contracts
+Use a narrow Hero-specific copy alignment for V2 coherence:
 
-- `scrollTo(id)` calls `document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })`, then closes the mobile menu.
-- Navigation does not change the URL or hash.
-- The logo button calls `window.scrollTo({ top: 0, behavior: 'smooth' })`.
-- `NavbarProps` contains `onCTAClick: () => void`.
-- `handleCTA` is memoized with `useCallback` and invokes `onCTAClick`.
-- Only the desktop action area currently renders the Navbar CTA; the mobile menu contains navigation links only.
-- App owns `isContactOpen`, passes `openContact` to Navbar, and renders ContactModal with App-owned open/close callbacks.
+- EN Hero CTA becomes the existing Navbar CTA: Start a project.
+- TR Hero CTA becomes the existing Navbar CTA: Projeyi konuşalım.
+- Keep the existing reassurance meanings and translation fields (duration, noCommitment, direct) unless the static composition requires a small presentation-only adjustment.
+- Do not rewrite unrelated copy, create new CTA behavior, or change Final CTA/contact copy.
 
-#### Language contract
+This keeps the Hero and Navbar action language consistent while preserving the existing conversion and trust contract.
 
-- Navbar consumes `useLanguage()` for `copy`, `language`, and `toggleLanguage()`.
-- The language control displays `EN` when the current language is Turkish and `TR` when the current language is English.
-- Its `aria-label` is sourced from `copy.nav.switchLanguage`; the same toggle logic is reused on desktop and mobile.
-- `LanguageProvider` owns persistence in `localStorage` under `richtai-language` and calls `applyLanguageMetadata()` for title, description, and language metadata. Navbar does not own persistence or metadata.
+## Static operational-system canvas
 
-#### Responsive and mobile contracts
+Replace the photo-led visual with one semantic, static system canvas built in Hero.tsx and styled in src/index.css.
 
-- The header is fixed with `top-0 left-0 right-0 z-40`.
-- Unscrolled header padding is `py-2` with nav height `h-16`; scrolled state is `py-1` with nav height `h-14`.
-- The nav uses `max-w-6xl mx-auto px-3 sm:px-6` and `grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]`.
-- Desktop navigation and actions use `hidden lg:flex`; mobile controls and mobile menu use `lg:hidden`; `lg` remains the transition boundary.
-- Desktop navigation occupies the center grid region; desktop language and CTA occupy the right region; mobile controls occupy the right grid column.
-- The mobile menu uses Menu/X icons, a full-width dark surface, and nav links only. It uses `max-h-[28rem] opacity-100` when open and `max-h-0 opacity-0 pointer-events-none` when closed, with a 300ms max-height/opacity transition.
-- Body scroll is not locked, Escape does not currently close the menu, and no mobile CTA is rendered inside the menu.
+### Concrete architecture
 
-#### Brand contract
+- Use one figure-like canvas surface, not a wall of dashboard cards.
+- Use six labeled nodes: Website, Messages, AI, CRM, Calendar, and Team; localize them as Web sitesi, Mesajlar, Yapay zekâ, CRM, Takvim, and Ekip.
+- Use one clear operational route: Website → Messages → AI → CRM → Calendar → Team.
+- Give AI one visually stronger central/processing treatment using Signal Lime. Use Electric Cyan only for secondary system signals or selected node details.
+- Use thin, static connectors between nodes. Keep connectors structural and decorative, with aria-hidden="true"; they must not be animated in Phase 3.
+- Use one small uppercase status/section label, based on the existing connected-systems label, above the route. Do not add explanatory paragraphs or process copy.
+- Keep a restrained Graphite canvas on the Carbon Hero surface, thin V2 borders, compact 6–8px UI detail radii, and no shadow-heavy nested cards.
+- Use light asymmetry: a clear primary horizontal route with a modest lower Team endpoint or supporting rail so the visual feels designed without becoming a dashboard.
+- Expose a concise accessible description for the whole canvas through a localized label/description. Do not expose every connector as a separate interactive element.
+- Phase 4 may later animate connector travel, node activation, and operational state changes; Phase 3 must render the final static state only.
 
-- Navbar consumes the shared `MermaidMark` component; it does not reference a source image path directly.
-- The mark is wrapped in a `w-9 h-9 rounded-lg overflow-hidden` bordered shell.
-- The current visual treatment includes a teal blur glow, a scrolled `scale-90` transform, and the `Richt Ai` wordmark with teal `Ai`.
-- The logo button scrolls smoothly to the top of the page.
-- Functional contract: preserve the Mermaid silhouette, wordmark recognition, and logo-to-top action. Visual glow, radius, scale, and color treatment are safe candidates for V2 replacement.
+## Desktop/tablet composition decision
 
-#### Accessibility contract and gaps
+- Use a full-width Carbon Hero aligned to the existing .v2-container/Navbar content edges.
+- Keep an editorial copy block on the left and the static system canvas on the right.
+- Replace the current 0.84fr / 1.16fr image-led balance with a more readable V2 target around 0.92fr / 1.08fr, using minmax(0, …) tracks and a deliberate gap. Final values must be chosen from the 1024px and 1280px pressure checks.
+- Make the headline substantially larger and more editorial than V1 while keeping the Turkish sentence legible and balanced at 1024px, 1280px, and 1440px+.
+- Limit support-copy width so it reads as a short positioning statement rather than a paragraph wall.
+- Keep the CTA prominent but compact, and keep reassurance visibly secondary below it.
+- Use whitespace and alignment to create premium scale; do not fill the composition with extra panels.
+- Below desktop, keep the current single-column fallback structurally safe. Do not create the dedicated Phase 5 mobile system-canvas composition in this phase.
 
-| Area | Current status | Phase 2 classification |
-| --- | --- | --- |
-| `header` / `nav` semantics | Present. | PRESERVE |
-| Buttons and CTA semantics | Native buttons are used for logo, links, language, menu, and CTA. | PRESERVE |
-| Active section | `aria-current="page"` is present on the active nav link. | PRESERVE |
-| Language label | `aria-label` comes from the translated `switchLanguage` copy. | PRESERVE |
-| Menu label | `aria-label` comes from translated `copy.nav.menu`. | PRESERVE |
-| `aria-expanded` / `aria-controls` | Not currently present. | IMPROVE IN PHASE 2 |
-| Keyboard focus | Native button focus is available; no Navbar-specific `.v2-focus-ring` is applied. | PRESERVE, then IMPROVE IN PHASE 2 if needed |
-| Escape close | Not currently implemented. | IMPROVE IN PHASE 2 only if safely compatible |
-| Reduced motion | Global reduced-motion rules shorten transitions and disable smooth scrolling; no Navbar-specific rule exists. | PRESERVE and verify |
+## V2 visual language
 
-#### Current visual structure
+Use the existing Phase 1 foundation:
 
-| Current treatment | Classification |
+- Carbon Black #080A0D for the Hero field;
+- Graphite #10141A and Elevated Graphite #171C23 for the canvas and node hierarchy;
+- Bone White #F4F2EB for primary copy;
+- Signal Lime #C7FF4A for the primary AI/status emphasis;
+- Electric Cyan #50DFFF for restrained secondary system accents;
+- Steel #89939E and Muted #626B75 for support copy and metadata;
+- Space Grotesk for display/headings and Inter for body copy;
+- borders over shadows, 16px surfaces only where genuinely needed, 8–10px controls, and 6–8px UI details.
+
+Avoid glassmorphism, glow-heavy backgrounds, gradient headline text, giant rounded cards, nested-card stacks, stock/futuristic AI imagery, decorative particles, random blobs, neon effects, and competing accent colors.
+
+## Accessibility and static-state considerations
+
+- Keep one real h1, with a localized exact headline.
+- Keep the CTA a native button with the existing callback and visible focus treatment.
+- Give the system canvas one concise localized accessible label/description; do not turn each connector into screen-reader noise.
+- Mark connector lines, status dots, and purely decorative rules aria-hidden="true".
+- Expose node labels as meaningful text in a semantic list/figure structure where useful, without making the canvas interactive.
+- Provide a meaningful localized replacement for the removed image’s alt/description through the canvas label rather than retaining a misleading photo alt.
+- Preserve contrast against Carbon/Graphite surfaces and the existing .v2-focus-ring behavior.
+- Do not add hover-dependent meaning, keyboard interactions, motion, parallax, or pointer-follow behavior.
+- Keep reduced-motion behavior safe even though Phase 3 should remove Hero-specific continuous animation.
+
+## Phase 4 motion handoff boundary
+
+Phase 3 ends with a visually complete static state. It may remove obsolete V1 Hero animation hooks, but it must not add:
+
+- animated connector travel;
+- node activation sequences;
+- pulsing dots or looping status changes;
+- scroll-driven Hero choreography;
+- mouse-follow or parallax behavior;
+- reveal orchestration specific to the new canvas.
+
+Phase 4 may animate the approved static canvas only after the static hierarchy, copy, accessibility, and desktop/tablet composition are accepted.
+
+## Phase 5 mobile handoff boundary
+
+Phase 3 must not become a dedicated mobile redesign. Preserve a usable responsive fallback and validate that no known overflow or overlap is introduced. Phase 5 owns:
+
+- mobile content order;
+- mobile system-canvas simplification;
+- mobile CTA placement;
+- narrow-screen spacing and typography pressure;
+- mobile Hero height and dedicated mobile visual hierarchy.
+
+## Implementation risks and guardrails
+
+| Risk | Guardrail |
 | --- | --- |
-| Fixed header, three-column desktop placement, `lg` split, smooth scroll, active underline, and menu transition | BEHAVIOR TO PRESERVE |
-| Backdrop blur and translucent navy surface | VISUAL TO REPLACE |
-| Large shadow in scrolled state | VISUAL TO REPLACE |
-| Teal logo glow | VISUAL TO REPLACE |
-| Teal-to-cyan gradient CTA and hover glow/lift | VISUAL TO REPLACE |
-| Rounded logo shell, rounded controls, and capsule/pill cues | VISUAL TO REPLACE |
-| Existing short active underline treatment | VISUAL TO REPLACE or refine, while preserving active semantics |
-| Mobile full-width dropdown structure and link-only content | BEHAVIOR TO PRESERVE; surface treatment may be replaced |
+| New Hero visual becomes a dashboard wall | Keep one canvas, one route, six nodes, one status label, and a single clear focal AI node. |
+| English/Turkish line wrapping becomes unbalanced | Test exact copy at 1024px, 1280px, and 1440px+ before finalizing widths or breaks. |
+| CTA disconnects from ContactModal | Preserve onCTAClick, the App callback, and one native Hero CTA; verify modal open/close. |
+| Fixed Navbar overlaps the new Hero | Preserve the current clearance contract and inspect top spacing at the desktop boundary. |
+| Dormant AIWorkflow copy or component is accidentally changed | Search consumers before editing; limit i18n changes to Hero-connected labels and approved Hero fields. |
+| Shared CSS is removed accidentally | Search every Hero-specific selector/keyframe before deleting; retain shared .reveal and global helpers used elsewhere. |
+| Phase 4 motion leaks into static work | Keep connectors, nodes, and statuses static; remove old motion only where it is Hero-specific and obsolete. |
+| Mobile scope expands prematurely | Preserve fallback structure only; defer mobile-specific composition to Phase 5. |
+| Existing asset cleanup causes unrelated breakage | Remove /images/ai-operations-hero-v2.png from Hero usage but leave the asset file untouched. |
 
-#### Current copy and Phase 2 staging
+## Ordered implementation checklist
 
-| Language | Current nav labels / CTA | Phase 2 labels / CTA | IDs |
-| --- | --- | --- | --- |
-| TR | Sorunlar, Çözüm, Nasıl çalışır?, Güven, S.S.S. / Ücretsiz tanışma görüşmesi | Sorunlar, Sistemler, Süreç, Hakkında, S.S.S. / Projeyi konuşalım | `sorun`, `cozum`, `nasil-calisir`, `guven`, `sss` |
-| EN | Challenges, Solutions, How it works, Trust, FAQ / Book a free introduction call | Challenges, Systems, Process, About, FAQ / Start a project | `sorun`, `cozum`, `nasil-calisir`, `guven`, `sss` |
+Implement exactly one checklist item per Codex run. Stop after each item and update this document before waiting for explicit approval.
 
-The first item remains Challenges / Sorunlar in Phase 2. Work / Projeler waits for the future Phase 6 Selected Work section and must not point to `sorun`.
+### 1. Audit and freeze Hero contracts
 
-#### Section ID contract
+- [ ] Confirm the current Hero props, App callback ownership, section ID, render order, Navbar clearance, i18n dependencies, CSS hooks, asset dependency, breakpoints, and reveal/motion consumers against source.
+- Expected files: implementation_update.md only.
 
-| ID | Owning component | Current section |
-| --- | --- | --- |
-| `sorun` | `src/components/Problem.tsx` | Problem / Challenges |
-| `cozum` | `src/components/Solution.tsx` | Solution / Systems |
-| `nasil-calisir` | `src/components/HowItWorks.tsx` | How It Works / Process |
-| `guven` | `src/components/Trust.tsx` | Trust / Founder |
-| `sss` | `src/components/FAQ.tsx` | FAQ |
+### 2. Finalize approved Hero copy and i18n scope
 
-### Frozen Navbar contracts
+- [ ] Update only the approved Hero headline/support fields and the narrowly-scoped Hero CTA alignment.
+- [ ] Define localized static canvas labels through the existing connected-system translation source or a minimal Hero-specific extension only if required.
+- [ ] Preserve unrelated translation groups and the dormant AIWorkflow contract.
+- Expected files: src/lib/i18n.tsx, implementation_update.md.
 
-- fixed header positioning;
-- `window.scrollY > 24` scroll threshold and passive listener cleanup;
-- `activeSection` initial value `sorun`;
-- current nav-derived observer IDs;
-- observer root margin `-28% 0px -58% 0px` and thresholds `[0, 0.2, 0.5, 0.8]`;
-- visible-section selection by highest intersection ratio;
-- smooth `scrollIntoView` without URL/hash changes;
-- mobile menu closes after a link selection;
-- language switching through `toggleLanguage()`;
-- CTA callback through `onCTAClick`;
-- ContactModal ownership in App;
-- `lg` desktop/mobile breakpoint;
-- logo-to-top smooth scrolling;
-- active `aria-current` semantics;
-- stable section IDs and existing rendered section order;
-- MermaidMark functional silhouette and wordmark interaction;
-- reduced-motion and keyboard usability.
+### 3. Replace image-led Hero with semantic static structure
 
-### Safe visual replacement areas
+- [ ] Refactor Hero.tsx to render the approved copy and a semantic two-column Hero structure without the photo frame or image overlay.
+- [ ] Keep one CTA, one reassurance presentation per responsive mode, id="anasayfa", useLanguage(), and onCTAClick.
+- Expected files: src/components/Hero.tsx, implementation_update.md.
 
-- blur-heavy translucent header background;
-- large scrolled-state shadow;
-- teal logo glow and scrolled logo scale treatment;
-- gradient CTA, CTA glow, and hover lift;
-- capsule/pill radius cues;
-- old mobile dropdown surface treatment;
-- old active underline styling, provided active semantics remain.
+### 4. Build the static operational-system canvas
 
-### Top five migration risks
+- [ ] Implement the six-node Website → Messages → AI → CRM → Calendar → Team canvas with static connectors, localized labels, one status label, and accessible grouping.
+- [ ] Keep decorative lines/dots non-interactive and static.
+- Expected files: src/components/Hero.tsx, src/index.css, implementation_update.md.
 
-| Rank | Risk | Cause | Likely failure | Guardrail |
-| --- | --- | --- | --- | --- |
-| 1 | Observer breakage | Replacing `navLinks`, IDs, or effect dependencies during markup work. | Active state stops tracking or highlights the wrong section. | Keep current IDs, root margin, thresholds, selection rule, cleanup, and `navLinks` dependency unchanged. |
-| 2 | ID/label mismatch | Introducing Work / Projeler before Selected Work exists. | A visible label promises a destination that is still Challenges / Sorunlar. | Keep Challenges / Sorunlar for `sorun`; defer Work / Projeler to Phase 6 with a new ID. |
-| 3 | Mobile menu regression | Replacing the max-height/opacity structure or forgetting close-after-selection. | Menu cannot open, close, or return focus/useful page state after navigation. | Test Menu/X, link selection, language toggle, overflow, and current body-scroll behavior at 320px and 375px. |
-| 4 | CTA / modal disconnect | Changing the CTA element or callback path while restyling actions. | Navbar CTA no longer opens App-owned ContactModal. | Preserve `onCTAClick`, `handleCTA`, and App ownership; verify opening and closing. |
-| 5 | TR/EN width pressure | Longer Turkish labels and language-dependent CTA widths. | Overlap, wrapping, clipped controls, or a broken 1024px transition. | Test both languages at 320px, 375px, 768px, 1024px, and desktop widths before completion. |
+### 5. Apply desktop/tablet V2 composition and typography
 
-### 2. Finalize V2 labels and ID-safe i18n mapping
+- [ ] Align Hero surfaces and container geometry with Navbar V2 and Phase 1 tokens.
+- [ ] Establish the editorial left-copy/right-canvas composition, bilingual-safe headline scale, support-copy width, CTA prominence, and deliberate whitespace at 1024px, 1280px, and 1440px+.
+- Expected files: src/components/Hero.tsx, src/index.css, implementation_update.md.
 
-- [ ] Verify the exact Phase 2 EN/TR visible-label mapping documented above against the live source.
-- [ ] Preserve Challenges / Sorunlar for `sorun` and migrate only Systems / Sistemler, Process / Süreç, About / Hakkında, and FAQ / S.S.S.
-- [ ] Migrate CTA copy only to EN `Start a project` and TR `Projeyi konuşalım`, preserving `copy.nav.links`, array shape, IDs, language parity, and persistence behavior.
-- [ ] Keep Work / Projeler staged for the Phase 6 Selected Work handoff; do not create or point to Selected Work during Phase 2.
-- [ ] Do not begin the broader copy rewrite planned for a later phase.
+### 6. Refine CTA and reassurance presentation
 
-Implementation note: Turkish Navbar labels are Sorunlar, Sistemler, Süreç, Hakkında, and S.S.S., with CTA `Projeyi konuşalım`. English Navbar labels are Challenges, Systems, Process, About, and FAQ, with CTA `Start a project`. Both languages retain exactly five links with the unchanged ID sequence `sorun`, `cozum`, `nasil-calisir`, `guven`, `sss` and unchanged nav array shape. Work / Projeler remains deferred to the Phase 6 Selected Work handoff. The existing Navbar already consumes `copy.nav.links` and `copy.nav.cta`, so no Navbar source change was required; unrelated translation groups, menu labels, language labels, IDs, persistence, and metadata behavior were left unchanged.
+- [ ] Apply the approved compact CTA treatment and quiet secondary reassurance without changing callback behavior or unrelated site copy.
+- [ ] Confirm the Hero action language matches the Navbar staging in both languages.
+- Expected files: src/components/Hero.tsx, src/index.css, src/lib/i18n.tsx only if copy alignment was not completed in Checklist 2, implementation_update.md.
 
-### 3. Prepare semantic V2 Navbar structure
+### 7. Remove obsolete Hero-only V1 visual and motion artifacts
 
-- [ ] Restructure only the Navbar into a clear semantic `header` → `.v2-container` → brand, navigation, and controls hierarchy.
-- [ ] Keep the MermaidMark plus wordmark arrangement recognizable.
-- [ ] Avoid excessive wrappers, dashboard-like surfaces, and duplicated controls.
-- [ ] Preserve desktop and mobile behavior contracts while changing presentation.
+- [ ] Usage-search and remove the Hero-only radial glow, gradient headline/overlay, image-frame, connected-rail, pulse/sweep, and Hero-specific reveal/fade hooks that are no longer used.
+- [ ] Keep shared/global selectors and animations required by other sections.
+- Expected files: src/components/Hero.tsx, src/index.css, implementation_update.md.
 
-Implementation note: The Navbar now uses a single `navbar-v2__shell` wrapper containing the background layer, a semantic `nav`, and the mobile menu. The nav adopts `.v2-container` for its width/gutter shell while retaining the existing three-column grid and breakpoint utilities. Stable hooks were added for the Navbar, shell, inner nav, brand, desktop navigation, desktop actions, mobile controls, and mobile menu. `navLinks.map(...)`, `aria-current`, `scrollTo`, `toggleLanguage`, `handleCTA`, `copy.nav.cta`, Menu/X state, open/closed classes, and all frozen observer/scroll logic are unchanged. No visual-system CSS was added, and no locked file changed. `pnpm typecheck` passed.
+### 8. Complete accessibility and static-state cleanup
 
-### 4. Apply the desktop Bold Systems visual system
+- [ ] Verify heading hierarchy, localized canvas description, decorative line semantics, visible focus, contrast, native CTA semantics, and no interactive diagram behavior.
+- [ ] Confirm no continuous Hero motion remains and reduced-motion behavior is safe.
+- Expected files: src/components/Hero.tsx, src/index.css, implementation_update.md.
 
-- [ ] Use a full-width fixed Carbon/near-Carbon header with a thin restrained border.
-- [ ] Remove the floating glass-pill, heavy blur, large shadow, gradient-border, neon, and capsule-driven treatment from the Navbar only.
-- [ ] Use compact spacing, minimal radius, strong wordmark presence, and precise navigation density.
-- [ ] Use Signal Lime sparingly for high-value emphasis and Electric Cyan only for secondary/system states.
-- [ ] Keep the active state precise through a short rule, marker, or stronger text rather than decorative glow.
+### 9. Run functional and project verification
 
-Implementation note: Desktop Navbar styling now uses the V2 Carbon surface and dark border variables, with desktop blur and scrolled shadow removed. Navigation uses the V2 display font and quieter secondary text, while the active link keeps a short Signal Lime marker. The desktop logo glow was removed while MermaidMark, the wordmark, logo-to-top behavior, and all existing interaction logic remain intact. The old desktop glass/blur, shadow, glow, and teal/cyan navigation noise were removed or replaced; CTA and language styling remain intentionally deferred, and mobile was not fully redesigned. Behavior was preserved: nav scrolling, active-section tracking, language switching, CTA modal behavior, and mobile menu logic are unchanged. Visual verification passed in the available 1280px desktop preview for both English and Turkish, with no horizontal overflow; 1024px and 1440px previews were not available in this run.
+- [ ] Verify Hero-to-ContactModal behavior, section ID/order, language switching, Navbar clearance, StatisticsStrip adjacency, and absence of unrelated changes.
+- [ ] Run pnpm typecheck, pnpm lint, and pnpm build; record exact outcomes without fixing unrelated failures.
+- Expected files: implementation_update.md only unless a Phase 3-caused defect is proven and explicitly scoped.
 
-### 5. Rework brand, language control, and CTA presentation
+### 10. Perform bilingual desktop/tablet and responsive-fallback QA
 
-- [ ] Preserve MermaidMark silhouette geometry and brand recognition; do not create or recolor a source asset.
-- [ ] Design the language control as a compact, obvious, keyboard-usable control that is not visually dominant.
-- [ ] Style the CTA with the approved EN/TR labels, compact 8–10px radius, Carbon text on Signal Lime where appropriate, no glow, and no hover lift.
-- [ ] Preserve the existing `onCTAClick` → ContactModal behavior and do not create a global `.v2-button-*` system.
+- [ ] Inspect TR and EN at 1024px, 1280px, and 1440px+ for copy wrapping, hierarchy, canvas balance, CTA placement, Navbar clearance, and overflow.
+- [ ] Check the existing below-desktop fallback at representative widths without beginning the dedicated Phase 5 mobile redesign.
+- Expected files: implementation_update.md only.
 
-Implementation note: The desktop brand keeps the existing MermaidMark and logo-to-top button while using a crisp restrained frame, quieter Space Grotesk wordmark, primary Richt text, and Signal Lime for the Ai accent without glow. The desktop language control is a compact transparent Carbon-compatible control with V2 border, secondary text, hover, and focus treatment. The desktop CTA now uses the approved translated labels with a Signal Lime fill, Carbon text, compact radius, no gradient, glow, shadow, or hover lift. No arrow/icon was added. `handleCTA` and the App-owned ContactModal callback remain intact. The available 1280px desktop preview was checked in English and Turkish without horizontal overflow; mobile redesign was not started.
+### 11. Complete Phase 3 readiness and handoff
 
-### 6. Rework active and scrolled states without behavioral drift
+- [ ] Confirm the static Hero is approved, V1-only artifacts are safely removed, locked areas remain untouched, and the next step is Phase 5 mobile planning/execution before Phase 4 motion.
+- [ ] Record the Phase 4 and Phase 5 handoff boundaries and mark Phase 3 complete only when every exit criterion is satisfied.
+- Expected files: implementation_update.md only.
 
-- [ ] Preserve the active-section observer, current IDs, root margin, thresholds, and `isScrolled` threshold unless a concrete bug is discovered.
-- [ ] Add only a small visual difference between top-of-page and scrolled states through border, background density, or restrained height/padding changes.
-- [ ] Avoid transform jumps, large shrink animations, blur-heavy transitions, dramatic shadows, or changes that destabilize Hero clearance.
+## Phase 3 exit criteria
 
-Implementation note: The active desktop item remains primary on-dark text with a centered 1.25rem Signal Lime marker; inactive links use secondary text and hover now strengthens text only, so hover cannot compete with the active rule. The top state uses Carbon with a restrained border, while `data-scrolled="true"` changes only the desktop surface to Graphite with the same restrained border. Desktop header height/padding is normalized to a stable 4rem / 0.5rem treatment, and the desktop mark and wordmark no longer scale or change size on scroll; mobile state styling remains outside this pass. The IntersectionObserver logic, IDs, root margin, thresholds, cleanup, and `navLinks` dependency are unchanged. The scroll threshold remains exactly `window.scrollY > 24`. English and Turkish were checked at the available 1280px desktop width with no overflow; 1024px and 1440px+ were not available in this run. Checklist 7 mobile redesign was not started.
+Phase 3 is complete only when:
 
-### 7. Rebuild the mobile Navbar/menu presentation
+- the exact approved TR/EN Hero headline and supporting copy are implemented;
+- the V1 image-led Hero is replaced by the static V2 operational-system canvas;
+- the Hero aligns with the Navbar V2 container, surfaces, typography, borders, and accent hierarchy;
+- the CTA still invokes the App-owned ContactModal through onCTAClick;
+- section ID anasayfa and App ordering remain stable;
+- no fake proof, metrics, or unsupported claims are introduced;
+- no Phase 4 motion is implemented;
+- no dedicated Phase 5 mobile redesign is implemented;
+- the static Hero remains usable across the current responsive fallback without known overflow or overlap;
+- obsolete Hero-only V1 visual and motion artifacts are removed only after usage search;
+- accessibility semantics, focus, contrast, and reduced-motion safety are preserved;
+- pnpm typecheck, pnpm lint, and pnpm build pass;
+- bilingual desktop/tablet QA passes at 1024px, 1280px, and 1440px+;
+- no unrelated files, dependencies, abstractions, or assets are added or changed;
+- the repository is ready for Phase 5 mobile execution before Phase 4 motion.
 
-- [ ] Create an intentional mobile top bar containing brand, language control, menu control, and CTA access without horizontal overflow at 320px.
-- [ ] Present the mobile menu as part of the system, not a generic floating dropdown card or stacked-chip surface.
-- [ ] Preserve menu open/close, menu-link scrolling, close-after-selection, language switching, CTA access, and body-scroll behavior.
-- [ ] Keep mobile tap targets approximately 44px where practical and avoid excessive radius or glass-modal treatment.
+## Workflow rules
 
-Implementation note: The mobile top bar now uses the Carbon/Graphite surface direction with a restrained border and no blur, shadow, or glow. The MermaidMark frame and Space Grotesk wordmark keep stable geometry, and the mobile language control and Menu/X button use compact V2 borders, secondary text, focus rings, and practical touch targets. The opened menu is a full-width Carbon/Graphite header extension with thin borders; links are full-width editorial rows with separators and a small Signal Lime active marker instead of chip backgrounds. The existing translated `copy.nav.cta` is now available as a full-width Signal Lime CTA inside the open menu; it closes the menu before invoking the unchanged `handleCTA` → App-owned ContactModal path. Body scroll remains unlocked as before. The available 467px desktop-browser viewport was used for mobile-style checks; 320px, 375px, 430px, 768px, and 1023px emulation were not available. Desktop V2 remained intact in the existing 1280px layout check.
-
-### 8. Preserve accessibility and restrained motion
-
-- [ ] Preserve semantic `nav`, button semantics, visible focus, keyboard navigation, sufficient contrast, and usable language controls.
-- [ ] Add or preserve `aria-expanded` and `aria-controls` where useful without broad accessibility refactoring outside Navbar.
-- [ ] Preserve or safely add Escape-to-close only if it fits the existing behavior contract.
-- [ ] Limit motion to color/border transitions, active-rule movement, menu transition, and a restrained 3–4px arrow shift if used.
-- [ ] Respect `prefers-reduced-motion`; do not add glow pulses, bounce, spring physics, gradients, scramble text, or reveal systems.
-
-Implementation note: The mobile Menu/X button now exposes `aria-expanded` and `aria-controls="navbar-mobile-menu"`; the menu has that stable ID and uses `aria-hidden` while closed. Escape closes only an open mobile menu through a cleaned-up keyboard listener. The brand, desktop/mobile nav links, language controls, menu toggle, desktop CTA, and mobile CTA use the existing `.v2-focus-ring` primitive. Mobile language/menu controls now use 2.75rem minimum touch dimensions; menu rows and CTA remain 2.75rem. Closed-menu links and CTA receive `tabIndex={-1}` and the menu is `aria-hidden`, preventing hidden controls from entering the keyboard sequence while preserving the max-height/opacity transition. Existing global `prefers-reduced-motion` handling is sufficient; no Navbar-specific reduced-motion CSS was needed. The motion audit removed the hidden glow and obsolete brand scale/wordmark-size transitions, shortened state and menu transitions, and kept only restrained color, border, active-marker, max-height, opacity, and small padding/height transitions. Relevant checks performed at the available 467px mobile and 1280px desktop previews: focus hooks present, ARIA relationship present, closed menu not tabbable by explicit tab indices, menu navigation closes after selection, Escape closes the menu, CTA closes the menu and opens ContactModal, language toggle works, active `aria-current` remains, no overflow, and body scroll remains unlocked. Observer/scroll/CTA/language contracts remain unchanged; Checklist 9 full verification was not started.
-
-### 9. Verify functional contracts and run project checks
-
-- [ ] Verify desktop and mobile nav links, active state, scroll state, language switch, CTA → ContactModal, menu open/close, close-after-selection, section scrolling, body-scroll behavior, and Hero clearance.
-- [ ] Verify no horizontal overflow and no changes to Hero or any other section.
-- [ ] Run `pnpm typecheck`.
-- [ ] Run `pnpm lint`.
-- [ ] Run `pnpm build`.
-- [ ] Record exact outcomes and stop on Phase 2-caused failures rather than fixing unrelated issues.
-
-Verification note — B. CHECKLIST 9 PASS WITH DOCUMENTED ENVIRONMENT LIMITATIONS: Source contracts remain intact: `window.scrollY > 24`, passive/immediate scroll handling and cleanup, `activeSection` initial `sorun`, nav-derived IDs, `document.getElementById`, observer `rootMargin: '-28% 0px -58% 0px'`, thresholds `[0, 0.2, 0.5, 0.8]`, intersection-ratio ordering, cleanup, and `navLinks` dependency all verified. Browser checks passed at the available 467px mobile and 1280px desktop previews: desktop/mobile nav visibility, correct section scrolling with no URL/hash mutation, active state updates, mobile close-after-selection and reopen, logo-to-top, TR → EN and EN → TR labels/CTA/language control, CTA opening the App-owned ContactModal, mobile CTA closing the menu first, `aria-expanded`/`aria-controls`, closed-menu `tabIndex=-1`, Escape-to-close, focus-ring hooks, unlocked body scroll, no horizontal overflow, and usable Hero clearance. Section IDs remain `sorun`, `cozum`, `nasil-calisir`, `guven`, `sss`; all owning sections exist and Work / Projeler was not introduced. The `lg` boundary and desktop/mobile control visibility were confirmed from source and browser. Motion remains limited to restrained color, border, background, active-marker, menu max-height/opacity, and small padding/height transitions; global reduced-motion handling remains in place. Locked areas and App/ContactModal ownership were unchanged. `pnpm typecheck` PASS, `pnpm lint` PASS, and `pnpm build` PASS; build emitted only the informational `VITE_SITE_URL is not set` message. Exact 1023px/1024px emulation and reduced-motion emulation were unavailable; no source/config/package files changed during verification.
-
-### 10. Perform bilingual responsive QA and final Phase 2 readiness review
-
-- [ ] Inspect EN and TR at 320px, 375px, 430px, 768px, 1024px, 1280px, and 1440px+.
-- [ ] Check brand alignment, header height, nav density, active state, CTA, language control, mobile menu, Hero clearance, TR/EN width pressure, and absence of overflow.
-- [ ] Confirm the Navbar is the only redesigned area and all locked files remain unchanged.
-- [ ] Confirm functionality, accessibility, reduced motion, typecheck, lint, and build results are recorded.
-- [ ] Confirm readiness for Phase 3 Hero static without starting Phase 3.
-
-Verification note — B. PHASE 2 COMPLETE WITH EXPLICIT MANUAL FOLLOW-UP: Available Codex In-app Browser coverage passed at the available 467px mobile-style viewport and 1280px desktop viewport in both English and Turkish. The checks covered brand alignment, header/nav density, language control, menu open/close, Escape-to-close, mobile CTA-to-ContactModal behavior, active navigation, Hero clearance, bilingual CTA/label fit, scrolled state, and `scrollWidth <= clientWidth` with no evident horizontal overflow. The source confirms the `lg` desktop boundary at 1024px and the desktop/mobile visibility contracts; exact 320px, 375px, 430px, 768px, 1023px/1024px, and 1440px+ visual emulation was unavailable. Reduced-motion emulation was also unavailable; the global `prefers-reduced-motion` rules remain present and the remaining manual check is explicitly recorded below. TR labels are `Sorunlar`, `Sistemler`, `Süreç`, `Hakkında`, `S.S.S.`, with CTA `Projeyi konuşalım`; EN labels are `Challenges`, `Systems`, `Process`, `About`, `FAQ`, with CTA `Start a project`. IDs and array order remain unchanged, and Work / Projeler remains deferred to Phase 6. Locked sections, App/ContactModal ownership, metadata, assets, packages, Tailwind, and other non-Navbar files were not changed. Checklist 9 results remain `pnpm typecheck` PASS, `pnpm lint` PASS, and `pnpm build` PASS with only the informational `VITE_SITE_URL is not set` message. Phase 2 is implementation-ready, with the remaining manual checks required before treating responsive coverage as fully complete.
-
-## Phase 2 exit criteria
-
-Phase 2 is complete only when:
-
-- Navbar V2 visuals are implemented;
-- existing navigation, observer, mobile menu, language, CTA, modal, and anchor contracts work;
-- section IDs remain stable;
-- Hero and every later section remain untouched;
-- reduced-motion and keyboard behavior remain usable;
-- typecheck, lint, and build pass;
-- bilingual responsive QA passes at the required widths;
-- no unrelated files or abstractions were added;
-- the repository is ready for Phase 3 Hero static.
-
-## Implementation discipline
-
-- Implement exactly one checklist item per Codex run.
-- Stop after each item.
-- Update `implementation_update.md` after each completed item.
-- Mark only the completed item `[x]`.
+- This document is the only file changed during this planning run.
+- All Phase 3 checklist items begin unchecked.
+- Implement exactly one checklist item per later Codex run.
+- Update this document after each completed item.
 - Do not auto-start the next item.
-- Show changed files after each run.
-- Perform only verification relevant to the completed item.
-- Wait for explicit user approval before continuing.
+- Do not begin Phase 4 or Phase 5 work from a Phase 3 checklist item.
 
-## Phase 2 checklist
-
-- [x] Audit and freeze the current Navbar contracts
-- [x] Finalize V2 labels and ID-safe i18n mapping
-- [x] Prepare semantic V2 Navbar structure
-- [x] Apply the desktop Bold Systems visual system
-- [x] Rework brand, language control, and CTA presentation
-- [x] Rework active and scrolled states without behavioral drift
-- [x] Rebuild the mobile Navbar/menu presentation
-- [x] Preserve accessibility and restrained motion
-- [x] Verify functional contracts and run project checks
-- [x] Perform bilingual responsive QA and final Phase 2 readiness review
-
-## Phase 2 handoff
-
-- **Current Navbar V2:** The Navbar uses the approved Carbon/Graphite visual system, centered desktop navigation, right-side language and CTA actions, and a mobile brand/language/menu layout with a restrained full-width menu.
-- **Frozen behavior contracts:** Stable section IDs, `lg` breakpoint, `window.scrollY > 24` scroll threshold, observer root margin/thresholds and cleanup, active `aria-current`, smooth section scrolling without URL hashes, language persistence, menu close-after-selection, Escape-to-close, logo-to-top behavior, CTA callback flow, and App-owned ContactModal ownership remain intact.
-- **Current labels:** EN is `Challenges`, `Systems`, `Process`, `About`, `FAQ` with `Start a project`; TR is `Sorunlar`, `Sistemler`, `Süreç`, `Hakkında`, `S.S.S.` with `Projeyi konuşalım`. Work / Projeler remains deferred to Phase 6 until a real Selected Work section and stable ID exist.
-- **Accessibility and motion:** Native button/nav semantics, visible V2 focus rings, language labels, `aria-expanded`, `aria-controls`, `aria-hidden`, closed-menu `tabIndex=-1`, Escape close, practical mobile targets, and global reduced-motion handling are preserved. No glow, bounce, spring, scramble, or gradient motion was added.
-- **Health:** `pnpm typecheck`, `pnpm lint`, and `pnpm build` passed; build emitted only the informational `VITE_SITE_URL is not set` message.
-- **Responsive QA status:** Codex browser checks passed at available 467px mobile-style and 1280px desktop widths in both languages, with no evident overflow or Navbar regression. Exact 320px, 375px, 430px, 768px, 1023px/1024px, and 1440px+ visual checks were unavailable in the current browser environment.
-- **Remaining manual checks:** Manually inspect the listed unavailable widths in both languages, verify the exact 1023px/1024px transition and 1440px+ balance, and enable reduced-motion to confirm transition shortening and disabled smooth scrolling.
-- **Phase 3 status:** Phase 3 may begin after those explicit manual follow-ups; no Phase 3 plan or implementation was started in this run.
