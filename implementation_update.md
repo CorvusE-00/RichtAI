@@ -1534,24 +1534,161 @@ Do not modify, rename, delete, optimize, or regenerate assets during this audit.
 
 ## Dependency audit
 
-Inspect `package.json` and classify relevant dependencies as:
+### Dependency inventory boundary
 
-- REQUIRED
-- USEFUL
-- POSSIBLY UNNECESSARY
-- DO NOT TOUCH
+The audit inspected `package.json`, `package-lock.json`, `pnpm-lock.yaml`, `vite.config.ts`, `tailwind.config.js`, `postcss.config.js`, `tsconfig.app.json`, `eslint.config.js`, the crawler script, and source imports.
 
-Cover dependencies relevant to:
+- The project is a React 18 + TypeScript + Vite single-page site.
+- `pnpm-lock.yaml` is the lockfile used by the requested `pnpm` scripts, while a second `package-lock.json` is also present. They have the same declared package ranges but materially different resolved versions; this is a package-manager/lockfile risk, not a reason to edit either file during Phase 0.
+- No router, global state library, query/cache library, form library, schema validation library, or external animation library is declared or imported.
 
-- animation
-- icons
-- forms
-- styling
-- frontend rendering
+### Runtime dependency audit
 
-Specifically determine whether Bold Systems requires a new animation library. The default recommendation should be to avoid introducing a new dependency unless existing CSS and React capabilities are insufficient.
+| Package | Declared range | Actual usage | Current files / areas | Classification | V2 role and migration risk |
+|---|---|---|---|---|---|
+| `react` | `^18.3.1` | Imported throughout the application; hooks and JSX runtime power the page. | `src/main.tsx`, `App.tsx`, all interactive components, `src/lib/i18n.tsx` | **REQUIRED** | Core rendering and state foundation. Do not change React major/version during visual migration; lifecycle or StrictMode changes could affect modal, language, reveal, and counter behavior. |
+| `react-dom` | `^18.3.1` | `createRoot` mounts the application. | `src/main.tsx` | **REQUIRED** | Required browser renderer. Keep aligned with React; changing it is outside V2 design scope. |
+| `lucide-react` | `^0.446.0` | Imported icons are rendered in Navbar, Hero, FAQ, ContactModal, FinalCTA, Footer, and AIWorkflow. | `src/components/Navbar.tsx`, `Hero.tsx`, `FAQ.tsx`, `ContactModal.tsx`, `FinalCTA.tsx`, `Footer.tsx`, `AIWorkflow.tsx` | **REQUIRED** | Current icon system is actively used and sufficient for interface controls. Custom system visuals should continue using CSS/inline SVG where they encode product/system concepts. Risk is visual inconsistency or unnecessary bundle churn from replacing the library. |
+| `@supabase/supabase-js` | `^2.57.4` | Creates a client only when both public Vite environment variables exist; ContactModal inserts a lead into the `leads` table. | `src/lib/supabase.ts`, `src/components/ContactModal.tsx` | **REQUIRED** | Preserves the existing contact flow. It is optional at local runtime because missing env values produce `null`, but production submission depends on it. Risk is silently breaking lead capture or changing the database contract. |
 
-Do not install anything during Phase 0.
+The lockfile-resolved versions differ from `package.json` ranges in the normal semver-compatible direction. The pnpm lock currently resolves Supabase to `2.117.2`, while `package-lock.json` resolves it to `2.57.4`; this confirms that both lockfiles must not be casually regenerated or mixed during migration.
+
+### Styling and build dependency audit
+
+| Package | Declared range / role | Actual usage | Classification | V2 role and migration risk |
+|---|---|---|---|---|
+| `vite` | `^5.4.2` / dev server and production bundler | `dev`, `build`, `preview` scripts; `vite.config.ts` defines React plugin, alias, allowed host, and dependency optimization. | **REQUIRED** | Build/runtime boundary for the site. Phase 1 does not need a Vite change. Config edits can affect the local preview, aliases, and deployment output. |
+| `@vitejs/plugin-react` | `^4.3.1` / Vite React transform | Imported and registered in `vite.config.ts`. | **REQUIRED** | Required for the current React/Vite build. Keep stable while components and CSS are migrated. |
+| `typescript` | `^5.5.3` / type checking and compiler | `pnpm typecheck` runs `tsc --noEmit -p tsconfig.app.json`; all source is TypeScript/TSX. | **REQUIRED** | Required for safe component migration. Existing strict/bundler settings are part of the source contract; no Phase 1 compiler change is needed. |
+| `@types/react` | `^18.3.5` | Supplies React and JSX types used by the TypeScript source. | **REQUIRED** | Typecheck infrastructure. Keep aligned with React 18; do not change independently during design work. |
+| `@types/react-dom` | `^18.3.0` | Supplies DOM renderer types for the application entry. | **REQUIRED** | Typecheck infrastructure. Keep aligned with React DOM. |
+| `tailwindcss` | `^3.4.1` / utility generation and theme tokens | Scans `index.html` and `src/**/*.{js,ts,jsx,tsx}`; supplies the current utility classes, custom color/font/animation tokens, and `@apply` processing. | **REQUIRED** | Core V2 styling foundation. Phase 1 can use the existing config; plugin/config changes are not required. Risk is purging classes or changing current token semantics during migration. |
+| `postcss` | `^8.4.35` / CSS processing host | Loads Tailwind and Autoprefixer through `postcss.config.js`. | **REQUIRED** | Required to produce the current CSS. Keep unchanged while token and section styles migrate. |
+| `autoprefixer` | `^10.4.18` / browser prefix generation | Registered in `postcss.config.js`. | **REQUIRED** | Required part of the current CSS pipeline. No V2-specific replacement is indicated. |
+
+### Lint and quality-tool dependency audit
+
+| Package | Declared range | Actual usage | Classification | V2 role and migration risk |
+|---|---|---|---|---|
+| `eslint` | `^9.9.1` | Runs the `lint` script and supplies the lint engine. | **REQUIRED** | Verification gate for staged V2 work. Keep stable until migration is complete. |
+| `@eslint/js` | `^9.9.1` | Imported by `eslint.config.js` for recommended JavaScript rules. | **REQUIRED** | Part of the active lint configuration, not a runtime dependency. |
+| `typescript-eslint` | `^8.3.0` | Provides the flat config, TypeScript parser, and recommended TypeScript rules. | **REQUIRED** | Required for the current lint gate. Config changes can create noise during component migration. |
+| `eslint-plugin-react-hooks` | `^5.1.0-rc.0` | Registered in `eslint.config.js` and spreads its recommended rules. | **REQUIRED** | Protects React hook usage in existing components and providers. |
+| `eslint-plugin-react-refresh` | `^0.4.11` | Registered in `eslint.config.js` for component refresh export warnings. | **REQUIRED** | Protects the Vite React development workflow and current lint configuration. |
+| `globals` | `^15.9.1` | Supplies browser globals to ESLint. | **REQUIRED** | Small but active lint configuration dependency. |
+
+### Package usage verification
+
+| Package | Imported in source/config? | Role | Classification |
+|---|---|---|---|
+| `react` | Yes | UI runtime, hooks, JSX | **REQUIRED** |
+| `react-dom` | Yes | Browser root mounting | **REQUIRED** |
+| `lucide-react` | Yes | Interface icons | **REQUIRED** |
+| `@supabase/supabase-js` | Yes | Optional-configured lead submission client | **REQUIRED** |
+| `vite` | Yes — scripts/config | Dev server and bundler | **REQUIRED** |
+| `@vitejs/plugin-react` | Yes — `vite.config.ts` | React transform | **REQUIRED** |
+| `typescript` | Yes — `typecheck` script | Type checking | **REQUIRED** |
+| `@types/react` | Yes — compiler type resolution | React types | **REQUIRED** |
+| `@types/react-dom` | Yes — compiler type resolution | DOM renderer types | **REQUIRED** |
+| `tailwindcss` | Yes — config/PostCSS | Utility CSS and tokens | **REQUIRED** |
+| `postcss` | Yes — config | CSS pipeline | **REQUIRED** |
+| `autoprefixer` | Yes — config | CSS compatibility processing | **REQUIRED** |
+| `eslint` | Yes — script/config | Lint engine | **REQUIRED** |
+| `@eslint/js` | Yes — `eslint.config.js` | ESLint baseline rules | **REQUIRED** |
+| `typescript-eslint` | Yes — `eslint.config.js` | TypeScript linting | **REQUIRED** |
+| `eslint-plugin-react-hooks` | Yes — `eslint.config.js` | Hook lint rules | **REQUIRED** |
+| `eslint-plugin-react-refresh` | Yes — `eslint.config.js` | Refresh lint rule | **REQUIRED** |
+| `globals` | Yes — `eslint.config.js` | Browser global definitions | **REQUIRED** |
+
+No direct package in `package.json` was confidently identified as unused. The two lockfiles are a cleanup concern, but they are not packages and should not be removed or regenerated during this audit.
+
+### Icon system conclusion
+
+`lucide-react` is used broadly enough to be an active interface dependency, and its current outline icon set covers navigation, CTA, FAQ, form, reassurance, and footer controls. Richt Ai V2 does **not** need a new icon library now: **NO**. New system visuals should use CSS, inline SVG, or existing component primitives when their geometry is bespoke; Lucide should not be forced into custom workflow/canvas visuals.
+
+### Animation dependency conclusion
+
+No external animation library is declared or imported. Current motion uses:
+
+- Tailwind animation utilities and CSS keyframes in `tailwind.config.js` and `src/index.css`;
+- React `useState`/`useEffect` for FAQ, Navbar, workflow, metadata, and modal state;
+- `IntersectionObserver` plus `requestAnimationFrame` in `useRevealObserver.ts` and `StatisticsStrip.tsx`;
+- CSS transitions and a `prefers-reduced-motion` fallback.
+
+Bold Systems does **not** require Framer Motion, Motion, GSAP, or another animation package right now: **NOT YET**. A new library should be considered only if the planned system canvas needs coordinated timelines, gestures, physics, or choreography that becomes unmaintainable with the current CSS/React primitives.
+
+### Form, backend, routing, and state audit
+
+- `@supabase/supabase-js` is the only backend/data client. `ContactModal` depends on it for `leads` insertion when `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are available; absent variables intentionally produce a local-preview error state. Preserve this contract and do not expose or hardcode secrets.
+- React Router is not installed or imported. Routing is **NOT CURRENTLY REQUIRED** for the current single-page studio site.
+- No global state-management library is installed. Local React state and the `LanguageProvider` are sufficient; global state is **NOT CURRENTLY REQUIRED**.
+- No query/cache library is installed. Server caching is **NOT CURRENTLY REQUIRED**.
+- No form library or schema validation library is installed. The current ContactModal uses native `FormData` and its existing fields; a form abstraction is **NOT CURRENTLY REQUIRED**.
+- No external animation library is installed; see the animation conclusion above.
+
+### Protected dependency contracts
+
+- **React / ReactDOM:** preserve the current aligned React 18 runtime and root mounting behavior.
+- **Vite / `@vitejs/plugin-react`:** preserve the current alias, allowed-host preview behavior, React transform, and build output while V2 sections move.
+- **Tailwind / PostCSS / Autoprefixer:** preserve content globs, custom token names, `@apply` processing, and generated CSS behavior during the design-foundation phase.
+- **TypeScript / React type packages:** preserve strict, bundler-mode type checking so staged changes remain reviewable.
+- **Lucide React:** preserve the existing icon contract until a concrete V2 icon-system decision exists.
+- **Supabase client:** preserve env-based optional initialization and the `leads` insert contract used by ContactModal.
+- **Lockfile strategy:** do not casually switch between `pnpm-lock.yaml` and `package-lock.json`; choose one package-manager source of truth in a later cleanup decision and verify the full build before removing the other.
+
+### Phase 1 dependency boundary
+
+- Phase 1 requires installing nothing.
+- Phase 1 requires no `package.json` changes and no lockfile changes.
+- Phase 1 requires no Tailwind plugin changes; existing utilities and config are sufficient for design tokens and compatibility classes.
+- Phase 1 requires no new animation package.
+- Phase 1 requires no new icon package.
+- The design foundation can be implemented entirely with the current React, Tailwind, PostCSS, TypeScript, and Vite stack.
+- Phase 1 should preserve Supabase configuration even if no backend code is touched; design work must not change ContactModal behavior.
+
+### Future dependency triggers
+
+- Add an animation library only if the system canvas needs coordinated timelines, gesture/physics behavior, or sequencing that cannot remain clear with CSS, state, and observers.
+- Add a form library only if ContactModal becomes multi-step or requires complex field arrays and validation schemas.
+- Add routing only if separate project, case-study, or service pages are introduced.
+- Add a CMS/data layer only if copy and project proof become externally managed.
+- Add a query/cache layer only if multiple server-backed views or asynchronous data states appear.
+- Add a new icon library only if a documented visual requirement cannot be met by Lucide plus bespoke CSS/SVG.
+
+### Build and toolchain risk map
+
+| Area | Risk | Evidence / concern |
+|---|---|---|
+| Lockfile/package-manager consistency | **HIGH** | Both `package-lock.json` and `pnpm-lock.yaml` exist, and their resolved versions differ substantially despite shared ranges. Regeneration can cause unplanned upgrades or local/CI divergence. |
+| Vite and React plugin config | **MEDIUM** | `vite.config.ts` owns the `@` alias, allowed host, React plugin, and `optimizeDeps` behavior. Config changes can break preview or imports. |
+| Tailwind/PostCSS pipeline | **MEDIUM** | Tailwind content globs, custom tokens, `@apply`, and PostCSS plugins jointly produce the current styling. Changing versions/config can purge classes or alter output. |
+| TypeScript/ESLint toolchain drift | **MEDIUM** | Strict typecheck and flat ESLint config are active verification gates. Version drift can turn existing warnings/errors into migration noise. |
+| Supabase environment/configuration | **MEDIUM** | Contact submission is optional locally but production-dependent on two Vite env variables and the `leads` schema. Package/config changes can fail silently at the CTA flow. |
+
+### Dependency cleanup timing
+
+Dependency cleanup should happen during **FINAL CLEANUP / PERFORMANCE PHASE**, after V2 functional migration. Removing packages or reconciling lockfiles during Phase 1 would mix visual work with build/runtime changes, obscure regressions, and make the existing verification baseline harder to compare.
+
+### Dependency migration risk map
+
+| Rank | Dependency / area | Risk | Likely failure | Guardrail |
+|---:|---|---|---|---|
+| 1 | `pnpm-lock.yaml` vs `package-lock.json` | Two package-manager resolutions can drift. | Different environments receive different transitive versions or behavior. | Keep both untouched during Phase 0; later choose one source of truth and run install, typecheck, lint, and build from it. |
+| 2 | Supabase client and env contract | ContactModal relies on optional initialization plus a specific `leads` insert shape. | Production leads stop submitting or local preview behavior changes. | Preserve `src/lib/supabase.ts`, env names, and ContactModal contract until a separately scoped backend task exists. |
+| 3 | Tailwind/PostCSS configuration | Tokens and CSS output depend on content globs and plugin order. | New V2 classes are purged or existing visual tokens change unexpectedly. | Introduce tokens compatibly, preserve globs/plugins, and compare desktop/mobile builds after styling changes. |
+| 4 | Vite / React build boundary | Alias, host, plugin, and dependency optimization are all config-sensitive. | Local preview, imports, or production build fail while components are being moved. | Avoid config changes in Phase 1 and verify `pnpm typecheck`, `pnpm lint`, and `pnpm build` after later config work. |
+| 5 | Unnecessary new motion/icon dependency | A new library can duplicate existing primitives and expand bundle/config risk. | Visual work becomes dependency-led, with bundle growth or conflicting motion/icon styles. | Use current CSS/React/Lucide stack first; add a package only after a concrete capability gap is demonstrated. |
+
+### Dependency audit conclusion
+
+- The current stack is sufficient for Bold Systems.
+- No new dependency is required now.
+- React, ReactDOM, Vite, the React Vite plugin, TypeScript, Tailwind, PostCSS, Autoprefixer, Lucide, ESLint tooling, and Supabase are active contracts for the current app/toolchain.
+- No package was confidently identified as possibly removable from source/config inspection. Lockfile duplication is a later cleanup issue, not a package removal decision.
+- Phase 1 should not modify `package.json`, either lockfile, or build configuration.
+- The safest V2 strategy is to keep the current dependency stack stable, implement the design foundation with existing CSS/React primitives, and defer any cleanup or new package decision until after functional migration.
+
+Do not install, remove, update, or reconfigure dependencies during this audit.
 
 ## V2 migration-order validation
 
@@ -1609,7 +1746,7 @@ This section must give enough information to create the later Phase 1 implementa
 - [x] Audit responsive architecture
 - [x] Audit i18n and copy architecture
 - [x] Inventory relevant assets
-- [ ] Audit relevant dependencies
+- [x] Audit relevant dependencies
 - [ ] Validate V2 migration order against current architecture
 - [ ] Define Phase 1 readiness and risk boundaries
 
