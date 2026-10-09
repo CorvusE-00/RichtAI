@@ -13,7 +13,7 @@ Phase 3 — Static Hero foundation
 → Phase 5 — Mobile Hero refinement  
 → Phase 4 — Motion system pass
 
-This document is the active source of truth for Phase 3.5. Checklists 1–3 are complete; Checklists 4–8 remain unchecked. No system-canvas redesign, Phase 4 motion, or Phase 5 mobile implementation has started.
+This document is the active source of truth for Phase 3.5. Checklists 1–5 are complete; Checklists 6–8 remain unchecked. No Phase 4 motion or Phase 5 mobile implementation has started.
 
 ## Objective
 
@@ -408,21 +408,25 @@ CTA and reassurance placement were refined only through spacing: CTA margin-top 
 
 ### 4. Redesign static system-canvas architecture
 
-- [ ] Evolve the six-node route from a simple diagram into a stronger signature operational-system composition.
-- [ ] Preserve Website → Messages → AI → CRM → Calendar → Team and localized labels.
-- [ ] Improve hierarchy, depth, framing, and structural relationships without adding motion or unrelated metaphor.
-- [ ] Keep the canvas semantic, accessible, static, and non-interactive.
+- [x] Evolve the six-node route from a simple diagram into a stronger signature operational-system composition.
+- [x] Preserve Website → Messages → AI → CRM → Calendar → Team and localized labels.
+- [x] Improve hierarchy, depth, framing, and structural relationships without adding motion or unrelated metaphor.
+- [x] Keep the canvas semantic, accessible, static, and non-interactive.
 
 Expected scope: Hero-local source/CSS and `implementation_update.md` only.
+
+Implementation note — Checklist 4 complete: The former 3×3 six-card topology was replaced with a structured operational-system composition: Website and Messages form the left input rail, AI is the central processor, CRM and Calendar form the right operations rail, and Team is isolated as the final human handoff endpoint. One static routed SVG backbone now joins those regions with aligned branches instead of five unrelated connector paths. The semantic DOM order remains Website → Messages → AI → CRM → Calendar → Team, labels still come from `copy.hero.systemCanvas.nodes`, and the localized figure caption/description, decorative connector semantics, native non-interactive nodes, and no-tab-stop behavior are preserved.
 
 ### 5. Refine canvas surface, node hierarchy, and route framing
 
-- [ ] Decide and implement the most balanced single-surface treatment, internal framing, zones, rails, and structural lines.
-- [ ] Make AI the clear focal node and Team the clear final endpoint.
-- [ ] Avoid generic app screenshots, nested-card stacks, glassmorphism, heavy shadows, glow, gradients, and dashboard-wall density.
-- [ ] Preserve enough internal breathing room so labels and connectors remain readable.
+- [x] Decide and implement the most balanced single-surface treatment, internal framing, zones, rails, and structural lines.
+- [x] Make AI the clear focal node and Team the clear final endpoint.
+- [x] Avoid generic app screenshots, nested-card stacks, glassmorphism, heavy shadows, glow, gradients, and dashboard-wall density.
+- [x] Preserve enough internal breathing room so labels and connectors remain readable.
 
 Expected scope: Hero-local source/CSS and `implementation_update.md` only.
+
+Implementation note — Checklist 5 complete: The canvas remains one restrained Graphite surface with a thin border, integrated header edge, and one inset structural frame; no glass, gradients, glow, heavy shadow, nested card wall, or motion was added. Secondary modules are compact and quieter, AI is the largest lime-accented processing node, and Team uses a cyan terminal treatment with a distinct handoff shape. A single static routed SVG backbone replaces the former connector set and is aligned to the input/core/operations/handoff rails. The final desktop Hero ratio remains `1.02fr / 0.98fr`; the existing top alignment and Hero height were preserved. TR and EN labels render from the existing i18n node map, and the narrow preview fallback is contained as a simple stacked static route with connectors hidden below 640px. Visual quality conclusion: the canvas now reads as one operational system with a clear processor and handoff endpoint rather than a 3×3 flowchart. `pnpm typecheck` PASS; full lint/build remain Checklist 8.
 
 ### 6. Refine CTA and reassurance integration
 
