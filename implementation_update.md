@@ -271,6 +271,8 @@ Implementation note: The Navbar now uses a single `navbar-v2__shell` wrapper con
 - [ ] Use Signal Lime sparingly for high-value emphasis and Electric Cyan only for secondary/system states.
 - [ ] Keep the active state precise through a short rule, marker, or stronger text rather than decorative glow.
 
+Implementation note: Desktop Navbar styling now uses the V2 Carbon surface and dark border variables, with desktop blur and scrolled shadow removed. Navigation uses the V2 display font and quieter secondary text, while the active link keeps a short Signal Lime marker. The desktop logo glow was removed while MermaidMark, the wordmark, logo-to-top behavior, and all existing interaction logic remain intact. The old desktop glass/blur, shadow, glow, and teal/cyan navigation noise were removed or replaced; CTA and language styling remain intentionally deferred, and mobile was not fully redesigned. Behavior was preserved: nav scrolling, active-section tracking, language switching, CTA modal behavior, and mobile menu logic are unchanged. Visual verification passed in the available 1280px desktop preview for both English and Turkish, with no horizontal overflow; 1024px and 1440px previews were not available in this run.
+
 ### 5. Rework brand, language control, and CTA presentation
 
 - [ ] Preserve MermaidMark silhouette geometry and brand recognition; do not create or recolor a source asset.
@@ -346,7 +348,7 @@ Phase 2 is complete only when:
 - [x] Audit and freeze the current Navbar contracts
 - [x] Finalize V2 labels and ID-safe i18n mapping
 - [x] Prepare semantic V2 Navbar structure
-- [ ] Apply the desktop Bold Systems visual system
+- [x] Apply the desktop Bold Systems visual system
 - [ ] Rework brand, language control, and CTA presentation
 - [ ] Rework active and scrolled states without behavioral drift
 - [ ] Rebuild the mobile Navbar/menu presentation

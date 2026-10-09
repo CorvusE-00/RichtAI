@@ -1511,3 +1511,33 @@
     transition: none;
   }
 }
+
+@media (min-width: 1024px) {
+  .navbar-v2__surface {
+    background-color: var(--v2-surface-carbon) !important;
+    border-color: var(--v2-border-dark) !important;
+    box-shadow: none !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .navbar-v2__nav-link {
+    color: var(--v2-text-on-dark-secondary);
+    font-family: var(--v2-font-display);
+    letter-spacing: 0.01em;
+  }
+
+  .navbar-v2__nav-link:hover,
+  .navbar-v2__nav-link[aria-current='page'] {
+    color: var(--v2-text-on-dark-primary);
+  }
+
+  .navbar-v2__nav-link::after {
+    left: 50%;
+    right: auto;
+    width: 1.25rem;
+    height: 2px;
+    margin-left: -0.625rem;
+    background-color: var(--v2-accent-signal);
+  }
+}
