@@ -1,386 +1,264 @@
-# Richt Ai V2 — Phase 3: Hero Static
+# Richt Ai V2 — Phase 3.5 Hero Visual Refinement
 
-## Phase 3 objective
+## Project status
 
-Replace the current V1 image-led Hero with the static foundation of the Richt Ai V2 Bold Systems direction.
+Phase 3 is technically complete: the static V2 Hero contracts, bilingual copy, connected-system canvas, CTA behavior, accessibility, and verification are in place.
 
-The Hero should communicate:
+The current Hero is functional but visually underpowered. It still reads too much like a restrained workflow diagram or clean development demo. Phase 3.5 is required before Phase 5 mobile refinement and Phase 4 motion work.
 
-> Richt builds connected digital systems that move work forward.
+The approved execution order is:
 
-The static Hero will present the customer-facing and operational path as one connected system:
+Phase 3 — Static Hero foundation  
+→ Phase 3.5 — Hero visual refinement  
+→ Phase 5 — Mobile Hero refinement  
+→ Phase 4 — Motion system pass
 
-Website → Messages → AI → CRM → Calendar → Team
+This document is the active source of truth for Phase 3.5. All checklist items below are intentionally unchecked because this is a plan-only run.
 
-Phase 3 owns the Hero’s static architecture, copy, desktop/tablet composition, system canvas, surfaces, spacing, typography, CTA/reassurance presentation, and removal of obsolete Hero-only V1 visual language.
+## Objective
 
-Phase 3 does not implement Hero motion, kinetic node transitions, pulsing or flowing signals, scroll choreography, a dedicated mobile redesign, Selected Work, or later homepage sections.
+Refine only the static Hero visual direction so it feels:
 
-Execution order remains:
+- premium and visually confident;
+- distinctive rather than generic;
+- editorial rather than blunt;
+- like a serious connected-systems studio;
+- like an art-directed operational interface rather than a demo diagram.
 
-Phase 3 static → Phase 5 mobile → Phase 4 motion
+Preserve the current approved structure and all functional, accessibility, localization, and ownership contracts.
 
-## Locked boundaries
+## Why this phase exists
 
-Do not change:
+The current Hero works structurally but does not yet meet the desired visual authority of a top automation or systems studio:
 
-- Navbar V2 behavior or visual system;
-- App.tsx ownership, page order, routing, or modal ownership unless the audit proves a genuine integration defect;
-- Problem, StatisticsStrip, Solution, How It Works, Trust, Founder, FAQ, Final CTA, Footer, or ContactModal;
-- section ID anasayfa;
-- Hero({ onCTAClick }) callback contract;
-- the App-owned ContactModal flow;
-- metadata, Supabase, packages, lockfiles, Vite/PostCSS/Tailwind configuration, or unrelated assets;
-- Phase 4 motion scope;
-- Phase 5 dedicated mobile structure and refinement scope.
+- the headline block is large but blocky, blunt, and not editorial enough;
+- line breaks feel functional rather than intentionally art-directed;
+- the right-side canvas reads as a skeletal wireframe or architecture sketch;
+- the canvas lacks enough depth, framing, hierarchy, and signature character;
+- the left/right balance is technically correct but emotionally weak;
+- the composition lacks visual tension and premium rhythm;
+- the Hero does not yet have a memorable signature visual identity;
+- beginning Phase 4 motion now would use animation to compensate for an insufficient static foundation.
 
-Do not add a dependency or generate a new Hero asset by default. Prefer semantic HTML, CSS, existing iconography, and the V2 foundation already present in the repository.
+Phase 3.5 is a focused visual-art-direction correction pass, not a rollback of Phase 3 functionality.
 
-## Current Hero audit
+## Protected contracts
 
-### Rendering and ownership
+### Hero and App ownership
 
-- Component: src/components/Hero.tsx.
-- Props: HeroProps { onCTAClick: () => void }.
-- The component calls useLanguage() and reads copy, language, and copy.workflow.connectedSystems.
-- src/App.tsx owns the contact modal state and passes the stable openContact callback to both Navbar and Hero. Hero has no modal-local state and does not route or mutate the URL.
-- Current page order is: Navbar → Hero#anasayfa → StatisticsStrip#istatistik → Problem#sorun → Solution#cozum → HowItWorks#nasil-calisir → Trust#guven → FAQ#sss → FinalCTA#final-cta → Footer → ContactModal.
-- StatisticsStrip renders immediately after Hero and owns its own counter IntersectionObserver; Phase 3 must not alter that relationship.
-- useRevealObserver(language) is initialized by App.tsx for the page-wide [data-reveal] system. Hero currently participates through a data-reveal/reveal wrapper.
+- Keep `Hero({ onCTAClick })` unchanged.
+- Keep the Hero CTA as a native button that invokes `onCTAClick`.
+- Keep ContactModal state and ownership in `App.tsx`.
+- Do not add modal state, routing, hash mutation, or navigation side effects to Hero.
 
-### Current structure and layout
+### Identity and structure
 
-- Hero section ID is anasayfa.
-- Current section classes include hero-section, relative, overflow-hidden, responsive top/bottom padding, and the conditional hero-section--tr class when language === 'tr'.
-- Current top/bottom spacing is pt-28 pb-3, sm:pt-24 sm:pb-10, and lg:pt-36 lg:pb-20; the large top padding provides clearance below the fixed Navbar.
-- The content wrapper is data-reveal reveal relative z-10 max-w-6xl mx-auto px-5 sm:px-6.
-- The content grid uses items-center, responsive gaps, and lg:grid-cols-[0.84fr_1.16fr]; at xl it gains a larger gap.
-- The left copy is centered until xl, then left-aligned. It contains the headline, support copy, CTA, desktop reassurance, and a compact mobile reassurance block.
-- The right region is an image frame followed by a connected-systems rail. The image is /images/ai-operations-hero-v2.png; the asset remains in the repository but is planned for removal from active Hero usage.
+- Keep `id="anasayfa"` unchanged.
+- Preserve the existing App render order and immediate StatisticsStrip adjacency.
+- Keep Phase 3’s desktop/tablet left-copy/right-canvas structure unless a documented visual correction requires a local adjustment.
+- Keep the connected-system concept and six entities: Website / Web sitesi, Messages / Mesajlar, AI / Yapay zekâ, CRM, Calendar / Takvim, Team / Ekip.
 
-### Current copy and dependencies
+### Translation and copy
 
-- TR copy.hero.headline is İşletmenizin dijital iletişimini; TR headlineAccent is daha akıllı hâle getirin..
-- EN copy.hero.headline is Make your business communication; EN headlineAccent is smarter by design..
-- copy.hero.subheadline is the current V1 supporting copy and must be replaced only with the approved Phase 3 support copy below.
-- copy.hero.cta, duration, noCommitment, and direct drive the Hero CTA and reassurance blocks.
-- The Hero currently reads copy.workflow.aria, copy.workflow.connectedSystemsLabel, and copy.workflow.connectedSystems; the connected-systems array is currently four items: TR Web sitesi, WhatsApp, CRM, Takvim; EN Website, WhatsApp, CRM, Calendar.
-- src/components/AIWorkflow.tsx exists and consumes the broader copy.workflow.* group, but it is not rendered by App.tsx. Its workflow.aria field is still a live source consumer if the component is rendered later; Phase 3 must not refactor or remove that dormant component or its unrelated workflow fields.
-- Repository usage confirms connectedSystems and connectedSystemsLabel are currently read by Hero.tsx only, while workflow.aria is read by both Hero.tsx and AIWorkflow.tsx. Checklist 2 should therefore prefer a minimal Hero-specific localized canvas extension and should not repurpose workflow.aria without a compatibility decision.
+- Keep `useLanguage()` and the existing i18n architecture as the translation source.
+- Preserve TR/EN parity and the approved Hero copy unless a later checklist documents a narrowly scoped presentation adjustment.
+- Do not rewrite unrelated site copy or translation groups.
 
-### Current visual and motion hooks
+### Trust, truth, and accessibility
 
-- V1 visual language includes the .hero-visual, .hero-visual__frame, .hero-visual__frame img, and .hero-connected-systems* selector family.
-- The Hero uses a radial-glow layer, a bg-gradient-to-b overlay, text-gradient-teal, image-frame shadow/radius treatment, and the existing V1 navy/teal palette.
-- The Hero uses animate-fade-in-up and animate-delay-* classes on copy elements, plus the shared [data-reveal] wrapper.
-- The connected rail currently uses connected-status-pulse, connected-node-pulse, and connected-signal-sweep animations, with a reduced-motion override.
-- Hero-specific selectors and keyframes must be usage-searched before removal. Shared .reveal, global animation helpers, and any selector consumed by another section must remain unless separately proven unused.
+- Add no invented metrics, client logos, case studies, or other fake proof.
+- Preserve the semantic canvas, localized accessible description, one real `h1`, native CTA semantics, visible focus treatment, decorative connector semantics, and non-interactive diagram behavior.
+- Preserve the static/no-motion state in this phase.
 
-### Responsive and accessibility baseline
+### Scope boundaries
 
-- Base/mobile uses a one-column grid, centered copy, the visual region after the subheadline, CTA after the visual, and compact mobile reassurance last. At max-width: 420px, workflow-event metadata is hidden, Hero meta spacing is increased to 1rem, and the reassurance separator is hidden.
-- At max-width: 639px, hero-copy becomes display: contents; explicit order is heading 1, subheadline 2, visual 3, CTA 4, and meta 5. The connected rail becomes a two-column grid, its connectors are hidden, the Hero heading is 2.15rem with line-height 1, and mobile reassurance uses two rows.
-- At min-width: 640px, the connected rail returns to a horizontal flex arrangement and the sm utility values apply: section pt-24/pb-10, larger heading/support copy, CTA margin-top, and desktop reassurance visibility. There is no Hero-specific min-width: 768px rule; 768px inherits this tablet behavior.
-- At min-width: 1024px, lg utilities apply: section pt-36/pb-20, the two-column grid is lg 0.84fr/1.16fr, copy remains centered until xl, and the visual stays in the right grid column. At min-width: 1280px, the visual receives 1.5rem left padding, Turkish reassurance is forced to one line, and a vertical visual separator is added. No current hero-section--tr min-height or padding override exists.
-- The current visual region exposes copy.workflow.aria; the image has a fixed English alt string; the CTA is a native button; the outer visual region and inner connected-systems rail both carry the same aria-label; and the section uses one h1.
-- Navbar V2 is fixed with z-40. Base/sm JSX states use py-2 + h-16 at the top (80px total) and py-1 + h-14 when scrolled (64px total). At min-width: 1024px, CSS overrides both states to 0.5rem vertical padding and a 4rem inner height (80px total), so desktop scroll does not change effective header height. Hero top padding is 7rem base, 6rem at sm, and 9rem at lg+, which currently clears the fixed header; this clearance must be preserved without modifying Navbar.
+- Keep later implementation Hero-local unless a documented dependency requires otherwise.
+- Do not begin Phase 5 mobile-specific refinement.
+- Do not begin Phase 4 motion.
+- Do not add dependencies or change assets by default.
 
-## Frozen functional contracts
+## Visual diagnosis
 
-- Keep Hero({ onCTAClick }) and invoke the callback from the single primary Hero CTA.
-- Keep ContactModal state and ownership in App.tsx; do not introduce Hero-local modal state.
-- Do not add routing, URL/hash mutation, or navigation side effects.
-- Keep section ID anasayfa and the existing App render order.
-- Keep useLanguage() as the Hero translation source and preserve TR/EN parity.
-- Preserve Navbar fixed-header clearance and the immediate StatisticsStrip relationship.
-- Preserve a single CTA and a single reassurance/meta block per responsive presentation; do not duplicate content to solve layout.
-- Keep existing language persistence and unrelated translation groups unchanged.
-- Retain global reduced-motion behavior for any remaining static-state transitions; Phase 3 adds no continuous motion.
-- Leave Navbar source and CSS untouched, preserve safe fixed-header clearance, add no dependencies, and leave the existing Hero asset physically intact even after removing it from active usage.
-- Do not begin Phase 4 motion or the dedicated Phase 5 mobile redesign from this phase.
+### Headline composition
 
-## Approved TR/EN Hero copy
+- The headline is too blocky and brute-force.
+- The line breaks feel accidental rather than art-directed.
+- The relationship between display scale, max width, support copy, and vertical rhythm lacks editorial control.
 
-The following copy is mandatory for the Phase 3 Hero:
+### System canvas
 
-### English
+- The canvas is too diagram-like and skeletal.
+- It does not yet feel like a signature operational visual.
+- Its depth, hierarchy, framing, and visual authority are insufficient.
+- The current node route risks reading as a low-detail flowchart instead of a designed system.
 
-Headline: Systems that keep your business moving.
+### Overall composition
 
-Supporting copy: AI, automation and digital experiences designed to work together — not as separate tools.
+- The left/right balance is technically correct but emotionally weak.
+- Copy, CTA, reassurance, and canvas do not yet create enough tension or premium visual rhythm.
+- The right-side visual needs stronger presence without becoming a dashboard wall.
 
-### Turkish
+### Signature identity
 
-Headline: İşletmenizi ileri taşıyan sistemler kuruyoruz.
+- The Hero lacks a memorable visual signature that distinguishes Richt Ai from a generic AI/SaaS landing page.
+- A stronger static visual foundation is required before any motion can add value.
 
-Supporting copy: Yapay zekâ, otomasyon ve dijital deneyimleri ayrı araçlar değil, birlikte çalışan bir sistem olarak tasarlıyoruz.
+### Phase sequencing
 
-The implementation should preserve the existing two-field headline rendering if practical by splitting each exact sentence across the existing headline and headlineAccent fields without changing the displayed sentence. Do not add manual br elements unless bilingual testing proves a strong, stable reason.
+- Moving directly into Phase 4 motion is premature.
+- Static hierarchy, framing, composition, and art direction must be resolved first.
 
-## CTA and reassurance copy decision
+## Art-direction target
 
-Use a narrow Hero-specific copy alignment for V2 coherence:
+The refined Hero should feel like:
 
-- EN Hero CTA becomes the existing Navbar CTA: Start a project.
-- TR Hero CTA becomes the existing Navbar CTA: Projeyi konuşalım.
-- Keep the existing reassurance meanings and translation fields (duration, noCommitment, direct) unless the static composition requires a small presentation-only adjustment.
-- Do not rewrite unrelated copy, create new CTA behavior, or change Final CTA/contact copy.
+- a premium operating system for business communication;
+- a connected-systems studio;
+- a modern digital control surface;
+- an art-directed systems composition;
+- an intentional blend of editorial typography and operational interface logic.
 
-This keeps the Hero and Navbar action language consistent while preserving the existing conversion and trust contract.
+It should not feel like:
 
-## Static operational-system canvas
+- a random dashboard;
+- a generic SaaS illustration;
+- a low-detail flowchart;
+- a glassmorphism card wall;
+- a vibecoded AI site;
+- a neon gimmick design.
 
-Replace the photo-led visual with one semantic, static system canvas built in Hero.tsx and styled in src/index.css.
+The six connected entities and logical route remain the conceptual foundation. The refinement should improve depth, hierarchy, framing, and authority without replacing the system metaphor with an unrelated visual.
 
-### Concrete architecture
+## Scope in
 
-- Use one figure-like canvas surface, not a wall of dashboard cards.
-- Use six labeled nodes: Website, Messages, AI, CRM, Calendar, and Team; localize them as Web sitesi, Mesajlar, Yapay zekâ, CRM, Takvim, and Ekip.
-- Use one clear operational route: Website → Messages → AI → CRM → Calendar → Team.
-- Give AI one visually stronger central/processing treatment using Signal Lime. Use Electric Cyan only for secondary system signals or selected node details.
-- Use thin, static connectors between nodes. Keep connectors structural and decorative, with aria-hidden="true"; they must not be animated in Phase 3.
-- Use one small uppercase status/section label, based on the existing connected-systems label, above the route. Do not add explanatory paragraphs or process copy.
-- Keep a restrained Graphite canvas on the Carbon Hero surface, thin V2 borders, compact 6–8px UI detail radii, and no shadow-heavy nested cards.
-- Use light asymmetry: a clear primary horizontal route with a modest lower Team endpoint or supporting rail so the visual feels designed without becoming a dashboard.
-- Expose a concise accessible description for the whole canvas through a localized label/description. Do not expose every connector as a separate interactive element.
-- Phase 4 may later animate connector travel, node activation, and operational state changes; Phase 3 must render the final static state only.
+Phase 3.5 may refine only the Hero’s static desktop/tablet visual presentation:
 
-## Desktop/tablet composition decision
+- left/right composition and visual balance;
+- copy-block width and vertical rhythm;
+- headline line breaks, scale balance, max width, and editorial rhythm;
+- support-copy width, spacing, and hierarchy;
+- static system-canvas architecture and visual hierarchy;
+- canvas surface, framing, zones, rails, structural lines, and contained depth;
+- AI focal treatment and Team endpoint clarity;
+- route presentation so the system feels connected and authoritative while remaining static;
+- CTA integration with the refined Hero composition;
+- reassurance strip alignment, spacing, hierarchy, and premium presentation;
+- desktop/tablet visual polish in both TR and EN;
+- Hero-local accessibility and responsive containment checks required by the visual changes.
 
-- Use a full-width Carbon Hero aligned to the existing .v2-container/Navbar content edges.
-- Keep an editorial copy block on the left and the static system canvas on the right.
-- Replace the current 0.84fr / 1.16fr image-led balance with a more readable V2 target around 0.92fr / 1.08fr, using minmax(0, …) tracks and a deliberate gap. Final values must be chosen from the 1024px and 1280px pressure checks.
-- Make the headline substantially larger and more editorial than V1 while keeping the Turkish sentence legible and balanced at 1024px, 1280px, and 1440px+.
-- Limit support-copy width so it reads as a short positioning statement rather than a paragraph wall.
-- Keep the CTA prominent but compact, and keep reassurance visibly secondary below it.
-- Use whitespace and alignment to create premium scale; do not fill the composition with extra panels.
-- Below desktop, keep the current single-column fallback structurally safe. Do not create the dedicated Phase 5 mobile system-canvas composition in this phase.
+Likely later implementation files are `src/components/Hero.tsx`, `src/index.css`, and this plan file only. No new dependency is expected.
 
-## V2 visual language
+## Scope out
 
-Use the existing Phase 1 foundation:
+Do not change in Phase 3.5:
 
-- Carbon Black #080A0D for the Hero field;
-- Graphite #10141A and Elevated Graphite #171C23 for the canvas and node hierarchy;
-- Bone White #F4F2EB for primary copy;
-- Signal Lime #C7FF4A for the primary AI/status emphasis;
-- Electric Cyan #50DFFF for restrained secondary system accents;
-- Steel #89939E and Muted #626B75 for support copy and metadata;
-- Space Grotesk for display/headings and Inter for body copy;
-- borders over shadows, 16px surfaces only where genuinely needed, 8–10px controls, and 6–8px UI details.
+- Navbar redesign;
+- ContactModal redesign or ownership;
+- StatisticsStrip redesign;
+- Problem, Solution, HowItWorks, Trust, FAQ, FinalCTA, or Footer redesign;
+- a site-wide copy overhaul;
+- the core business positioning;
+- the route/system concept;
+- the global design system;
+- metadata, Supabase, package files, lockfiles, or build configuration;
+- assets outside the Hero unless separately approved;
+- fake social proof, metrics, testimonials, or client claims;
+- Phase 4 animation, particles, glows, parallax, pulse systems, or decorative motion;
+- Phase 5 mobile restructuring, mobile-specific canvas redesign, or narrow-screen composition work.
 
-Avoid glassmorphism, glow-heavy backgrounds, gradient headline text, giant rounded cards, nested-card stacks, stock/futuristic AI imagery, decorative particles, random blobs, neon effects, and competing accent colors.
+## Phase 3.5 implementation checklist
 
-## Accessibility and static-state considerations
+Implement one checklist item per later run. Complete a task, update this file, then stop and wait for explicit approval before starting the next task.
 
-- Keep one real h1, with a localized exact headline.
-- Keep the CTA a native button with the existing callback and visible focus treatment.
-- Give the system canvas one concise localized accessible label/description; do not turn each connector into screen-reader noise.
-- Mark connector lines, status dots, and purely decorative rules aria-hidden="true".
-- Expose node labels as meaningful text in a semantic list/figure structure where useful, without making the canvas interactive.
-- Provide a meaningful localized replacement for the removed image’s alt/description through the canvas label rather than retaining a misleading photo alt.
-- Preserve contrast against Carbon/Graphite surfaces and the existing .v2-focus-ring behavior.
-- Do not add hover-dependent meaning, keyboard interactions, motion, parallax, or pointer-follow behavior.
-- Keep reduced-motion behavior safe even though Phase 3 should remove Hero-specific continuous animation.
+### 1. Audit current Hero visual weaknesses
 
-## Phase 4 motion handoff boundary
+- [ ] Inspect the current TR and EN Hero at representative desktop/tablet widths.
+- [ ] Record the actual headline wrapping, copy/canvas balance, canvas presence, CTA/meta relationship, and containment issues.
+- [ ] Confirm the Phase 3 protected contracts before visual edits begin.
 
-Phase 3 ends with a visually complete static state. It may remove obsolete V1 Hero animation hooks, but it must not add:
+Expected scope: `implementation_update.md` only.
 
-- animated connector travel;
-- node activation sequences;
-- pulsing dots or looping status changes;
-- scroll-driven Hero choreography;
-- mouse-follow or parallax behavior;
-- reveal orchestration specific to the new canvas.
+### 2. Refine headline composition and left-column rhythm
 
-Phase 4 may animate the approved static canvas only after the static hierarchy, copy, accessibility, and desktop/tablet composition are accepted.
+- [ ] Refine headline max width, line breaks, scale balance, and line-height without rewriting approved copy.
+- [ ] Refine the spacing relationship between headline, support copy, CTA, and reassurance.
+- [ ] Keep the headline editorial and strong in both TR and EN without clumsy wrapping.
 
-## Phase 5 mobile handoff boundary
+Expected scope: Hero-local source/CSS and `implementation_update.md` only.
 
-Phase 3 must not become a dedicated mobile redesign. Preserve a usable responsive fallback and validate that no known overflow or overlap is introduced. Phase 5 owns:
+### 3. Refine support-copy hierarchy
 
-- mobile content order;
-- mobile system-canvas simplification;
-- mobile CTA placement;
-- narrow-screen spacing and typography pressure;
-- mobile Hero height and dedicated mobile visual hierarchy.
+- [ ] Tune support-copy width, line length, spacing, and visual weight so it supports the headline rather than forming a paragraph wall.
+- [ ] Preserve the approved TR/EN support copy and existing i18n source.
+- [ ] Verify the copy remains readable at desktop/tablet widths.
 
-## Implementation risks and guardrails
+Expected scope: Hero-local source/CSS and `implementation_update.md` only.
 
-| Risk | Guardrail |
-| --- | --- |
-| New Hero visual becomes a dashboard wall | Keep one canvas, one route, six nodes, one status label, and a single clear focal AI node. |
-| English/Turkish line wrapping becomes unbalanced | Test exact copy at 1024px, 1280px, and 1440px+ before finalizing widths or breaks. |
-| CTA disconnects from ContactModal | Preserve onCTAClick, the App callback, and one native Hero CTA; verify modal open/close. |
-| Fixed Navbar overlaps the new Hero | Preserve the current clearance contract and inspect top spacing at the desktop boundary. |
-| Dormant AIWorkflow copy or component is accidentally changed | Search consumers before editing; limit i18n changes to Hero-connected labels and approved Hero fields. |
-| Shared CSS is removed accidentally | Search every Hero-specific selector/keyframe before deleting; retain shared .reveal and global helpers used elsewhere. |
-| Phase 4 motion leaks into static work | Keep connectors, nodes, and statuses static; remove old motion only where it is Hero-specific and obsolete. |
-| Mobile scope expands prematurely | Preserve fallback structure only; defer mobile-specific composition to Phase 5. |
-| Existing asset cleanup causes unrelated breakage | Remove /images/ai-operations-hero-v2.png from Hero usage but leave the asset file untouched. |
+### 4. Redesign static system-canvas architecture
 
-## Ordered implementation checklist
+- [ ] Evolve the six-node route from a simple diagram into a stronger signature operational-system composition.
+- [ ] Preserve Website → Messages → AI → CRM → Calendar → Team and localized labels.
+- [ ] Improve hierarchy, depth, framing, and structural relationships without adding motion or unrelated metaphor.
+- [ ] Keep the canvas semantic, accessible, static, and non-interactive.
 
-Implement exactly one checklist item per Codex run. Stop after each item and update this document before waiting for explicit approval.
+Expected scope: Hero-local source/CSS and `implementation_update.md` only.
 
-### 1. Audit and freeze Hero contracts
+### 5. Refine canvas surface, node hierarchy, and route framing
 
-- [x] Confirm the current Hero props, App callback ownership, section ID, render order, Navbar clearance, i18n dependencies, CSS hooks, asset dependency, breakpoints, and reveal/motion consumers against source.
-- Expected files: implementation_update.md only.
+- [ ] Decide and implement the most balanced single-surface treatment, internal framing, zones, rails, and structural lines.
+- [ ] Make AI the clear focal node and Team the clear final endpoint.
+- [ ] Avoid generic app screenshots, nested-card stacks, glassmorphism, heavy shadows, glow, gradients, and dashboard-wall density.
+- [ ] Preserve enough internal breathing room so labels and connectors remain readable.
 
-Audit note — Checklist 1 complete: HeroProps is exactly HeroProps { onCTAClick: () => void }; Hero has no local state and destructures copy and language from useLanguage(). It consumes copy.hero.headline, headlineAccent, subheadline, cta, duration, noCommitment, and direct, plus copy.workflow.aria, connectedSystemsLabel, and connectedSystems. The CTA directly invokes onCTAClick; App owns openContact, closeContact, isContactOpen, and ContactModal. The stable section ID is anasayfa and the frozen App order is Navbar → Hero → StatisticsStrip → Problem → Solution → HowItWorks → Trust → FAQ → FinalCTA → Footer → ContactModal. The Hero uses the two-span headline, separate desktop/mobile reassurance blocks, an image frame at /images/ai-operations-hero-v2.png, a connected-systems rail, duplicate visual aria-labels, a fixed English image alt, data-reveal/reveal, and animate-fade-in-up/animate-delay classes. Workflow consumer audit found AIWorkflow.tsx is not rendered by App, but it consumes workflow.aria; connectedSystems and connectedSystemsLabel are currently Hero-only consumers. Checklist 2 must prefer Hero-specific canvas translations unless compatibility is proven. CSS classification is: hero-section, hero-section--tr, hero-copy*, hero-heading, hero-meta*, hero-visual*, hero-connected-systems*, and connected-status-pulse/connected-node-pulse/connected-signal-sweep are Hero-only; radial-glow is currently Hero-only; text-gradient-teal is shared by Hero, Solution, and FinalCTA; reveal is shared by multiple sections through useRevealObserver; animate-fade-in-up and animate-delay-* are shared by AIWorkflow and ContactModal and must be preserved; uncertain selectors must be preserved until usage search proves otherwise. The Hero asset is referenced only by Hero.tsx and remains physically untouched. Current responsive behavior is preserved as documented above, and Navbar clearance is safe at base/sm and lg+ under current source rules. StatisticsStrip is immediately adjacent with its own observer/counters and remains untouched. Accessibility baseline is one h1, native CTA, static non-interactive rail, duplicate aria-labels on visual wrappers, decorative dots/connectors partly aria-hidden, and inherited CTA focus styling. No source/config/package/asset file changed.
+Expected scope: Hero-local source/CSS and `implementation_update.md` only.
 
-### 2. Finalize approved Hero copy and i18n scope
+### 6. Refine CTA and reassurance integration
 
-- [x] Update only the approved Hero headline/support fields and the narrowly-scoped Hero CTA alignment.
-- [x] Prefer a minimal Hero-specific localized canvas extension; change connected-system workflow labels only if repository compatibility is explicitly proven, and do not repurpose workflow.aria without auditing AIWorkflow.
-- [x] Preserve unrelated translation groups and the dormant AIWorkflow contract.
-- Expected files: src/lib/i18n.tsx, implementation_update.md.
+- [ ] Ensure the CTA feels integrated with the refined composition rather than oversized or disconnected.
+- [ ] Preserve `onCTAClick`, native button semantics, approved CTA copy, focus treatment, and restrained styling.
+- [ ] Improve reassurance alignment, spacing, hierarchy, and premium presentation while keeping it secondary.
 
-Implementation note — Checklist 2 complete: TR now reconstructs exactly `İşletmenizi ileri taşıyan` + `sistemler kuruyoruz.` with support copy `Yapay zekâ, otomasyon ve dijital deneyimleri ayrı araçlar değil, birlikte çalışan bir sistem olarak tasarlıyoruz.` and CTA `Projeyi konuşalım`. EN now reconstructs exactly `Systems that keep your business` + `moving.` with support copy `AI, automation and digital experiences designed to work together — not as separate tools.` and CTA `Start a project`. The existing reassurance values duration, noCommitment, and direct are unchanged. Both languages now have the identical hero.systemCanvas shape with label, aria, and website/messages/ai/crm/calendar/team nodes. Every workflow.* field is unchanged, and no unrelated translation group changed. TypeScript typecheck passed before Checklist 3.
+Expected scope: Hero-local source/CSS and `implementation_update.md` only.
 
-### 3. Replace image-led Hero with semantic static structure
+### 7. Perform bilingual desktop/tablet visual QA
 
-- [x] Refactor Hero.tsx to render the approved copy and a semantic two-column Hero structure without the photo frame or image overlay.
-- [x] Keep one CTA, one reassurance presentation per responsive mode, id="anasayfa", useLanguage(), and onCTAClick.
-- Expected files: src/components/Hero.tsx, implementation_update.md.
+- [ ] Inspect TR and EN at 1024px, 1280px, and 1440px+.
+- [ ] Verify headline wrapping, support-copy hierarchy, left/right balance, canvas authority, CTA/meta placement, Navbar clearance, StatisticsStrip adjacency, and horizontal containment.
+- [ ] Confirm no locked area, functional contract, accessibility contract, copy contract, or asset boundary regressed.
 
-Implementation note — Checklist 3 complete: Removed the active Hero image and old connected-systems rail from JSX, including all copy.workflow consumption. Added the semantic hero-v2 shell with hero-v2__layout, hero-v2__copy, hero-v2__heading, hero-v2__support, hero-v2__actions, hero-v2__meta, hero-system, hero-system__label, and hero-system__stage hooks. The system figure reads only copy.hero.systemCanvas. The stage is intentionally an empty semantic scaffold; final six-node architecture, connectors, focal AI treatment, and canvas styling remain deferred to Checklist 4. The single native CTA still invokes onCTAClick, section ID anasayfa and App ordering are unchanged, and ContactModal remains App-owned. The Hero no longer renders the image, workflow rail, radial glow, gradient overlay, headline gradient, Hero fade-up classes, or Hero data-reveal wrapper. Reassurance meanings are preserved in one combined responsive meta block; no dedicated Phase 5 mobile restructure was started. No CSS was changed, no new motion was added, and no Phase 4 or Phase 5 scope was started. pnpm typecheck passed.
+Expected scope: `implementation_update.md` only unless a proven Hero-local defect is found.
 
-### 4. Build the static operational-system canvas
+### 8. Complete Phase 3.5 readiness and handoff
 
-- [x] Implement the six-node Website → Messages → AI → CRM → Calendar → Team canvas with static connectors, localized labels, one status label, and accessible grouping.
-- [x] Keep decorative lines/dots non-interactive and static.
-- Expected files: src/components/Hero.tsx, src/index.css, implementation_update.md.
+- [ ] Run the required typecheck, lint, and build verification after any source change.
+- [ ] Confirm the Hero is visually stronger, distinctive, premium, static, bilingual, accessible, and ready for the next phase.
+- [ ] Record the Phase 5 mobile handoff and keep Phase 4 motion deferred until after Phase 5.
 
-Implementation note — Checklist 4 complete: Hero now renders a reusable six-node semantic `ol`/`li` route sourced from `copy.hero.systemCanvas.nodes`, preserving the localized sequence Website → Messages → AI → CRM → Calendar → Team (Web sitesi → Mesajlar → Yapay zekâ → CRM → Takvim → Ekip in Turkish). The asymmetric 3×3 placement gives Website upper-left, Messages left, AI center, CRM upper-right, Calendar right, and Team lower-center. A single translated figcaption remains the canvas label, while decorative SVG connectors use `aria-hidden="true"` and `focusable="false"`; nodes are not interactive or focusable. AI is the static Signal Lime focal node, with restrained Electric Cyan secondary detail and Team handoff emphasis. No hardcoded labels, assets, `copy.workflow.*` dependencies, animation, or moving signal were introduced.
+Expected scope: `implementation_update.md` only unless a proven Hero-local defect requires a final correction.
 
-### 5. Apply desktop/tablet V2 composition and typography
+## Exit criteria
 
-- [x] Align Hero surfaces and container geometry with Navbar V2 and Phase 1 tokens.
-- [x] Establish the editorial left-copy/right-canvas composition, bilingual-safe headline scale, support-copy width, CTA prominence, and deliberate whitespace at 1024px, 1280px, and 1440px+.
-- Expected files: src/components/Hero.tsx, src/index.css, implementation_update.md.
+Phase 3.5 is complete only when:
 
-Implementation note — Checklist 5 complete: The Hero uses the shared `.v2-container`, Carbon Black field, and an intentional `0.92fr / 1.08fr` left-copy/right-canvas grid from `lg` onward. Responsive spacing remains 7rem base, 6rem at `sm`, and 9rem at `lg` on top with restrained bottom padding. The headline uses Space Grotesk, Bone White, fluid sizing, controlled line-height, and no gradient or manual line break; support copy remains Inter/Steel with a 34rem desktop cap. The Graphite canvas uses a restrained 16px surface, contained route, and borders over shadows. Below `lg`, the existing stacked fallback remains contained without starting the dedicated Phase 5 mobile redesign. QA covered EN at approximately 1280px desktop-style and TR at approximately 467px mobile-style; exact 1024px and 1440px emulation was unavailable. Navbar clearance and canvas containment were visually safe, no Phase 4 motion was added, and `pnpm typecheck` passed.
+- the Hero has clear premium visual authority beyond a prototype or dev-demo diagram;
+- headline composition and editorial rhythm are intentional in TR and EN;
+- support copy, CTA, and reassurance form a coherent left-column hierarchy;
+- the static system canvas feels like a signature connected operational system rather than a low-detail flowchart;
+- AI is the clear focal treatment and Team is a clear endpoint;
+- the canvas has depth and framing without glassmorphism, glow, gradients, heavy nested cards, or dashboard-wall density;
+- the six-system concept and logical route remain intact;
+- the Hero remains static with no Phase 4 motion or decorative animation;
+- the Hero remains desktop/tablet-first and no Phase 5 mobile redesign has started;
+- `Hero({ onCTAClick })`, App-owned ContactModal, `id="anasayfa"`, App order, i18n parity, accessibility semantics, and no-route behavior remain intact;
+- no fake proof, unsupported claim, unrelated section change, dependency, asset change, or global redesign was introduced;
+- bilingual desktop/tablet QA passes with no overflow or Navbar/StatisticsStrip composition defect;
+- typecheck, lint, and build pass after implementation;
+- the repository is ready for Phase 5 mobile Hero refinement.
 
-### 6. Refine CTA and reassurance presentation
+## Handoff
 
-- [x] Apply the approved compact CTA treatment and quiet secondary reassurance without changing callback behavior or unrelated site copy.
-- [x] Confirm the Hero action language matches the Navbar staging in both languages.
-- Expected files: src/components/Hero.tsx, src/index.css, src/lib/i18n.tsx only if copy alignment was not completed in Checklist 2, implementation_update.md.
+When all Phase 3.5 checklist items pass, hand off to Phase 5 for mobile Hero refinement. Phase 5 owns mobile content order, mobile canvas simplification, narrow-screen typography, mobile CTA/reassurance placement, mobile spacing, Hero height, and mobile-specific hierarchy.
 
-Implementation note — Checklist 6 complete: Added the Hero-local `.hero-v2__cta` treatment while leaving the shared `.btn-primary` unchanged for ContactModal and FinalCTA. The Hero CTA remains a native button with unchanged `onCTAClick`, using Signal Lime, Carbon text, a compact V2 radius, visible focus ring, no shadow/glow/lift/scale, and only restrained color transitions. The ArrowRight is decorative and `aria-hidden`. Turkish remains `Projeyi konuşalım` and English remains `Start a project`, matching Navbar staging. Duration, no-commitment, and direct-contact reassurance meanings and translations remain intact in a quiet bordered meta row with decorative icons/separators.
+Phase 4 remains after Phase 5. It may later animate only the approved static system canvas through subtle connector travel, node activation, and operational state transitions. Phase 4 must not redesign the static hierarchy, change copy, add generic decorative motion, or introduce particles, glows, or parallax.
 
-### 7. Remove obsolete Hero-only V1 visual and motion artifacts
-
-- [x] Usage-search and remove the Hero-only radial glow, gradient headline/overlay, image-frame, connected-rail, pulse/sweep, and Hero-specific reveal/fade hooks that are no longer used.
-- [x] Keep shared/global selectors and animations required by other sections.
-- Expected files: src/components/Hero.tsx, src/index.css, implementation_update.md.
-
-Implementation note — Checklist 7 complete: Repository usage search proved the obsolete Hero-only `.hero-section`, `.hero-section--tr`, `.hero-noise`, `.hero-heading`, `.hero-meta*`, `.hero-copy*`, `.hero-visual*`, `.hero-connected-systems*`, `.radial-glow`, and connected pulse/sweep keyframes were unused by the active V2 Hero and removed. The Hero-only legacy image/rail/reveal hooks are no longer rendered. Shared `.btn-primary`, `.text-gradient-teal`, `.reveal`, `animate-fade-in-up`, `animate-delay-*`, global reduced-motion infrastructure, AIWorkflow dependencies, and ContactModal dependencies were preserved. The physical Hero image asset remains untouched.
-
-### 8. Complete accessibility and static-state cleanup
-
-- [x] Verify heading hierarchy, localized canvas description, decorative line semantics, visible focus, contrast, native CTA semantics, and no interactive diagram behavior.
-- [x] Confirm no continuous Hero motion remains and reduced-motion behavior is safe.
-- Expected files: src/components/Hero.tsx, src/index.css, implementation_update.md.
-
-Implementation note — Checklist 8 complete: Hero retains one `h1`, one semantic support paragraph, one native CTA, and no duplicated hidden copy. The system figure now uses the visible localized figcaption as its accessible name via `aria-labelledby`, the localized `copy.hero.systemCanvas.aria` as a concise hidden description via `aria-describedby`, and the logical `ol`/`li` route order Website → Messages → AI → CRM → Calendar → Team. SVG connectors and markers are decorative (`aria-hidden`, `focusable="false"` for SVG); nodes have no interactive roles or tab stops. Static contrast and focus styling were reviewed, no active Hero keyframes/continuous motion/reveal dependency remains, and the existing global reduced-motion rule safely covers the CTA transition. `pnpm typecheck` passed; full lint/build and functional verification remain Checklist 9.
-
-### 9. Run functional and project verification
-
-- [x] Verify Hero-to-ContactModal behavior, section ID/order, language switching, Navbar clearance, StatisticsStrip adjacency, and absence of unrelated changes.
-- [x] Run pnpm typecheck, pnpm lint, and pnpm build; record exact outcomes without fixing unrelated failures.
-- Expected files: implementation_update.md only unless a Phase 3-caused defect is proven and explicitly scoped.
-
-Implementation note — Checklist 9 complete — decision A: CHECKLIST 9 PASS — FUNCTIONAL CONTRACTS AND PROJECT CHECKS PASS. Hero contracts passed: `HeroProps` remains `onCTAClick`, Hero has no modal state or routing, `useLanguage()` remains the source, `id="anasayfa"` remains stable, the CTA is one native button invoking `onCTAClick`, the exact static V2 canvas is rendered once, one `h1` and one support paragraph are present, and the six nodes remain in Website → Messages → AI → CRM → Calendar → Team DOM order without `copy.workflow.*` or the old image asset. App ownership/order passed: App still owns ContactModal state/callbacks and renders Navbar → Hero → StatisticsStrip → Problem → Solution → HowItWorks → Trust → FAQ → FinalCTA → Footer → ContactModal. Browser verification passed in EN and TR: Hero CTA opened and closed the App-owned ContactModal in both languages; Hero CTA labels remained `Start a project` / `Projeyi konuşalım`; language switching localized headline, support, reassurance, canvas label/description, and all six node labels. Canvas/accessibility passed: decorative SVG is `aria-hidden` and `focusable="false"`, nodes are non-interactive, figure naming/description and visible figcaption are present, focus styling is defined, and no duplicate Hero copy exists. CTA CSS passed: active `.hero-v2__cta` has Signal Lime fill, Carbon text, compact radius, border, no glow/heavy shadow/lift/scale, restrained hover transition, and visible focus styling; global `.btn-primary` remains unchanged. V1 cleanup and static-motion checks passed; shared reveal, gradient, animation, reduced-motion, AIWorkflow, and ContactModal infrastructure remains intact. Navbar clearance, StatisticsStrip adjacency (`istatistik` immediately follows Hero), and available-preview containment passed with no observed clipping/overflow; exact bilingual desktop/tablet viewport QA remains Checklist 10. `pnpm typecheck` PASS, `pnpm lint` PASS, `pnpm build` PASS. Build emitted informational `VITE_SITE_URL is not set; keeping robots.txt without a sitemap URL.` only. Checklist 9 exposed and fixed one Phase 3 lint defect: unused `language` destructuring in Hero.tsx after obsolete class removal; no unrelated files changed. Checklists 10 and 11 remain deferred.
-
-### 10. Perform bilingual desktop/tablet and responsive-fallback QA
-
-- [x] Inspect TR and EN at 1024px, 1280px, and 1440px+ for copy wrapping, hierarchy, canvas balance, CTA placement, Navbar clearance, and overflow.
-- [x] Check the existing below-desktop fallback at representative widths without beginning the dedicated Phase 5 mobile redesign.
-- Expected files: implementation_update.md only.
-
-QA note — Checklist 10 complete — decision A: CHECKLIST 10 PASS — BILINGUAL RESPONSIVE QA COMPLETE. Codex In-app Browser checks were performed at exact 1024×900, 1280×900, 1440×900, and 1536×900 desktop/tablet widths in both TR and EN, plus 768×1000 and 375×900 responsive-fallback widths in both languages. At 1024px, Navbar/Hero alignment, fixed-header clearance, two-column activation, bilingual wrapping, CTA/meta placement, six-node canvas containment, and StatisticsStrip adjacency passed. At 1280px and 1440px+, editorial scale, 0.92fr/1.08fr balance, support-copy width, CTA hierarchy, canvas focal AI/Team endpoint, restrained accents, and whitespace passed. At 1536px, both languages remained contained and balanced with no overflow or Hero/StatisticsStrip gap issue. TR and EN approved Hero headline/support/CTA copy remained exact; no manual line breaks or copy changes were introduced. The existing 768px and 375px single-column fallbacks remained understandable, contained, readable, and free of clipping, fixed-Navbar collision, and horizontal overflow; no Phase 5 redesign was started. `document.documentElement.scrollWidth <= document.documentElement.clientWidth` returned PASS at every tested viewport. Locked-area/source review found no Navbar, StatisticsStrip, Problem, Solution, HowItWorks, Trust, FAQ, FinalCTA, Footer, ContactModal, App ownership/order, or asset changes in this QA turn.
-
-### 11. Complete Phase 3 readiness and handoff
-
-- [x] Confirm the static Hero is approved, V1-only artifacts are safely removed, locked areas remain untouched, and the next step is Phase 5 mobile planning/execution before Phase 4 motion.
-- [x] Record the Phase 4 and Phase 5 handoff boundaries and mark Phase 3 complete only when every exit criterion is satisfied.
-- Expected files: implementation_update.md only.
-
-Handoff note — Checklist 11 complete — decision A: PHASE 3 COMPLETE — READY FOR PHASE 5 MOBILE. All Phase 3 exit criteria are satisfied: approved bilingual static Hero copy and canvas are implemented; the V1 image-led Hero and Hero-only artifacts were removed safely; CTA/App ContactModal ownership, `id="anasayfa"`, App order, i18n parity, accessibility, no-motion state, static fallback, and locked-area boundaries remain intact; `pnpm typecheck`, `pnpm lint`, and `pnpm build` passed. The build retained only the informational `VITE_SITE_URL is not set; keeping robots.txt without a sitemap URL.` note. No unrelated source/config/dependency/asset changes were made in this QA turn.
-
-## Phase 3 handoff
-
-### Static Hero V2
-
-- Approved TR/EN headline, support copy, and CTA are implemented and verified at desktop/tablet and fallback widths.
-- One semantic static V2 system canvas contains Website → Messages → AI → CRM → Calendar → Team with localized labels, restrained static connectors, AI focal treatment, and Team endpoint.
-- Desktop/tablet composition uses the controlled V2 container, editorial left copy, right canvas, stable Navbar clearance, and natural StatisticsStrip adjacency.
-- CTA remains a compact native button; reassurance remains secondary and localized.
-- Canvas naming, description, node order, decorative connector semantics, one `h1`, focus styling, and non-interactive behavior are preserved.
-- Hero remains static with no continuous motion, animation, parallax, or Phase 4 behavior.
-
-### Frozen contracts
-
-- `Hero({ onCTAClick })`
-- App-owned ContactModal
-- `id="anasayfa"`
-- Existing App render order
-- Navbar untouched
-- StatisticsStrip adjacency
-- `useLanguage()` / i18n source
-- No route or hash behavior
-
-### Phase 5 handoff
-
-Phase 5 owns the mobile implementation pass: mobile content order, mobile system-canvas simplification, narrow-screen typography, mobile CTA/reassurance placement, mobile vertical spacing and Hero height, and mobile-specific visual hierarchy. The current fallback is usable and contains no known defect; do not treat this handoff as Phase 5 implementation.
-
-### Phase 4 handoff
-
-Phase 4 may later animate only the approved static system canvas through connector travel, node activation, and subtle operational state transitions. It must not redesign the static hierarchy, change copy, add generic decorative motion, or introduce particles, glows, or parallax.
-
-### Health
-
-- `pnpm typecheck` PASS
-- `pnpm lint` PASS
-- `pnpm build` PASS
-- Informational build note: `VITE_SITE_URL is not set; keeping robots.txt without a sitemap URL.`
-
-### QA status
-
-- Codex In-app Browser: TR and EN at 1024×900, 1280×900, 1440×900, 1536×900, 768×1000, and 375×900.
-- All tested widths passed bilingual layout, copy wrapping, canvas containment, CTA/reassurance placement, Navbar clearance, and horizontal-overflow checks.
-- No manual follow-up is required for Phase 3 QA; the next approved phase is Phase 5 mobile execution, followed later by Phase 4 motion.
-
-## Phase 3 exit criteria
-
-Phase 3 is complete only when:
-
-- the exact approved TR/EN Hero headline and supporting copy are implemented;
-- the V1 image-led Hero is replaced by the static V2 operational-system canvas;
-- the Hero aligns with the Navbar V2 container, surfaces, typography, borders, and accent hierarchy;
-- the CTA still invokes the App-owned ContactModal through onCTAClick;
-- section ID anasayfa and App ordering remain stable;
-- no fake proof, metrics, or unsupported claims are introduced;
-- no Phase 4 motion is implemented;
-- no dedicated Phase 5 mobile redesign is implemented;
-- the static Hero remains usable across the current responsive fallback without known overflow or overlap;
-- obsolete Hero-only V1 visual and motion artifacts are removed only after usage search;
-- accessibility semantics, focus, contrast, and reduced-motion safety are preserved;
-- pnpm typecheck, pnpm lint, and pnpm build pass;
-- bilingual desktop/tablet QA passes at 1024px, 1280px, and 1440px+;
-- no unrelated files, dependencies, abstractions, or assets are added or changed;
-- the repository is ready for Phase 5 mobile execution before Phase 4 motion.
-
-## Workflow rules
-
-- This document is the only file changed during this planning run.
-- All Phase 3 checklist items begin unchecked.
-- Implement exactly one checklist item per later Codex run.
-- Update this document after each completed item.
-- Do not auto-start the next item.
-- Do not begin Phase 4 or Phase 5 work from a Phase 3 checklist item.
-
+No Phase 3.5 checklist item has been implemented in this plan-only run.
