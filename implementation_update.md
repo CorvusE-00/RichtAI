@@ -1183,18 +1183,205 @@ When Trust is decomposed, system-proof flow dependencies move to Live System Dem
 
 ## i18n and copy architecture audit
 
-Inspect the complete translation structure and document:
+This is an architecture and migration-safety audit only. No translation text, key, array, label, ID, or component rendering was changed.
 
-- how strings are grouped
-- whether components depend directly on array ordering
-- whether visual behavior depends on exact string counts
-- whether TR and EN structures match
-- whether navigation-label changes require component changes
-- where obsolete V1 strings can remain temporarily during migration
-- risks when sections are merged or removed
-- whether both languages can support native, concise V2 copy
+### Translation architecture overview
 
-Do not rewrite copy in Phase 0.
+- `src/lib/i18n.tsx` exports `Language = 'tr' | 'en'` and one `translations` object with `tr` and `en` branches. Each branch contains the same nested groups: `seo`, `nav`, `hero`, `workflow`, `problem`, `solution`, `how`, `stats`, `trust`, `faq`, `finalCta`, `footer`, and `contact`.
+- `TranslationSet` is inferred as `(typeof translations)[Language]`, so the provider exposes a typed `copy` object without a separate schema or runtime validation layer. TypeScript therefore checks source-level shape symmetry.
+- `LanguageProvider` owns current language state, initial localStorage selection, `setLanguage`, `toggleLanguage`, memoized context value, and language-dependent metadata updates. Components consume data through `useLanguage()` rather than importing individual strings.
+- Initial selection uses `localStorage` key `richtai-language`; exact `en` selects English and every other value defaults to Turkish. The provider effect persists the selected language and calls `applyLanguageMetadata` with `copy.seo.title` and `copy.seo.description`.
+- Nested objects are used for each section and for structured units such as `trust.founder`, `trust.systemProof`, and `contact`. Arrays are used for navigation, incidents, capabilities, process/step data, metrics, FAQ items, and workflow connected systems.
+- Copy shape controls rendering in several places: mapped array length controls repeated rows/items; `Solution` branches by capability index; Problem branches by incident index; and reveal delays are calculated from map indexes. The workflow group also supplies both the active Hero systems rail and the unrendered AIWorkflow text.
+- TR and EN currently share the same group/key/array structure and matching array lengths. They do not need a replacement i18n system to support V2; the provider can remain while groups and component consumers migrate.
+
+### Top-level copy group inventory
+
+| Group | Current consumer(s) | Data shape | Copy-architecture status |
+| --- | --- | --- | --- |
+| `nav` | Navbar, Footer sitemap | links array plus CTA/menu/language labels | KEEP structure; visible labels and IDs should be separated conceptually. |
+| `seo` | LanguageProvider → `applyLanguageMetadata` | title and description strings | MIGRATE with metadata source consolidation later. |
+| `hero` | Hero | headline, accent, subheadline, CTA, duration, reassurance/direct strings | MIGRATE structure while preserving CTA/reassurance contract. |
+| `workflow` | Hero connected systems; unrendered AIWorkflow | scalar labels plus `connectedSystems` array | SPLIT; separate active Hero/system-demo copy from legacy staged workflow copy. |
+| `stats` | StatisticsStrip | aria label plus four metric objects | DEPRECATE LATER with the planned render removal; do not carry unsupported proof forward. |
+| `problem` | Problem | intro fields plus four incident objects | MIGRATE; shorten/reshape for V2 friction without preserving board-only fields. |
+| `solution` | Solution | intro plus three capability objects | SPLIT into isolated V2 capability groups while preserving conceptual areas. |
+| `how` | HowItWorks | intro plus three `{ title, meta, description }` steps | KEEP as the likely canonical process source. |
+| `trust` | Trust | intro, four process objects, systemProof object, founder object | SPLIT into Live Demo, How We Work, and Founder destinations. |
+| `faq` | FAQ | intro plus five `{ question, answer }` objects | KEEP structure; copy can be rewritten in the later bilingual phase. |
+| `finalCta` | FinalCTA | headline, accent, description, CTA, trust, quote | MIGRATE presentation/wording later while preserving CTA contract. |
+| `footer` | Footer | prompt, CTA, brand, sitemap/social/contact/bottom-bar strings | MIGRATE as V2 footer becomes simpler. |
+| `contact` | ContactModal | close, status, form labels/placeholders, submit/error/privacy strings | KEEP functional key contract; visual/copy refinement must preserve form semantics. |
+
+### Array dependency audit
+
+| Array | TR length | EN length | Order/length dependency | IDs/visual/reveal dependency | Reordering/removal risk |
+| --- | ---: | ---: | --- | --- | --- |
+| `nav.links` | 5 | 5 | Order controls desktop/mobile and Footer sitemap order. | Each item carries an anchor ID; Navbar active observer and smooth-scroll targets depend on those IDs. | HIGH; changing IDs requires atomic Navbar, Footer, rendered-section, and observer updates. |
+| `problem.incidents` | 4 | 4 | Order controls four incident rows. | Index `0/2` controls focus styling; index `0/1/2/3` controls fragment markup; reveal delay is `index * 90ms`. | HIGH; reorder can show the wrong fragment type or emphasis. |
+| `solution.capabilities` | 3 | 3 | Order defines the three capability bands and desktop alternating layout. | `index === 0/1/2` selects interaction, automation, or Luma prototype visual; reveal delay is `index * 100ms`; `capability-band:nth-child(even)` changes order. | VERY HIGH; reorder changes visual meaning and copy/visual pairing. |
+| `how.steps` | 3 | 3 | Order defines numbered journey stages. | Number, connector presence, and reveal delay (`index * 120ms`) derive from index/length. | MEDIUM-HIGH; reorder changes process meaning and connector placement. |
+| `trust.process` | 4 | 4 | Order defines process rows and reveal delay (`index * 80ms`). | Glyph is selected by index; no generated ID, but visual sequence and meaning depend on order. | HIGH while Trust remains composite; decomposition should map items explicitly. |
+| `trust.systemProof.items` | 4 | 4 | Order defines flow sequence. | Arrows render between items based on index; no persistent IDs. | MEDIUM-HIGH; reorder changes the system narrative. |
+| `faq.questions` | 5 | 5 | Order defines visible accordion order and initial open item (`openIndex = 0`). | `faq-trigger-${index}` and `faq-answer-${index}` are generated from index; reveal delay is `index * 70ms`. | HIGH; reorder is possible but changes generated identity, initial answer, and delay. |
+| `workflow.connectedSystems` | 4 | 4 | Order defines Hero rail nodes and connectors. | Connector appears between index entries; no IDs; used by active Hero and legacy workflow concept. | MEDIUM-HIGH; reorder changes system story and rail shape. |
+| Workflow stages/items | No translated stage array | No translated stage array | AIWorkflow stages are hardcoded state values `0–4`; copy fields are scalar and action items are JSX branches. | `stage` controls CSS classes and completion state; no translated array length contract. | HIGH if the legacy component is reactivated; state/copy branches must change together. |
+| `stats.metrics` | 4 | 4 | Order maps metrics to four visual cells. | `metricValues[index]` supplies display/value/suffix; reveal delay is `index * 90ms`. | HIGH; metric order/length must match the parallel `metricValues` array. |
+
+The highest-risk array contracts are Solution, Problem, Stats, and Navbar. FAQ IDs are index-based but remain structurally flexible if item identity is not persisted outside the current render. All currently inspected TR/EN array lengths match.
+
+### Navigation copy contract
+
+| Language | Visible labels | Target IDs |
+| --- | --- | --- |
+| Turkish | `Sorunlar`, `Çözüm`, `Nasıl çalışır?`, `Güven`, `S.S.S.` | `sorun`, `cozum`, `nasil-calisir`, `guven`, `sss` |
+| English | `Challenges`, `Solutions`, `How it works`, `Trust`, `FAQ` | `sorun`, `cozum`, `nasil-calisir`, `guven`, `sss` |
+
+- Target IDs are stored alongside translated labels in each `nav.links` object, but the IDs are not translated; both language arrays intentionally point to the same rendered section anchors.
+- Navbar maps the links for desktop/mobile, uses the IDs to build its active-section IntersectionObserver, and smooth-scrolls to those IDs. Footer maps the same `copy.nav.links` array for its sitemap buttons.
+- Visible label changes are safe independently of IDs as long as the link object shape and target ID remain unchanged. Changing an ID requires an atomic update to the rendered section, Navbar observer/scroll target, and Footer sitemap behavior.
+- For V2, visible navigation labels and target IDs should be treated as separate contracts even if they remain co-located in the current data shape. This prevents copy rewrites from accidentally breaking anchors.
+
+### Hero copy architecture
+
+- Current `hero` fields are `headline`, `headlineAccent`, `subheadline`, `cta`, `duration`, `noCommitment`, and `direct`.
+- Hero also consumes `workflow.aria`, `workflow.connectedSystemsLabel`, and `workflow.connectedSystems` for the connected-system rail. The remaining workflow scalar fields are used only by the non-rendered AIWorkflow.
+- The group can support V2 copy without changing the provider because the provider exposes typed nested data and components already consume a group rather than individual imports. The main architectural concern is separating visual/system-demo copy from legacy workflow copy.
+- **KEEP STRUCTURE:** CTA callback-facing key, primary headline/subheadline relationship, and reassurance/meta concept.
+- **MIGRATE STRUCTURE:** headline/accent fields if V2 typography or editorial composition needs a more explicit model; system-rail copy should move to the relevant system-demo model.
+- **DEPRECATE LATER:** legacy workflow scalar fields that are only consumed by unrendered AIWorkflow, after the replacement decision is made.
+- `.hero-section--tr` and current responsive behavior show that longer TR strings can affect layout, but this is a component/layout dependency rather than a reason to duplicate translation architecture.
+
+### Problem copy architecture
+
+- Intro/editorial fields are `label`, `headline`, `headlineAccent`, `description`, `prompt`, and `exampleLabel`.
+- Each incident contains `label`, `title`, `detail`, `status`, `timeStart`, `timeStartLabel`, `timeEnd`, and `timeEndLabel`.
+- `detail` is overloaded: it is displayed as prose, split by ` → ` for the route fragment, and split by ` · ` for the warning fragment depending on incident index. This is tightly coupled to the V1 board UI.
+- Fields likely able to survive conceptually into a shorter V2 friction section are the editorial headline/description/prompt and selected incident themes represented by label/title/detail. `status`, time fields, route delimiters, and split-dependent detail formatting are tightly tied to the old incident-board presentation.
+- No copy is rewritten here; the migration must first decouple content themes from fragment rendering.
+
+### Solution copy/data architecture
+
+- `solution.capabilities` contains three symmetric objects in both languages. Each object has `label`, `title`, `description`, `visualLabel`, `visualItems`, and `visualMeta`.
+- The three conceptual areas map cleanly to customer-facing AI / AI Systems, operational automation / Automation & Operations, and digital experience / Digital Experiences.
+- The content model worth keeping is the capability identity (`label`), explanation (`title`/`description`), and a concise outcome/role. The `visualLabel`, `visualItems`, and `visualMeta` fields are presentation-oriented and currently exist to populate three different V1 visual branches.
+- Data is shape-symmetric but not content-symmetric: `visualItems` lengths are 3, 4, and 3, so a future shared shell cannot assume equal item counts or equal visual heights.
+- Index `0/1/2` currently determines the visual branch, desktop alternating order, and reveal delay. This is the clearest copy-to-render coupling in the repository.
+- Future V2 should use separate capability subgroups under a shared systems namespace rather than one undifferentiated array if component isolation is the priority. A shared outer shell can still consume common presentation metadata without making visual meaning depend on array position.
+
+### How / process copy architecture
+
+- `how` contains `label`, `headline`, `headlineAccent`, `description`, and three steps with `{ title, meta, description }`.
+- `trust.process` contains four objects with the same `{ title, description }` shape but a different length and a more personal/direct working model. Its first three concepts overlap with the HowItWorks journey; its fourth emphasizes continuing with the same point of contact.
+- HowItWorks can become the canonical V2 process source because it already has a concise ordered three-step model and a dedicated section. Trust process should not remain as a competing second process after decomposition.
+- Trust process fields are redundant where they repeat discovery/design/build progression; the uniquely useful content is the direct personal involvement/continuity message, which can map to Founder or the canonical process narrative without duplicating a second process list.
+
+### Trust copy decomposition
+
+| Current Trust copy group | Future destination | Migration note |
+| --- | --- | --- |
+| `trust.label`, `headline`, `headlineAccent`, `description` | Distributed trust framing across Live System Demo, How We Work, and Founder / Why Richt | Do not leave the same intro active in multiple destinations after migration. |
+| `trust.systemProof` | Live System Demo | `items` and `description` describe a system flow; avoid presenting the same proof as both Trust and live demo. |
+| `trust.process` | How We Work | Compare against `how.steps`; keep one canonical process list and preserve only uniquely useful continuity content. |
+| `trust.founder` | Founder / Why Richt | Data shape is already self-contained and can move cleanly with portrait/alt usage outside the copy object. |
+
+If Trust and its future destinations remain active simultaneously, system proof, process, and founder positioning would be duplicated. The safe sequence is to keep the current Trust copy intact until each destination is rendered and verified, then remove only the migrated render usage.
+
+### Founder copy contract
+
+`trust.founder` contains `label`, `name`, `role`, `alt`, `statement`, `modelLabel`, and `modelDescription`. TR and EN have the same fields and order. The current standalone Founder data shape is cleanly reusable: it is already independent from the process and systemProof arrays, although the component currently renders it inside Trust. Keep the name/role/alt semantics and direct-contact model intact while changing presentation later.
+
+### FAQ copy architecture
+
+- `faq` contains `label`, `headline`, `headlineAccent`, `description`, and five `{ question, answer }` objects in both languages.
+- FAQ trigger/answer IDs are generated as `faq-trigger-${index}` and `faq-answer-${index}`. Order changes therefore change the generated DOM IDs and the initial open item, but there is no persisted external identity.
+- Long questions affect trigger wrapping and answer height but do not change the data shape. Item count is structurally flexible because the component maps the array.
+- The data structure can remain unchanged in V2. Reordering is safe only when the initial open behavior and generated IDs are intentionally accepted; stable explicit IDs would be a later improvement, not a Phase 0 change.
+
+### Contact copy contract
+
+- Functional labels/controls include `close`, `submit`, `submitting`, `successTitle`, `successDescription`, and `error`.
+- Form labels/placeholders include `name`, `namePlaceholder`, `email`, `emailPlaceholder`, `phone`, `phonePlaceholder`, `business`, `optional`, `message`, and `messagePlaceholder`.
+- Supporting text includes `badge`, `title`, `description`, `privacy`, and `direct`.
+- `ContactModal` behavior is tied to the status labels and messages: `submitting` is shown while the Supabase request is pending, `successTitle`/`successDescription` render after success, `error` renders after failure, and `close` labels both close controls. Field label/placeholder keys must remain aligned with the existing field names and requiredness.
+- These keys can be translated or visually restyled later, but their semantic role and state mapping must not change during section migration.
+
+### Metadata copy architecture
+
+- Dynamic language metadata is stored in `translations[language].seo.title` and `.seo.description`, then passed by `LanguageProvider` to `applyLanguageMetadata` in `src/lib/siteMetadata.ts`.
+- The helper updates `document.title`, `html[lang]`, description, canonical, OG title/description/url/image/locale/alternate, Twitter title/description/image, and Organization/WebSite JSON-LD description/language fields.
+- `index.html` contains static initial Turkish title/description, OG/Twitter copy, image alt, author, and initial JSON-LD. It also includes a static Service node and initial bilingual language declarations. Static and dynamic metadata therefore have overlapping ownership during initial load.
+- `siteMetadata.ts` keeps image/logo/theme values separate from translation copy. `VITE_SITE_URL` controls absolute URL formation; it is not copy data.
+- Metadata keys are coupled to the i18n provider effect but not to section component groups. SEO copy should remain a separate contract and be audited alongside, not embedded into, future section copy.
+
+### V1 copy coexistence strategy
+
+- Old groups can remain temporarily while new V2 groups are introduced, provided only one rendered source owns a visible section at a time and both languages remain type-compatible.
+- Do not reuse an old group name when its meaning changes significantly. Add a new V2 group or namespace and keep the old group as a temporary compatibility source until render migration is complete.
+- Delete obsolete groups only after no component, metadata path, or legacy reference consumes them and both language builds have passed structural checks.
+- Keep `trust` intact until Live System Demo, How We Work, and Founder / Why Richt destinations are implemented and verified; then decompose its render usage atomically.
+- Keep Stats copy until StatisticsStrip render usage is removed; do not carry its metric framing into new proof without verified evidence.
+- Keep Workflow copy while the active Hero consumes its connected-system fields and AIWorkflow remains reference-only. Split or deprecate only after the replacement system-demo data contract exists.
+
+### New V2 copy group strategy
+
+Without writing new copy, the safer direction is a top-level `systems` namespace with separate typed subgroups for `aiSystems`, `automationOperations`, and `digitalExperiences`, alongside `selectedWork`, `liveDemo`, `problem`, `process`, `founder`, `faq`, `finalCta`, `footer`, and `contact`.
+
+Separate capability subgroups under `systems` are safer for component isolation than one flat capability array because the current three branches have different visual data lengths and presentation assumptions. Shared labels can use common types later, but visual-state data should remain separate from core copy.
+
+### Bilingual content resilience
+
+- The typed provider supports native TR and EN values with different lengths because components consume strings/arrays rather than measuring or comparing translations. Current structure symmetry does not require identical paragraph length.
+- Native phrasing, non-literal translation, different line breaks, and different paragraph heights are supported by the data model. The responsive audit found layout pressure in Hero, Navbar labels, FAQ questions, process descriptions, capability descriptions, and Footer labels.
+- Architecture that wrongly assumes equal length exists in the layout/render coupling, not the provider: `.hero-section--tr`, index-based visual branches, fixed/max-width assumptions, and any UI that treats translated `detail` delimiters as structured data.
+- TR and EN should remain structurally compatible but textually independent. Copy migrations should permit natural Turkish and natural English rather than forcing mirrored sentence length or line breaks.
+
+### Copy migration risks
+
+1. **Solution index coupling** — Index selects visual branch, alternating order, reveal delay, and capability meaning. Failure: copy is paired with the wrong visual. Guardrail: introduce explicit capability type/presentation metadata before reordering or splitting.
+2. **Navbar labels and IDs** — Labels and IDs are stored together, while Navbar, Footer, rendered sections, and active observer depend on IDs. Failure: a label/ID edit breaks navigation. Guardrail: treat visible labels and stable target IDs as separate contracts and update IDs atomically.
+3. **Trust decomposition** — Intro, system proof, process, and founder copy live in one group/component. Failure: duplicated or lost process/founder content during merge. Guardrail: keep Trust intact until each destination is rendered and map each group explicitly.
+4. **Hero language pressure** — Hero mixes copy group and workflow fields with language-specific CSS assumptions. Failure: Turkish/English wrapping changes composition or rail fit. Guardrail: use intrinsic layouts and test both languages before retiring `.hero-section--tr` exceptions.
+5. **FAQ/metadata identity and duplication** — FAQ IDs derive from order and static/dynamic metadata have overlapping ownership. Failure: reordered questions change DOM identity or previews drift between initial and switched language. Guardrail: preserve order during migration and keep one verified metadata source per field before later cleanup.
+
+### Copy architecture classification
+
+| Group | Status | Architecture reason |
+| --- | --- | --- |
+| `nav` | KEEP | Shared navigation data and target IDs are protected contracts. |
+| `hero` | MIGRATE | Core shape is reusable, but V2 presentation and workflow separation will change. |
+| `stats` | DEPRECATE LATER | Section is planned for render removal and metrics are not protected proof. |
+| `problem` | MIGRATE | Editorial fields are useful; incident-board fields are presentation-coupled. |
+| `solution` | SPLIT | Three capability meanings need isolated V2 groups and visual data separation. |
+| `how` | KEEP | Concise ordered process source is suitable as canonical V2 process content. |
+| `trust` | SPLIT | System proof, process, and founder content belong to different destinations. |
+| `faq` | KEEP | Stable question/answer array shape and flexible mapping are reusable. |
+| `finalCta` | MIGRATE | CTA contract remains; wording and presentation belong to later copy work. |
+| `footer` | MIGRATE | Content architecture can simplify with V2 footer scope. |
+| `contact` | KEEP | Functional labels/status keys are tied to protected modal behavior. |
+| `workflow` | SPLIT | Active Hero systems copy and legacy staged workflow copy have different futures. |
+
+### V2 copy architecture guardrails
+
+- Keep visible labels and navigation IDs as separate conceptual contracts.
+- Do not let array index determine visual meaning; use explicit semantic metadata in future component data.
+- Do not assume equal TR/EN length, line breaks, or paragraph height.
+- Keep core copy separate from visual-state/presentation data wherever the current arrays mix them.
+- Preserve ContactModal field/state semantics and metadata/social preview semantics.
+- Do not delete old groups before render migration and reference checks are complete.
+- Keep prototype/project claims honest and do not carry unsupported metrics into V2.
+- Treat Trust decomposition as a one-source-at-a-time migration to avoid duplicated process/founder copy.
+- Keep TR and EN native and independently editable; structural parity does not require literal translation.
+- Preserve stable section IDs while visible navigation wording evolves.
+
+### i18n and copy architecture conclusion
+
+- The current provider architecture is reusable for V2; a full i18n replacement is not required.
+- Keep the typed provider, language persistence/toggle, shared `TranslationSet` shape, navigation IDs, ContactModal contract, and dynamic metadata integration.
+- Structurally migrate Hero/workflow separation, Solution capability groups, Trust decomposition, and obsolete Stats/AIWorkflow copy boundaries.
+- `nav`, `how`, `faq`, `contact`, and core CTA contracts can coexist with V2 during staged migration. Trust, Solution, and Workflow need explicit split plans.
+- Phase 1 must not rewrite copy, rename translation keys, change arrays/IDs, or alter metadata ownership while token foundations are being introduced.
+- Phase 17 can remain the full bilingual copy rewrite phase, provided earlier structural migrations preserve typed TR/EN parity and do not embed copy assumptions into visual branches.
 
 ## Asset inventory
 
@@ -1291,7 +1478,7 @@ This section must give enough information to create the later Phase 1 implementa
 - [x] Identify design-token migration risks
 - [x] Audit animation systems
 - [x] Audit responsive architecture
-- [ ] Audit i18n and copy architecture
+- [x] Audit i18n and copy architecture
 - [ ] Inventory relevant assets
 - [ ] Audit relevant dependencies
 - [ ] Validate V2 migration order against current architecture
