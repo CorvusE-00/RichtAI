@@ -266,21 +266,27 @@ Implementation note — Checklist 5 complete: The Hero uses the shared `.v2-cont
 
 ### 6. Refine CTA and reassurance presentation
 
-- [ ] Apply the approved compact CTA treatment and quiet secondary reassurance without changing callback behavior or unrelated site copy.
-- [ ] Confirm the Hero action language matches the Navbar staging in both languages.
+- [x] Apply the approved compact CTA treatment and quiet secondary reassurance without changing callback behavior or unrelated site copy.
+- [x] Confirm the Hero action language matches the Navbar staging in both languages.
 - Expected files: src/components/Hero.tsx, src/index.css, src/lib/i18n.tsx only if copy alignment was not completed in Checklist 2, implementation_update.md.
+
+Implementation note — Checklist 6 complete: Added the Hero-local `.hero-v2__cta` treatment while leaving the shared `.btn-primary` unchanged for ContactModal and FinalCTA. The Hero CTA remains a native button with unchanged `onCTAClick`, using Signal Lime, Carbon text, a compact V2 radius, visible focus ring, no shadow/glow/lift/scale, and only restrained color transitions. The ArrowRight is decorative and `aria-hidden`. Turkish remains `Projeyi konuşalım` and English remains `Start a project`, matching Navbar staging. Duration, no-commitment, and direct-contact reassurance meanings and translations remain intact in a quiet bordered meta row with decorative icons/separators.
 
 ### 7. Remove obsolete Hero-only V1 visual and motion artifacts
 
-- [ ] Usage-search and remove the Hero-only radial glow, gradient headline/overlay, image-frame, connected-rail, pulse/sweep, and Hero-specific reveal/fade hooks that are no longer used.
-- [ ] Keep shared/global selectors and animations required by other sections.
+- [x] Usage-search and remove the Hero-only radial glow, gradient headline/overlay, image-frame, connected-rail, pulse/sweep, and Hero-specific reveal/fade hooks that are no longer used.
+- [x] Keep shared/global selectors and animations required by other sections.
 - Expected files: src/components/Hero.tsx, src/index.css, implementation_update.md.
+
+Implementation note — Checklist 7 complete: Repository usage search proved the obsolete Hero-only `.hero-section`, `.hero-section--tr`, `.hero-noise`, `.hero-heading`, `.hero-meta*`, `.hero-copy*`, `.hero-visual*`, `.hero-connected-systems*`, `.radial-glow`, and connected pulse/sweep keyframes were unused by the active V2 Hero and removed. The Hero-only legacy image/rail/reveal hooks are no longer rendered. Shared `.btn-primary`, `.text-gradient-teal`, `.reveal`, `animate-fade-in-up`, `animate-delay-*`, global reduced-motion infrastructure, AIWorkflow dependencies, and ContactModal dependencies were preserved. The physical Hero image asset remains untouched.
 
 ### 8. Complete accessibility and static-state cleanup
 
-- [ ] Verify heading hierarchy, localized canvas description, decorative line semantics, visible focus, contrast, native CTA semantics, and no interactive diagram behavior.
-- [ ] Confirm no continuous Hero motion remains and reduced-motion behavior is safe.
+- [x] Verify heading hierarchy, localized canvas description, decorative line semantics, visible focus, contrast, native CTA semantics, and no interactive diagram behavior.
+- [x] Confirm no continuous Hero motion remains and reduced-motion behavior is safe.
 - Expected files: src/components/Hero.tsx, src/index.css, implementation_update.md.
+
+Implementation note — Checklist 8 complete: Hero retains one `h1`, one semantic support paragraph, one native CTA, and no duplicated hidden copy. The system figure now uses the visible localized figcaption as its accessible name via `aria-labelledby`, the localized `copy.hero.systemCanvas.aria` as a concise hidden description via `aria-describedby`, and the logical `ol`/`li` route order Website → Messages → AI → CRM → Calendar → Team. SVG connectors and markers are decorative (`aria-hidden`, `focusable="false"` for SVG); nodes have no interactive roles or tab stops. Static contrast and focus styling were reviewed, no active Hero keyframes/continuous motion/reveal dependency remains, and the existing global reduced-motion rule safely covers the CTA transition. `pnpm typecheck` passed; full lint/build and functional verification remain Checklist 9.
 
 ### 9. Run functional and project verification
 
