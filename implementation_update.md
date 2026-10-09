@@ -94,7 +94,7 @@ The new foundation may exist unused until Phase 2.
 
 ### 1. Add semantic V2 CSS variables
 
-- [ ] Add an isolated, namespaced variable layer in `src/index.css`.
+- [x] Add an isolated, namespaced variable layer in `src/index.css`.
 
 Plan the minimum groups only:
 
@@ -108,6 +108,8 @@ Plan the minimum groups only:
 - Typography: display, heading, body, label, system/mono families.
 
 Use the approved palette values. Do not change existing V1 variables, Tailwind colors, body defaults, or rendered output.
+
+Implementation note: `src/index.css` now contains the isolated `--v2-` variable block covering surfaces, text, accents, borders, interaction, shape, layout, and font-family roles. The collision search found no prior `--v2-*` variables or proposed names, and no V1 selector consumes the new variables. `tailwind.config.js` and all other files remained untouched.
 
 ### 2. Add dark/light surface contracts
 
@@ -232,7 +234,7 @@ Phase 1 is complete only when:
 
 ## Phase 1 checklist
 
-- [ ] Add semantic V2 CSS variables
+- [x] Add semantic V2 CSS variables
 - [ ] Add dark/light surface contracts
 - [ ] Add typography, shape, and layout semantic roles
 - [ ] Add minimum `.v2-*` primitive classes

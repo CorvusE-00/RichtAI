@@ -1,3 +1,46 @@
+:root {
+  /* V2 semantic foundation — opt-in only; legacy V1 tokens remain unchanged. */
+  --v2-surface-carbon: #080A0D;
+  --v2-surface-graphite: #10141A;
+  --v2-surface-elevated: #171C23;
+  --v2-surface-bone: #F4F2EB;
+
+  --v2-text-on-dark-primary: #F4F2EB;
+  --v2-text-on-dark-secondary: #89939E;
+  --v2-text-on-light-primary: #080A0D;
+  --v2-text-on-light-secondary: #626B75;
+
+  --v2-accent-signal: #C7FF4A;
+  --v2-accent-system: #50DFFF;
+
+  --v2-border-dark: rgba(244, 242, 235, 0.14);
+  --v2-border-light: rgba(8, 10, 13, 0.16);
+  --v2-border-active: var(--v2-accent-signal);
+
+  --v2-focus: var(--v2-accent-system);
+  --v2-hover: rgba(80, 223, 255, 0.12);
+  --v2-pressed: rgba(80, 223, 255, 0.2);
+  --v2-disabled: #626B75;
+
+  --v2-radius-surface: 16px;
+  --v2-radius-control: 8px;
+  --v2-radius-ui: 6px;
+
+  --v2-content-max: 80rem;
+  --v2-gutter-mobile: 20px;
+  --v2-gutter-tablet: 32px;
+  --v2-gutter-desktop: 64px;
+  --v2-gutter-desktop-wide: 80px;
+  --v2-section-space: 96px;
+  --v2-component-space: 32px;
+
+  --v2-font-display: 'Space Grotesk', system-ui, sans-serif;
+  --v2-font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --v2-font-body: 'Inter', system-ui, sans-serif;
+  --v2-font-label: 'Space Grotesk', system-ui, sans-serif;
+  --v2-font-system: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
