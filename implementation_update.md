@@ -125,7 +125,7 @@ Implementation note: added `.v2-section-dark` and `.v2-section-light` with scope
 
 ### 3. Add typography, shape, and layout roles
 
-- [ ] Add opt-in semantic roles without changing current typography or containers.
+- [x] Add opt-in semantic roles without changing current typography or containers.
 
 Plan:
 
@@ -137,6 +137,8 @@ Plan:
 - Encode approximately 1280px content max width, 96px large section spacing, and 32px component spacing.
 
 These roles remain opt-in. Do not migrate V1 containers, global headings, body font, or section spacing.
+
+Implementation note: added `.v2-type-display`, `.v2-type-heading`, `.v2-type-body`, `.v2-type-label`, `.v2-type-system`, `.v2-radius-surface`, `.v2-radius-control`, and `.v2-radius-ui`. No layout classes were added; layout tokens remain available until `.v2-container` is introduced in Checklist 4. No current source consumer uses these roles, V1 output remains unaffected, and `tailwind.config.js` remains untouched.
 
 ### 4. Add the minimum V2 primitives
 
@@ -238,7 +240,7 @@ Phase 1 is complete only when:
 
 - [x] Add semantic V2 CSS variables
 - [x] Add dark/light surface contracts
-- [ ] Add typography, shape, and layout semantic roles
+- [x] Add typography, shape, and layout semantic roles
 - [ ] Add minimum `.v2-*` primitive classes
 - [ ] Evaluate whether Tailwind semantic aliases are needed
 - [ ] Add only justified Tailwind aliases if required

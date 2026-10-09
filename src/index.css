@@ -100,6 +100,17 @@
     --v2-current-disabled: var(--v2-disabled);
   }
 
+  /* V2 typography and shape roles — opt-in only; no current markup consumes these. */
+  .v2-type-display { font-family: var(--v2-font-display); }
+  .v2-type-heading { font-family: var(--v2-font-heading); }
+  .v2-type-body { font-family: var(--v2-font-body); }
+  .v2-type-label { font-family: var(--v2-font-label); }
+  .v2-type-system { font-family: var(--v2-font-system); }
+
+  .v2-radius-surface { border-radius: var(--v2-radius-surface); }
+  .v2-radius-control { border-radius: var(--v2-radius-control); }
+  .v2-radius-ui { border-radius: var(--v2-radius-ui); }
+
   /* Teal is the primary brand signal; cyan remains available for secondary workflow states. */
   .text-gradient-teal {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-teal-300 via-teal-400 to-teal-300;
