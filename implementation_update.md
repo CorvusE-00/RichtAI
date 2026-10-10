@@ -511,8 +511,8 @@ The likely later Hero V3 implementation scope is:
 - `implementation_update.md` — checklist notes and verification records.
 
 No App, Navbar, ContactModal, StatisticsStrip, unrelated section, metadata, asset, package, or configuration changes are justified by Checklist 1.
-- [ ] 2. Finalize bilingual Hero V3 copy, including the recommended TR/EN headline and support copy.
-- [ ] 3. Build the Hero V3 static layout shell with desktop, tablet, and mobile structural contracts.
+- [x] 2. Finalize bilingual Hero V3 copy, including the recommended TR/EN headline and support copy.
+- [x] 3. Build the Hero V3 static layout shell with desktop, tablet, and mobile structural contracts.
 - [ ] 4. Build the multi-channel Website + WhatsApp inbound architecture with semantic order and equal status.
 - [ ] 5. Build the central AI / CRM / Calendar / Team live system scene and one coherent route backbone.
 - [ ] 6. Establish the static premium visual hierarchy, surface framing, AI focal treatment, Team handoff, CTA relationship, and reassurance grouping.
@@ -522,6 +522,35 @@ No App, Navbar, ContactModal, StatisticsStrip, unrelated section, metadata, asse
 - [ ] 10. Adapt the Hero deliberately for tablet and mobile while preserving both channels and readable reduced scenes.
 - [ ] 11. Complete accessibility, reduced-motion, performance, and browser-containment refinement.
 - [ ] 12. Complete full bilingual visual QA, typecheck, lint, build, protected-contract verification, and final handoff.
+
+### Checklist 2 implementation note — bilingual Hero V3 copy
+
+- Final TR headline: `Müşteri iletişimini işleyen sistemlere dönüştürüyoruz.`
+- Final EN headline: `We turn customer communication into working systems.`
+- Final TR support: `Web sitesi ve WhatsApp’tan gelen talepleri yapay zekâ, CRM, randevu ve ekip süreçleriyle tek bir sistemde birleştiriyoruz.`
+- Final EN support: `We connect enquiries from your website and WhatsApp to the AI, CRM, scheduling, and team workflows that move the next step forward.`
+- CTA remains `Projeyi konuşalım` / `Start a project`.
+- Headline field decision: Hero-only `headlineAccent` was removed from the TR/EN `hero` objects and Hero now renders one localized `headline` string. Other translation groups retain their own `headlineAccent` fields, so no unrelated consumers were changed and TR/EN Hero object shapes remain identical.
+- Added the localized `hero.eyebrow` field: `Bağlı dijital sistemler` / `Connected digital systems`.
+- Replaced the generic `systemCanvas.nodes.messages` shape with `systemCanvas.nodes.whatsapp` and updated both localized descriptions to the Website + WhatsApp → AI → CRM / scheduling → team story.
+- `duration`, `noCommitment`, and `direct` wording was preserved.
+- `workflow.*` and every unrelated translation group were left untouched.
+
+### Checklist 3 implementation note — Hero V3 static shell
+
+- Replaced the active `.hero-v2` / `.hero-system` markup with a new `.hero-v3` / `.hero-live-system` class architecture.
+- Hero structure is now: `section#anasayfa` → `.v2-container` → `.hero-v3__layout` → copy column and labelled live-system figure.
+- Copy classes are `.hero-v3__copy`, `.hero-v3__eyebrow`, `.hero-v3__heading`, `.hero-v3__support`, `.hero-v3__actions`, `.hero-v3__meta`, and `.hero-v3__cta`.
+- System-shell classes are `.hero-live-system`, `__surface`, `__header`, `__body`, and structural `__region` variants for inbound, core, operations, and handoff.
+- The static surface uses Carbon / Graphite, thin borders, restrained internal rails, a central core zone, downstream operation rows, and a small handoff marker. It is visually structured but does not yet render final Website / WhatsApp node content.
+- Desktop composition uses an intentional approximately 47% copy / 53% system split from 1024px upward, with deliberate top alignment and preserved Navbar clearance.
+- Tablet uses a single-column copy-first shell from 768px, with the system below and reduced height; mobile uses a compact single-column shell below 768px with no fixed grid and no horizontal overflow-prone node map.
+- Headline uses one natural localized string, balanced wrapping, Space Grotesk / display styling, Bone White, and no gradient or manual line break. Support uses Inter / secondary styling with a controlled measure.
+- Removed active Phase 3.5 geometry: named node grid areas, static connector SVG path, six-node `hero-system` list, and old `hero-v2` Hero selectors. Shared reveal, reduced-motion, and unrelated workflow CSS remain untouched.
+- Accessibility preserved: one h1, native CTA callback, figure `aria-labelledby` / `aria-describedby`, localized screen-reader description, decorative shell body hidden from assistive technology, no placeholder interaction, and no extra tab stops.
+- No motion was added: no keyframes, timers, effects, requestAnimationFrame, intervals, state cycling, SVG animation, pulsing, sweeping, or route travel.
+- Responsive source and layout contracts were checked for 1024×900, 1280×900, 1440×900, 1536×900, 768–1023px tablet, and below-768px mobile ranges. The Codex in-app browser confirmed the new localized eyebrow, single headline, support copy, CTA, and labelled system figure in the running page.
+- Verification: `pnpm typecheck` PASS; `pnpm lint` PASS. Full build remains assigned to Checklist 12.
 
 ## Exit criteria
 
@@ -568,4 +597,4 @@ If any answer is NO, Hero V3 is not complete.
 
 ## Handoff
 
-The audit is complete and the next implementation run starts with Checklist 2. Work must advance one checklist at a time. Expected future implementation scope is limited to `src/components/Hero.tsx`, `src/index.css`, `src/lib/i18n.tsx`, and this plan file unless a later approved checklist explicitly expands it. Do not edit App, Navbar, other sections, ContactModal, metadata, assets, or configuration without separate approval.
+Checklists 1–3 are complete and the next implementation run starts with Checklist 4. Work must advance one checklist at a time. Expected future implementation scope remains limited to `src/components/Hero.tsx`, `src/index.css`, `src/lib/i18n.tsx`, and this plan file unless a later approved checklist explicitly expands it. Do not edit App, Navbar, other sections, ContactModal, metadata, assets, or configuration without separate approval.

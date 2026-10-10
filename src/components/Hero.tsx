@@ -7,40 +7,29 @@ interface HeroProps {
 
 export function Hero({ onCTAClick }: HeroProps) {
   const { copy } = useLanguage();
-  const systemNodes = [
-    { key: 'website', label: copy.hero.systemCanvas.nodes.website, itemClass: 'hero-system__item--website', nodeClass: 'hero-system__node--website' },
-    { key: 'messages', label: copy.hero.systemCanvas.nodes.messages, itemClass: 'hero-system__item--messages', nodeClass: 'hero-system__node--messages' },
-    { key: 'ai', label: copy.hero.systemCanvas.nodes.ai, itemClass: 'hero-system__item--ai', nodeClass: 'hero-system__node--ai' },
-    { key: 'crm', label: copy.hero.systemCanvas.nodes.crm, itemClass: 'hero-system__item--crm', nodeClass: 'hero-system__node--crm' },
-    { key: 'calendar', label: copy.hero.systemCanvas.nodes.calendar, itemClass: 'hero-system__item--calendar', nodeClass: 'hero-system__node--calendar' },
-    { key: 'team', label: copy.hero.systemCanvas.nodes.team, itemClass: 'hero-system__item--team', nodeClass: 'hero-system__node--team' },
-  ] as const;
 
   return (
     <section
       id="anasayfa"
-      className="hero-v2 v2-section-dark relative overflow-hidden"
+      className="hero-v3 v2-section-dark relative overflow-hidden"
     >
       <div className="v2-container relative">
-        <div className="hero-v2__layout">
-          <div className="hero-v2__copy">
-            <h1 className="hero-v2__heading">
-              <span>{copy.hero.headline}</span>{' '}
-              <span>{copy.hero.headlineAccent}</span>
-            </h1>
+        <div className="hero-v3__layout">
+          <div className="hero-v3__copy">
+            <p className="hero-v3__eyebrow">{copy.hero.eyebrow}</p>
 
-            <p className="hero-v2__support">
-              {copy.hero.subheadline}
-            </p>
+            <h1 className="hero-v3__heading">{copy.hero.headline}</h1>
 
-            <div className="hero-v2__actions">
-              <button onClick={onCTAClick} className="hero-v2__cta w-full sm:w-auto">
+            <p className="hero-v3__support">{copy.hero.subheadline}</p>
+
+            <div className="hero-v3__actions">
+              <button onClick={onCTAClick} className="hero-v3__cta w-full sm:w-auto">
                 <span>{copy.hero.cta}</span>
                 <ArrowRight className="h-5 w-5" aria-hidden="true" />
               </button>
             </div>
 
-            <div className="hero-v2__meta">
+            <div className="hero-v3__meta">
               <span>{copy.hero.duration}</span>
               <span aria-hidden="true">·</span>
               <span className="inline-flex items-center gap-1.5">
@@ -55,34 +44,40 @@ export function Hero({ onCTAClick }: HeroProps) {
             </div>
           </div>
 
-          <figure className="hero-system" aria-labelledby="hero-system-label" aria-describedby="hero-system-description">
-            <div className="hero-system__stage">
-              <figcaption id="hero-system-label" className="hero-system__label">
-                <span className="hero-system__label-marker" aria-hidden="true" />
+          <figure className="hero-live-system" aria-labelledby="hero-live-system-label" aria-describedby="hero-live-system-description">
+            <div className="hero-live-system__surface">
+              <figcaption id="hero-live-system-label" className="hero-live-system__header">
+                <span className="hero-live-system__header-marker" aria-hidden="true" />
                 {copy.hero.systemCanvas.label}
               </figcaption>
-              <span id="hero-system-description" className="sr-only">
+              <span id="hero-live-system-description" className="sr-only">
                 {copy.hero.systemCanvas.aria}
               </span>
-              <svg className="hero-system__connectors" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-                <path
-                  className="hero-system__connector"
-                  d="M 14 25 H 29 V 55 M 14 55 H 29 M 71 55 H 76 V 25 H 86 M 76 55 H 86 M 76 55 V 85 H 86"
-                />
-              </svg>
-              <ol className="hero-system__route">
-                {systemNodes.map((node) => (
-                  <li
-                    key={node.key}
-                    className={`hero-system__item ${node.itemClass}`}
-                  >
-                    <div className={`hero-system__node ${node.nodeClass}`}>
-                      <span className="hero-system__marker" aria-hidden="true" />
-                      <span className="hero-system__node-label">{node.label}</span>
-                    </div>
-                  </li>
-                ))}
-              </ol>
+
+              <div className="hero-live-system__body" aria-hidden="true">
+                <div className="hero-live-system__region hero-live-system__region--inbound">
+                  <span className="hero-live-system__rail" />
+                  <span className="hero-live-system__rail hero-live-system__rail--short" />
+                  <span className="hero-live-system__rail" />
+                </div>
+
+                <div className="hero-live-system__region hero-live-system__region--core">
+                  <span className="hero-live-system__core-ring" />
+                  <span className="hero-live-system__core-mark" />
+                  <span className="hero-live-system__core-line" />
+                </div>
+
+                <div className="hero-live-system__region hero-live-system__region--operations">
+                  <span className="hero-live-system__operation-row" />
+                  <span className="hero-live-system__operation-row hero-live-system__operation-row--wide" />
+                  <span className="hero-live-system__operation-row" />
+                </div>
+
+                <div className="hero-live-system__region hero-live-system__region--handoff">
+                  <span className="hero-live-system__handoff-line" />
+                  <span className="hero-live-system__handoff-marker" />
+                </div>
+              </div>
             </div>
           </figure>
         </div>
