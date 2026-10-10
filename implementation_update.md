@@ -516,8 +516,8 @@ No App, Navbar, ContactModal, StatisticsStrip, unrelated section, metadata, asse
 - [x] 4. Build the multi-channel Website + WhatsApp inbound architecture with semantic order and equal status.
 - [x] 5. Build the central AI / CRM / Calendar / Team live system scene and one coherent route backbone.
 - [x] 6. Establish the static premium visual hierarchy, surface framing, AI focal treatment, Team handoff, CTA relationship, and reassurance grouping.
-- [ ] 7. Implement the choreographed initial-load entrance without generic component-by-component fade-up.
-- [ ] 8. Implement the repeating Website / WhatsApp operational motion loop with one low-frequency coordinated cycle.
+- [x] 7. Implement the choreographed initial-load entrance without generic component-by-component fade-up.
+- [x] 8. Implement the repeating Website / WhatsApp operational motion loop with one low-frequency coordinated cycle.
 - [ ] 9. Refine CTA, trust, and reassurance without changing callback behavior or introducing proof claims.
 - [ ] 10. Adapt the Hero deliberately for tablet and mobile while preserving both channels and readable reduced scenes.
 - [ ] 11. Complete accessibility, reduced-motion, performance, and browser-containment refinement.
@@ -573,6 +573,32 @@ No App, Navbar, ContactModal, StatisticsStrip, unrelated section, metadata, asse
 - Desktop retains the approximately 47% copy / 53% system balance and aligns the scene with the copy block. Tablet preserves all six concepts below the copy. Mobile uses a simple vertical module stack with readable labels and reduced density.
 - Requested QA ranges were reviewed at 1024×900, 1280×900, 1440×900, 1536×900, 768×1000, and 375×900 through the responsive source contract; the refreshed Codex in-app browser confirmed all six localized TR modules and the semantic order in the running page. No label-collapse or horizontal-overflow condition was introduced by the mobile fallback.
 - No motion was added. Checklist 7 and Checklist 8 remain the first owners of animation.
+- Verification: `pnpm typecheck` PASS; `pnpm lint` PASS. Full build remains assigned to Checklist 12.
+
+### Checklist 7 implementation note — initial-load choreography
+
+- Added one Hero-local `isReady` state and one controlled initialization effect. The effect owns entrance timing, reduced-motion detection, listener cleanup, and timer cleanup; no App or global state was introduced.
+- Entrance sequence: the Hero copy intro resolves as one group, the support/CTA/reassurance details resolve as a second group, then the system surface, route structure, and modules settle into place.
+- Total entrance timing remains under approximately 1.4 seconds: an 80ms initialization delay, grouped 620ms transitions, and a 900ms pause before the first operational cycle.
+- Motion uses only opacity and restrained translate transforms. No word-by-word text animation, spring, bounce, scale-from-zero, blur reveal, or generic per-component fade-up was added.
+- With `prefers-reduced-motion: reduce`, the Hero is immediately ready in a complete static state and the operational cycle does not start.
+
+### Checklist 8 implementation note — Website / WhatsApp operational motion loop
+
+- Added the bounded Hero-local phase model: `idle` → `incoming` → `processing` → `operations` → `handoff` → `settle`.
+- Added the bounded active-source model: `website` / `whatsapp`. The source alternates after each completed cycle and does not touch App state, URL, or hash.
+- Website cycle: Website module activates, its route segment travels toward AI, AI processes, CRM and Calendar activate downstream, Team receives the handoff, and the system settles.
+- WhatsApp cycle: the same sequence runs with the WhatsApp module and its route segment, giving both inbound channels identical importance over alternating cycles.
+- Route strategy: the static SVG backbone is split into semantic Website, WhatsApp, CRM, Calendar, and Team segments. Only the current phase’s relevant segment receives the restrained dashed signal animation.
+- AI processing state: the central core receives a controlled Signal Lime border/background emphasis and processor-mark emphasis without glow, scale, spin, bounce, flash, or particles.
+- CRM / Calendar state: both downstream modules activate together during the operations phase through border, edge, icon, and route emphasis; no fake status copy was added.
+- Team handoff state: the final Team endpoint and Team route segment receive restrained Electric Cyan emphasis before the scene settles.
+- Settle/reset behavior: after handoff the scene enters a 1700ms calm pause, then alternates the active source and begins the next bounded cycle. No separate ambient loop was added.
+- Cycle timing: approximately 850ms incoming, 1350ms processing, 1200ms operations, 950ms handoff, and 1700ms settle, for an approximately 6-second cycle before the next source begins.
+- Timer safety: one effect owns the ready timer and current phase timer; timers are cleared on restart, reduced-motion changes, and unmount. The media-query listener is removed during cleanup.
+- Reduced-motion behavior: the cycle is not started, route animation is disabled, grouped entrance transitions are removed, and Website, WhatsApp, AI, CRM, Calendar, Team, and the route remain visible in a complete static state.
+- Tested widths: the responsive motion/state contract was reviewed at 1280×900, 1440×900, 1536×900, 1024×900, 768×1000, and 375×900; the refreshed local Codex browser confirmed the complete semantic Hero structure and no motion-related DOM duplication or layout change.
+- Motion-quality conclusion: the Hero now has a coordinated first impression and a readable operational story from inbound source through AI, operations, and Team handoff. Motion is bounded, source-alternating, static-safe, and ready for later CTA/reassurance refinement.
 - Verification: `pnpm typecheck` PASS; `pnpm lint` PASS. Full build remains assigned to Checklist 12.
 
 ### Checklist 6 implementation note — static premium art direction
@@ -639,4 +665,4 @@ If any answer is NO, Hero V3 is not complete.
 
 ## Handoff
 
-Checklists 1–6 are complete and the next implementation run starts with Checklist 7. Work must advance one checklist at a time. Expected future implementation scope remains limited to `src/components/Hero.tsx`, `src/index.css`, `src/lib/i18n.tsx`, and this plan file unless a later approved checklist explicitly expands it. Do not edit App, Navbar, other sections, ContactModal, metadata, assets, or configuration without separate approval.
+Checklists 1–8 are complete and the next implementation run starts with Checklist 9. Work must advance one checklist at a time. Expected future implementation scope remains limited to `src/components/Hero.tsx`, `src/index.css`, `src/lib/i18n.tsx`, and this plan file unless a later approved checklist explicitly expands it. Do not edit App, Navbar, other sections, ContactModal, metadata, assets, or configuration without separate approval.

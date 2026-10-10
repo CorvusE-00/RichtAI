@@ -133,6 +133,30 @@
     text-align: center;
   }
 
+  .hero-v3__intro,
+  .hero-v3__details,
+  .hero-live-system {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 620ms cubic-bezier(0.22, 1, 0.36, 1), transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .hero-v3__details {
+    transition-delay: 90ms;
+  }
+
+  .hero-live-system {
+    transform: translateX(12px);
+    transition-delay: 160ms;
+  }
+
+  .hero-v3--ready .hero-v3__intro,
+  .hero-v3--ready .hero-v3__details,
+  .hero-v3--ready .hero-live-system {
+    opacity: 1;
+    transform: none;
+  }
+
   .hero-v3__eyebrow {
     margin: 0 0 1rem;
     color: var(--v2-accent-system);
@@ -264,7 +288,13 @@
     z-index: 0;
     width: calc(100% - 2.5rem);
     height: calc(100% - 3.75rem);
+    opacity: 0;
+    transition: opacity 520ms cubic-bezier(0.22, 1, 0.36, 1) 360ms;
     pointer-events: none;
+  }
+
+  .hero-live-system--ready .hero-live-system__route-lines {
+    opacity: 1;
   }
 
   .hero-live-system__route-line {
@@ -289,6 +319,14 @@
     padding: 0;
     gap: 0.75rem;
     list-style: none;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 520ms cubic-bezier(0.22, 1, 0.36, 1) 420ms, transform 520ms cubic-bezier(0.22, 1, 0.36, 1) 420ms;
+  }
+
+  .hero-live-system--ready .hero-live-system__route {
+    opacity: 1;
+    transform: none;
   }
 
   .hero-live-system__node {
@@ -345,6 +383,76 @@
     border-radius: 999px;
     background: var(--v2-accent-system);
     content: '';
+  }
+
+  .hero-live-system[data-phase='incoming'][data-source='website'] .hero-live-system__node--website .hero-live-system__module,
+  .hero-live-system[data-phase='processing'][data-source='website'] .hero-live-system__node--website .hero-live-system__module,
+  .hero-live-system[data-phase='incoming'][data-source='whatsapp'] .hero-live-system__node--whatsapp .hero-live-system__module,
+  .hero-live-system[data-phase='processing'][data-source='whatsapp'] .hero-live-system__node--whatsapp .hero-live-system__module {
+    border-bottom-color: var(--v2-accent-signal);
+    color: var(--v2-text-on-dark-primary);
+  }
+
+  .hero-live-system[data-phase='incoming'][data-source='website'] .hero-live-system__node--website .hero-live-system__module::after,
+  .hero-live-system[data-phase='processing'][data-source='website'] .hero-live-system__node--website .hero-live-system__module::after,
+  .hero-live-system[data-phase='incoming'][data-source='whatsapp'] .hero-live-system__node--whatsapp .hero-live-system__module::after,
+  .hero-live-system[data-phase='processing'][data-source='whatsapp'] .hero-live-system__node--whatsapp .hero-live-system__module::after {
+    background: var(--v2-accent-signal);
+  }
+
+  .hero-live-system[data-phase='processing'] .hero-live-system__module--core {
+    border-color: var(--v2-accent-signal);
+    background: color-mix(in srgb, var(--v2-accent-signal) 6%, var(--v2-surface-carbon));
+  }
+
+  .hero-live-system[data-phase='processing'] .hero-live-system__core-mark {
+    background: color-mix(in srgb, var(--v2-accent-signal) 16%, var(--v2-surface-carbon));
+  }
+
+  .hero-live-system[data-phase='operations'] .hero-live-system__node--crm .hero-live-system__module,
+  .hero-live-system[data-phase='operations'] .hero-live-system__node--calendar .hero-live-system__module {
+    border-bottom-color: var(--v2-accent-system);
+    border-left-color: var(--v2-accent-system);
+    color: var(--v2-text-on-dark-primary);
+  }
+
+  .hero-live-system[data-phase='operations'] .hero-live-system__node--crm .hero-live-system__module-icon,
+  .hero-live-system[data-phase='operations'] .hero-live-system__node--calendar .hero-live-system__module-icon {
+    color: var(--v2-accent-system);
+  }
+
+  .hero-live-system[data-phase='handoff'] .hero-live-system__node--team .hero-live-system__module {
+    border-left-color: var(--v2-accent-system);
+    color: var(--v2-text-on-dark-primary);
+  }
+
+  .hero-live-system[data-phase='handoff'] .hero-live-system__node--team .hero-live-system__module::after {
+    background: var(--v2-accent-system);
+  }
+
+  .hero-live-system[data-phase='incoming'][data-source='website'] .hero-live-system__route-line--website,
+  .hero-live-system[data-phase='processing'][data-source='website'] .hero-live-system__route-line--website,
+  .hero-live-system[data-phase='incoming'][data-source='whatsapp'] .hero-live-system__route-line--whatsapp,
+  .hero-live-system[data-phase='processing'][data-source='whatsapp'] .hero-live-system__route-line--whatsapp,
+  .hero-live-system[data-phase='operations'] .hero-live-system__route-line--crm,
+  .hero-live-system[data-phase='operations'] .hero-live-system__route-line--calendar,
+  .hero-live-system[data-phase='handoff'] .hero-live-system__route-line--team {
+    stroke: var(--v2-accent-signal);
+    stroke-dasharray: 8 12;
+    stroke-width: 2;
+    animation: hero-v3-route-signal 1200ms linear infinite;
+    opacity: 1;
+  }
+
+  .hero-live-system[data-phase='operations'] .hero-live-system__route-line--crm,
+  .hero-live-system[data-phase='operations'] .hero-live-system__route-line--calendar,
+  .hero-live-system[data-phase='handoff'] .hero-live-system__route-line--team {
+    stroke: var(--v2-accent-system);
+  }
+
+  @keyframes hero-v3-route-signal {
+    from { stroke-dashoffset: 20; }
+    to { stroke-dashoffset: 0; }
   }
 
   .hero-live-system__module--core {
@@ -1784,6 +1892,20 @@
   .motion-ready .reveal.reveal-visible {
     opacity: 1;
     transform: none;
+  }
+
+  .hero-v3__intro,
+  .hero-v3__details,
+  .hero-live-system,
+  .hero-live-system__route,
+  .hero-live-system__route-lines {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hero-live-system__route-line {
+    animation: none !important;
   }
 
   .workflow-action:not(.is-resolved) {
