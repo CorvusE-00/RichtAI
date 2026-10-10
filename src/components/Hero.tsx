@@ -8,12 +8,12 @@ interface HeroProps {
 export function Hero({ onCTAClick }: HeroProps) {
   const { copy } = useLanguage();
   const systemNodes = [
-    { key: 'website', label: copy.hero.systemCanvas.nodes.website, modifier: 'website' },
-    { key: 'messages', label: copy.hero.systemCanvas.nodes.messages, modifier: 'messages' },
-    { key: 'ai', label: copy.hero.systemCanvas.nodes.ai, modifier: 'ai' },
-    { key: 'crm', label: copy.hero.systemCanvas.nodes.crm, modifier: 'crm' },
-    { key: 'calendar', label: copy.hero.systemCanvas.nodes.calendar, modifier: 'calendar' },
-    { key: 'team', label: copy.hero.systemCanvas.nodes.team, modifier: 'team' },
+    { key: 'website', label: copy.hero.systemCanvas.nodes.website, itemClass: 'hero-system__item--website', nodeClass: 'hero-system__node--website' },
+    { key: 'messages', label: copy.hero.systemCanvas.nodes.messages, itemClass: 'hero-system__item--messages', nodeClass: 'hero-system__node--messages' },
+    { key: 'ai', label: copy.hero.systemCanvas.nodes.ai, itemClass: 'hero-system__item--ai', nodeClass: 'hero-system__node--ai' },
+    { key: 'crm', label: copy.hero.systemCanvas.nodes.crm, itemClass: 'hero-system__item--crm', nodeClass: 'hero-system__node--crm' },
+    { key: 'calendar', label: copy.hero.systemCanvas.nodes.calendar, itemClass: 'hero-system__item--calendar', nodeClass: 'hero-system__node--calendar' },
+    { key: 'team', label: copy.hero.systemCanvas.nodes.team, itemClass: 'hero-system__item--team', nodeClass: 'hero-system__node--team' },
   ] as const;
 
   return (
@@ -67,16 +67,16 @@ export function Hero({ onCTAClick }: HeroProps) {
               <svg className="hero-system__connectors" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
                 <path
                   className="hero-system__connector"
-                  d="M 14 31 V 47 H 34 M 14 62 H 26 V 47 M 66 47 H 75 V 31 H 85 M 66 47 H 75 V 62 H 85 M 66 47 H 75 V 85 H 84"
+                  d="M 14 25 H 29 V 55 M 14 55 H 29 M 71 55 H 76 V 25 H 86 M 76 55 H 86 M 76 55 V 85 H 86"
                 />
               </svg>
               <ol className="hero-system__route">
                 {systemNodes.map((node) => (
                   <li
                     key={node.key}
-                    className={`hero-system__item hero-system__item--${node.modifier}`}
+                    className={`hero-system__item ${node.itemClass}`}
                   >
-                    <div className={`hero-system__node hero-system__node--${node.modifier}`}>
+                    <div className={`hero-system__node ${node.nodeClass}`}>
                       <span className="hero-system__marker" aria-hidden="true" />
                       <span className="hero-system__node-label">{node.label}</span>
                     </div>
