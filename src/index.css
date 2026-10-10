@@ -246,139 +246,121 @@
 
   .hero-live-system__body {
     position: relative;
-    display: grid;
-    grid-template-columns: minmax(5rem, 0.78fr) minmax(8rem, 1.2fr) minmax(6rem, 0.92fr);
-    align-items: center;
     min-height: 18rem;
     padding: 2.25rem 1.25rem 1.5rem;
-    gap: 1rem;
   }
 
-  .hero-live-system__body::before,
-  .hero-live-system__body::after {
+  .hero-live-system__route-lines {
     position: absolute;
-    top: 50%;
-    height: 1px;
-    background: color-mix(in srgb, var(--v2-accent-system) 44%, var(--v2-border-dark));
-    content: '';
+    inset: 2.25rem 1.25rem 1.5rem;
+    z-index: 0;
+    width: calc(100% - 2.5rem);
+    height: calc(100% - 3.75rem);
     pointer-events: none;
   }
 
-  .hero-live-system__body::before {
-    left: 12%;
-    right: 61%;
+  .hero-live-system__route-line {
+    fill: none;
+    stroke: color-mix(in srgb, var(--v2-accent-system) 68%, var(--v2-border-dark));
+    stroke-width: 1.2;
+    vector-effect: non-scaling-stroke;
   }
 
-  .hero-live-system__body::after {
-    left: 58%;
-    right: 12%;
+  .hero-live-system__route-line--handoff {
+    stroke: color-mix(in srgb, var(--v2-accent-system) 76%, var(--v2-border-dark));
   }
 
-  .hero-live-system__region {
+  .hero-live-system__route {
     position: relative;
     z-index: 1;
-    min-width: 0;
-  }
-
-  .hero-live-system__region--inbound {
     display: grid;
+    grid-template-columns: minmax(6rem, 0.82fr) minmax(9rem, 1.28fr) minmax(6rem, 0.9fr);
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    grid-template-areas:
+      "website ai crm"
+      "whatsapp ai calendar"
+      ". ai team";
+    min-height: 18rem;
+    margin: 0;
+    padding: 0;
     gap: 0.75rem;
+    list-style: none;
   }
 
-  .hero-live-system__rail,
-  .hero-live-system__operation-row {
-    display: block;
-    height: 2.25rem;
-    border: 1px solid color-mix(in srgb, var(--v2-border-dark) 92%, var(--v2-accent-system));
-    border-radius: var(--v2-radius-ui);
-    background: color-mix(in srgb, var(--v2-surface-elevated) 72%, var(--v2-surface-graphite));
-  }
-
-  .hero-live-system__rail::before,
-  .hero-live-system__operation-row::before {
-    display: block;
-    width: 38%;
-    height: 0.25rem;
-    margin: 0.9rem 0.75rem;
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--v2-accent-system) 55%, var(--v2-border-dark));
-    content: '';
-  }
-
-  .hero-live-system__rail--short {
-    width: 78%;
-  }
-
-  .hero-live-system__region--core {
-    display: grid;
-    min-height: 10rem;
-    place-items: center;
-    border: 1px solid var(--v2-accent-signal);
-    border-radius: var(--v2-radius-ui);
-    background: var(--v2-surface-carbon);
-  }
-
-  .hero-live-system__core-ring {
-    position: absolute;
-    width: 5.75rem;
-    height: 5.75rem;
-    border: 1px solid color-mix(in srgb, var(--v2-accent-signal) 72%, transparent);
-    border-radius: 999px;
-  }
-
-  .hero-live-system__core-mark {
-    width: 0.75rem;
-    height: 0.75rem;
-    border: 2px solid var(--v2-accent-signal);
-    border-radius: 999px;
-    background: var(--v2-accent-signal);
-    box-shadow: 0 0 0 0.5rem color-mix(in srgb, var(--v2-accent-signal) 12%, transparent);
-  }
-
-  .hero-live-system__core-line {
-    position: absolute;
-    bottom: 1.25rem;
-    width: 2.75rem;
-    height: 1px;
-    background: color-mix(in srgb, var(--v2-accent-signal) 72%, var(--v2-border-dark));
-  }
-
-  .hero-live-system__region--operations {
-    display: grid;
-    gap: 0.75rem;
-  }
-
-  .hero-live-system__operation-row {
-    height: 2.25rem;
-  }
-
-  .hero-live-system__operation-row--wide {
-    width: 88%;
-  }
-
-  .hero-live-system__region--handoff {
-    position: absolute;
-    right: 1.25rem;
-    bottom: 1rem;
+  .hero-live-system__node {
     display: flex;
+    min-width: 0;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: center;
   }
 
-  .hero-live-system__handoff-line {
-    display: block;
-    width: 2.75rem;
-    height: 1px;
-    background: color-mix(in srgb, var(--v2-accent-system) 72%, var(--v2-border-dark));
+  .hero-live-system__node--website { grid-area: website; }
+  .hero-live-system__node--whatsapp { grid-area: whatsapp; }
+  .hero-live-system__node--ai { grid-area: ai; }
+  .hero-live-system__node--crm { grid-area: crm; }
+  .hero-live-system__node--calendar { grid-area: calendar; }
+  .hero-live-system__node--team { grid-area: team; }
+
+  .hero-live-system__module {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.625rem 0.75rem;
+    border: 1px solid var(--v2-border-dark);
+    border-radius: var(--v2-radius-ui);
+    background: color-mix(in srgb, var(--v2-surface-elevated) 82%, var(--v2-surface-graphite));
+    color: var(--v2-text-on-dark-primary);
+    font-family: var(--v2-font-label);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.25;
   }
 
-  .hero-live-system__handoff-marker {
-    display: block;
-    width: 0.625rem;
-    height: 0.625rem;
-    border: 1px solid var(--v2-accent-system);
-    border-radius: 999px;
-    background: transparent;
+  .hero-live-system__module-icon {
+    flex: 0 0 auto;
+    width: 1rem;
+    height: 1rem;
+    color: var(--v2-accent-system);
+  }
+
+  .hero-live-system__module--core {
+    min-height: 9.75rem;
+    justify-content: center;
+    padding: 1rem;
+    border-color: var(--v2-accent-signal);
+    background: var(--v2-surface-carbon);
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-live-system__module--core .hero-live-system__module-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--v2-accent-signal);
+  }
+
+  .hero-live-system__module--operation {
+    min-height: 2.75rem;
+    background: color-mix(in srgb, var(--v2-surface-elevated) 64%, var(--v2-surface-graphite));
+  }
+
+  .hero-live-system__module--operation .hero-live-system__module-icon {
+    color: var(--v2-text-on-dark-secondary);
+  }
+
+  .hero-live-system__module--team {
+    min-height: 3rem;
+    border-color: color-mix(in srgb, var(--v2-accent-system) 76%, var(--v2-border-dark));
+    border-left-width: 2px;
+    background: color-mix(in srgb, var(--v2-accent-system) 8%, var(--v2-surface-graphite));
+    color: var(--v2-text-on-dark-primary);
+  }
+
+  .hero-live-system__module--team .hero-live-system__module-icon {
+    color: var(--v2-accent-system);
   }
 
   @media (min-width: 768px) {
@@ -415,6 +397,15 @@
     .hero-live-system__body {
       min-height: 20rem;
       padding-inline: 1.5rem;
+    }
+
+    .hero-live-system__route-lines {
+      inset-inline: 1.5rem;
+      width: calc(100% - 3rem);
+    }
+
+    .hero-live-system__route {
+      min-height: 20rem;
     }
   }
 
@@ -464,6 +455,10 @@
     .hero-live-system__body {
       min-height: clamp(20rem, 29vw, 24rem);
     }
+
+    .hero-live-system__route {
+      min-height: clamp(20rem, 29vw, 24rem);
+    }
   }
 
   @media (max-width: 767px) {
@@ -472,43 +467,43 @@
     }
 
     .hero-live-system__body {
-      grid-template-columns: minmax(4.25rem, 0.75fr) minmax(6.5rem, 1.2fr) minmax(4.25rem, 0.85fr);
-      min-height: 14rem;
-      padding: 1.75rem 0.875rem 1.25rem;
+      min-height: 20rem;
+      padding: 1.5rem 0.875rem 1.25rem;
+    }
+
+    .hero-live-system__route-lines {
+      display: none;
+    }
+
+    .hero-live-system__route {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
       gap: 0.625rem;
     }
 
-    .hero-live-system__rail,
-    .hero-live-system__operation-row {
-      height: 1.75rem;
+    .hero-live-system__node {
+      width: 100%;
     }
 
-    .hero-live-system__rail::before,
-    .hero-live-system__operation-row::before {
-      margin: 0.65rem 0.5rem;
+    .hero-live-system__module {
+      min-height: 2.75rem;
+      padding: 0.625rem 0.75rem;
+      font-size: 0.75rem;
     }
 
-    .hero-live-system__region--core {
-      min-height: 7.75rem;
+    .hero-live-system__module--core {
+      min-height: 4rem;
+      justify-content: flex-start;
     }
 
-    .hero-live-system__core-ring {
-      width: 4.25rem;
-      height: 4.25rem;
+    .hero-live-system__module--team {
+      min-height: 2.875rem;
     }
 
-    .hero-live-system__core-line {
-      bottom: 0.875rem;
-      width: 2rem;
-    }
-
-    .hero-live-system__region--handoff {
-      right: 0.875rem;
-      bottom: 0.75rem;
-    }
-
-    .hero-live-system__handoff-line {
-      width: 1.75rem;
+    .hero-live-system__module-icon {
+      width: 0.95rem;
+      height: 0.95rem;
     }
   }
 

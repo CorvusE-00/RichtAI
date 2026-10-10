@@ -1,4 +1,14 @@
-import { ArrowRight, ShieldCheck, UserRound } from 'lucide-react';
+import {
+  ArrowRight,
+  CalendarDays,
+  Database,
+  Globe2,
+  MessageCircle,
+  ShieldCheck,
+  Sparkles,
+  UserRound,
+  Users,
+} from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 
 interface HeroProps {
@@ -7,6 +17,14 @@ interface HeroProps {
 
 export function Hero({ onCTAClick }: HeroProps) {
   const { copy } = useLanguage();
+  const systemNodes = [
+    { key: 'website', label: copy.hero.systemCanvas.nodes.website, icon: Globe2, moduleClass: 'hero-live-system__module--inbound' },
+    { key: 'whatsapp', label: copy.hero.systemCanvas.nodes.whatsapp, icon: MessageCircle, moduleClass: 'hero-live-system__module--inbound' },
+    { key: 'ai', label: copy.hero.systemCanvas.nodes.ai, icon: Sparkles, moduleClass: 'hero-live-system__module--core' },
+    { key: 'crm', label: copy.hero.systemCanvas.nodes.crm, icon: Database, moduleClass: 'hero-live-system__module--operation' },
+    { key: 'calendar', label: copy.hero.systemCanvas.nodes.calendar, icon: CalendarDays, moduleClass: 'hero-live-system__module--operation' },
+    { key: 'team', label: copy.hero.systemCanvas.nodes.team, icon: Users, moduleClass: 'hero-live-system__module--team' },
+  ] as const;
 
   return (
     <section
@@ -54,30 +72,24 @@ export function Hero({ onCTAClick }: HeroProps) {
                 {copy.hero.systemCanvas.aria}
               </span>
 
-              <div className="hero-live-system__body" aria-hidden="true">
-                <div className="hero-live-system__region hero-live-system__region--inbound">
-                  <span className="hero-live-system__rail" />
-                  <span className="hero-live-system__rail hero-live-system__rail--short" />
-                  <span className="hero-live-system__rail" />
-                </div>
+              <svg className="hero-live-system__route-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path className="hero-live-system__route-line" d="M 17 31 H 34 V 50 H 43" />
+                <path className="hero-live-system__route-line" d="M 17 69 H 34 V 50 H 43" />
+                <path className="hero-live-system__route-line" d="M 57 50 H 68 V 31 H 84" />
+                <path className="hero-live-system__route-line" d="M 57 50 H 68 V 69 H 84" />
+                <path className="hero-live-system__route-line hero-live-system__route-line--handoff" d="M 68 50 H 84 V 87" />
+              </svg>
 
-                <div className="hero-live-system__region hero-live-system__region--core">
-                  <span className="hero-live-system__core-ring" />
-                  <span className="hero-live-system__core-mark" />
-                  <span className="hero-live-system__core-line" />
-                </div>
-
-                <div className="hero-live-system__region hero-live-system__region--operations">
-                  <span className="hero-live-system__operation-row" />
-                  <span className="hero-live-system__operation-row hero-live-system__operation-row--wide" />
-                  <span className="hero-live-system__operation-row" />
-                </div>
-
-                <div className="hero-live-system__region hero-live-system__region--handoff">
-                  <span className="hero-live-system__handoff-line" />
-                  <span className="hero-live-system__handoff-marker" />
-                </div>
-              </div>
+              <ol className="hero-live-system__route">
+                {systemNodes.map(({ key, label, icon: Icon, moduleClass }) => (
+                  <li key={key} className={`hero-live-system__node hero-live-system__node--${key}`}>
+                    <div className={`hero-live-system__module ${moduleClass}`}>
+                      <Icon className="hero-live-system__module-icon" aria-hidden="true" />
+                      <span>{label}</span>
+                    </div>
+                  </li>
+                ))}
+              </ol>
             </div>
           </figure>
         </div>

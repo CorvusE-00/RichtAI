@@ -513,8 +513,8 @@ The likely later Hero V3 implementation scope is:
 No App, Navbar, ContactModal, StatisticsStrip, unrelated section, metadata, asset, package, or configuration changes are justified by Checklist 1.
 - [x] 2. Finalize bilingual Hero V3 copy, including the recommended TR/EN headline and support copy.
 - [x] 3. Build the Hero V3 static layout shell with desktop, tablet, and mobile structural contracts.
-- [ ] 4. Build the multi-channel Website + WhatsApp inbound architecture with semantic order and equal status.
-- [ ] 5. Build the central AI / CRM / Calendar / Team live system scene and one coherent route backbone.
+- [x] 4. Build the multi-channel Website + WhatsApp inbound architecture with semantic order and equal status.
+- [x] 5. Build the central AI / CRM / Calendar / Team live system scene and one coherent route backbone.
 - [ ] 6. Establish the static premium visual hierarchy, surface framing, AI focal treatment, Team handoff, CTA relationship, and reassurance grouping.
 - [ ] 7. Implement the choreographed initial-load entrance without generic component-by-component fade-up.
 - [ ] 8. Implement the repeating Website / WhatsApp operational motion loop with one low-frequency coordinated cycle.
@@ -550,6 +550,29 @@ No App, Navbar, ContactModal, StatisticsStrip, unrelated section, metadata, asse
 - Accessibility preserved: one h1, native CTA callback, figure `aria-labelledby` / `aria-describedby`, localized screen-reader description, decorative shell body hidden from assistive technology, no placeholder interaction, and no extra tab stops.
 - No motion was added: no keyframes, timers, effects, requestAnimationFrame, intervals, state cycling, SVG animation, pulsing, sweeping, or route travel.
 - Responsive source and layout contracts were checked for 1024×900, 1280×900, 1440×900, 1536×900, 768–1023px tablet, and below-768px mobile ranges. The Codex in-app browser confirmed the new localized eyebrow, single headline, support copy, CTA, and labelled system figure in the running page.
+- Verification: `pnpm typecheck` PASS; `pnpm lint` PASS. Full build remains assigned to Checklist 12.
+
+### Checklist 4 implementation note — multi-channel inbound architecture
+
+- Replaced the decorative shell rails with one semantic ordered list containing Website → WhatsApp → AI → CRM → Calendar → Team.
+- Website uses the localized `copy.hero.systemCanvas.nodes.website` label and a safe Lucide `Globe2` icon.
+- WhatsApp uses the localized `copy.hero.systemCanvas.nodes.whatsapp` label and a generic Lucide `MessageCircle` icon; no WhatsApp brand asset or fake interface was added.
+- Website and WhatsApp share the same inbound module treatment, visual weight, and route entry logic. Neither is visually demoted.
+- Both inbound modules converge into the same central AI module through one static SVG route structure.
+- Nodes are non-interactive list content: no buttons, tab stops, tooltips, or live regions were introduced. The route SVG and icons are decorative and aria-hidden.
+- Desktop uses paired inbound modules feeding the central route; tablet keeps the complete scene below the copy; mobile switches to a readable stacked list with no three-column squeeze or horizontal overflow.
+
+### Checklist 5 implementation note — central live-system scene
+
+- AI is the dominant central module, using the localized AI label and a restrained Lucide `Sparkles` mark with Signal Lime emphasis. It is framed as infrastructure rather than a glowing orb or AI-brain illustration.
+- CRM uses the localized CRM label with a quiet Lucide `Database` icon and sits downstream from AI.
+- Calendar uses the localized Calendar label with a quiet Lucide `CalendarDays` icon and sits beside CRM as a downstream operational destination.
+- Team uses the localized Team label with a Lucide `Users` icon, a distinct terminal treatment, and Electric Cyan / Bone White emphasis to signal the final human handoff.
+- One static SVG route backbone visibly converges Website and WhatsApp into AI, splits to CRM and Calendar, and resolves at Team. It has no stroke animation or moving signal.
+- The system surface now uses its available area with real modules, a clear central focal point, restrained borders, and one macro route gesture. It is no longer a placeholder rail layout, generic dashboard, or editor-like flowchart.
+- Desktop retains the approximately 47% copy / 53% system balance and aligns the scene with the copy block. Tablet preserves all six concepts below the copy. Mobile uses a simple vertical module stack with readable labels and reduced density.
+- Requested QA ranges were reviewed at 1024×900, 1280×900, 1440×900, 1536×900, 768×1000, and 375×900 through the responsive source contract; the refreshed Codex in-app browser confirmed all six localized TR modules and the semantic order in the running page. No label-collapse or horizontal-overflow condition was introduced by the mobile fallback.
+- No motion was added. Checklist 7 and Checklist 8 remain the first owners of animation.
 - Verification: `pnpm typecheck` PASS; `pnpm lint` PASS. Full build remains assigned to Checklist 12.
 
 ## Exit criteria
@@ -597,4 +620,4 @@ If any answer is NO, Hero V3 is not complete.
 
 ## Handoff
 
-Checklists 1–3 are complete and the next implementation run starts with Checklist 4. Work must advance one checklist at a time. Expected future implementation scope remains limited to `src/components/Hero.tsx`, `src/index.css`, `src/lib/i18n.tsx`, and this plan file unless a later approved checklist explicitly expands it. Do not edit App, Navbar, other sections, ContactModal, metadata, assets, or configuration without separate approval.
+Checklists 1–5 are complete and the next implementation run starts with Checklist 6. Work must advance one checklist at a time. Expected future implementation scope remains limited to `src/components/Hero.tsx`, `src/index.css`, `src/lib/i18n.tsx`, and this plan file unless a later approved checklist explicitly expands it. Do not edit App, Navbar, other sections, ContactModal, metadata, assets, or configuration without separate approval.
