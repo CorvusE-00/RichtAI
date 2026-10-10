@@ -178,9 +178,10 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem 1rem;
-    margin-top: 1.25rem;
+    gap: 0.5rem 0;
+    margin: 1.25rem 0 0;
     padding-top: 0.75rem;
+    padding-inline: 0;
     border-top: 1px solid var(--v2-border-dark);
     color: var(--v2-text-on-dark-secondary);
     font-family: var(--v2-font-body);
@@ -188,10 +189,26 @@
     line-height: 1.5;
   }
 
-  .hero-v3__meta span {
+  .hero-v3__meta li {
+    position: relative;
     display: inline-flex;
     align-items: center;
     gap: 0.375rem;
+    list-style: none;
+  }
+
+  .hero-v3__meta li + li {
+    margin-left: 0.875rem;
+    padding-left: 0.875rem;
+  }
+
+  .hero-v3__meta li + li::before {
+    position: absolute;
+    left: 0;
+    width: 1px;
+    height: 0.75rem;
+    background: var(--v2-border-dark);
+    content: '';
   }
 
   .hero-live-system {
@@ -208,15 +225,6 @@
     background: var(--v2-surface-graphite);
   }
 
-  .hero-live-system__surface::before {
-    position: absolute;
-    inset: 3.5rem 0.75rem 0.75rem;
-    border: 1px solid color-mix(in srgb, var(--v2-border-dark) 72%, transparent);
-    border-radius: var(--v2-radius-ui);
-    content: '';
-    pointer-events: none;
-  }
-
   .hero-live-system__header {
     position: relative;
     z-index: 2;
@@ -226,7 +234,7 @@
     min-height: 2.75rem;
     margin: 0;
     padding: 0.75rem 1.25rem;
-    border-bottom: 1px solid var(--v2-border-dark);
+    border-bottom: 0;
     color: var(--v2-text-on-dark-secondary);
     font-family: var(--v2-font-label);
     font-size: 0.6875rem;
@@ -261,13 +269,9 @@
 
   .hero-live-system__route-line {
     fill: none;
-    stroke: color-mix(in srgb, var(--v2-accent-system) 68%, var(--v2-border-dark));
-    stroke-width: 1.2;
+    stroke: color-mix(in srgb, var(--v2-accent-system) 58%, var(--v2-border-dark));
+    stroke-width: 1.6;
     vector-effect: non-scaling-stroke;
-  }
-
-  .hero-live-system__route-line--handoff {
-    stroke: color-mix(in srgb, var(--v2-accent-system) 76%, var(--v2-border-dark));
   }
 
   .hero-live-system__route {
@@ -302,6 +306,7 @@
   .hero-live-system__node--team { grid-area: team; }
 
   .hero-live-system__module {
+    position: relative;
     display: flex;
     width: 100%;
     min-width: 0;
@@ -309,9 +314,9 @@
     align-items: center;
     gap: 0.625rem;
     padding: 0.625rem 0.75rem;
-    border: 1px solid var(--v2-border-dark);
-    border-radius: var(--v2-radius-ui);
-    background: color-mix(in srgb, var(--v2-surface-elevated) 82%, var(--v2-surface-graphite));
+    border: 0;
+    border-radius: 0;
+    background: transparent;
     color: var(--v2-text-on-dark-primary);
     font-family: var(--v2-font-label);
     font-size: 0.75rem;
@@ -326,25 +331,90 @@
     color: var(--v2-accent-system);
   }
 
+  .hero-live-system__module--inbound {
+    min-height: 2.5rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--v2-border-dark) 82%, var(--v2-accent-system));
+    padding: 0.5rem 0.625rem;
+  }
+
+  .hero-live-system__module--inbound::after {
+    position: absolute;
+    right: 0;
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 999px;
+    background: var(--v2-accent-system);
+    content: '';
+  }
+
   .hero-live-system__module--core {
-    min-height: 9.75rem;
+    min-height: 11rem;
+    flex-direction: column;
     justify-content: center;
-    padding: 1rem;
-    border-color: var(--v2-accent-signal);
+    padding: 1.25rem;
+    border: 1px solid var(--v2-accent-signal);
+    border-radius: var(--v2-radius-surface);
     background: var(--v2-surface-carbon);
     font-size: 1rem;
     letter-spacing: -0.01em;
   }
 
-  .hero-live-system__module--core .hero-live-system__module-icon {
+  .hero-live-system__module--core::after {
+    position: absolute;
+    inset: 0.625rem;
+    border: 1px solid color-mix(in srgb, var(--v2-accent-signal) 32%, transparent);
+    border-radius: calc(var(--v2-radius-surface) - 4px);
+    content: '';
+    pointer-events: none;
+  }
+
+  .hero-live-system__core-mark {
+    position: relative;
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    border: 1px solid var(--v2-accent-signal);
+    border-radius: var(--v2-radius-ui);
+    background: color-mix(in srgb, var(--v2-accent-signal) 8%, var(--v2-surface-carbon));
+  }
+
+  .hero-live-system__core-mark::before,
+  .hero-live-system__core-mark::after,
+  .hero-live-system__core-mark-line {
+    position: absolute;
+    display: block;
+    background: var(--v2-accent-signal);
+    content: '';
+  }
+
+  .hero-live-system__core-mark::before,
+  .hero-live-system__core-mark::after {
     width: 1.25rem;
-    height: 1.25rem;
-    color: var(--v2-accent-signal);
+    height: 1px;
+  }
+
+  .hero-live-system__core-mark::after {
+    transform: rotate(90deg);
+  }
+
+  .hero-live-system__core-mark-line {
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 999px;
+  }
+
+  .hero-live-system__module--core > span:last-child {
+    position: relative;
+    z-index: 1;
+    margin-top: 0.75rem;
   }
 
   .hero-live-system__module--operation {
     min-height: 2.75rem;
-    background: color-mix(in srgb, var(--v2-surface-elevated) 64%, var(--v2-surface-graphite));
+    border-bottom: 1px solid color-mix(in srgb, var(--v2-border-dark) 88%, var(--v2-accent-system));
+    border-left: 2px solid color-mix(in srgb, var(--v2-border-dark) 88%, var(--v2-accent-system));
+    padding-inline: 0.875rem;
   }
 
   .hero-live-system__module--operation .hero-live-system__module-icon {
@@ -353,10 +423,20 @@
 
   .hero-live-system__module--team {
     min-height: 3rem;
-    border-color: color-mix(in srgb, var(--v2-accent-system) 76%, var(--v2-border-dark));
     border-left-width: 2px;
-    background: color-mix(in srgb, var(--v2-accent-system) 8%, var(--v2-surface-graphite));
+    border-left-color: var(--v2-accent-system);
+    padding-left: 1rem;
     color: var(--v2-text-on-dark-primary);
+  }
+
+  .hero-live-system__module--team::after {
+    position: absolute;
+    right: 0;
+    width: 0.5rem;
+    height: 0.5rem;
+    border: 1px solid var(--v2-accent-system);
+    border-radius: 999px;
+    content: '';
   }
 
   .hero-live-system__module--team .hero-live-system__module-icon {

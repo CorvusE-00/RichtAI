@@ -515,7 +515,7 @@ No App, Navbar, ContactModal, StatisticsStrip, unrelated section, metadata, asse
 - [x] 3. Build the Hero V3 static layout shell with desktop, tablet, and mobile structural contracts.
 - [x] 4. Build the multi-channel Website + WhatsApp inbound architecture with semantic order and equal status.
 - [x] 5. Build the central AI / CRM / Calendar / Team live system scene and one coherent route backbone.
-- [ ] 6. Establish the static premium visual hierarchy, surface framing, AI focal treatment, Team handoff, CTA relationship, and reassurance grouping.
+- [x] 6. Establish the static premium visual hierarchy, surface framing, AI focal treatment, Team handoff, CTA relationship, and reassurance grouping.
 - [ ] 7. Implement the choreographed initial-load entrance without generic component-by-component fade-up.
 - [ ] 8. Implement the repeating Website / WhatsApp operational motion loop with one low-frequency coordinated cycle.
 - [ ] 9. Refine CTA, trust, and reassurance without changing callback behavior or introducing proof claims.
@@ -575,6 +575,25 @@ No App, Navbar, ContactModal, StatisticsStrip, unrelated section, metadata, asse
 - No motion was added. Checklist 7 and Checklist 8 remain the first owners of animation.
 - Verification: `pnpm typecheck` PASS; `pnpm lint` PASS. Full build remains assigned to Checklist 12.
 
+### Checklist 6 implementation note — static premium art direction
+
+- **Static hierarchy:** Inbound Website and WhatsApp modules are now compact, paired, and secondary; AI is the dominant architectural core; CRM and Calendar are quieter operational outputs; Team is a distinct final endpoint.
+- **Inbound treatment:** Channel modules use open-edge, lightly bordered treatments instead of six equivalent cards. Their icons and labels remain localized and visually equal.
+- **AI focal treatment:** Removed the generic Sparkles icon. AI now uses a restrained architectural processor mark, a larger Carbon core frame, a Signal Lime edge, and an internal crosshair/detail structure without glow, gradient, orb, or brain-cliché styling.
+- **Operations treatment:** CRM and Calendar use utility-like open modules with shared alignment, low visual weight, and localized Lucide icons rather than full competing cards.
+- **Team endpoint:** Team now uses an open terminal treatment with a cyan edge, endpoint marker, and Users icon so it reads as a human handoff rather than another software module.
+- **Route backbone:** Replaced the multiple equal-looking connector segments with one stronger static SVG backbone containing inbound convergence, the AI intersection, downstream branching, and a final handoff resolution. It remains aria-hidden and completely static.
+- **Surface framing:** Removed the inset nested frame. The surface now relies on one controlled outer field, a restrained system identifier, internal alignment, and the route/module silhouette instead of dashboard chrome.
+- **CTA relationship:** Preserved the native CTA, callback, copy, focus-visible treatment, and Signal Lime. The CTA now reads as the human action counterpart to the AI system accent without glow or lift changes.
+- **Reassurance grouping:** Converted the metadata row into one semantic list with quieter CSS separators and grouped duration, no commitment, and direct contact as a single confidence block without rewriting copy or adding proof.
+- **Desktop composition:** Retained the approximately 47% copy / 53% system split with deliberate top alignment. The scene has more visual mass through hierarchy and route silhouette, not extra panels.
+- **Responsive safety:** Preserved the stable 1024px desktop split, readable 768px stacked layout, and 375px vertical fallback with no connector collapse or horizontal-overflow-prone grid.
+- **Accessibility:** Preserved one h1, native CTA, figure label/description, ordered semantic nodes, hidden decorative icons and route SVG, non-interactive modules, and no live regions or extra tab stops.
+- **No motion:** No effects, timers, intervals, requestAnimationFrame, keyframes, route travel, pulsing, or entrance choreography were added. Checklist 7 remains the motion boundary.
+- **Tested widths:** Reviewed the responsive contract at 1024×900, 1280×900, 1440×900, 1536×900, 768×1000, and 375×900; refreshed local browser structure confirmed the paused Hero remains semantically complete in TR. No source-level clipping or horizontal-overflow condition was introduced.
+- **Paused-screenshot conclusion:** The Hero now reads as one embedded operating system with a clear silhouette and hierarchy rather than six equal cards with connector lines. It is ready for later animation without relying on motion to establish meaning.
+- Verification: `pnpm typecheck` PASS; `pnpm lint` PASS. Full build remains assigned to Checklist 12.
+
 ## Exit criteria
 
 Hero V3 is complete only when:
@@ -620,4 +639,4 @@ If any answer is NO, Hero V3 is not complete.
 
 ## Handoff
 
-Checklists 1–5 are complete and the next implementation run starts with Checklist 6. Work must advance one checklist at a time. Expected future implementation scope remains limited to `src/components/Hero.tsx`, `src/index.css`, `src/lib/i18n.tsx`, and this plan file unless a later approved checklist explicitly expands it. Do not edit App, Navbar, other sections, ContactModal, metadata, assets, or configuration without separate approval.
+Checklists 1–6 are complete and the next implementation run starts with Checklist 7. Work must advance one checklist at a time. Expected future implementation scope remains limited to `src/components/Hero.tsx`, `src/index.css`, `src/lib/i18n.tsx`, and this plan file unless a later approved checklist explicitly expands it. Do not edit App, Navbar, other sections, ContactModal, metadata, assets, or configuration without separate approval.
