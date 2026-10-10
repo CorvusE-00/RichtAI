@@ -2,9 +2,9 @@
 
 ## Project status
 
-This is the active, plan-only Hero V3 direction. The current Hero is being replaced conceptually with a premium live operating-system scene. No source code, CSS, i18n source, assets, dependencies, or rendered components are changed in this planning phase.
+This is the active Hero V3 direction. Checklist 1, the contract audit and preparation step, is complete. Checklists 2–12 remain unchecked. No source code, CSS, i18n source, assets, dependencies, or rendered components were changed during the audit.
 
-All implementation checklist items below begin unchecked. Later implementation must preserve the approved functional contracts and proceed in the listed order.
+Later implementation must preserve the approved functional contracts and proceed in the listed order.
 
 ## Why the current Hero is being replaced
 
@@ -331,7 +331,186 @@ Hero V3 must not take ownership of ContactModal, Supabase, Navbar, footer, FAQ l
 
 ## Ordered implementation checklist
 
-- [ ] 1. Audit current Hero contracts and remove obsolete V2/V3 assumptions without changing protected ownership or unrelated sections.
+- [x] 1. Audit current Hero contracts and remove obsolete V2/V3 assumptions without changing protected ownership or unrelated sections.
+
+### Checklist 1 implementation note — current contract audit
+
+#### 1. Hero source contract
+
+- Source: `src/components/Hero.tsx`.
+- `HeroProps` contains exactly one external prop: `onCTAClick: () => void`.
+- `useLanguage()` is the only Hook used by Hero; Hero reads the current localized `copy` object.
+- The root is `<section id="anasayfa" className="hero-v2 v2-section-dark relative overflow-hidden">`.
+- Heading structure is one `h1.hero-v2__heading` containing `copy.hero.headline`, a whitespace separator, and `copy.hero.headlineAccent` in two spans.
+- Support copy is one paragraph, `.hero-v2__support`, rendering `copy.hero.subheadline`.
+- CTA structure is one native `<button>` in `.hero-v2__actions`, calling the external `onCTAClick` prop and rendering `copy.hero.cta` plus an aria-hidden `ArrowRight` icon.
+- Reassurance/meta structure is one `.hero-v2__meta` flex row containing duration, no-commitment, and direct-contact values with decorative separators and aria-hidden `ShieldCheck` / `UserRound` icons.
+- The current system structure is a `<figure className="hero-system">` with a labelled stage, a screen-reader-only description, one decorative SVG connector path, and one semantic ordered list of six nodes: Website, Messages, AI, CRM, Calendar, Team.
+- Lucide imports are `ArrowRight`, `ShieldCheck`, and `UserRound`.
+- Hero has no local state, timers, effects, `requestAnimationFrame`, interval, timeout, route mutation, or hash behavior.
+- Hero performs no navigation itself; the CTA delegates to App-owned modal state.
+
+#### 2. App/modal ownership
+
+- `src/App.tsx` owns `isContactOpen` with `useState(false)`.
+- `openContact` is a memoized callback that sets the state to `true`; `closeContact` sets it to `false`.
+- App passes `openContact` to both `<Navbar onCTAClick={openContact} />` and `<Hero onCTAClick={openContact} />`.
+- The current render order is: Navbar; main → Hero → StatisticsStrip → Problem → Solution → HowItWorks → Trust → FAQ → FinalCTA; Footer; ContactModal.
+- `StatisticsStrip` immediately follows Hero in `main`.
+- `ContactModal` is rendered after Footer as `<ContactModal isOpen={isContactOpen} onClose={closeContact} />`; Hero does not own or import it.
+- `useRevealObserver(language)` runs at App level and globally initializes reveal behavior for `[data-reveal]` elements. Current Hero markup has no `data-reveal`, so it is not directly reveal-controlled.
+
+#### 3. Navbar / clearance contract
+
+- `src/components/Navbar.tsx` renders a fixed header: `fixed top-0 left-0 right-0 z-40`.
+- Its default/header-state shell uses `py-2` and a 4rem (`h-16`) inner height; the scrolled state uses `py-1` and `h-14`.
+- Active CSS at desktop forces `.navbar-v2__inner` to `height: 4rem` and the Navbar to 0.5rem top/bottom padding, so the effective desktop header footprint is approximately 5rem.
+- At mobile/tablet, the inner height follows the `h-16` / `h-14` state classes and the header remains fixed with the same top-of-page clearance responsibility.
+- Hero currently provides that clearance with `.hero-v2` padding: 7rem top on mobile, 6rem from 640px, and 9rem from 1024px.
+- Navbar owns the CTA callback, language toggle, mobile menu, smooth section scrolling, active-section IntersectionObserver, and scroll-state styling. Hero V3 must not alter those behaviors or the header contract.
+- Navbar links currently target `sorun`, `cozum`, `nasil-calisir`, `guven`, and `sss`; no Hero link target is required beyond `id="anasayfa"` for the logo/top behavior.
+- The Hero has no Navbar-specific class or selector dependency beyond its top padding and shared page layering.
+
+#### 4. Current Hero CSS ownership
+
+Hero styling is primarily global CSS in `src/index.css`, with Tailwind utilities for layout and focus classes in TSX. The active selector families are:
+
+| Selector family | Classification | Current responsibility |
+| --- | --- | --- |
+| `.hero-v2`, `.hero-v2__layout`, `.hero-v2__copy`, `.hero-v2__heading`, `.hero-v2__support`, `.hero-v2__actions`, `.hero-v2__meta` | B — likely replaceable | Current Hero shell, copy layout, typography, spacing, CTA grouping, and metadata rhythm. Preserve behavior but free the visual architecture. |
+| `.hero-v2__cta` and its hover/active/focus-visible states | A/B — behavior reusable, presentation replaceable | Native CTA treatment and focus contract; later styling may be refined without changing its callback. |
+| `.hero-system`, `.hero-system__label`, `.hero-system__stage`, `.hero-system__node`, `.hero-system__node-label` | B — likely replaceable | Current static system-canvas surface and node presentation. |
+| `.hero-system__connectors`, `.hero-system__connector`, `.hero-system__route`, `.hero-system__item*` | C — obsolete after Hero V3 | Phase 3.5 / current three-region flowchart geometry and connector layout; do not delete in this audit. |
+| `.hero-system__node--ai*`, `.hero-system__node--team*` | B/C — replaceable state styling | Current AI and Team emphasis; conceptual roles remain, but the visual state architecture should be rebuilt. |
+| `@media (min-width: 640px)`, `@media (min-width: 1024px)`, and `@media (max-width: 639px)` Hero rules | B — likely replaceable | Current tablet/desktop split and mobile stacked fallback. |
+| `.reveal`, `.motion-ready .reveal*`, and `@media (prefers-reduced-motion: reduce)` | D — shared / must not remove | App-wide reveal and reduced-motion infrastructure. Hero V3 should use or extend it carefully rather than break it. |
+
+Current Hero CSS has no Hero-specific keyframes or continuous animation. The unrelated `success-pop` keyframe and `.workflow-*` CSS belong elsewhere and are not Hero V3 ownership.
+
+#### 5. Current i18n values
+
+Hero values in `src/lib/i18n.tsx` are:
+
+| Field | TR | EN |
+| --- | --- | --- |
+| `headline` | `İşletmenizi ileri taşıyan` | `Systems that keep your business` |
+| `headlineAccent` | `sistemler kuruyoruz.` | `moving.` |
+| `subheadline` | `Yapay zekâ, otomasyon ve dijital deneyimleri ayrı araçlar değil, birlikte çalışan bir sistem olarak tasarlıyoruz.` | `AI, automation and digital experiences designed to work together — not as separate tools.` |
+| `cta` | `Projeyi konuşalım` | `Start a project` |
+| `duration` | `İlk görüşme yaklaşık 30 dakika sürer.` | `The first call takes around 30 minutes.` |
+| `noCommitment` | `Herhangi bir taahhüt yok` | `No commitment required` |
+| `direct` | `Doğrudan Emre Kocaaliler ile iletişim` | `Speak directly with Emre Kocaaliler` |
+| `systemCanvas.label` | `Bağlı sistem` | `Connected system` |
+| `systemCanvas.aria` | `Web sitesi, mesajlar, yapay zekâ, CRM, takvim ve ekibi birbirine bağlayan iş sistemi.` | `Connected business system linking website, messages, AI, CRM, calendar and team.` |
+| `systemCanvas.nodes.website` | `Web sitesi` | `Website` |
+| `systemCanvas.nodes.messages` | `Mesajlar` | `Messages` |
+| `systemCanvas.nodes.ai` | `Yapay zekâ` | `AI` |
+| `systemCanvas.nodes.crm` | `CRM` | `CRM` |
+| `systemCanvas.nodes.calendar` | `Takvim` | `Calendar` |
+| `systemCanvas.nodes.team` | `Ekip` | `Team` |
+
+The current Hero does not consume any `workflow.*` field. `AIWorkflow.tsx` consumes those fields, but `AIWorkflow` is not rendered by `App.tsx` and is not part of the active homepage.
+
+#### 6. Current system architecture
+
+The active Hero system is a six-node ordered list inside a CSS grid: Website and Messages enter on the left, AI occupies the central region, and CRM, Calendar, and Team occupy downstream positions on the right. A single SVG path visually connects the regions. The architecture is static; there is no Hero-local state or cycle.
+
+`AIWorkflow.tsx` is a separate existing component with its own staged interval, but it is not imported or rendered by App and must not be silently substituted into Hero V3.
+
+#### 7. Website / WhatsApp gap
+
+- Website exists as the current inbound concept (`systemCanvas.nodes.website` / `Web sitesi` / `Website`).
+- WhatsApp does not exist in the current Hero system canvas.
+- The current second inbound node is generic `Messages` / `Mesajlar`, not an explicit WhatsApp channel.
+- AI is currently a central labelled node, but it has no processing state.
+- CRM and Calendar are downstream labelled nodes with no active operational state.
+- Team is the final labelled node with no handoff state.
+
+Later Hero V3 must replace the old Website + Messages mental model with equal Website + WhatsApp inbound sources feeding one AI core, then CRM / Calendar, then Team. This is a visual and i18n concept change only for later checklists; it is not implemented here.
+
+#### 8. Motion infrastructure
+
+- `framer-motion` / Motion is not installed. `package.json` contains no animation library beyond the existing React/CSS stack.
+- `lucide-react` is installed and already used by Hero and other components.
+- Hero itself has no timers, effects, keyframes, interval, timeout, `requestAnimationFrame`, or continuous animation.
+- App-level `useRevealObserver` uses `IntersectionObserver` and one `requestAnimationFrame` for reveal containment, but current Hero has no `[data-reveal]` target.
+- `AIWorkflow.tsx` uses a 2800ms `setInterval` and `data-stage`, but is not active homepage infrastructure.
+- Existing CSS contains the shared `.reveal` transition system, the `success-pop` keyframe for unrelated UI, and global reduced-motion rules that disable reveal transforms and shorten transitions.
+- Existing SVG connector styling is static; there is no current SVG stroke animation pattern.
+- Conclusion: later Hero V3 motion can begin with CSS transforms/opacity, lightweight SVG state/stroke techniques, and bounded React state/timers without adding a dependency. The existing shared reduced-motion and reveal infrastructure must remain intact.
+
+#### 9. WhatsApp icon / branding
+
+- `lucide-react` is available.
+- Generic safe message/chat iconography exists through Lucide, including `MessageCircle`, already used by the separate `AIWorkflow` and `Footer`.
+- No WhatsApp-specific logo asset was found in `public` or `src`.
+- Later Hero V3 should avoid a trademark/logo dependency by using localized Website / WhatsApp text and safe generic iconography unless a branded asset is explicitly approved.
+
+#### 10. Current responsive contract
+
+| Range | Current behavior | Fragile points to preserve or improve later |
+| --- | --- | --- |
+| `>= 1280px` | Two-column Hero grid (`1.02fr / 0.98fr`), left-aligned copy, large heading, canvas on right; 9rem top / 5rem bottom padding. | Static canvas geometry and large minimum height can dominate; top clearance is coupled to Hero padding. |
+| `1024–1279px` | Same two-column desktop grid and left-aligned copy, with the same Hero CSS breakpoint and fluid gap. | Narrow desktop can pressure headline, support copy, and six-node canvas simultaneously. |
+| `768–1023px` | Single-column grid inherited from base rules; centered copy first, canvas below; `min-width: 640px` typography and spacing apply. | No dedicated intermediate composition; desktop canvas density carries into tablet. |
+| `640–767px` | Single-column centered copy and canvas; 3rem heading, larger support spacing, compact grid canvas. | Same tablet fallback rather than a deliberately art-directed intermediate state. |
+| `< 640px` | Single-column centered copy; 2.25rem heading; CTA can be full width; meta wraps; connectors hidden; six nodes become a vertical flex stack; stage minimum height is 18rem. | Small nodes, repeated labels, and the current flowchart order can feel cramped; mobile is a fallback rather than a simplified live scene. |
+
+The current canvas is contained by `overflow: hidden` on the Hero section and stage, but its grid geometry depends on fixed named areas and min-height clamps. Hero V3 must preserve no-overflow behavior while replacing the fragile architecture deliberately. The current headline, CTA, canvas, and meta are single instances with no duplication.
+
+#### 11. Accessibility baseline
+
+- Exactly one Hero `h1` exists.
+- CTA is a native button with visible localized text, an aria-hidden ArrowRight icon, and a dedicated `:focus-visible` outline in `.hero-v2__cta`.
+- The system is a semantic `<figure>` with `aria-labelledby` pointing to its `<figcaption>` and `aria-describedby` pointing to a localized `sr-only` description.
+- The connector SVG is decorative with `aria-hidden="true"` and `focusable="false"`.
+- System nodes are non-interactive list content in an ordered `<ol>` with semantic order Website → Messages → AI → CRM → Calendar → Team.
+- Node markers and decorative icons are aria-hidden; no visual node is a tab stop.
+- No Hero live region is present, so there is no current screen-reader spam from changing Hero content.
+- Global reduced-motion CSS disables reveal transforms and reduces transition duration; Hero has no continuous motion to suppress today.
+- Later weakness to improve: the semantic inbound node must become equal Website + WhatsApp; the live state story and its accessible static fallback must be explicit; the figure description must be updated with the new route; and the Hero must remain understandable without relying on motion.
+
+#### 12. Obsolete assumptions released in the plan
+
+Hero V3 is no longer constrained by these visual assumptions:
+
+- current node-map geometry;
+- current three-region / static canvas shape;
+- current system-node dimensions and named-area placement;
+- current Phase 3.5 flowchart architecture;
+- the old Website-only / generic-Messages inbound mental model;
+- the assumption that motion is optional or can be bolted on later;
+- the assumption that mobile can be handled only as a late desktop fallback.
+
+This release applies to the visual architecture only. Functional ownership, App callbacks, section identity, language behavior, accessibility baseline, and page order remain frozen.
+
+#### 13. Frozen Hero V3 contracts
+
+- Preserve `Hero({ onCTAClick })` as the external Hero interface.
+- Preserve App-owned ContactModal state and callback ownership.
+- Preserve `id="anasayfa"`.
+- Preserve one native CTA that invokes the existing callback.
+- Do not introduce route or hash mutation from Hero.
+- Preserve `useLanguage()` and TR/EN parity.
+- Leave Navbar implementation and behavior untouched.
+- Preserve StatisticsStrip immediately after Hero and the current App render order.
+- Leave Supabase and contact submission flow untouched.
+- Leave metadata untouched.
+- Leave Mermaid logo and assets untouched by default.
+- Preserve the current accessibility baseline: one h1, native focusable CTA, semantic order, decorative SVG hiding, non-interactive visual nodes, and reduced-motion support.
+- Introduce no fake proof, metrics, testimonials, or unsupported customer evidence.
+- Add no new dependency by default.
+
+#### Later implementation boundary recommendation
+
+The likely later Hero V3 implementation scope is:
+
+- `src/components/Hero.tsx` — structure, semantic nodes, and bounded live-state behavior;
+- `src/index.css` — Hero visual system, responsive layout, route states, motion, and reduced-motion rules;
+- `src/lib/i18n.tsx` — Hero copy and Website / WhatsApp system labels in both languages;
+- `implementation_update.md` — checklist notes and verification records.
+
+No App, Navbar, ContactModal, StatisticsStrip, unrelated section, metadata, asset, package, or configuration changes are justified by Checklist 1.
 - [ ] 2. Finalize bilingual Hero V3 copy, including the recommended TR/EN headline and support copy.
 - [ ] 3. Build the Hero V3 static layout shell with desktop, tablet, and mobile structural contracts.
 - [ ] 4. Build the multi-channel Website + WhatsApp inbound architecture with semantic order and equal status.
@@ -389,4 +568,4 @@ If any answer is NO, Hero V3 is not complete.
 
 ## Handoff
 
-This document is plan-only. The next implementation run starts with Checklist 1 and must advance one checklist at a time. Expected future implementation scope is limited to `src/components/Hero.tsx`, `src/index.css`, and this plan file unless a later approved checklist explicitly expands it. Do not edit i18n, App, Navbar, other sections, or configuration without separate approval.
+The audit is complete and the next implementation run starts with Checklist 2. Work must advance one checklist at a time. Expected future implementation scope is limited to `src/components/Hero.tsx`, `src/index.css`, `src/lib/i18n.tsx`, and this plan file unless a later approved checklist explicitly expands it. Do not edit App, Navbar, other sections, ContactModal, metadata, assets, or configuration without separate approval.
