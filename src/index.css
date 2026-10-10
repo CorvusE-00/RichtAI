@@ -1,26 +1,26 @@
 :root {
-  /* V2 semantic foundation — opt-in only; legacy V1 tokens remain unchanged. */
-  --v2-surface-carbon: #080A0D;
-  --v2-surface-graphite: #10141A;
-  --v2-surface-elevated: #171C23;
-  --v2-surface-bone: #F4F2EB;
+  /* Shared palette: graphite / bone / muted teal. */
+  --v2-surface-carbon: #0B0D0F;
+  --v2-surface-graphite: #111417;
+  --v2-surface-elevated: #171B1F;
+  --v2-surface-bone: #F2EFE8;
 
-  --v2-text-on-dark-primary: #F4F2EB;
-  --v2-text-on-dark-secondary: #89939E;
-  --v2-text-on-light-primary: #080A0D;
-  --v2-text-on-light-secondary: #626B75;
+  --v2-text-on-dark-primary: #F2EFE8;
+  --v2-text-on-dark-secondary: #A1A5A8;
+  --v2-text-on-light-primary: #0B0D0F;
+  --v2-text-on-light-secondary: #737A80;
 
-  --v2-accent-signal: #C7FF4A;
-  --v2-accent-system: #50DFFF;
+  --v2-accent-signal: #38B2A3;
+  --v2-accent-system: #7FC8BE;
 
-  --v2-border-dark: rgba(244, 242, 235, 0.14);
-  --v2-border-light: rgba(8, 10, 13, 0.16);
+  --v2-border-dark: #2A3035;
+  --v2-border-light: rgba(11, 13, 15, 0.16);
   --v2-border-active: var(--v2-accent-signal);
 
-  --v2-focus: var(--v2-accent-system);
-  --v2-hover: rgba(80, 223, 255, 0.12);
-  --v2-pressed: rgba(80, 223, 255, 0.2);
-  --v2-disabled: #626B75;
+  --v2-focus: var(--v2-accent-signal);
+  --v2-hover: rgba(56, 178, 163, 0.1);
+  --v2-pressed: rgba(56, 178, 163, 0.16);
+  --v2-disabled: #737A80;
 
   --v2-radius-surface: 16px;
   --v2-radius-control: 8px;
@@ -69,7 +69,7 @@
 }
 
 @layer components {
-  /* V2 surface contracts — opt-in only; no current section consumes these. */
+  /* V2 surface contracts. */
   .v2-section-dark {
     background-color: var(--v2-surface-carbon);
     color: var(--v2-text-on-dark-primary);
@@ -100,7 +100,7 @@
     --v2-current-disabled: var(--v2-disabled);
   }
 
-  /* V2 typography and shape roles — opt-in only; no current markup consumes these. */
+  /* V2 typography and shape roles. */
   .v2-type-display { font-family: var(--v2-font-display); }
   .v2-type-heading { font-family: var(--v2-font-heading); }
   .v2-type-body { font-family: var(--v2-font-body); }
@@ -709,13 +709,13 @@
     outline-offset: 3px;
   }
 
-  /* Teal is the primary brand signal; cyan remains available for secondary workflow states. */
+  /* Emphasis remains solid to keep the palette editorial and neutral-first. */
   .text-gradient-teal {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-teal-300 via-teal-400 to-teal-300;
+    color: #F2EFE8;
   }
 
   .section-tone {
-    background-color: #070f1c;
+    background-color: #0B0D0F;
   }
 
   @media (min-width: 768px) {
@@ -737,26 +737,26 @@
   }
 
   .section-tone--stats {
-    background-color: #0a1628;
+    background-color: #101316;
   }
 
   .section-tone--problem,
   .section-tone--trust,
   .section-tone--faq {
-    background-color: #070f1c;
+    background-color: #0B0D0F;
   }
 
   .section-tone--solution,
   .section-tone--how {
-    background-color: #0a1628;
+    background-color: #111417;
   }
 
   .section-tone--final {
-    background-color: #0c1a30;
+    background-color: #14181B;
   }
 
   .section-tone--footer {
-    background-color: #070f1c;
+    background-color: #090B0D;
   }
 
   .section-surface {
@@ -764,31 +764,31 @@
   }
 
   .section-surface--stats {
-    background: linear-gradient(90deg, rgba(20, 184, 166, 0.025), transparent 42%, rgba(34, 211, 238, 0.018));
+    background: #101316;
   }
 
   .section-surface--problem {
-    background: linear-gradient(180deg, #070f1c 0%, #091625 100%);
+    background: #0B0D0F;
   }
 
   .section-surface--solution {
-    background: linear-gradient(180deg, #0a1628 0%, #0c1a30 48%, #0a1628 100%);
+    background: #111417;
   }
 
   .section-surface--how {
-    background: linear-gradient(180deg, #0c1a30 0%, #0a1628 100%);
+    background: #101316;
   }
 
   .section-surface--trust {
-    background: linear-gradient(180deg, #070f1c 0%, #081221 100%);
+    background: #0B0D0F;
   }
 
   .section-surface--faq {
-    background: linear-gradient(180deg, #070f1c 0%, #091625 100%);
+    background: #111417;
   }
 
   .section-surface--final {
-    background: linear-gradient(180deg, #081a2b 0%, #0c1a30 100%);
+    background: #14181B;
   }
 
   .card-glow {
@@ -798,7 +798,7 @@
   .card-glow::before {
     content: '';
     @apply absolute -inset-px rounded-[1.25rem] opacity-0 transition-opacity duration-300;
-    background: linear-gradient(135deg, rgba(20, 184, 166, 0.14), rgba(6, 182, 212, 0.06));
+    background: rgba(56, 178, 163, 0.04);
   }
 
   .card-glow:hover::before {
@@ -839,7 +839,7 @@
 
   .input-premium:focus {
     @apply border-teal-400/70 bg-navy-900/80 outline-none;
-    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.08), 0 6px 18px rgba(6, 182, 212, 0.05);
+    box-shadow: 0 0 0 3px rgba(56, 178, 163, 0.12);
   }
 
   .success-check {
@@ -993,13 +993,13 @@
 
   .grid-bg {
     background-image:
-      linear-gradient(rgba(30, 45, 74, 0.24) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(30, 45, 74, 0.24) 1px, transparent 1px);
+      linear-gradient(rgba(42, 48, 53, 0.34) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(42, 48, 53, 0.34) 1px, transparent 1px);
     background-size: 48px 48px;
   }
 
   .mermaid-mark {
-    @apply relative block overflow-hidden bg-gradient-to-br from-teal-500 to-cyan-500;
+    @apply relative block overflow-hidden bg-teal-500;
   }
 
   .mermaid-mark__silhouette {
@@ -1020,7 +1020,7 @@
 
   .workflow-shell {
     @apply relative rounded-2xl border border-navy-600/55 bg-navy-900/85;
-    box-shadow: 0 12px 30px rgba(3, 12, 26, 0.18), inset 0 1px 0 rgba(148, 163, 184, 0.04);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(242, 239, 232, 0.035);
   }
 
   .workflow-scene {
@@ -1037,7 +1037,7 @@
 
   .workflow-scene__status-dot {
     @apply h-1.5 w-1.5 rounded-full bg-teal-400;
-    box-shadow: 0 0 0 2px rgba(45, 212, 191, 0.07);
+    box-shadow: 0 0 0 2px rgba(56, 178, 163, 0.07);
   }
 
   .workflow-scene__example {
@@ -1176,7 +1176,7 @@
 
   .problem-board {
     @apply overflow-hidden rounded-2xl border border-navy-600/65 bg-navy-900/70;
-    box-shadow: 0 16px 36px rgba(3, 12, 26, 0.16), inset 0 1px 0 rgba(148, 163, 184, 0.035);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(242, 239, 232, 0.035);
   }
 
   .problem-board__header {
@@ -1326,7 +1326,7 @@
 
   .capability-visual {
     @apply min-w-0 rounded-2xl border border-navy-600/65 bg-navy-900/65 px-4 py-4 sm:px-5 sm:py-5;
-    box-shadow: 0 12px 28px rgba(3, 12, 26, 0.12), inset 0 1px 0 rgba(148, 163, 184, 0.035);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14), inset 0 1px 0 rgba(242, 239, 232, 0.035);
   }
 
   .capability-fragment__header {
@@ -1335,7 +1335,7 @@
 
   .capability-fragment__signal {
     @apply h-1.5 w-1.5 rounded-full bg-teal-400;
-    box-shadow: 0 0 0 2px rgba(45, 212, 191, 0.07);
+    box-shadow: 0 0 0 2px rgba(56, 178, 163, 0.07);
   }
 
   .capability-fragment__meta {
@@ -1409,7 +1409,7 @@
 
   .capability-prototype {
     @apply mt-4 overflow-hidden rounded-xl border border-navy-600/75 bg-navy-950/90;
-    box-shadow: 0 14px 30px rgba(3, 12, 26, 0.2), inset 0 1px 0 rgba(148, 163, 184, 0.04);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(242, 239, 232, 0.04);
   }
 
   .capability-prototype__chrome {
@@ -1612,7 +1612,7 @@
            text-base tracking-tight
            transition-all duration-300 ease-out
            hover:bg-teal-400
-           hover:shadow-[0_10px_30px_rgba(20,184,166,0.22)]
+           hover:shadow-[0_10px_30px_rgba(0,0,0,0.18)]
            hover:-translate-y-0.5
            active:translate-y-0
            focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950;

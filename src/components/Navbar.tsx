@@ -63,7 +63,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
   return (
     <header data-scrolled={isScrolled ? 'true' : 'false'} className={`navbar-v2 fixed top-0 left-0 right-0 z-40 transition-[padding] duration-200 ${isScrolled ? 'py-1' : 'py-2'}`}>
       <div className="navbar-v2__shell relative">
-        <div className={`navbar-v2__surface absolute inset-0 border-b ${isScrolled ? 'bg-navy-950/92 border-navy-600/70 shadow-[0_10px_40px_rgba(2,8,23,0.25)]' : 'bg-navy-950/45 border-navy-600/35'}`} />
+        <div className={`navbar-v2__surface absolute inset-0 border-b ${isScrolled ? 'bg-navy-950/92 border-navy-600/70 shadow-[0_10px_32px_rgba(0,0,0,0.18)]' : 'bg-navy-950/45 border-navy-600/35'}`} />
 
         <nav className={`navbar-v2__inner v2-container relative grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center transition-[height] duration-200 ${isScrolled ? 'h-14' : 'h-16'}`}>
           {/* Logo */}
