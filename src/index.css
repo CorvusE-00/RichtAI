@@ -238,6 +238,20 @@
     margin-right: 0;
   }
 
+  .hero-monolith-stage--levitate {
+    animation: hero-monolith-stage-levitate 6.6s ease-in-out infinite;
+  }
+
+  .hero-monolith-stage__content {
+    position: relative;
+    transform-origin: center;
+  }
+
+  .hero-monolith-stage--parallax .hero-monolith-stage__content {
+    will-change: transform;
+    transition: transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
   .hero-monolith-window--motion {
     opacity: 0;
     transform: translateY(8px);
@@ -273,27 +287,59 @@
     opacity: 0.78;
   }
 
-  .hero-monolith-motion__core {
-    fill: none;
-    stroke: rgba(111, 227, 218, 0.28);
-    stroke-width: 1.2;
-    opacity: 0.22;
-    transform-box: fill-box;
-    transform-origin: center;
-    transition: opacity 650ms ease, stroke 650ms ease;
-    vector-effect: non-scaling-stroke;
+  .hero-monolith-motion__path.is-hovered {
+    stroke: rgba(135, 241, 231, 0.92);
+    opacity: 0.94;
+    stroke-dasharray: 0.16 0.84;
+    animation: hero-monolith-hover-sweep 1.8s ease-out 1;
   }
 
-  .hero-monolith-motion__core.is-active {
-    stroke: rgba(132, 240, 231, 0.9);
-    opacity: 0.85;
-    animation: hero-monolith-core-pulse 1.8s ease-in-out infinite;
+  .hero-monolith-motion__orbit {
+    fill: none;
+    stroke-linecap: round;
+    stroke-width: 1.1;
+    transform-box: view-box;
+    transform-origin: 438px 164px;
+  }
+
+  .hero-monolith-motion__orbit--teal {
+    stroke: rgba(108, 226, 216, 0.46);
+    opacity: 0.56;
+    animation: hero-monolith-orbit-teal 17s linear infinite;
+  }
+
+  .hero-monolith-motion__orbit--warm {
+    stroke: rgba(222, 218, 200, 0.36);
+    opacity: 0.46;
+    animation: hero-monolith-orbit-warm 13s linear -4s infinite reverse;
+  }
+
+  .hero-monolith-motion__orbit--faint {
+    stroke: rgba(126, 211, 203, 0.2);
+    opacity: 0.3;
+    animation: hero-monolith-orbit-faint 22s linear -8s infinite;
+  }
+
+  .hero-monolith-motion__orbitals.is-active .hero-monolith-motion__orbit--teal {
+    opacity: 0.78;
+    animation: hero-monolith-orbit-teal-active 900ms ease-out 1,
+      hero-monolith-orbit-teal 17s linear 900ms infinite;
+  }
+
+  .hero-monolith-motion__orbitals.is-active .hero-monolith-motion__orbit--warm {
+    opacity: 0.62;
+  }
+
+  [data-hovered-endpoint] .hero-monolith-motion__path:not(.is-hovered) {
+    opacity: 0.1;
   }
 
   .hero-monolith-motion__endpoint {
     fill: rgba(95, 216, 207, 0.42);
     opacity: 0.24;
-    transition: opacity 500ms ease, fill 500ms ease;
+    transition: opacity 500ms ease, fill 500ms ease, transform 220ms ease-out, filter 220ms ease-out;
+    transform-box: fill-box;
+    transform-origin: center;
     vector-effect: non-scaling-stroke;
   }
 
@@ -302,20 +348,154 @@
     opacity: 0.92;
   }
 
+  .hero-monolith-motion__endpoint.is-hovered {
+    animation-play-state: paused;
+    filter: drop-shadow(0 0 4px rgba(103, 226, 216, 0.52));
+    transform: translateY(-1px) scale(1.05);
+  }
+
+  .hero-monolith-motion__endpoint--website {
+    animation: hero-monolith-endpoint-drift-a 6.8s ease-in-out infinite;
+  }
+
+  .hero-monolith-motion__endpoint--whatsapp {
+    animation: hero-monolith-endpoint-drift-b 6.1s ease-in-out -1.8s infinite;
+  }
+
+  .hero-monolith-motion__endpoint--crm {
+    animation: hero-monolith-endpoint-drift-c 7.2s ease-in-out -3.1s infinite;
+  }
+
+  .hero-monolith-motion__endpoint--calendar {
+    animation: hero-monolith-endpoint-drift-b 6.5s ease-in-out -2.4s infinite;
+  }
+
+  .hero-monolith-motion__endpoint--team {
+    animation: hero-monolith-endpoint-drift-a 7.4s ease-in-out -4.2s infinite;
+  }
+
+  .hero-monolith-endpoint-zones {
+    position: absolute;
+    inset: 0;
+    pointer-events: auto;
+  }
+
+  .hero-monolith-endpoint-zone {
+    position: absolute;
+    display: block;
+    border-radius: 999px;
+    cursor: default;
+  }
+
+  .hero-monolith-endpoint-zone::after {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(114, 232, 221, 0.58);
+    border-radius: inherit;
+    content: '';
+    opacity: 0;
+    transform: translateY(-1px) scale(1.015);
+    transition: opacity 220ms ease-out, transform 220ms ease-out;
+  }
+
+  [data-hovered-endpoint='website'] .hero-monolith-endpoint-zone--website::after,
+  [data-hovered-endpoint='whatsapp'] .hero-monolith-endpoint-zone--whatsapp::after,
+  [data-hovered-endpoint='crm'] .hero-monolith-endpoint-zone--crm::after,
+  [data-hovered-endpoint='calendar'] .hero-monolith-endpoint-zone--calendar::after,
+  [data-hovered-endpoint='team'] .hero-monolith-endpoint-zone--team::after {
+    opacity: 0.52;
+    transform: translateY(-1px) scale(1.04);
+  }
+
+  .hero-monolith-endpoint-zone--website {
+    top: 27%;
+    left: 1.2%;
+    width: 16%;
+    height: 19%;
+  }
+
+  .hero-monolith-endpoint-zone--whatsapp {
+    top: 49%;
+    left: 1.2%;
+    width: 16%;
+    height: 19%;
+  }
+
+  .hero-monolith-endpoint-zone--crm {
+    top: 8%;
+    right: 3.2%;
+    width: 12%;
+    height: 20%;
+  }
+
+  .hero-monolith-endpoint-zone--calendar {
+    top: 35%;
+    right: 1.8%;
+    width: 13%;
+    height: 20%;
+  }
+
+  .hero-monolith-endpoint-zone--team {
+    top: 68%;
+    right: 1.8%;
+    width: 13%;
+    height: 22%;
+  }
+
   .hero-monolith-motion__signal {
-    fill: rgba(178, 255, 247, 0.98);
-    filter: drop-shadow(0 0 4px rgba(85, 224, 214, 0.72));
+    fill: rgba(178, 255, 247, 0.84);
+    filter: drop-shadow(0 0 3px rgba(85, 224, 214, 0.5));
+    opacity: 0.82;
   }
 
   .hero-monolith-motion--reduced .hero-monolith-motion__path,
-  .hero-monolith-motion--reduced .hero-monolith-motion__core,
   .hero-monolith-motion--reduced .hero-monolith-motion__endpoint {
     transition: none;
   }
 
-  @keyframes hero-monolith-core-pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.04); }
+  @keyframes hero-monolith-stage-levitate {
+    0%, 100% { transform: translateY(-2px); }
+    50% { transform: translateY(2px); }
+  }
+
+  @keyframes hero-monolith-endpoint-drift-a {
+    0%, 100% { transform: translateY(-1px); }
+    50% { transform: translateY(1px); }
+  }
+
+  @keyframes hero-monolith-endpoint-drift-b {
+    0%, 100% { transform: translateY(1px); }
+    50% { transform: translateY(-1px); }
+  }
+
+  @keyframes hero-monolith-endpoint-drift-c {
+    0%, 100% { transform: translateY(-1.5px); }
+    50% { transform: translateY(1.5px); }
+  }
+
+  @keyframes hero-monolith-hover-sweep {
+    from { stroke-dashoffset: 0.22; }
+    to { stroke-dashoffset: -0.9; }
+  }
+
+  @keyframes hero-monolith-orbit-teal {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes hero-monolith-orbit-warm {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes hero-monolith-orbit-faint {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes hero-monolith-orbit-teal-active {
+    from { transform: rotate(-10deg); }
+    to { transform: rotate(2deg); }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -326,8 +506,37 @@
       transition: none;
     }
 
-    .hero-monolith-motion__core.is-active {
+    .hero-monolith-motion__path.is-hovered {
       animation: none;
+    }
+
+    .hero-monolith-motion--reduced .hero-monolith-motion__orbit {
+      animation: none;
+      transform: none;
+    }
+
+    .hero-monolith-stage--levitate {
+      animation: none;
+      transform: none;
+    }
+
+    .hero-monolith-stage__content {
+      transform: none !important;
+      transition: none;
+    }
+
+    .hero-monolith-motion__endpoint {
+      animation: none;
+      transform: none;
+    }
+
+    .hero-monolith-motion__endpoint.is-hovered {
+      filter: none;
+      transform: none;
+    }
+
+    .hero-monolith-endpoint-zone::after {
+      transition: none;
     }
   }
 

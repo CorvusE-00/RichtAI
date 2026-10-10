@@ -171,6 +171,23 @@ Avoid splitting the implementation into more files unless a concrete reuse or li
 - [ ] 15. Final review checkpoint before commit
 - [ ] 16. Commit and push ONLY after explicit approval
 
+## Motion V2 — Premium Interaction Pass
+
+- [x] V2-1. Audit current motion layers and freeze approved behavior
+- [x] V2-2. Add subtle monolith idle levitation
+- [x] V2-3. Add subtle endpoint idle drift
+- [x] V2-4. Add hover hit areas for the five system endpoints
+- [x] V2-5. Add endpoint hover scale / intensity response
+- [x] V2-6. Add connector-path emphasis tied to hovered endpoint
+- [x] V2-7. Remove the basic AI pulse circle
+- [x] V2-8. Build a refined multi-arc AI orbital core
+- [x] V2-9. Add restrained monolith hover parallax / tilt
+- [x] V2-10. Refine active signal travel to support, not dominate
+- [x] V2-11. Add reduced-motion fallbacks for all new V2 behaviors
+- [ ] V2-12. Desktop visual QA at target widths
+- [ ] V2-13. Typecheck / lint / build / diff review
+- [ ] V2-14. Final review checkpoint before commit
+
 ### Checklist 1 — Implementation notes
 
 - **Hero prop contract:** `Hero({ onCTAClick })` remains unchanged.
@@ -221,6 +238,45 @@ Avoid splitting the implementation into more files unless a concrete reuse or li
 - **Sequence:** the overlay expresses Website/WhatsApp inbound signals, AI core response, CRM then Takvim downstream resolution, and final Ekip handoff. The cycle settles before alternating sources and remains within the requested calm 8–12 second rhythm.
 - **Static/reduced-motion behavior:** the approved raster asset and window proportions remain the base composition. Reduced motion renders a complete calm overlay without entrance translation, looping timers, or signal travel.
 - **Locale boundary:** motion is enabled only for the Turkish desktop branch in this run. The baked labels are not edited or overlaid, and English inner-label refinement is deferred.
+
+### Motion V2 — V2-1 audit note
+
+- **Stays:** the existing `website | whatsapp` source state, `idle → inbound → ai → crm → calendar → handoff` phase order, visibility observer, page-visibility listener, reduced-motion detection, timer cleanup, Turkish-only motion enablement, and semantic source-to-destination story.
+- **Changes:** idle presence, endpoint interaction zones, hover emphasis, connector priority, orbital core treatment, restrained stage parallax, and signal prominence will be refined in V2-2 through V2-10.
+- **Removed:** none in V2-1; the existing single-circle core and current signal layers remain frozen until their explicitly assigned checklist items.
+- **Secondary motion:** signal travel remains supporting motion; physical presence, hover response, and orbital depth become the primary interaction hierarchy.
+
+### Motion V2 — V2-8 QA note
+
+- **Orbital core:** replaced the removed full-circle AI pulse with three asymmetric partial arcs: teal, warm-neutral, and faint teal. Their unequal slow rotations create restrained depth without a neon ring or closed orbit.
+- **Active response:** the teal arc gains a short, low-intensity emphasis as the sequence reaches the AI/downstream phases; no copy, asset, or connector-path story changed.
+- **Reduced motion:** orbital rotation and the active entrance emphasis are disabled through the existing reduced-motion class.
+- **QA:** `pnpm typecheck`, `pnpm lint`, and `git diff --check` passed. No dependency or unrelated section changes were introduced.
+
+### Motion V2 — V2-9 QA note
+
+- **Interaction:** the central monolith stage now responds to pointer movement only within a bounded center region, using a maximum 3px translation and approximately 1.5° tilt. Pointer leave returns it smoothly to neutral.
+- **Scope:** the wrapper remains stable; the whole Hero, window chrome, and surrounding layout do not tilt. Endpoint hit areas and the approved stage levitation remain separate.
+- **Reduced motion:** parallax state resets and the content transform is disabled when reduced motion is active or motion is unavailable.
+- **QA:** `pnpm typecheck`, `pnpm lint`, and `git diff --check` passed. No dependency or unrelated section changes were introduced.
+
+### Motion V2 — V2-10 QA note
+
+- **Signal hierarchy:** reduced each traveling signal dot from `r=3.5` to `r=2.75`, lowered fill opacity, and softened the drop shadow so connector paths and the orbital core remain primary.
+- **Sequence preserved:** Website/WhatsApp inbound still resolves through AI, CRM, Takvim, and Ekip without changing the existing phase machine, timing, or path mapping.
+- **QA:** `pnpm typecheck`, `pnpm lint`, and `git diff --check` passed. No dependency or unrelated section changes were introduced.
+
+### Motion V2 — V2-11 QA note
+
+- **Fallback coverage:** reduced motion keeps the complete static asset and stable orbital artwork while disabling entrance translation, stage levitation, endpoint drift, orbital rotation, hover sweep animation, signal travel, and pointer parallax.
+- **Allowed response:** endpoint hover can still provide a static restrained outline/state without animated movement; the pointer zones remain non-clickable and do not trap focus.
+- **Verification:** `pnpm typecheck`, `pnpm lint`, `pnpm build`, and `git diff --check` passed. The reduced-motion coverage is implemented through the existing `prefers-reduced-motion` CSS plus the component’s reduced-motion state/timer guards.
+
+### Motion V2 — V2-12 QA note
+
+- **Available preview:** the Codex In-app Browser rendered the live Turkish page at its available narrow/mobile viewport; the approved mobile fallback, connected-systems rail, CTA, and reassurance layout remained intact with no evident overflow.
+- **Desktop limitation:** the current embedded browser exposes no resizable viewport control, and a separate desktop browser is unavailable in this session. The required 1536×900, 1440×900, 1280×800, and 1024×768 visual inspections therefore could not be completed truthfully.
+- **Checklist state:** V2-12 remains unchecked, and the workflow stops here as required. V2-13 and V2-14 remain untouched.
 
 ## Execution rules for future runs
 
