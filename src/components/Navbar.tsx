@@ -51,7 +51,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${isScrolled ? 'py-1' : 'py-2'}`}>
-      <div className={`absolute inset-0 backdrop-blur-md border-b transition-all duration-500 ${isScrolled ? 'bg-navy-950/92 border-navy-600/70 shadow-[0_10px_40px_rgba(2,8,23,0.25)]' : 'bg-navy-950/45 border-navy-600/35'}`} />
+      <div className={`absolute inset-0 backdrop-blur-md border-b transition-all duration-500 ${isScrolled ? 'bg-navy-950/92 border-navy-600/70 shadow-[0_10px_32px_rgba(0,0,0,0.18)]' : 'bg-navy-950/45 border-navy-600/35'}`} />
 
       <nav className={`relative max-w-6xl mx-auto px-3 sm:px-6 grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center transition-all duration-500 ${isScrolled ? 'h-14' : 'h-16'}`}>
         {/* Logo */}
@@ -60,7 +60,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
           className="col-start-1 justify-self-start flex items-center gap-2.5 group"
         >
           <div className={`relative transition-transform duration-500 ${isScrolled ? 'scale-90' : ''}`}>
-            <div className="absolute inset-0 bg-teal-500/30 blur-lg group-hover:bg-teal-500/40 transition-all duration-300" />
+            <div className="absolute inset-0 bg-teal-500/5 blur-lg group-hover:bg-teal-500/10 transition-all duration-300" />
             <div className="relative w-9 h-9 rounded-lg overflow-hidden border border-teal-400/25">
               <MermaidMark className="h-full w-full" />
             </div>
@@ -77,7 +77,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
               key={link.id}
               onClick={() => scrollTo(link.id)}
               aria-current={activeSection === link.id ? 'page' : undefined}
-              className={`relative px-3 py-2 text-sm transition-colors duration-200 font-display after:absolute after:left-3 after:right-3 after:-bottom-0.5 after:h-px after:origin-left after:rounded-full after:bg-teal-400 after:transition-transform after:duration-300 ${activeSection === link.id ? 'text-snow-100 after:scale-x-100' : 'text-snow-400 after:scale-x-0 hover:text-snow-100 hover:after:scale-x-50'}`}
+              className={`relative px-3 py-2 text-sm transition-colors duration-200 font-display after:absolute after:left-3 after:right-3 after:-bottom-0.5 after:h-px after:origin-left after:rounded-full after:bg-teal-500 after:transition-transform after:duration-300 ${activeSection === link.id ? 'text-snow-100 after:scale-x-100' : 'text-snow-400 after:scale-x-0 hover:text-snow-100 hover:after:scale-x-50'}`}
             >
               {link.label}
             </button>
@@ -95,7 +95,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
           </button>
           <button
             onClick={handleCTA}
-            className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-gradient-to-r from-teal-500 to-cyan-500 text-navy-950 font-display font-semibold text-sm transition-all duration-300 hover:from-teal-400 hover:to-cyan-400 hover:shadow-[0_0_20px_rgba(20,184,166,0.35)] hover:-translate-y-0.5"
+            className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg border border-white/10 bg-teal-500 text-navy-950 font-display font-semibold text-sm transition-all duration-300 hover:bg-teal-400 hover:-translate-y-0.5"
           >
             {copy.nav.cta}
           </button>

@@ -26,36 +26,39 @@
 }
 
 @layer components {
-  /* Teal is the primary brand signal; cyan remains available for secondary workflow states. */
+  /* Warm graphite / bone / muted teal palette. */
   .text-gradient-teal {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-teal-300 via-teal-400 to-teal-300;
+    color: #F3F0E9;
   }
 
   .section-tone {
-    background-color: #070f1c;
+    background-color: #121416;
   }
 
   .section-tone--stats {
-    background-color: #0a1628;
+    background-color: #16191C;
   }
 
   .section-tone--problem,
   .section-tone--trust,
   .section-tone--faq {
-    background-color: #070f1c;
+    background-color: #121416;
   }
 
-  .section-tone--solution,
+  .section-tone--solution {
+    background-color: #181B1E;
+  }
+
   .section-tone--how {
-    background-color: #0a1628;
+    background-color: #15181B;
   }
 
   .section-tone--final {
-    background-color: #0c1a30;
+    background-color: #1A1E21;
   }
 
   .section-tone--footer {
-    background-color: #070f1c;
+    background-color: #0F1113;
   }
 
   .section-surface {
@@ -63,31 +66,31 @@
   }
 
   .section-surface--stats {
-    background: linear-gradient(90deg, rgba(20, 184, 166, 0.025), transparent 42%, rgba(34, 211, 238, 0.018));
+    background: #16191C;
   }
 
   .section-surface--problem {
-    background: linear-gradient(180deg, #070f1c 0%, #091625 100%);
+    background: #121416;
   }
 
   .section-surface--solution {
-    background: linear-gradient(180deg, #0a1628 0%, #0c1a30 48%, #0a1628 100%);
+    background: #181B1E;
   }
 
   .section-surface--how {
-    background: linear-gradient(180deg, #0c1a30 0%, #0a1628 100%);
+    background: #15181B;
   }
 
   .section-surface--trust {
-    background: linear-gradient(180deg, #070f1c 0%, #081221 100%);
+    background: #121416;
   }
 
   .section-surface--faq {
-    background: linear-gradient(180deg, #070f1c 0%, #091625 100%);
+    background: #181B1E;
   }
 
   .section-surface--final {
-    background: linear-gradient(180deg, #081a2b 0%, #0c1a30 100%);
+    background: #1A1E21;
   }
 
   .card-glow {
@@ -97,7 +100,7 @@
   .card-glow::before {
     content: '';
     @apply absolute -inset-px rounded-[1.25rem] opacity-0 transition-opacity duration-300;
-    background: linear-gradient(135deg, rgba(20, 184, 166, 0.14), rgba(6, 182, 212, 0.06));
+    background: rgba(52, 143, 132, 0.025);
   }
 
   .card-glow:hover::before {
@@ -133,8 +136,8 @@
 
   .hero-noise {
     background-image:
-      radial-gradient(circle at 20% 20%, rgba(20, 184, 166, 0.06) 0 1px, transparent 1.5px),
-      radial-gradient(circle at 80% 70%, rgba(103, 232, 249, 0.045) 0 1px, transparent 1.5px);
+      radial-gradient(circle at 20% 20%, rgba(52, 143, 132, 0.018) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 80% 70%, rgba(243, 240, 233, 0.016) 0 1px, transparent 1.5px);
     background-size: 17px 19px, 23px 21px;
     opacity: 0.18;
     mix-blend-mode: screen;
@@ -159,7 +162,7 @@
 
   .hero-visual__frame {
     @apply overflow-hidden rounded-[1.5rem] border border-navy-600/70 bg-navy-900/80;
-    box-shadow: 0 18px 46px rgba(3, 12, 26, 0.24), inset 0 1px 0 rgba(148, 163, 184, 0.05);
+    box-shadow: 0 18px 46px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(243, 240, 233, 0.04);
     aspect-ratio: 3 / 2;
   }
 
@@ -169,7 +172,7 @@
 
   .hero-connected-systems {
     @apply relative z-10 mx-6 mt-3 rounded-xl border border-navy-600/80 bg-navy-950/95 px-4 py-3 backdrop-blur-md;
-    box-shadow: 0 12px 28px rgba(3, 12, 26, 0.26), inset 0 1px 0 rgba(148, 163, 184, 0.045);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(243, 240, 233, 0.035);
   }
 
   .hero-connected-systems__header {
@@ -178,7 +181,7 @@
 
   .hero-connected-systems__status-dot {
     @apply h-1.5 w-1.5 shrink-0 rounded-full bg-teal-400;
-    box-shadow: 0 0 0 2px rgba(45, 212, 191, 0.08);
+    box-shadow: 0 0 0 2px rgba(52, 143, 132, 0.08);
     animation: connected-status-pulse 3.2s ease-in-out infinite;
   }
 
@@ -191,7 +194,7 @@
   }
 
   .hero-connected-systems__node {
-    @apply flex min-w-0 flex-1 items-center gap-2 rounded-lg border border-navy-600/70 bg-navy-900/70 px-2.5 py-2 text-xs text-snow-300;
+    @apply flex min-w-0 flex-1 items-center gap-2 rounded-lg border border-navy-600/70 bg-navy-900/70 px-2.5 py-2 text-xs text-snow-200;
   }
 
   .hero-connected-systems__node-dot {
@@ -258,7 +261,7 @@
     .hero-visual-region::before {
       content: '';
       @apply absolute left-0 top-[14%] bottom-[14%] w-px;
-      background: linear-gradient(to bottom, transparent, rgba(45, 212, 209, 0.24), transparent);
+      background: linear-gradient(to bottom, transparent, rgba(52, 143, 132, 0.14), transparent);
     }
   }
 
@@ -269,7 +272,7 @@
 
   .input-premium:focus {
     @apply border-teal-400/70 bg-navy-900/80 outline-none;
-    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.08), 0 6px 18px rgba(6, 182, 212, 0.05);
+    box-shadow: 0 0 0 3px rgba(52, 143, 132, 0.12);
   }
 
   .success-check {
@@ -423,17 +426,17 @@
 
   .grid-bg {
     background-image:
-      linear-gradient(rgba(30, 45, 74, 0.24) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(30, 45, 74, 0.24) 1px, transparent 1px);
+      linear-gradient(rgba(48, 54, 59, 0.32) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(48, 54, 59, 0.32) 1px, transparent 1px);
     background-size: 48px 48px;
   }
 
   .radial-glow {
-    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(20, 184, 166, 0.07), transparent 70%);
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(241, 238, 231, 0.035), transparent 70%);
   }
 
   .mermaid-mark {
-    @apply relative block overflow-hidden bg-gradient-to-br from-teal-500 to-cyan-500;
+    @apply relative block overflow-hidden bg-teal-500;
   }
 
   .mermaid-mark__silhouette {
@@ -454,7 +457,7 @@
 
   .workflow-shell {
     @apply relative rounded-2xl border border-navy-600/55 bg-navy-900/85;
-    box-shadow: 0 12px 30px rgba(3, 12, 26, 0.18), inset 0 1px 0 rgba(148, 163, 184, 0.04);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(241, 238, 231, 0.035);
   }
 
   .workflow-scene {
@@ -471,7 +474,7 @@
 
   .workflow-scene__status-dot {
     @apply h-1.5 w-1.5 rounded-full bg-teal-400;
-    box-shadow: 0 0 0 2px rgba(45, 212, 191, 0.07);
+    box-shadow: 0 0 0 2px rgba(52, 143, 132, 0.07);
   }
 
   .workflow-scene__example {
@@ -610,7 +613,7 @@
 
   .problem-board {
     @apply overflow-hidden rounded-2xl border border-navy-600/65 bg-navy-900/70;
-    box-shadow: 0 16px 36px rgba(3, 12, 26, 0.16), inset 0 1px 0 rgba(148, 163, 184, 0.035);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(241, 238, 231, 0.035);
   }
 
   .problem-board__header {
@@ -760,7 +763,7 @@
 
   .capability-visual {
     @apply min-w-0 rounded-2xl border border-navy-600/65 bg-navy-900/65 px-4 py-4 sm:px-5 sm:py-5;
-    box-shadow: 0 12px 28px rgba(3, 12, 26, 0.12), inset 0 1px 0 rgba(148, 163, 184, 0.035);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14), inset 0 1px 0 rgba(241, 238, 231, 0.035);
   }
 
   .capability-fragment__header {
@@ -769,7 +772,7 @@
 
   .capability-fragment__signal {
     @apply h-1.5 w-1.5 rounded-full bg-teal-400;
-    box-shadow: 0 0 0 2px rgba(45, 212, 191, 0.07);
+    box-shadow: 0 0 0 2px rgba(52, 143, 132, 0.07);
   }
 
   .capability-fragment__meta {
@@ -843,7 +846,7 @@
 
   .capability-prototype {
     @apply mt-4 overflow-hidden rounded-xl border border-navy-600/75 bg-navy-950/90;
-    box-shadow: 0 14px 30px rgba(3, 12, 26, 0.2), inset 0 1px 0 rgba(148, 163, 184, 0.04);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(241, 238, 231, 0.04);
   }
 
   .capability-prototype__chrome {
@@ -1046,10 +1049,16 @@
            text-base tracking-tight
            transition-all duration-300 ease-out
            hover:bg-teal-400
-           hover:shadow-[0_10px_30px_rgba(20,184,166,0.22)]
+           hover:shadow-[0_10px_30px_rgba(0,0,0,0.18)]
            hover:-translate-y-0.5
            active:translate-y-0
            focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #0F1513;
+  }
+
+  .hero-section > .bg-gradient-to-b {
+    background: rgba(18, 20, 22, 0.92) !important;
   }
 
   .section-label {

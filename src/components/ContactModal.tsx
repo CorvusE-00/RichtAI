@@ -82,9 +82,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
         onClick={onClose}
       />
 
-      <div className="relative w-full max-w-lg rounded-2xl bg-navy-850 border border-navy-600/60 shadow-[0_0_80px_rgba(10,22,40,0.85),0_0_30px_rgba(20,184,166,0.08)] animate-fade-in-up max-h-[90vh] overflow-y-auto scrollbar-hide">
-        {/* Glow accent */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-40 bg-teal-500/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="relative w-full max-w-lg rounded-2xl bg-navy-850 border border-navy-600/60 shadow-[0_20px_60px_rgba(0,0,0,0.35)] animate-fade-in-up max-h-[90vh] overflow-y-auto scrollbar-hide">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-40 bg-snow-50/[0.03] rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative p-6 sm:p-8">
           <button
