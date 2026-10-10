@@ -1,5 +1,6 @@
 import { ArrowRight, ShieldCheck, UserRound } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
+import { HeroMonolithVisual } from './HeroMonolithVisual';
 
 interface HeroProps {
   onCTAClick: () => void;
@@ -8,14 +9,15 @@ interface HeroProps {
 export function Hero({ onCTAClick }: HeroProps) {
   const { copy, language } = useLanguage();
   const connectedSystems = copy.workflow.connectedSystems;
+  const monolithWindowLabel = language === 'tr' ? 'CANLI SİSTEM GÖRÜNÜMÜ' : 'LIVE SYSTEM VIEW';
   return (
     <section id="anasayfa" className={`hero-section relative overflow-hidden pt-28 pb-3 sm:pt-24 sm:pb-10 lg:pt-36 lg:pb-20 ${language === 'tr' ? 'hero-section--tr' : ''}`}>
       {/* One restrained atmospheric layer; the visual system carries the hero's detail. */}
       <div className="absolute inset-0 radial-glow opacity-70 pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-b from-navy-950/45 via-navy-950/80 to-navy-950 pointer-events-none" />
 
-      <div data-reveal className="reveal relative z-10 max-w-6xl mx-auto px-5 sm:px-6">
-        <div className="grid items-center gap-3 sm:gap-8 md:gap-14 lg:grid-cols-[0.84fr_1.16fr] xl:gap-16">
+      <div data-reveal className="reveal relative z-10 mx-auto max-w-6xl px-5 sm:px-6 lg:max-w-[85rem]">
+        <div className="grid items-center gap-3 sm:gap-8 md:gap-14 lg:grid-cols-[0.65fr_1fr] lg:gap-8 xl:gap-10">
           <div className="hero-copy text-center xl:text-left">
             {/* Headline */}
             <h1 className="hero-copy__heading hero-heading mt-0 max-w-[40rem] font-display text-4xl sm:text-5xl xl:text-6xl 2xl:text-7xl font-semibold leading-[1.04] tracking-[-0.04em] text-snow-50 animate-fade-in-up animate-delay-100">
@@ -64,8 +66,17 @@ export function Hero({ onCTAClick }: HeroProps) {
             </div>
           </div>
 
-          {/* Visual-led Hero region with one compact operational proof overlay. */}
-          <div className="hero-visual-region" aria-label={copy.workflow.aria}>
+          {/* Desktop uses the exact supplied visual-only monolith asset. */}
+          <div className="hero-visual-region hidden lg:block" aria-label={copy.workflow.aria}>
+            <HeroMonolithVisual
+              alt="AI signal monolith connecting website, WhatsApp, CRM, calendar, and team systems"
+              motionEnabled={language === 'tr'}
+              windowLabel={monolithWindowLabel}
+            />
+          </div>
+
+          {/* Tablet and mobile keep the approved photo and connected-systems fallback. */}
+          <div className="hero-visual-region lg:hidden" aria-label={copy.workflow.aria}>
             <div className="hero-visual">
               <div className="hero-visual__frame">
                 <img
