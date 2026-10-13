@@ -238,397 +238,47 @@
     margin-right: 0;
   }
 
-  .hero-monolith-stage--levitate {
-    animation: hero-monolith-stage-levitate 6.6s ease-in-out infinite;
-  }
-
-  .hero-monolith-stage__content {
-    position: relative;
-    transform-origin: center;
-  }
-
-  .hero-monolith-stage--parallax .hero-monolith-stage__content {
-    will-change: transform;
-    transition: transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
-  }
-
-  .hero-monolith-window--motion {
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 800ms ease, transform 800ms ease;
-  }
-
-  .hero-monolith-window--motion.is-entered {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .hero-monolith-motion {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    overflow: visible;
-    pointer-events: none;
-  }
-
-  .hero-monolith-motion__path {
-    fill: none;
-    stroke: rgba(105, 223, 211, 0.34);
-    stroke-linecap: round;
-    stroke-width: 1.35;
-    opacity: 0.16;
-    transition: opacity 650ms ease, stroke 650ms ease;
-    vector-effect: non-scaling-stroke;
-  }
-
-  .hero-monolith-motion__path.is-active {
-    stroke: rgba(113, 232, 222, 0.78);
-    opacity: 0.78;
-  }
-
-  .hero-monolith-motion__path.is-hovered {
-    stroke: rgba(135, 241, 231, 0.92);
-    opacity: 0.94;
-    stroke-dasharray: 0.16 0.84;
-    animation: hero-monolith-hover-sweep 1.8s ease-out 1;
-  }
-
-  .hero-monolith-motion__orbit {
-    fill: none;
-    stroke-linecap: round;
-    stroke-width: 1.1;
-    transform-box: view-box;
-    transform-origin: 438px 164px;
-  }
-
-  .hero-monolith-motion__orbit--teal {
-    stroke: rgba(108, 226, 216, 0.46);
-    opacity: 0.56;
-    animation: hero-monolith-orbit-teal 17s linear infinite;
-  }
-
-  .hero-monolith-motion__orbit--warm {
-    stroke: rgba(222, 218, 200, 0.36);
-    opacity: 0.46;
-    animation: hero-monolith-orbit-warm 13s linear -4s infinite reverse;
-  }
-
-  .hero-monolith-motion__orbit--faint {
-    stroke: rgba(126, 211, 203, 0.2);
-    opacity: 0.3;
-    animation: hero-monolith-orbit-faint 22s linear -8s infinite;
-  }
-
-  .hero-monolith-motion__orbitals.is-active .hero-monolith-motion__orbit--teal {
-    opacity: 0.78;
-    animation: hero-monolith-orbit-teal-active 900ms ease-out 1,
-      hero-monolith-orbit-teal 17s linear 900ms infinite;
-  }
-
-  .hero-monolith-motion__orbitals.is-active .hero-monolith-motion__orbit--warm {
-    opacity: 0.62;
-  }
-
-  [data-hovered-endpoint] .hero-monolith-motion__path:not(.is-hovered) {
-    opacity: 0.1;
-  }
-
-  .hero-monolith-motion__endpoint {
-    fill: rgba(95, 216, 207, 0.42);
-    opacity: 0.24;
-    transition: opacity 500ms ease, fill 500ms ease, transform 220ms ease-out, filter 220ms ease-out;
-    transform-box: fill-box;
-    transform-origin: center;
-    vector-effect: non-scaling-stroke;
-  }
-
-  .hero-monolith-motion__endpoint.is-active {
-    fill: rgba(147, 246, 236, 0.96);
-    opacity: 0.92;
-  }
-
-  .hero-monolith-motion__endpoint.is-hovered {
-    animation-play-state: paused;
-    filter: drop-shadow(0 0 4px rgba(103, 226, 216, 0.52));
-    transform: translateY(-1px) scale(1.05);
-  }
-
-  .hero-monolith-motion__endpoint--website {
-    animation: hero-monolith-endpoint-drift-a 6.8s ease-in-out infinite;
-  }
-
-  .hero-monolith-motion__endpoint--whatsapp {
-    animation: hero-monolith-endpoint-drift-b 6.1s ease-in-out -1.8s infinite;
-  }
-
-  .hero-monolith-motion__endpoint--crm {
-    animation: hero-monolith-endpoint-drift-c 7.2s ease-in-out -3.1s infinite;
-  }
-
-  .hero-monolith-motion__endpoint--calendar {
-    animation: hero-monolith-endpoint-drift-b 6.5s ease-in-out -2.4s infinite;
-  }
-
-  .hero-monolith-motion__endpoint--team {
-    animation: hero-monolith-endpoint-drift-a 7.4s ease-in-out -4.2s infinite;
-  }
-
-  .hero-monolith-endpoint-zones {
-    position: absolute;
-    inset: 0;
-    pointer-events: auto;
-  }
-
-  .hero-monolith-endpoint-zone {
-    position: absolute;
-    display: block;
-    border-radius: 999px;
-    cursor: default;
-  }
-
-  .hero-monolith-endpoint-zone::after {
-    position: absolute;
-    inset: 0;
-    border: 1px solid rgba(114, 232, 221, 0.58);
-    border-radius: inherit;
-    content: '';
-    opacity: 0;
-    transform: translateY(-1px) scale(1.015);
-    transition: opacity 220ms ease-out, transform 220ms ease-out;
-  }
-
-  [data-hovered-endpoint='website'] .hero-monolith-endpoint-zone--website::after,
-  [data-hovered-endpoint='whatsapp'] .hero-monolith-endpoint-zone--whatsapp::after,
-  [data-hovered-endpoint='crm'] .hero-monolith-endpoint-zone--crm::after,
-  [data-hovered-endpoint='calendar'] .hero-monolith-endpoint-zone--calendar::after,
-  [data-hovered-endpoint='team'] .hero-monolith-endpoint-zone--team::after {
-    opacity: 0.52;
-    transform: translateY(-1px) scale(1.04);
-  }
-
-  .hero-monolith-endpoint-zone--website {
-    top: 27%;
-    left: 1.2%;
-    width: 16%;
-    height: 19%;
-  }
-
-  .hero-monolith-endpoint-zone--whatsapp {
-    top: 49%;
-    left: 1.2%;
-    width: 16%;
-    height: 19%;
-  }
-
-  .hero-monolith-endpoint-zone--crm {
-    top: 8%;
-    right: 3.2%;
-    width: 12%;
-    height: 20%;
-  }
-
-  .hero-monolith-endpoint-zone--calendar {
-    top: 35%;
-    right: 1.8%;
-    width: 13%;
-    height: 20%;
-  }
-
-  .hero-monolith-endpoint-zone--team {
-    top: 68%;
-    right: 1.8%;
-    width: 13%;
-    height: 22%;
-  }
-
-  .hero-monolith-motion__signal {
-    fill: rgba(178, 255, 247, 0.84);
-    filter: drop-shadow(0 0 3px rgba(85, 224, 214, 0.5));
-    opacity: 0.82;
-  }
-
-  .hero-monolith-motion--reduced .hero-monolith-motion__path,
-  .hero-monolith-motion--reduced .hero-monolith-motion__endpoint {
-    transition: none;
-  }
-
-  @keyframes hero-monolith-stage-levitate {
-    0%, 100% { transform: translateY(-2px); }
-    50% { transform: translateY(2px); }
-  }
-
-  @keyframes hero-monolith-endpoint-drift-a {
-    0%, 100% { transform: translateY(-1px); }
-    50% { transform: translateY(1px); }
-  }
-
-  @keyframes hero-monolith-endpoint-drift-b {
-    0%, 100% { transform: translateY(1px); }
-    50% { transform: translateY(-1px); }
-  }
-
-  @keyframes hero-monolith-endpoint-drift-c {
-    0%, 100% { transform: translateY(-1.5px); }
-    50% { transform: translateY(1.5px); }
-  }
-
-  @keyframes hero-monolith-hover-sweep {
-    from { stroke-dashoffset: 0.22; }
-    to { stroke-dashoffset: -0.9; }
-  }
-
-  @keyframes hero-monolith-orbit-teal {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  @keyframes hero-monolith-orbit-warm {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  @keyframes hero-monolith-orbit-faint {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  @keyframes hero-monolith-orbit-teal-active {
-    from { transform: rotate(-10deg); }
-    to { transform: rotate(2deg); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-monolith-window--motion,
-    .hero-monolith-window--motion.is-entered {
-      opacity: 1;
-      transform: none;
-      transition: none;
+  @media (max-width: 1023px) {
+    .hero-monolith-window {
+      width: 100%;
+      max-width: 56rem;
+      margin-right: 0;
+      margin-inline: auto;
+      border-radius: 0.9rem;
     }
 
-    .hero-monolith-motion__path.is-hovered {
-      animation: none;
+    .hero-monolith-window__bar {
+      min-height: 1.8rem;
+      padding-inline: 0.65rem;
+      gap: 0.55rem;
     }
 
-    .hero-monolith-motion--reduced .hero-monolith-motion__orbit {
-      animation: none;
-      transform: none;
+    .hero-monolith-window__label {
+      font-size: 0.55rem;
+      letter-spacing: 0.13em;
     }
 
-    .hero-monolith-stage--levitate {
-      animation: none;
-      transform: none;
-    }
-
-    .hero-monolith-stage__content {
-      transform: none !important;
-      transition: none;
-    }
-
-    .hero-monolith-motion__endpoint {
-      animation: none;
-      transform: none;
-    }
-
-    .hero-monolith-motion__endpoint.is-hovered {
-      filter: none;
-      transform: none;
-    }
-
-    .hero-monolith-endpoint-zone::after {
-      transition: none;
+    .hero-monolith-stage {
+      width: 100%;
+      margin-right: 0;
     }
   }
 
-  .hero-visual {
-    @apply relative min-w-0;
-  }
-
-  .hero-visual__frame {
-    @apply overflow-hidden rounded-[1.5rem] border border-navy-600/70 bg-navy-900/80;
-    box-shadow: 0 18px 46px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(243, 240, 233, 0.04);
-    aspect-ratio: 3 / 2;
-  }
-
-  .hero-visual__frame img {
-    @apply block h-full w-full object-cover object-center;
-  }
-
-  .hero-connected-systems {
-    @apply relative z-10 mx-6 mt-3 rounded-xl border border-navy-600/80 bg-navy-950/95 px-4 py-3 backdrop-blur-md;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(243, 240, 233, 0.035);
-  }
-
-  .hero-connected-systems__header {
-    @apply flex items-center gap-2 text-[11px] font-display uppercase tracking-[0.14em] text-snow-500;
-  }
-
-  .hero-connected-systems__status-dot {
-    @apply h-1.5 w-1.5 shrink-0 rounded-full bg-teal-400;
-    box-shadow: 0 0 0 2px rgba(52, 143, 132, 0.08);
-    animation: connected-status-pulse 3.2s ease-in-out infinite;
-  }
-
-  .hero-connected-systems__rail {
-    @apply mt-3 flex items-center gap-2;
-  }
-
-  .hero-connected-systems__segment {
-    @apply flex min-w-0 flex-1 items-center gap-2;
-  }
-
-  .hero-connected-systems__node {
-    @apply flex min-w-0 flex-1 items-center gap-2 rounded-lg border border-navy-600/70 bg-navy-900/70 px-2.5 py-2 text-xs text-snow-200;
-  }
-
-  .hero-connected-systems__node-dot {
-    @apply h-1.5 w-1.5 shrink-0 rounded-full bg-teal-300/80;
-    animation: connected-node-pulse 4.8s ease-in-out infinite;
-  }
-
-  .hero-connected-systems__connector {
-    @apply h-px min-w-2 flex-1 bg-gradient-to-r from-teal-400/20 via-teal-300/65 to-teal-400/20;
-    background-size: 200% 100%;
-    animation: connected-signal-sweep 5.5s ease-in-out infinite;
-  }
-
-  .hero-connected-systems__segment:nth-child(2) .hero-connected-systems__node-dot {
-    animation-delay: 1.2s;
-  }
-
-  .hero-connected-systems__segment:nth-child(3) .hero-connected-systems__node-dot {
-    animation-delay: 2.4s;
-  }
-
-  .hero-connected-systems__segment:nth-child(4) .hero-connected-systems__node-dot {
-    animation-delay: 3.6s;
-  }
-
-  @keyframes connected-status-pulse {
-    0%, 100% { opacity: 0.55; transform: scale(0.9); }
-    50% { opacity: 1; transform: scale(1); }
-  }
-
-  @keyframes connected-node-pulse {
-    0%, 100% { opacity: 0.45; transform: scale(0.9); }
-    50% { opacity: 1; transform: scale(1); }
-  }
-
-  @keyframes connected-signal-sweep {
-    0%, 100% { background-position: 100% 0; opacity: 0.55; }
-    50% { background-position: 0 0; opacity: 1; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-connected-systems__status-dot,
-    .hero-connected-systems__node-dot,
-    .hero-connected-systems__connector {
-      animation: none;
+  @media (max-width: 639px) {
+    .hero-monolith-window {
+      border-radius: 0.8rem;
     }
-  }
 
-  @media (min-width: 640px) {
-    .hero-connected-systems__rail { gap: 0.5rem; }
+    .hero-monolith-window__bar {
+      min-height: 1.65rem;
+      padding-inline: 0.55rem;
+      gap: 0.45rem;
+    }
+
+    .hero-monolith-window__label {
+      font-size: 0.48rem;
+      letter-spacing: 0.11em;
+    }
   }
 
   @media (min-width: 1280px) {
@@ -1639,29 +1289,6 @@
     .hero-visual-region {
       order: 3;
       margin-top: 0.75rem;
-    }
-
-    .hero-connected-systems {
-      position: static;
-      margin-top: 0.75rem;
-      @apply mx-0;
-      @apply px-3 py-2.5;
-    }
-
-    .hero-connected-systems__rail {
-      @apply grid grid-cols-2 gap-2;
-    }
-
-    .hero-connected-systems__segment {
-      @apply contents;
-    }
-
-    .hero-connected-systems__connector {
-      display: none;
-    }
-
-    .hero-connected-systems__node {
-      @apply px-2 py-1 text-[0.625rem] leading-4;
     }
 
     .hero-copy__cta {

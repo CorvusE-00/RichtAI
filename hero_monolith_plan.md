@@ -278,6 +278,90 @@ Avoid splitting the implementation into more files unless a concrete reuse or li
 - **Desktop limitation:** the current embedded browser exposes no resizable viewport control, and a separate desktop browser is unavailable in this session. The required 1536×900, 1440×900, 1280×800, and 1024×768 visual inspections therefore could not be completed truthfully.
 - **Checklist state:** V2-12 remains unchecked, and the workflow stops here as required. V2-13 and V2-14 remain untouched.
 
+## Static Consolidation + Mobile Monolith
+
+- [x] S1. Audit current motion-only code and frozen static contracts
+- [x] S2. Remove monolith motion state, timers, observers, pointer logic, and SVG animation layer
+- [x] S3. Remove obsolete monolith motion CSS and dead keyframes
+- [x] S4. Simplify HeroMonolithVisual to a static reusable component
+- [x] S5. Preserve approved desktop static window composition
+- [x] S6. Replace tablet fallback with static monolith window
+- [x] S7. Replace mobile fallback with static monolith window
+- [x] S8. Tune responsive sizing / spacing for 768, 430, 390, 375
+- [x] S9. Verify TR/EN window-title behavior
+- [x] S10. Full static responsive visual QA
+- [x] S11. Typecheck / lint / build / diff review
+- [ ] S12. Final screenshot review checkpoint before commit
+
+### Static Consolidation — S1 audit note
+
+- **Motion-only code to remove:** `motionEnabled`, `MotionSource`, `MotionPhase`, `Endpoint`, all monolith `useEffect`/`useRef`/`useState` lifecycle logic, IntersectionObserver, document visibility listener, reduced-motion listener, timer cycle, pointer/parallax state and handlers, endpoint hover state, SVG connector paths, signal dots, orbital arcs, endpoint hit zones, levitation/parallax/entrance classes, motion keyframes, and motion-only reduced-motion overrides.
+- **Static structure to preserve:** the exact `/images/richtai-signal-monolith-visual.png` raster, current premium window chrome and localized title, Hero left copy, CTA callback, reassurance/meta, unified Hero background, current desktop proportions, palette, ContactModal flow, `id="anasayfa"`, and existing TR/EN language switching.
+- **Responsive intent:** the same static window component will replace the existing tablet/mobile photo plus connected-systems fallback; no other homepage section or contract changes are in scope.
+
+### Static Consolidation — S2 QA note
+
+- **Removed from `HeroMonolithVisual.tsx`:** all monolith motion hooks, state, timers, IntersectionObserver, document visibility listener, reduced-motion listener, pointer/parallax handlers, endpoint hover state, animated SVG overlay, and animation lifecycle classes.
+- **Preserved:** the static window chrome, localized title, monolith raster, and stage wrapper remain available for the following CSS cleanup and responsive reuse steps.
+- **QA:** `pnpm typecheck`, `pnpm lint`, and `git diff --check` passed.
+
+### Static Consolidation — S3 QA note
+
+- **Removed:** all `.hero-monolith-motion*`, endpoint-zone, levitation, parallax, motion-window, and monolith-specific reduced-motion selectors, plus their keyframes.
+- **Preserved at S3:** the unrelated `.hero-connected-systems*` animation family was retained temporarily; it was removed with the old fallback during S7.
+- **Dead-class search:** no monolith motion selectors or keyframes remain in `src/components` or `src/index.css`.
+- **QA:** `pnpm typecheck`, `pnpm lint`, and `git diff --check` passed.
+
+### Static Consolidation — S4 QA note
+
+- **Component contract:** `HeroMonolithVisual` now accepts only `alt` and `windowLabel` and renders the premium window chrome plus the exact static monolith image.
+- **Removed:** motion props and all hidden interaction/animation layers. The desktop Hero consumer no longer passes `motionEnabled`.
+- **QA:** `pnpm typecheck`, `pnpm lint`, and `git diff --check` passed.
+
+### Static Consolidation — S5 QA note
+
+- **Desktop branch preserved:** `hidden lg:block` still renders the same static `HeroMonolithVisual` in the existing `lg:grid-cols-[0.65fr_1fr]` composition.
+- **Static design preserved:** the window chrome, unified Hero background, exact raster sizing, palette, and desktop placement remain unchanged; no desktop photo or connected-systems rail is rendered by that branch.
+- **QA:** source contract inspection and `git diff --check` passed.
+
+### Static Consolidation — S6 QA note
+
+- **Tablet branch:** 640–1023px now renders the same static `HeroMonolithVisual` below the copy in the existing single-column responsive grid.
+- **Isolation:** the prior photo/connected-systems fallback remains temporarily scoped to `<640px` for S7 and does not render at tablet widths.
+- **QA:** `pnpm typecheck`, `pnpm lint`, and `git diff --check` passed.
+
+### Static Consolidation — S7 QA note
+
+- **Mobile branch:** below 640px now renders the same static `HeroMonolithVisual` after the copy and before the CTA/meta, preserving the approved text-first order.
+- **Removed fallback:** `/images/ai-operations-hero-v2.png`, connected-system rail markup, and its Hero-specific CSS/keyframes are no longer referenced.
+- **QA:** old fallback search returned no matches in `Hero.tsx` or `src/index.css`; `pnpm typecheck`, `pnpm lint`, and `git diff --check` passed.
+
+### Static Consolidation — S8 QA note
+
+- **Responsive bounds:** below 1024px the window is constrained to `width: 100%`, centered with no negative right margin, and capped at `56rem` for tablet. The stage also resets to full available width.
+- **Compact mobile chrome:** below 1024px the title bar is reduced to `1.8rem`; below 640px it is reduced to `1.65rem` with smaller label tracking/font while preserving the raster aspect ratio.
+- **Preview measurement:** the live local preview at 1280×720 reported body/document width 1265px with no horizontal overflow; the exact 870×325 raster loaded successfully and the old fallback/rail were absent.
+- **QA:** `pnpm typecheck`, `pnpm lint`, and `git diff --check` passed. Responsive breakpoint rules were source-inspected for 768/430/390/375 targets; direct viewport overrides were unavailable in the embedded browser.
+
+### Static Consolidation — S9 QA note
+
+- **English:** live preview switch produced `LIVE SYSTEM VIEW`.
+- **Turkish:** switching back produced `CANLI SİSTEM GÖRÜNÜMÜ`.
+- **Raster labels:** no overlay or baked-label edit was introduced; the exact static asset remains unchanged.
+- **QA:** both title transitions were verified in the local preview with the existing language state.
+
+### Static Consolidation — S10 QA note
+
+- **Live preview:** at the available 1280×720 desktop viewport, the static window rendered with the exact 870×325 asset, no horizontal overflow, no SVG overlay, no computed animations, and one intact Hero CTA.
+- **Responsive source audit:** all three Hero breakpoint branches use `HeroMonolithVisual`; the mobile order remains controlled by the existing `<640px` ordering rules. No old photo, connected-systems rail, or monolith motion reference remains.
+- **Visual limitation:** the embedded browser did not expose direct viewport overrides for the remaining target sizes (1536×900, 1440×900, 1280×800, 1024×768, 768×1024, 430×932, 390×844, 375×812). Those breakpoint outcomes were verified through the responsive CSS/source structure, while the live screenshot covered the available desktop viewport.
+
+### Static Consolidation — S11 QA note
+
+- **Checks:** `pnpm typecheck` passed; `pnpm lint` passed; `pnpm build` passed; `git diff --check` passed.
+- **Source review:** no dead monolith motion imports, props, timers, listeners, observers, pointer/parallax logic, SVG animation layer, or motion selectors remain. No old mobile Hero asset or connected-systems fallback references remain.
+- **Dependency/config review:** no package or dependency changes were introduced.
+
 ## Execution rules for future runs
 
 - Future implementation runs may implement only the explicitly assigned checklist item(s).

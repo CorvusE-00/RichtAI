@@ -8,7 +8,6 @@ interface HeroProps {
 
 export function Hero({ onCTAClick }: HeroProps) {
   const { copy, language } = useLanguage();
-  const connectedSystems = copy.workflow.connectedSystems;
   const monolithWindowLabel = language === 'tr' ? 'CANLI SİSTEM GÖRÜNÜMÜ' : 'LIVE SYSTEM VIEW';
   return (
     <section id="anasayfa" className={`hero-section relative overflow-hidden pt-28 pb-3 sm:pt-24 sm:pb-10 lg:pt-36 lg:pb-20 ${language === 'tr' ? 'hero-section--tr' : ''}`}>
@@ -70,39 +69,24 @@ export function Hero({ onCTAClick }: HeroProps) {
           <div className="hero-visual-region hidden lg:block" aria-label={copy.workflow.aria}>
             <HeroMonolithVisual
               alt="AI signal monolith connecting website, WhatsApp, CRM, calendar, and team systems"
-              motionEnabled={language === 'tr'}
               windowLabel={monolithWindowLabel}
             />
           </div>
 
-          {/* Tablet and mobile keep the approved photo and connected-systems fallback. */}
-          <div className="hero-visual-region lg:hidden" aria-label={copy.workflow.aria}>
-            <div className="hero-visual">
-              <div className="hero-visual__frame">
-                <img
-                  src="/images/ai-operations-hero-v2.png"
-                  alt="AI automation system quietly organizing business operations"
-                />
-              </div>
+          {/* Tablet uses the same static monolith window; mobile fallback remains isolated for S7. */}
+          <div className="hero-visual-region hidden sm:block lg:hidden" aria-label={copy.workflow.aria}>
+            <HeroMonolithVisual
+              alt="AI signal monolith connecting website, WhatsApp, CRM, calendar, and team systems"
+              windowLabel={monolithWindowLabel}
+            />
+          </div>
 
-              <div className="hero-connected-systems" aria-label={copy.workflow.aria}>
-                <div className="hero-connected-systems__header">
-                  <span className="hero-connected-systems__status-dot" aria-hidden="true" />
-                  <span>{copy.workflow.connectedSystemsLabel}</span>
-                </div>
-                <div className="hero-connected-systems__rail">
-                  {connectedSystems.map((system, index) => (
-                    <div key={system} className="hero-connected-systems__segment">
-                      <div className="hero-connected-systems__node">
-                        <span className="hero-connected-systems__node-dot" aria-hidden="true" />
-                        <span>{system}</span>
-                      </div>
-                      {index < connectedSystems.length - 1 && <span className="hero-connected-systems__connector" aria-hidden="true" />}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+          {/* Mobile uses the same static monolith window in the existing text-first order. */}
+          <div className="hero-visual-region sm:hidden" aria-label={copy.workflow.aria}>
+            <HeroMonolithVisual
+              alt="AI signal monolith connecting website, WhatsApp, CRM, calendar, and team systems"
+              windowLabel={monolithWindowLabel}
+            />
           </div>
         </div>
       </div>
