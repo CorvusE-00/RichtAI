@@ -55,7 +55,7 @@ export function Hero({ onCTAClick }: HeroProps) {
 
             <p className="mt-3 text-sm text-snow-300 sm:text-base">{hero.reassurance}</p>
 
-            <div className="hero-benefits mt-10 border-t border-snow-100/20 pt-5 sm:mt-12">
+            <div className="hero-benefits mt-10 border-t border-snow-100/30 pt-5 sm:mt-12">
               {hero.benefits.map((benefit, index) => {
                 const Icon = index === 0 ? Zap : index === 1 ? UsersRound : BarChart3;
                 return (

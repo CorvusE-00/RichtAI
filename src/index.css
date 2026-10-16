@@ -103,6 +103,19 @@
     outline-offset: 3px;
   }
 
+  .navbar__mermaid-mark {
+    background-color: #43a296;
+    mask-image: url('/images/mermaid-mark.png');
+    mask-mode: luminance;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    -webkit-mask-image: url('/images/mermaid-mark.png');
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+  }
+
   .reveal {
     --reveal-delay: 0ms;
     --reveal-distance: 24px;
@@ -182,11 +195,11 @@
   }
 
   .hero-benefit {
-    @apply flex min-w-0 items-start gap-2 text-sm leading-snug text-snow-100 sm:gap-2.5 sm:text-[0.95rem];
+    @apply flex min-w-0 items-start gap-2 text-sm font-medium leading-snug text-snow-50 sm:gap-2.5 sm:text-[0.95rem];
   }
 
   .hero-benefit + .hero-benefit {
-    border-left: 1px solid rgba(243, 240, 233, 0.16);
+    border-left: 1px solid rgba(243, 240, 233, 0.3);
     padding-left: 0.7rem;
   }
 
@@ -195,7 +208,7 @@
   }
 
   .hero-benefit__icon {
-    @apply inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-teal-300/35 bg-navy-950/35 text-teal-200;
+    @apply inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-teal-300/55 bg-navy-950/45 text-teal-200;
   }
 
   .hero-benefit__icon svg {
@@ -876,7 +889,7 @@
 
     .hero-benefit + .hero-benefit {
       border-left: 0;
-      border-top: 1px solid rgba(243, 240, 233, 0.16);
+      border-top: 1px solid rgba(243, 240, 233, 0.3);
       padding-left: 0;
       padding-top: 0.75rem;
     }

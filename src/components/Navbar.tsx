@@ -1,6 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { MermaidMark } from './MermaidMark';
 import { useLanguage } from '@/lib/i18n';
 
 interface NavbarProps {
@@ -61,7 +60,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
         >
           <div className={`relative transition-transform duration-500 ${isScrolled ? 'scale-90' : ''}`}>
             <div className="relative h-10 w-10">
-              <MermaidMark className="block h-full w-full object-contain" />
+              <span className="navbar__mermaid-mark block h-full w-full" aria-hidden="true" />
             </div>
           </div>
           <span className={`font-display font-semibold tracking-tight text-snow-50 transition-all duration-500 ${isScrolled ? 'text-base' : 'text-xl'}`}>
