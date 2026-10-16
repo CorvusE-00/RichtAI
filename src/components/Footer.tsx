@@ -1,6 +1,7 @@
 import { MapPin, Mail, ArrowRight, Instagram, Linkedin, MessageCircle } from 'lucide-react';
 import { MermaidMark } from './MermaidMark';
 import { useLanguage } from '@/lib/i18n';
+import { whatsappUrl } from '@/lib/whatsapp';
 
 interface FooterProps {
   onCTAClick: () => void;
@@ -89,6 +90,19 @@ export function Footer({ onCTAClick }: FooterProps) {
                   {copy.footer.contactButton}
                 </button>
               </li>
+              {whatsappUrl && (
+                <li>
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 text-snow-500 text-sm transition-colors duration-200 hover:text-teal-400"
+                  >
+                    <MessageCircle className="w-4 h-4 text-teal-400 shrink-0" />
+                    {copy.footer.whatsapp}
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
         </div>

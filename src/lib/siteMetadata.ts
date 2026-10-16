@@ -1,7 +1,7 @@
 export const siteMetadata = {
   imagePath: '/images/og-richtai.png',
   logoPath: '/images/mermaid-mark.png',
-  themeColor: '#050d1a',
+  themeColor: '#121416',
 };
 
 function configuredSiteUrl() {

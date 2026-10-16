@@ -6,8 +6,8 @@
   "dir": "ltr",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#050d1a",
-  "theme_color": "#050d1a",
+  "background_color": "#121416",
+  "theme_color": "#121416",
   "icons": [
     {
       "src": "/images/mermaid-mark.png",

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Check, Sparkles, X } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useLanguage } from '@/lib/i18n';
+import { whatsappUrl } from '@/lib/whatsapp';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -202,6 +203,16 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 <p className="text-center text-teal-300/80 text-xs font-display">
                   {copy.contact.direct}
                 </p>
+                {whatsappUrl && (
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex w-full items-center justify-center rounded-xl border border-teal-400/30 bg-teal-500/10 px-4 py-3 text-sm font-display font-medium text-teal-200 transition-colors hover:border-teal-300/50 hover:bg-teal-500/15"
+                  >
+                    {copy.contact.whatsapp}
+                  </a>
+                )}
               </form>
             </>
           )}

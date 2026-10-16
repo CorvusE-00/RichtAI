@@ -18,6 +18,13 @@ export function Hero({ onCTAClick }: HeroProps) {
       <div data-reveal className="reveal relative z-10 mx-auto max-w-6xl px-5 sm:px-6 lg:max-w-[85rem]">
         <div className="grid items-center gap-3 sm:gap-8 md:gap-14 lg:grid-cols-[0.65fr_1fr] lg:gap-8 xl:gap-10">
           <div className="hero-copy text-center xl:text-left">
+            <div className="mb-5 flex flex-col items-center gap-2 text-xs sm:text-sm xl:items-start animate-fade-in-up">
+              <span className="inline-flex items-center rounded-full border border-teal-400/25 bg-teal-500/10 px-3 py-1.5 font-display text-teal-200">
+                {copy.hero.pilotBadge}
+              </span>
+              <span className="text-snow-500">{copy.hero.pilotRegion}</span>
+            </div>
+
             {/* Headline */}
             <h1 className="hero-copy__heading hero-heading mt-0 max-w-[40rem] font-display text-4xl sm:text-5xl xl:text-6xl 2xl:text-7xl font-semibold leading-[1.04] tracking-[-0.04em] text-snow-50 animate-fade-in-up animate-delay-100">
               <span className="block">{copy.hero.headline}</span>
@@ -30,11 +37,19 @@ export function Hero({ onCTAClick }: HeroProps) {
             </p>
 
             {/* Primary action */}
-            <div className="hero-copy__cta flex flex-col items-center gap-4 sm:mt-8 xl:items-start animate-fade-in-up animate-delay-500">
+            <div className="hero-copy__cta flex flex-col items-center gap-3 sm:mt-8 xl:items-start animate-fade-in-up animate-delay-500">
               <button onClick={onCTAClick} className="btn-primary group w-full sm:w-auto">
                 <span>{copy.hero.cta}</span>
                 <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
+              <a
+                href="https://dental-teal-alpha.vercel.app/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex w-full items-center justify-center rounded-xl border border-navy-600/80 bg-navy-800/55 px-6 py-3.5 font-display text-sm font-medium text-snow-200 transition-colors duration-300 hover:border-teal-400/45 hover:text-teal-200 sm:w-auto"
+              >
+                {copy.hero.secondaryCta}
+              </a>
             </div>
 
             {/* Quiet reassurance and trust information */}

@@ -20,6 +20,9 @@ export function Trust() {
             <p className="mt-5 max-w-xl text-base leading-relaxed text-snow-400 sm:text-lg">
               {copy.trust.description}
             </p>
+            <p className="mt-4 max-w-xl border-l border-teal-400/50 pl-4 text-sm leading-relaxed text-teal-200/85 sm:text-base">
+              {copy.trust.pilotNote}
+            </p>
           </div>
 
           <div data-reveal className="reveal trust-system-proof" aria-label={systemProof.label}>

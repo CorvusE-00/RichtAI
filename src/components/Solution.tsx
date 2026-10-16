@@ -95,6 +95,10 @@ export function Solution() {
             </article>
           ))}
         </div>
+
+        <p data-reveal className="reveal mt-8 border-l border-teal-400/50 pl-4 text-sm leading-relaxed text-snow-400 sm:text-base">
+          {copy.solution.safetyNote}
+        </p>
       </div>
     </section>
   );
