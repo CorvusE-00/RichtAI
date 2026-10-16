@@ -1,16 +1,4 @@
-import {
-  ArrowRight,
-  BarChart3,
-  CalendarCheck2,
-  CheckCircle2,
-  Clock3,
-  Globe2,
-  MessageCircle,
-  UserRound,
-  UsersRound,
-  Zap,
-} from 'lucide-react';
-import type { CSSProperties } from 'react';
+import { ArrowRight, BarChart3, UsersRound, Zap } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 
 interface HeroProps {
@@ -22,7 +10,7 @@ export function Hero({ onCTAClick }: HeroProps) {
   const hero = copy.hero;
 
   return (
-    <section id="anasayfa" className="hero-section relative overflow-hidden">
+    <section id="anasayfa" aria-labelledby="hero-title" className="hero-section relative overflow-hidden">
       <div className="hero-section__background pointer-events-none absolute inset-0" aria-hidden="true" />
       <div className="hero-section__shade pointer-events-none absolute inset-0" aria-hidden="true" />
       <div className="hero-noise pointer-events-none absolute inset-0" aria-hidden="true" />
@@ -36,7 +24,7 @@ export function Hero({ onCTAClick }: HeroProps) {
               {hero.pilotBadge}
             </span>
 
-            <h1 className="hero-editorial-heading mt-7 max-w-[44rem] font-display text-[clamp(3.4rem,5.6vw,5.5rem)] font-semibold leading-[0.98] tracking-[-0.065em] text-snow-50">
+            <h1 id="hero-title" className="hero-editorial-heading mt-7 max-w-[44rem] font-display text-[clamp(3.4rem,5.6vw,5.5rem)] font-semibold leading-[0.98] tracking-[-0.065em] text-snow-50">
               {hero.headline.split('\n').map((line) => (
                 <span key={line} className="block">
                   {line}
@@ -81,71 +69,6 @@ export function Hero({ onCTAClick }: HeroProps) {
                 );
               })}
             </div>
-          </div>
-
-          <div className="hero-visual" aria-label={hero.operational.aria}>
-            <div className="hero-visual__halo" aria-hidden="true" />
-
-            <article
-              data-reveal
-              className="hero-overlay-card hero-channel hero-channel--website reveal"
-              style={{ '--reveal-delay': '300ms' } as CSSProperties}
-            >
-              <span className="hero-channel__icon hero-channel__icon--website"><Globe2 aria-hidden="true" /></span>
-              <span className="hero-channel__copy">
-                <strong>{hero.operational.website.title}</strong>
-                <small>{hero.operational.website.subtitle}</small>
-              </span>
-              <time>{hero.operational.website.time}</time>
-            </article>
-
-            <article
-              data-reveal
-              className="hero-overlay-card hero-channel hero-channel--whatsapp reveal"
-              style={{ '--reveal-delay': '450ms' } as CSSProperties}
-            >
-              <span className="hero-channel__icon hero-channel__icon--whatsapp"><MessageCircle aria-hidden="true" /></span>
-              <span className="hero-channel__copy">
-                <strong>{hero.operational.whatsapp.title}</strong>
-                <small>{hero.operational.whatsapp.subtitle}</small>
-              </span>
-              <time>{hero.operational.whatsapp.time}</time>
-            </article>
-
-            <div className="hero-timeline" role="list" aria-label={hero.operational.timelineLabel}>
-              {hero.operational.timeline.map((item, index) => {
-                const Icon = index === 0 ? UserRound : index === 1 ? CalendarCheck2 : CheckCircle2;
-                return (
-                  <div
-                    key={item}
-                    data-reveal
-                    className="hero-timeline__step reveal"
-                    style={{ '--reveal-delay': `${650 + index * 200}ms` } as CSSProperties}
-                    role="listitem"
-                  >
-                    <span className="hero-timeline__node"><Icon aria-hidden="true" /></span>
-                    <span>{item}</span>
-                  </div>
-                );
-              })}
-            </div>
-
-            <article
-              data-reveal
-              className="hero-overlay-card hero-appointment reveal"
-              style={{ '--reveal-delay': '1050ms' } as CSSProperties}
-            >
-              <div className="hero-appointment__heading">
-                <span className="hero-channel__icon hero-channel__icon--appointment"><CalendarCheck2 aria-hidden="true" /></span>
-                <strong>{hero.operational.appointment.title}</strong>
-                <span className="hero-appointment__status">{hero.operational.appointment.status}</span>
-              </div>
-              <div className="hero-appointment__body">
-                <span>{hero.operational.appointment.service}</span>
-                <strong>{hero.operational.appointment.day}</strong>
-                <span className="hero-appointment__time"><Clock3 aria-hidden="true" /> {hero.operational.appointment.time}</span>
-              </div>
-            </article>
           </div>
         </div>
       </div>
