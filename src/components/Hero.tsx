@@ -21,7 +21,7 @@ export function Hero({ onCTAClick }: HeroProps) {
               {hero.pilotBadge}
             </span>
 
-            <h1 id="hero-title" className="hero-editorial-heading mt-6 font-display text-[clamp(3.25rem,3.6vw,4.4rem)] font-semibold leading-[1] tracking-[-0.06em] text-snow-50 max-[767px]:text-[clamp(2.55rem,10.4vw,2.9rem)] max-[767px]:leading-[0.98]">
+            <h1 id="hero-title" className="hero-editorial-heading mt-6 font-display text-[clamp(3.25rem,3.6vw,4.4rem)] font-semibold leading-[1] tracking-[-0.06em] text-snow-50 max-[767px]:text-[clamp(2.5rem,9.8vw,2.75rem)] max-[767px]:leading-[0.98]">
               {hero.headline.split('\n').map((line) => (
                 <span key={line} className="block">
                   {line}
@@ -41,10 +41,12 @@ export function Hero({ onCTAClick }: HeroProps) {
               {hero.subheadline}
             </p>
 
-            <button onClick={onCTAClick} className="btn-primary group mt-7 min-h-[62px] px-6 text-[1.02rem] max-[767px]:mt-4 max-[767px]:min-h-[58px] max-[767px]:w-full max-[767px]:px-4 max-[767px]:text-base">
-              <span>{hero.cta}</span>
-              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
-            </button>
+            <div className="hero-mobile-cta">
+              <button onClick={onCTAClick} className="btn-primary group mt-7 min-h-[62px] px-6 text-[1.02rem] max-[767px]:mt-0 max-[767px]:min-h-[58px] max-[767px]:w-full max-[767px]:px-4 max-[767px]:text-base">
+                <span>{hero.cta}</span>
+                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+              </button>
+            </div>
 
           </div>
         </div>
