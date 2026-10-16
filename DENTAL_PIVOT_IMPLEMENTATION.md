@@ -46,8 +46,6 @@ F1 audit completed against the requested component set.
 - [ ] S7. Responsive + TR/EN content QA
 - [x] S8. Typecheck / lint / build / diff-check
 
-## Run 3 placeholder checklist
-
 ## Run 3 checklist
 
 - [x] P0. Fix known HumanAI mobile connector layout
@@ -103,4 +101,36 @@ F1 audit completed against the requested component set.
 - P8 QA: `pnpm typecheck`, `pnpm lint`, `pnpm build`, and `git diff --check` all pass. Build reports only the expected unset `VITE_SITE_URL` note. No missing translation parity issue, duplicate section ID, unresolved navbar anchor, Pricing callback regression, Starter web-only wording, stale free-introduction CTA, old Trust nav item, dead StatisticsStrip counter/observer, unused import, unnecessary dependency diff, or obvious new fixed-width overflow pattern was found. `HeroMonolithVisual.tsx` has no diff and no new monolith animation was introduced.
 - Run 3 changed files: `DENTAL_PIVOT_IMPLEMENTATION.md`, `src/components/HumanAI.tsx`, `src/components/PilotMeasurement.tsx`, `src/components/Pricing.tsx`, `src/components/StatisticsStrip.tsx`, `src/components/WhyBuy.tsx`, `src/index.css`, and `src/lib/i18n.tsx`.
 - Run 3 visual status: P9 remains intentionally unchecked for the final screenshot review; browser viewport verification is still pending.
+
+## Run 4 — Professional Visual Rebuild
+
+- [x] V1. Audit screenshot problems + freeze functional contracts
+- [x] V2. Rebuild Hero into a wide editorial/product-stage layout
+- [x] V3. Consolidate Problem + WhyBuy into one visual ClinicPain section
+- [x] V4. Consolidate Solution + HumanAI into one interactive ProductShowcase section
+- [x] V5. Consolidate HowItWorks + PilotMeasurement into one visual Pilot section
+- [x] V6. Redesign Pricing / Trust / FAQ / FinalCTA for stronger visual rhythm
+- [x] V7. Implement alternating light/dark chapter system + stronger typography hierarchy
+- [x] V8. Remove obsolete sections / dead CSS / redundant copy
+- [x] V9. Static responsive + TR/EN QA
+- [x] V10. Typecheck / lint / build / diff review
+- [ ] V11. Final screenshot checkpoint
+
+## Run 4 audit and protected contracts
+
+- Run 4 baseline: `HEAD` is `a98939a1c6cfd24c7bd773645a8894c24f581886`; the worktree was clean before this run. No commit or push is authorized in this run.
+- V1 visual audit: the current page is technically sound but visually too long and flat, with too many similar dark sections, repeated explanatory copy, weak editorial rhythm, and insufficient visual proof. The current Hero compresses the copy into a narrow left column beside a shallow monolith; the product moment needs to become a taller composite stage. Problem/WhyBuy, Solution/HumanAI, and HowItWorks/PilotMeasurement each overlap enough to consolidate. Pricing, Trust, FAQ, and Final CTA need clearer contrast, hierarchy, and shorter copy.
+- V1 protected contracts: TR remains the default with an EN switch; Navbar, ContactModal, Supabase lead insert fields (`name`, `email`, `phone`, `business_name`, `message`), optional WhatsApp environment behavior, SEO metadata behavior, founder identity and portrait, Luma dental prototype preview, pricing amounts, one-channel Starter, add-on boundaries, human-controlled cancel/reschedule, honest pilot pricing, external dental demo link, and reduced-motion support remain protected. The monolith asset remains present and static; it may only be repositioned or demoted.
+- V2 QA: the Hero now uses a wide editorial copy block, exact TR/EN parity for the requested headline and CTA hierarchy, a large Luma browser frame, DOM/CSS WhatsApp and result panels, and a small monolith support detail. `pnpm typecheck` passes. Static inspection covers mobile vertical order, desktop stage proportions, constrained text widths, no fixed-width panel overflow, and reduced-motion-compatible live-dot/reveal behavior.
+- V3 QA: `ClinicPain.tsx` replaces Problem and WhyBuy with one bone comparison scenario, three concise owner reasons, and one fit line. It uses the requested scenario language without performance claims and includes TR/EN copy.
+- V4 QA: `ProductShowcase.tsx` replaces Solution and HumanAI with three local-state tabs for Web, WhatsApp, and Lead + Appointment. It uses the real Luma preview, DOM/CSS operational visuals, human handoff notes, no financial metrics, and TR/EN copy. Typecheck and lint pass.
+- V5 QA: `PilotSection.tsx` replaces HowItWorks and PilotMeasurement with one bone chapter, a dominant 14 visual, three process steps, three measurement chips, and the regional line. Pricing is not discussed in the section; typecheck and lint pass.
+- V6 QA: Pricing keeps the exact Starter, Growth, Pro, and Pilot values with four bullets per card; Growth is visually dominant; add-ons remain separate. Trust is a bone founder chapter with the real portrait, founder identity, transparency note, and three principles. FAQ now contains exactly eight visible themes and removes references, budget, and "think about it" questions. Final CTA uses the requested light high-contrast copy and live-demo link.
+- V7 QA: the chapter rhythm is now dark Hero → dark value strip → bone ClinicPain → dark ProductShowcase → bone PilotSection → dark Pricing → bone Trust → dark FAQ → bone FinalCTA → dark Footer. New chapter headings use varied editorial geometry, large type, shorter paragraphs, and limited kicker treatment.
+- V8 QA: removed unused `Problem.tsx`, `WhyBuy.tsx`, `Solution.tsx`, `HumanAI.tsx`, `HowItWorks.tsx`, `PilotMeasurement.tsx`, and the unused `AIWorkflow.tsx`; removed their obsolete i18n structures and old layout CSS. The monolith component/asset remains present and unchanged as a protected static asset.
+- V9 QA: static responsive audit covered 1536, 1440, 1280, 1024, 768, 430, 390, and 375px code paths. Hero copy/stage, bone-section contrast, ProductShowcase tabs, Pilot stacking, pricing cards, founder portrait crop, FAQ density, overflow boundaries, and reduced-motion fallback were reviewed for TR and EN. No new fixed-width overflow pattern was found. Browser pixel-perfect verification was not performed; final screenshot review remains pending under V11.
+- V10 QA: `pnpm typecheck`, `pnpm lint`, `pnpm build`, and `git diff --check` pass. Build reports only the expected unset `VITE_SITE_URL` note. No unresolved imports, duplicate IDs, broken navbar targets, CTA callback regressions, ContactModal/Supabase diffs, pricing-value changes, missing Luma or monolith assets, unnecessary dependency changes, or reduced-motion regression was found.
+- Run 4 App order: Navbar → Hero → StatisticsStrip → ClinicPain → ProductShowcase → PilotSection → Pricing → Trust → FAQ → FinalCTA → Footer → ContactModal.
+- Run 4 changed files: `DENTAL_PIVOT_IMPLEMENTATION.md`, `src/App.tsx`, `src/components/Hero.tsx`, `src/components/ClinicPain.tsx`, `src/components/ProductShowcase.tsx`, `src/components/PilotSection.tsx`, `src/components/Pricing.tsx`, `src/components/Trust.tsx`, `src/components/FAQ.tsx`, `src/components/FinalCTA.tsx`, `src/index.css`, and `src/lib/i18n.tsx`; deleted `src/components/Problem.tsx`, `src/components/WhyBuy.tsx`, `src/components/Solution.tsx`, `src/components/HumanAI.tsx`, `src/components/HowItWorks.tsx`, `src/components/PilotMeasurement.tsx`, and `src/components/AIWorkflow.tsx`.
+- Run 4 screenshot status: V11 remains intentionally unchecked for user review. No commit or push is authorized in this run.
 

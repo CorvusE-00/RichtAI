@@ -1,12 +1,9 @@
 import { useState, useCallback } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { Hero } from '@/components/Hero';
-import { Problem } from '@/components/Problem';
-import { WhyBuy } from '@/components/WhyBuy';
-import { Solution } from '@/components/Solution';
-import { HumanAI } from '@/components/HumanAI';
-import { HowItWorks } from '@/components/HowItWorks';
-import { PilotMeasurement } from '@/components/PilotMeasurement';
+import { ClinicPain } from '@/components/ClinicPain';
+import { ProductShowcase } from '@/components/ProductShowcase';
+import { PilotSection } from '@/components/PilotSection';
 import { Pricing } from '@/components/Pricing';
 import { Trust } from '@/components/Trust';
 import { FinalCTA } from '@/components/FinalCTA';
@@ -32,12 +29,9 @@ function App() {
       <main>
         <Hero onCTAClick={openContact} />
         <StatisticsStrip />
-        <Problem />
-        <WhyBuy />
-        <Solution />
-        <HumanAI />
-        <HowItWorks />
-        <PilotMeasurement />
+        <ClinicPain />
+        <ProductShowcase />
+        <PilotSection />
         <Pricing onCTAClick={openContact} />
         <Trust />
         <FAQ />

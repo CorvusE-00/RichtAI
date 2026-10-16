@@ -4,59 +4,33 @@ import { useLanguage } from '@/lib/i18n';
 
 export function FAQ() {
   const { copy } = useLanguage();
-  const questions = copy.faq.questions;
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="sss" className="section-tone section-tone--faq relative overflow-hidden py-20 sm:py-24">
-      <div className="section-surface section-surface--faq absolute inset-0" />
-
-      <div className="relative mx-auto max-w-6xl px-5 sm:px-6">
-        <div className="faq-layout">
-          <div data-reveal className="reveal faq-intro">
-            <span className="section-label">{copy.faq.label}</span>
-            <h2 className="mt-6 font-display text-3xl font-semibold leading-tight tracking-tight text-snow-50 sm:text-4xl lg:text-5xl">
+    <section id="sss" className="chapter chapter--dark faq-section overflow-hidden py-20 sm:py-28 lg:py-36">
+      <div className="mx-auto max-w-[82rem] px-5 sm:px-6">
+        <div className="faq-section__layout">
+          <div data-reveal className="reveal">
+            <span className="chapter-kicker">{copy.faq.label}</span>
+            <h2 className="chapter-heading mt-6 max-w-xl font-display text-4xl font-semibold leading-[0.98] tracking-[-0.055em] text-snow-50 sm:text-5xl lg:text-6xl">
               {copy.faq.headline}
-              <br />
-              <span className="text-snow-400">{copy.faq.headlineAccent}</span>
+              <span className="mt-2 block text-snow-400">{copy.faq.headlineAccent}</span>
             </h2>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-snow-400 sm:text-lg">
-              {copy.faq.description}
-            </p>
+            <p className="mt-6 max-w-md text-base leading-relaxed text-snow-400 sm:text-lg">{copy.faq.description}</p>
           </div>
 
-          <div className="faq-list">
-            {questions.map((item, index) => {
+          <div className="faq-section__list">
+            {copy.faq.questions.map((item, index) => {
               const isOpen = openIndex === index;
               const answerId = `faq-answer-${index}`;
               const triggerId = `faq-trigger-${index}`;
-
               return (
-                <article
-                  key={item.question}
-                  data-reveal
-                  style={{ '--reveal-delay': `${index * 70}ms` } as React.CSSProperties}
-                  className="reveal faq-item"
-                >
-                  <button
-                    type="button"
-                    id={triggerId}
-                    aria-expanded={isOpen}
-                    aria-controls={answerId}
-                    onClick={() => setOpenIndex(isOpen ? null : index)}
-                    className="faq-trigger"
-                  >
+                <article key={item.question} data-reveal className="reveal faq-section__item">
+                  <button type="button" id={triggerId} aria-expanded={isOpen} aria-controls={answerId} onClick={() => setOpenIndex(isOpen ? null : index)} className="faq-section__trigger">
                     <span>{item.question}</span>
-                    <ChevronDown
-                      className={`faq-trigger__icon ${isOpen ? 'is-open' : ''}`}
-                      aria-hidden="true"
-                    />
+                    <ChevronDown className={`faq-section__icon ${isOpen ? 'is-open' : ''}`} aria-hidden="true" />
                   </button>
-                  <div id={answerId} role="region" aria-labelledby={triggerId} className="faq-answer" data-open={isOpen}>
-                    <div>
-                      <p className="faq-answer__text">{item.answer}</p>
-                    </div>
-                  </div>
+                  <div id={answerId} role="region" aria-labelledby={triggerId} className="faq-section__answer" data-open={isOpen}><div><p>{item.answer}</p></div></div>
                 </article>
               );
             })}

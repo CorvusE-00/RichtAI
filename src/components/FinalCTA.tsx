@@ -1,4 +1,4 @@
-import { ArrowRight, ShieldCheck } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 
 interface FinalCTAProps {
@@ -9,33 +9,21 @@ export function FinalCTA({ onCTAClick }: FinalCTAProps) {
   const { copy } = useLanguage();
 
   return (
-    <section id="final-cta" className="section-tone section-tone--final relative overflow-hidden border-t border-navy-700/55 py-24 sm:py-32">
-      <div className="section-surface section-surface--final absolute inset-0" />
-
-      <div data-reveal className="reveal relative max-w-3xl mx-auto px-5 sm:px-6 text-center">
-        <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl font-semibold text-snow-50 leading-[1.08] tracking-[-0.04em]">
+    <section id="final-cta" className="chapter chapter--bone final-cta-section overflow-hidden py-24 sm:py-36 lg:py-44">
+      <div data-reveal className="reveal mx-auto max-w-5xl px-5 text-center sm:px-6">
+        <span className="chapter-kicker chapter-kicker--dark">{copy.finalCta.trust}</span>
+        <h2 className="chapter-heading chapter-heading--dark mx-auto mt-7 max-w-4xl font-display text-5xl font-semibold leading-[0.9] tracking-[-0.07em] sm:text-7xl lg:text-8xl">
           {copy.finalCta.headline}
-          <br />
-          <span className="text-gradient-teal">{copy.finalCta.headlineAccent}</span>
+          <span className="mt-3 block text-teal-700">{copy.finalCta.headlineAccent}</span>
         </h2>
-
-        <p className="mt-7 max-w-xl mx-auto text-snow-400 text-base sm:text-lg leading-relaxed">
-          {copy.finalCta.description}
-        </p>
-
-        <div className="mt-10 flex flex-col items-center gap-4">
-          <button onClick={onCTAClick} className="btn-primary group min-w-[18rem] sm:min-w-[20rem]">
-            <span>{copy.finalCta.cta}</span>
-            <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+        <p className="mx-auto mt-7 max-w-xl text-base leading-relaxed text-navy-600 sm:text-lg">{copy.finalCta.description}</p>
+        <div className="mt-10 flex flex-col items-center gap-5 sm:flex-row sm:justify-center">
+          <button type="button" onClick={onCTAClick} className="btn-primary group min-h-14 w-full sm:w-auto">
+            {copy.finalCta.cta}<ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
           </button>
-
-          <div className="flex items-center gap-1.5 text-snow-500 text-sm">
-            <ShieldCheck className="w-4 h-4 text-teal-400" />
-            <span>{copy.finalCta.trust}</span>
-          </div>
-          <p className="max-w-md text-xs sm:text-sm leading-relaxed text-snow-500/90 italic">
-            {copy.finalCta.quote}
-          </p>
+          <a href="https://dental-teal-alpha.vercel.app/" target="_blank" rel="noreferrer" className="font-display text-sm font-medium text-navy-700 underline decoration-teal-600/60 underline-offset-4 transition-colors hover:text-teal-700 sm:text-base">
+            {copy.finalCta.secondaryCta}
+          </a>
         </div>
       </div>
     </section>

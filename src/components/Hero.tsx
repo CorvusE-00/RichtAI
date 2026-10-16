@@ -1,6 +1,5 @@
-import { ArrowRight, ShieldCheck, UserRound } from 'lucide-react';
+import { ArrowRight, Check, Circle } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
-import { HeroMonolithVisual } from './HeroMonolithVisual';
 
 interface HeroProps {
   onCTAClick: () => void;
@@ -8,104 +7,103 @@ interface HeroProps {
 
 export function Hero({ onCTAClick }: HeroProps) {
   const { copy, language } = useLanguage();
-  const monolithWindowLabel = language === 'tr' ? 'CANLI SİSTEM GÖRÜNÜMÜ' : 'LIVE SYSTEM VIEW';
+  const stage = copy.hero.stage;
+
   return (
-    <section id="anasayfa" className={`hero-section relative overflow-hidden pt-28 pb-3 sm:pt-24 sm:pb-10 lg:pt-36 lg:pb-20 ${language === 'tr' ? 'hero-section--tr' : ''}`}>
-      {/* One restrained atmospheric layer; the visual system carries the hero's detail. */}
-      <div className="absolute inset-0 radial-glow opacity-70 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-950/45 via-navy-950/80 to-navy-950 pointer-events-none" />
+    <section id="anasayfa" className="hero-section relative overflow-hidden pb-16 pt-32 sm:pb-20 sm:pt-36 lg:pb-24 lg:pt-44">
+      <div className="hero-noise pointer-events-none absolute inset-0" aria-hidden="true" />
+      <div className="hero-section__rule pointer-events-none absolute inset-x-0 top-0" aria-hidden="true" />
 
-      <div data-reveal className="reveal relative z-10 mx-auto max-w-6xl px-5 sm:px-6 lg:max-w-[85rem]">
-        <div className="grid items-center gap-3 sm:gap-8 md:gap-14 lg:grid-cols-[0.65fr_1fr] lg:gap-8 xl:gap-10">
-          <div className="hero-copy text-center xl:text-left">
-            <div className="mb-5 flex flex-col items-center gap-2 text-xs sm:text-sm xl:items-start animate-fade-in-up">
-              <span className="inline-flex items-center rounded-full border border-teal-400/25 bg-teal-500/10 px-3 py-1.5 font-display text-teal-200">
-                {copy.hero.pilotBadge}
-              </span>
-              <span className="text-snow-500">{copy.hero.pilotRegion}</span>
-            </div>
+      <div className="relative z-10 mx-auto max-w-[82rem] px-5 sm:px-6">
+        <div data-reveal className="reveal mx-auto max-w-[58rem] text-center">
+          <span className="hero-kicker">
+            <span className="hero-kicker__dot" aria-hidden="true" />
+            {copy.hero.pilotBadge}
+          </span>
+          <h1 className="hero-editorial-heading mx-auto mt-7 max-w-[58rem] font-display text-[clamp(3.25rem,8vw,6.25rem)] font-semibold leading-[0.96] tracking-[-0.065em] text-snow-50">
+            <span className="block">{copy.hero.headline}</span>
+            <span className="mt-3 block text-teal-300">{copy.hero.headlineAccent}</span>
+          </h1>
+          <p className="mx-auto mt-7 max-w-[46rem] text-base leading-relaxed text-snow-300 sm:text-lg lg:text-xl">
+            {copy.hero.subheadline}
+          </p>
+          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <button onClick={onCTAClick} className="btn-primary group min-h-14 w-full sm:w-auto">
+              <span>{copy.hero.cta}</span>
+              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+            </button>
+            <a
+              href="https://dental-teal-alpha.vercel.app/"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-14 w-full items-center justify-center rounded-xl border border-navy-600 bg-navy-900 px-6 py-4 font-display text-base font-medium text-snow-100 transition-colors duration-300 hover:border-teal-400/60 hover:text-teal-200 sm:w-auto"
+            >
+              {copy.hero.secondaryCta}
+            </a>
+          </div>
+          <p className="mt-5 text-sm text-snow-500 sm:text-base">{copy.hero.reassurance}</p>
+        </div>
 
-            {/* Headline */}
-            <h1 className="hero-copy__heading hero-heading mt-0 max-w-[40rem] font-display text-4xl sm:text-5xl xl:text-6xl 2xl:text-7xl font-semibold leading-[1.04] tracking-[-0.04em] text-snow-50 animate-fade-in-up animate-delay-100">
-              <span className="block">{copy.hero.headline}</span>
-              <span className="mt-1 block text-gradient-teal">{copy.hero.headlineAccent}</span>
-            </h1>
-
-            {/* Supporting copy */}
-            <p className="hero-copy__subheadline max-w-xl text-base sm:mt-6 sm:text-lg text-snow-400 leading-relaxed animate-fade-in-up animate-delay-300">
-              {copy.hero.subheadline}
-            </p>
-
-            {/* Primary action */}
-            <div className="hero-copy__cta flex flex-col items-center gap-3 sm:mt-8 xl:items-start animate-fade-in-up animate-delay-500">
-              <button onClick={onCTAClick} className="btn-primary group w-full sm:w-auto">
-                <span>{copy.hero.cta}</span>
-                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
-              <a
-                href="https://dental-teal-alpha.vercel.app/"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex w-full items-center justify-center rounded-xl border border-navy-600/80 bg-navy-800/55 px-6 py-3.5 font-display text-sm font-medium text-snow-200 transition-colors duration-300 hover:border-teal-400/45 hover:text-teal-200 sm:w-auto"
-              >
-                {copy.hero.secondaryCta}
-              </a>
-            </div>
-
-            {/* Quiet reassurance and trust information */}
-            <div className="hero-copy__meta hero-meta hero-meta--desktop mt-4 hidden text-center sm:mt-6 sm:block xl:text-left">
-              <span className="text-snow-500 text-xs sm:text-sm">{copy.hero.duration}</span>
-              <div className="hero-meta__reassurance mt-2.5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-snow-500 text-xs sm:text-sm xl:justify-start">
-                <div className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4 text-teal-400/85" />
-                  <span>{copy.hero.noCommitment}</span>
+        <div data-reveal className="reveal mt-14 sm:mt-16 lg:mt-20" aria-label={stage.aria}>
+          <div className="hero-product-stage">
+            <div className="hero-product-stage__browser">
+              <div className="hero-product-stage__bar">
+                <div className="hero-product-stage__window-controls" aria-hidden="true">
+                  <Circle className="text-teal-300" />
+                  <Circle />
+                  <Circle />
                 </div>
-                <span className="hero-meta__separator hidden h-1 w-1 rounded-full bg-navy-500 sm:block" aria-hidden="true" />
-                <div className="flex items-center gap-1.5">
-                  <UserRound className="w-4 h-4 text-teal-400/85" />
-                  <span>{copy.hero.direct}</span>
+                <span className="hero-product-stage__url">{stage.browserUrl}</span>
+                <span className="hero-product-stage__status">{stage.browserStatus}</span>
+              </div>
+              <div className="hero-product-stage__browser-body">
+                <img src="/images/luma-dental-prototype-preview.png" alt={stage.browserLabel} />
+                <div className="hero-product-stage__browser-caption">
+                  <span>{stage.browserLabel}</span>
+                  <span className="hero-product-stage__live"><span aria-hidden="true" />{stage.liveLabel}</span>
                 </div>
               </div>
             </div>
 
-            <div className="hero-copy__meta hero-meta hero-meta--mobile mt-3 text-center sm:hidden">
-              <div className="hero-meta__mobile-row">
-                <span>{copy.hero.duration}</span>
-                <span aria-hidden="true">·</span>
-                <span>{copy.hero.noCommitment}</span>
+            <article className="hero-product-stage__assistant">
+              <div className="hero-product-stage__panel-heading">
+                <div className="hero-product-stage__avatar">R</div>
+                <div>
+                  <p>{stage.assistantTitle}</p>
+                  <span>{stage.assistantStatus}</span>
+                </div>
+                <span className="hero-product-stage__panel-live" aria-hidden="true" />
               </div>
-              <div className="hero-meta__mobile-row hero-meta__mobile-row--direct">
-                <span>{copy.hero.direct}</span>
+              <div className="hero-product-stage__messages">
+                <div className="hero-product-stage__message hero-product-stage__message--patient">{stage.patientMessage}</div>
+                <div className="hero-product-stage__message hero-product-stage__message--ai">{stage.aiMessage}</div>
+                <div className="hero-product-stage__handoff"><Check aria-hidden="true" />{stage.handoffLabel}</div>
               </div>
+            </article>
+
+            <article className="hero-product-stage__result">
+              <div className="hero-product-stage__result-heading">
+                <span>{stage.resultTitle}</span>
+                <span className="hero-product-stage__result-mark" aria-hidden="true">✓</span>
+              </div>
+              <dl>
+                {stage.resultItems.map((item) => (
+                  <div key={item.label}>
+                    <dt>{item.label}</dt>
+                    <dd>{item.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </article>
+
+            <div className="hero-product-stage__system-detail" aria-hidden="true">
+              <span>{stage.systemLabel}</span>
+              <img src="/images/richtai-signal-monolith-visual.png" alt="" />
             </div>
           </div>
-
-          {/* Desktop uses the exact supplied visual-only monolith asset. */}
-          <div className="hero-visual-region hidden lg:block" aria-label={copy.workflow.aria}>
-            <HeroMonolithVisual
-              alt="AI signal monolith connecting website, WhatsApp, CRM, calendar, and team systems"
-              windowLabel={monolithWindowLabel}
-            />
-          </div>
-
-          {/* Tablet uses the same static monolith window; mobile fallback remains isolated for S7. */}
-          <div className="hero-visual-region hidden sm:block lg:hidden" aria-label={copy.workflow.aria}>
-            <HeroMonolithVisual
-              alt="AI signal monolith connecting website, WhatsApp, CRM, calendar, and team systems"
-              windowLabel={monolithWindowLabel}
-            />
-          </div>
-
-          {/* Mobile uses the same static monolith window in the existing text-first order. */}
-          <div className="hero-visual-region sm:hidden" aria-label={copy.workflow.aria}>
-            <HeroMonolithVisual
-              alt="AI signal monolith connecting website, WhatsApp, CRM, calendar, and team systems"
-              windowLabel={monolithWindowLabel}
-            />
-          </div>
+          <p className="hero-product-stage__caption">{language === 'tr' ? 'Yeni hasta iletişimi için tek operasyonel görünüm.' : 'One operational view for new-patient communication.'}</p>
         </div>
       </div>
-
     </section>
   );
 }
