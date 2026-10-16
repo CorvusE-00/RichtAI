@@ -122,90 +122,17 @@
     transform: translate3d(0, 0, 0);
   }
 
-  .hero-noise {
-    background-image:
-      radial-gradient(circle at 20% 20%, rgba(52, 143, 132, 0.018) 0 1px, transparent 1.5px),
-      radial-gradient(circle at 80% 70%, rgba(243, 240, 233, 0.016) 0 1px, transparent 1.5px);
-    background-size: 17px 19px, 23px 21px;
-    opacity: 0.18;
-    mix-blend-mode: screen;
-  }
-
-  .hero-heading {
-    text-wrap: balance;
-  }
-
-  .hero-section__rule {
-    height: 1px;
-    background: rgba(114, 182, 172, 0.16);
-  }
-
   .hero-section {
-    min-height: min(56rem, 100svh);
+    min-height: min(55rem, calc(100svh - 4.5rem));
     background: #080f12;
     border-bottom: 1px solid rgba(58, 64, 69, 0.72);
   }
 
   .hero-section__background {
-    background-image: url('/images/richtai-dental-ai-mermaid-hero.png');
-    background-position: 54% center;
+    background-image: url('/images/richtai-dental-hero-final.png');
+    background-position: 60% center;
     background-repeat: no-repeat;
     background-size: cover;
-    filter: saturate(0.92) contrast(1.04);
-  }
-
-  .hero-section__shade {
-    background: linear-gradient(90deg, rgba(6, 14, 18, 0.99) 0%, rgba(6, 14, 18, 0.94) 28%, rgba(6, 14, 18, 0.78) 40%, rgba(6, 14, 18, 0.38) 52%, rgba(6, 14, 18, 0.12) 65%, rgba(6, 14, 18, 0.04) 100%);
-  }
-
-  .hero-layout {
-    @apply flex items-center;
-    min-height: min(56rem, 100svh);
-    padding-top: 4.5rem;
-  }
-
-  .hero-copy {
-    @apply relative z-10 w-full max-w-[34rem] py-20 lg:py-24;
-    margin-left: clamp(1.5rem, 5vw, 4rem);
-  }
-
-  .hero-kicker {
-    @apply inline-flex items-center gap-2 rounded-full border border-teal-300/35 bg-navy-950/35 px-4 py-2 text-xs font-display font-semibold uppercase tracking-[0.13em] text-teal-100 shadow-[0_10px_32px_rgba(0,0,0,0.12)] sm:text-sm;
-  }
-
-  .hero-editorial-heading {
-    text-wrap: balance;
-  }
-
-  .hero-accent {
-    text-wrap: balance;
-  }
-
-  .hero-demo-play {
-    @apply inline-flex h-7 w-7 items-center justify-center rounded-full border border-snow-100/45 text-[0.55rem] text-snow-50;
-  }
-
-  .hero-benefits {
-    @apply grid grid-cols-3 gap-3;
-    max-width: 34rem;
-    border-top-color: rgba(243, 240, 233, 0.15);
-  }
-
-  .hero-benefit {
-    @apply flex min-w-0 items-start gap-2 text-sm leading-snug text-snow-100 sm:gap-2.5 sm:text-[0.95rem];
-  }
-
-  .hero-benefit + .hero-benefit {
-    border-left: 1px solid rgba(243, 240, 233, 0.16);
-    padding-left: 0.75rem;
-  }
-
-  .hero-benefit__icon {
-    @apply inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-teal-300/35 bg-navy-950/35 text-teal-200;
-  }
-
-  .hero-benefit__icon svg {
-    @apply h-4 w-4;
   }
 
   .value-marquee {
@@ -247,11 +174,6 @@
     to {
       transform: translateX(-50%);
     }
-  }
-
-  .hero-kicker__dot {
-    @apply h-2 w-2 rounded-full bg-teal-400;
-    animation: blink 2.8s ease-in-out infinite;
   }
 
   .chapter {
@@ -820,76 +742,22 @@
 
   @media (max-width: 1179px) {
     .hero-section {
-      min-height: auto;
-      padding-bottom: 28rem;
+      min-height: 42rem;
     }
 
     .hero-section__background {
-      background-position: 64% bottom;
-      background-size: auto 34rem;
-    }
-
-    .hero-section__shade {
-      background: linear-gradient(180deg, rgba(6, 14, 18, 0.99) 0%, rgba(6, 14, 18, 0.97) 42%, rgba(6, 14, 18, 0.72) 65%, rgba(6, 14, 18, 0.2) 84%, rgba(6, 14, 18, 0.68) 100%);
-    }
-
-    .hero-layout {
-      min-height: auto;
-      padding-top: 4.5rem;
-    }
-
-    .hero-copy {
-      max-width: 40rem;
-      margin-left: 0;
+      background-position: 66% center;
     }
   }
 
   @media (max-width: 639px) {
     .hero-section {
-      min-height: auto;
-      padding-bottom: 24rem;
+      min-height: 38rem;
     }
 
     .hero-section__background {
-      background-position: 68% bottom;
-      background-size: auto 42rem;
+      background-position: 72% center;
     }
-
-    .hero-section__shade {
-      background: linear-gradient(180deg, rgba(6, 14, 18, 0.99) 0%, rgba(6, 14, 18, 0.98) 34%, rgba(6, 14, 18, 0.7) 59%, rgba(6, 14, 18, 0.26) 78%, rgba(6, 14, 18, 0.72) 100%);
-    }
-
-    .hero-layout {
-      padding-top: 4.5rem;
-    }
-
-    .hero-copy {
-      max-width: none;
-      padding-bottom: 0;
-      padding-top: 4rem;
-    }
-
-    .hero-benefits {
-      gap: 0.65rem;
-    }
-
-    .hero-benefit {
-      display: block;
-      font-size: 0.72rem;
-      line-height: 1.35;
-    }
-
-    .hero-benefit__icon {
-      margin-bottom: 0.5rem;
-      height: 1.9rem;
-      width: 1.9rem;
-    }
-
-    .hero-benefit__icon svg {
-      height: 0.9rem;
-      width: 0.9rem;
-    }
-
   }
 
   @media (min-width: 768px) {
