@@ -2,8 +2,12 @@ import { useState, useCallback } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { Hero } from '@/components/Hero';
 import { Problem } from '@/components/Problem';
+import { WhyBuy } from '@/components/WhyBuy';
 import { Solution } from '@/components/Solution';
+import { HumanAI } from '@/components/HumanAI';
 import { HowItWorks } from '@/components/HowItWorks';
+import { PilotMeasurement } from '@/components/PilotMeasurement';
+import { Pricing } from '@/components/Pricing';
 import { Trust } from '@/components/Trust';
 import { FinalCTA } from '@/components/FinalCTA';
 import { Footer } from '@/components/Footer';
@@ -29,8 +33,12 @@ function App() {
         <Hero onCTAClick={openContact} />
         <StatisticsStrip />
         <Problem />
+        <WhyBuy />
         <Solution />
+        <HumanAI />
         <HowItWorks />
+        <PilotMeasurement />
+        <Pricing onCTAClick={openContact} />
         <Trust />
         <FAQ />
         <FinalCTA onCTAClick={openContact} />
