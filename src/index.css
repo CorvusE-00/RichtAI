@@ -160,7 +160,7 @@
     @apply relative z-10 w-full;
     width: min(32rem, 31vw);
     max-width: 32rem;
-    padding: 4rem 0 3rem;
+    padding: 4rem 0 2rem;
   }
 
   .hero-kicker {
@@ -186,41 +186,6 @@
 
   .hero-demo-play {
     @apply inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-snow-100/45 text-[0.55rem] text-snow-50;
-  }
-
-  .hero-benefits {
-    @apply grid grid-cols-3 gap-2;
-    max-width: 100%;
-    gap: 0.5rem;
-    padding: 0.5rem;
-    border: 1px solid rgba(243, 240, 233, 0.22);
-    border-radius: 1rem;
-    background: rgba(8, 15, 18, 0.52);
-    backdrop-filter: blur(6px);
-  }
-
-  .hero-benefit {
-    @apply flex min-w-0 items-center gap-2 rounded-xl border px-2.5 py-2 font-medium leading-snug text-snow-50;
-    gap: 0.4rem;
-    font-size: clamp(0.72rem, 0.9vw, 0.95rem);
-    line-height: 1.3;
-    border-color: rgba(114, 182, 172, 0.38);
-    background: rgba(18, 20, 22, 0.7);
-  }
-
-  .hero-benefit > span:last-child {
-    white-space: pre-line;
-  }
-
-  .hero-benefit__icon {
-    @apply inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-teal-100;
-    border-color: rgba(114, 226, 215, 0.55);
-    background: rgba(52, 143, 132, 0.2);
-    box-shadow: inset 0 0 0 1px rgba(243, 240, 233, 0.08);
-  }
-
-  .hero-benefit__icon svg {
-    @apply h-4 w-4;
   }
 
   .value-marquee {
@@ -828,25 +793,6 @@
     border-top: 1px solid rgba(58, 64, 69, 0.35);
   }
 
-  @media (min-width: 640px) and (max-width: 1366px) {
-    .hero-benefit {
-      gap: 0.25rem;
-      padding-left: 0.4rem;
-      padding-right: 0.4rem;
-      font-size: 0.72rem;
-    }
-
-    .hero-benefit__icon {
-      height: 1.75rem;
-      width: 1.75rem;
-    }
-
-    .hero-benefit__icon svg {
-      height: 0.9rem;
-      width: 0.9rem;
-    }
-  }
-
   @media (min-width: 1180px) {
     .hero-section__background {
       transform: translate3d(0, 80px, 0);
@@ -909,10 +855,6 @@
       width: 100%;
     }
 
-    .hero-benefits {
-      grid-template-columns: 1fr;
-      gap: 0.5rem;
-    }
   }
 
   @media (min-width: 768px) {
