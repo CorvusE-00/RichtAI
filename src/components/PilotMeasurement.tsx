@@ -7,7 +7,7 @@ export function PilotMeasurement() {
   const { copy } = useLanguage();
 
   return (
-    <section id="pilot" className="section-tone relative overflow-hidden border-t border-navy-700/55 py-20 sm:py-28">
+    <section id="pilot" className="section-tone relative overflow-hidden border-t border-navy-700/55 py-16 sm:py-24">
       <div className="relative mx-auto max-w-6xl px-5 sm:px-6">
         <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-end lg:gap-20">
           <div data-reveal className="reveal max-w-xl">
@@ -26,8 +26,8 @@ export function PilotMeasurement() {
             {copy.pilotMeasurement.blocks.map((block, index) => {
               const Icon = measurementIcons[index];
               return (
-                <article key={block.title} data-reveal className="reveal grid gap-4 border-b border-navy-700/65 py-6 last:border-b-0 sm:grid-cols-[3rem_0.78fr_1.22fr] sm:items-start sm:gap-6">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-teal-400/35 text-teal-300">
+                <article key={block.title} data-reveal className="reveal grid gap-4 border-b border-navy-700/65 py-6 transition-colors duration-300 hover:border-teal-400/35 last:border-b-0 sm:grid-cols-[3rem_0.78fr_1.22fr] sm:items-start sm:gap-6">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-teal-400/35 text-teal-300 transition-colors duration-300">
                     <Icon className="h-4 w-4" strokeWidth={1.6} aria-hidden="true" />
                   </div>
                   <h3 className="font-display text-lg font-medium leading-snug text-snow-100">{block.title}</h3>

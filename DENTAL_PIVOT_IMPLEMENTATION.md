@@ -48,8 +48,18 @@ F1 audit completed against the requested component set.
 
 ## Run 3 placeholder checklist
 
-- [ ] Define and validate future motion / broader conversion work.
-- [ ] Do not execute in Run 1.
+## Run 3 checklist
+
+- [x] P0. Fix known HumanAI mobile connector layout
+- [x] P1. Convert StatisticsStrip into a seamless right-to-left value marquee
+- [x] P2. Add reduced-motion/static fallback for marquee
+- [x] P3. Polish section hierarchy / icon consistency / spacing
+- [x] P4. Add restrained micro-interactions where useful
+- [x] P5. Remove copy repetition and weak generic phrases
+- [x] P6. Full TR/EN conversion QA
+- [x] P7. Static responsive QA + document visual-verification limitation
+- [x] P8. Technical QA + final diff review
+- [ ] P9. Final screenshot checkpoint before commit
 
 ## Notes / decisions / QA findings
 
@@ -81,4 +91,16 @@ F1 audit completed against the requested component set.
 - Run 2 section order: Hero → StatisticsStrip → Problem → WhyBuy → Solution → HumanAI → HowItWorks → PilotMeasurement → Pricing → Trust → FAQ → FinalCTA.
 - Pricing decisions: Starter is exactly one selected channel (Website OR WhatsApp); Growth is recommended; Pro does not guarantee mobile website work; website refresh, landing pages, integrations, reporting, and custom automation are separate add-ons; no checkout or payment system was added.
 - Visual QA remains pending because browser viewport verification was unavailable; S7 remains intentionally unchecked.
+- Run 3 baseline: Run 2 is complete through S8 and pushed at `5ecafaa8cf7b7fd484451b2fdc897be2b3c03359`; `HEAD` matches `origin/main` and the worktree is clean.
+- P0 QA: HumanAI flow now stacks as card → centered down-arrow on mobile and card → arrow → card horizontally from `sm+`; `pnpm typecheck` passes and no JS or copy changes were added.
+- P1 QA: `StatisticsStrip` now uses the six existing dental metrics in two identical CSS track groups, moving right-to-left on a 30-second linear loop with restrained separators, no cards, and no JS motion code; the duplicate group is `aria-hidden`.
+- P2 QA: `prefers-reduced-motion: reduce` disables the marquee, hides the duplicate group, and wraps all six values in a static row; typecheck passes.
+- P3 QA: audited WhyBuy, Solution, HumanAI, HowItWorks, PilotMeasurement, Pricing, Trust, FAQ, and FinalCTA; adjusted section rhythm, editorial borders, icon consistency, pricing alignment, and mobile spacing without adding gradients, blobs, glassmorphism, stock photography, or card walls.
+- P4 QA: added only restrained border/color transitions, a 2px pricing hover lift, subtle icon responses, and pricing CTA arrow movement; typecheck and focused lint pass, with no new animation library or continuous effect.
+- P5 editorial gate: reviewed TR first, then EN. Retained necessary pilot, channel, lead, appointment, and coordinator reinforcement at conversion points; changed the process label to distinguish setup-to-measurement and softened a repeated numeric 7/24 phrase in WhyBuy. New section components contain no hardcoded sales copy.
+- P6 QA: typecheck passes; all five navbar anchors resolve with no duplicate IDs; each new translation structure appears in both locales; prohibited-claim scan is clean; Starter remains Website OR WhatsApp / one channel; add-ons remain separate; the dental demo CTA retains its external href, `_blank`, and `noreferrer` semantics.
+- P7 QA: static code-level responsive audit completed at 1536, 1440, 1280, 1024, 768, 430, 390, and 375px. New Run 3 components have no fixed-width pattern or obvious horizontal-overflow risk; HumanAI, WhyBuy, PilotMeasurement, Pricing, and the marquee fallback stack or wrap safely. Browser viewport verification was not performed because Computer Use could not safely verify the local browser URL, so pixel-perfect visual QA remains pending. Run 2 S7 remains intentionally unchecked.
+- P8 QA: `pnpm typecheck`, `pnpm lint`, `pnpm build`, and `git diff --check` all pass. Build reports only the expected unset `VITE_SITE_URL` note. No missing translation parity issue, duplicate section ID, unresolved navbar anchor, Pricing callback regression, Starter web-only wording, stale free-introduction CTA, old Trust nav item, dead StatisticsStrip counter/observer, unused import, unnecessary dependency diff, or obvious new fixed-width overflow pattern was found. `HeroMonolithVisual.tsx` has no diff and no new monolith animation was introduced.
+- Run 3 changed files: `DENTAL_PIVOT_IMPLEMENTATION.md`, `src/components/HumanAI.tsx`, `src/components/PilotMeasurement.tsx`, `src/components/Pricing.tsx`, `src/components/StatisticsStrip.tsx`, `src/components/WhyBuy.tsx`, `src/index.css`, and `src/lib/i18n.tsx`.
+- Run 3 visual status: P9 remains intentionally unchecked for the final screenshot review; browser viewport verification is still pending.
 

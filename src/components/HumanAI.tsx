@@ -7,7 +7,7 @@ export function HumanAI() {
   const { copy } = useLanguage();
 
   return (
-    <section id="insan-ai" className="section-tone relative overflow-hidden border-t border-navy-700/55 py-20 sm:py-28">
+    <section id="insan-ai" className="section-tone relative overflow-hidden border-t border-navy-700/55 py-20 sm:py-24">
       <div className="relative mx-auto max-w-6xl px-5 sm:px-6">
         <div className="grid gap-10 lg:grid-cols-[0.86fr_1.14fr] lg:items-end lg:gap-20">
           <div data-reveal className="reveal max-w-xl">
@@ -27,13 +27,13 @@ export function HumanAI() {
               {copy.humanAI.flow.map((step, index) => {
                 const Icon = flowIcons[index];
                 return (
-                  <div key={step} className="flex min-w-0 flex-1 items-center gap-3 sm:block">
-                    <div className="flex min-h-16 flex-1 items-center gap-3 rounded-xl border border-navy-600/70 bg-navy-900/45 px-3 py-3 sm:min-h-24 sm:flex-col sm:items-start sm:justify-between sm:px-4 sm:py-4">
-                      <Icon className="h-5 w-5 shrink-0 text-teal-300" strokeWidth={1.6} aria-hidden="true" />
+                  <div key={step} className="flex min-w-0 flex-1 flex-col items-stretch sm:flex-row sm:items-stretch">
+                    <div className="group flex min-h-16 w-full flex-1 items-center gap-3 rounded-xl border border-navy-600/70 bg-navy-900/45 px-3 py-3 transition-colors duration-300 hover:border-teal-400/35 sm:min-h-24 sm:flex-col sm:items-start sm:justify-between sm:px-4 sm:py-4">
+                      <Icon className="h-5 w-5 shrink-0 text-teal-300 transition-colors duration-300 group-hover:text-teal-200" strokeWidth={1.6} aria-hidden="true" />
                       <span className="text-sm leading-snug text-snow-200">{step}</span>
                     </div>
                     {index < copy.humanAI.flow.length - 1 && (
-                      <ArrowRight className="mx-1 h-4 w-4 shrink-0 rotate-90 text-teal-300/70 sm:mx-0 sm:mt-10 sm:rotate-0" strokeWidth={1.5} aria-hidden="true" />
+                      <ArrowRight className="mx-auto my-1 h-4 w-4 shrink-0 rotate-90 text-teal-300/70 sm:mx-2 sm:my-0 sm:mt-10 sm:rotate-0" strokeWidth={1.5} aria-hidden="true" />
                     )}
                   </div>
                 );

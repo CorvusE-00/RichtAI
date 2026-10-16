@@ -1,4 +1,4 @@
-import { Check, Sparkles } from 'lucide-react';
+import { ArrowRight, Check, Sparkles } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 
 interface PricingProps {
@@ -44,7 +44,7 @@ export function Pricing({ onCTAClick }: PricingProps) {
                 key={plan.name}
                 data-reveal
                 style={{ '--reveal-delay': `${index * 100}ms` } as React.CSSProperties}
-                className={`reveal relative flex flex-col border px-5 py-6 sm:px-6 sm:py-7 ${isRecommended ? 'border-teal-400/55 bg-navy-800/60' : 'border-navy-600/70 bg-navy-900/45'}`}
+                className={`reveal relative flex flex-col border px-5 py-6 transition-[transform,border-color] duration-300 hover:-translate-y-0.5 sm:px-6 sm:py-7 ${isRecommended ? 'border-teal-400/55 bg-navy-800/60 hover:border-teal-300/70' : 'border-navy-600/70 bg-navy-900/45 hover:border-navy-500/90'}`}
               >
                 {badge && (
                   <div className="absolute right-5 top-5 inline-flex items-center gap-1.5 text-xs font-display font-medium text-teal-200">
@@ -75,8 +75,9 @@ export function Pricing({ onCTAClick }: PricingProps) {
                   ))}
                 </ul>
 
-                <button onClick={onCTAClick} className="mt-8 inline-flex min-h-12 w-full items-center justify-center rounded-xl border border-teal-400/35 bg-teal-500/10 px-4 py-3 text-sm font-display font-medium text-teal-100 transition-colors hover:border-teal-300/55 hover:bg-teal-500/15">
+                <button onClick={onCTAClick} className="group mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-teal-400/35 bg-teal-500/10 px-4 py-3 text-sm font-display font-medium text-teal-100 transition-colors hover:border-teal-300/55 hover:bg-teal-500/15">
                   {plan.cta}
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
                 </button>
               </article>
             );

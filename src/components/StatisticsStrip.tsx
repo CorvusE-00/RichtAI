@@ -11,27 +11,31 @@ export function StatisticsStrip() {
       className="section-tone section-tone--stats relative border-y border-navy-700/60"
     >
       <div className="section-surface section-surface--stats absolute inset-0" />
-      <div className="relative max-w-6xl mx-auto px-5 sm:px-6 py-6 sm:py-9">
-        <div className="grid grid-cols-2 gap-y-5 gap-x-4 sm:grid-cols-3 lg:grid-cols-6 sm:gap-y-0 sm:gap-x-8">
-          {metrics.map((metric, index) => {
-            return (
-              <div
-                key={metric.label}
-                data-reveal
-                style={{ '--reveal-delay': `${index * 90}ms` } as React.CSSProperties}
-                className="reveal stats-principle text-center"
-              >
-                <div className="stats-principle__value">
-                  {metric.display}
-                </div>
-                <div className="stats-principle__label">
-                  {metric.label}
-                </div>
-              </div>
-            );
-          })}
+      <div className="value-marquee relative py-5 sm:py-7">
+        <div className="value-marquee__track">
+          <MetricGroup metrics={metrics} />
+          <MetricGroup metrics={metrics} isDuplicate />
         </div>
       </div>
     </section>
+  );
+}
+
+function MetricGroup({
+  metrics,
+  isDuplicate = false,
+}: {
+  metrics: readonly { display: string; label: string }[];
+  isDuplicate?: boolean;
+}) {
+  return (
+    <div className="value-marquee__group" role="list" aria-hidden={isDuplicate ? true : undefined}>
+      {metrics.map((metric) => (
+        <div key={metric.label} className="value-marquee__item" role="listitem">
+          <div className="value-marquee__value">{metric.display}</div>
+          <div className="value-marquee__label">{metric.label}</div>
+        </div>
+      ))}
+    </div>
   );
 }

@@ -30,9 +30,9 @@ export function WhyBuy() {
                   key={outcome.title}
                   data-reveal
                   style={{ '--reveal-delay': `${index * 90}ms` } as React.CSSProperties}
-                  className="reveal border-t border-navy-700/65 py-6 first:pt-0 sm:first:pt-6"
+                  className="group reveal border-t border-navy-700/65 py-6 transition-colors duration-300 hover:border-teal-400/35 first:pt-0 sm:first:pt-6"
                 >
-                  <Icon className="h-5 w-5 text-teal-300" strokeWidth={1.6} aria-hidden="true" />
+                  <Icon className="h-5 w-5 text-teal-300 transition-transform duration-300 group-hover:translate-x-0.5" strokeWidth={1.6} aria-hidden="true" />
                   <h3 className="mt-4 font-display text-lg font-medium leading-snug text-snow-100">
                     {outcome.title}
                   </h3>
