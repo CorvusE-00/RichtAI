@@ -24,7 +24,7 @@ export function Hero({ onCTAClick }: HeroProps) {
               {hero.pilotBadge}
             </span>
 
-            <h1 id="hero-title" className="hero-editorial-heading mt-7 max-w-[44rem] font-display text-[clamp(3.4rem,5.6vw,5.5rem)] font-semibold leading-[0.98] tracking-[-0.065em] text-snow-50">
+            <h1 id="hero-title" className="hero-editorial-heading mt-7 max-w-[34rem] font-display text-[clamp(3.4rem,4.2vw,4.8rem)] font-semibold leading-[1] tracking-[-0.065em] text-snow-50">
               {hero.headline.split('\n').map((line) => (
                 <span key={line} className="block">
                   {line}
@@ -32,11 +32,11 @@ export function Hero({ onCTAClick }: HeroProps) {
               ))}
             </h1>
 
-            <p className="hero-accent mt-6 max-w-[38rem] font-display text-[clamp(1.5rem,2.45vw,2.35rem)] font-medium leading-tight tracking-[-0.04em] text-teal-300">
+            <p className="hero-accent mt-6 max-w-[34rem] font-display text-[clamp(2rem,2.35vw,2.35rem)] font-medium leading-tight tracking-[-0.04em] text-teal-300">
               {hero.headlineAccent}
             </p>
 
-            <p className="mt-5 max-w-[39rem] text-base leading-relaxed text-snow-200 sm:text-lg">
+            <p className="mt-5 max-w-[32rem] text-base leading-relaxed text-snow-200 sm:text-lg">
               {hero.subheadline}
             </p>
 
