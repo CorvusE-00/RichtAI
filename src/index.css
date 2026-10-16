@@ -176,18 +176,6 @@
     text-wrap: balance;
   }
 
-  .hero-cta-row {
-    flex-wrap: wrap;
-  }
-
-  .hero-secondary-cta {
-    white-space: nowrap;
-  }
-
-  .hero-demo-play {
-    @apply inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-snow-100/45 text-[0.55rem] text-snow-50;
-  }
-
   .value-marquee {
     @apply relative flex h-[4.75rem] items-center overflow-hidden;
   }
@@ -845,14 +833,6 @@
     .hero-copy {
       max-width: 34rem;
       padding: 2.5rem 0 1rem;
-    }
-
-    .hero-cta-row {
-      flex-direction: column;
-    }
-
-    .hero-cta-row > * {
-      width: 100%;
     }
 
   }

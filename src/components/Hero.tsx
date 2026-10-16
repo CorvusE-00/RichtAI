@@ -37,21 +37,10 @@ export function Hero({ onCTAClick }: HeroProps) {
               {hero.subheadline}
             </p>
 
-            <div className="hero-cta-row mt-7 flex items-stretch gap-3">
-              <button onClick={onCTAClick} className="btn-primary group min-h-[60px] px-5 text-base">
+            <button onClick={onCTAClick} className="btn-primary group mt-7 min-h-[62px] px-6 text-[1.02rem]">
                 <span>{hero.cta}</span>
                 <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
-              </button>
-              <a
-                href="https://dental-teal-alpha.vercel.app/"
-                target="_blank"
-                rel="noreferrer"
-                className="hero-secondary-cta inline-flex min-h-[60px] items-center justify-center gap-2 rounded-xl border border-snow-100/35 bg-navy-950/35 px-5 font-display text-[1.02rem] font-medium text-snow-50 transition-colors duration-300 hover:border-teal-300/70 hover:bg-navy-950/60 hover:text-teal-100"
-              >
-                <span className="hero-demo-play" aria-hidden="true">▶</span>
-                {hero.secondaryCta}
-              </a>
-            </div>
+            </button>
 
           </div>
         </div>
