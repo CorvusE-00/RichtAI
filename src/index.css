@@ -740,6 +740,12 @@
     border-top: 1px solid rgba(58, 64, 69, 0.35);
   }
 
+  @media (min-width: 1180px) {
+    .hero-section__background {
+      transform: translate3d(0, 80px, 0);
+    }
+  }
+
   @media (max-width: 1179px) {
     .hero-section {
       min-height: 42rem;
