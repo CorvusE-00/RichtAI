@@ -105,184 +105,240 @@
     text-wrap: balance;
   }
 
-  .hero-section {
-    background: #121416;
-    border-bottom: 1px solid rgba(58, 64, 69, 0.72);
-  }
-
   .hero-section__rule {
     height: 1px;
     background: rgba(114, 182, 172, 0.16);
   }
 
-  .hero-kicker {
-    @apply inline-flex items-center gap-2 border-b border-teal-400/45 pb-2 text-xs font-display font-semibold uppercase tracking-[0.16em] text-teal-200 sm:text-sm;
+  .hero-section {
+    min-height: 56rem;
+    background: #080f12;
+    border-bottom: 1px solid rgba(58, 64, 69, 0.72);
   }
 
-  .hero-kicker__dot {
-    @apply h-2 w-2 rounded-full bg-teal-400;
-    animation: blink 2.8s ease-in-out infinite;
+  .hero-section__background {
+    background-image: url('/images/richtai-dental-ai-mermaid-hero.png');
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: saturate(0.92) contrast(1.04);
+  }
+
+  .hero-section__shade {
+    background: linear-gradient(90deg, rgba(6, 14, 18, 0.98) 0%, rgba(6, 14, 18, 0.9) 30%, rgba(6, 14, 18, 0.58) 52%, rgba(6, 14, 18, 0.2) 76%, rgba(6, 14, 18, 0.1) 100%);
+  }
+
+  .hero-layout {
+    @apply grid items-center gap-8 lg:grid-cols-[minmax(0,0.96fr)_minmax(0,1.04fr)];
+    min-height: 56rem;
+    padding-top: 4.5rem;
+  }
+
+  .hero-copy {
+    @apply relative z-10 max-w-[44rem] py-20 lg:py-24;
+  }
+
+  .hero-kicker {
+    @apply inline-flex items-center gap-2 rounded-full border border-teal-300/35 bg-navy-950/35 px-4 py-2 text-xs font-display font-semibold uppercase tracking-[0.13em] text-teal-100 shadow-[0_10px_32px_rgba(0,0,0,0.12)] sm:text-sm;
   }
 
   .hero-editorial-heading {
     text-wrap: balance;
   }
 
-  .hero-product-stage {
-    @apply relative grid gap-3 border border-navy-600/80 bg-navy-900 p-3 sm:gap-4 sm:p-5 lg:grid-cols-[minmax(0,1.62fr)_minmax(16rem,0.68fr)] lg:grid-rows-[minmax(0,1fr)_minmax(0,1fr)] lg:p-6;
-    min-height: 36rem;
-    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(243, 240, 233, 0.05);
+  .hero-accent {
+    text-wrap: balance;
   }
 
-  .hero-product-stage__browser,
-  .hero-product-stage__assistant,
-  .hero-product-stage__result {
-    @apply relative min-w-0 overflow-hidden border border-navy-600/80;
-    background: #202428;
+  .hero-demo-play {
+    @apply inline-flex h-7 w-7 items-center justify-center rounded-full border border-snow-100/45 text-[0.55rem] text-snow-50;
   }
 
-  .hero-product-stage__browser {
-    @apply flex min-h-0 flex-col lg:row-span-2;
+  .hero-benefits {
+    @apply grid grid-cols-3 gap-4;
   }
 
-  .hero-product-stage__bar {
-    @apply flex min-h-11 items-center gap-3 border-b border-navy-600/70 px-3 text-[0.65rem] text-snow-500 sm:px-4;
+  .hero-benefit {
+    @apply flex min-w-0 items-start gap-2 text-sm leading-snug text-snow-100 sm:gap-3 sm:text-base;
   }
 
-  .hero-product-stage__window-controls {
-    @apply flex shrink-0 items-center gap-1;
+  .hero-benefit__icon {
+    @apply inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-teal-300/35 bg-navy-950/35 text-teal-200;
   }
 
-  .hero-product-stage__window-controls svg {
-    @apply h-2.5 w-2.5 fill-current text-snow-500/50;
+  .hero-benefit__icon svg {
+    @apply h-4 w-4;
   }
 
-  .hero-product-stage__window-controls svg:first-child {
-    @apply text-teal-300;
+  .hero-visual {
+    @apply relative z-10 min-w-0;
+    min-height: 41rem;
   }
 
-  .hero-product-stage__url {
-    @apply min-w-0 flex-1 truncate font-mono text-[0.65rem] text-snow-400;
+  .hero-visual__halo {
+    @apply pointer-events-none absolute;
+    inset: 11% 5% 6% 7%;
+    background: radial-gradient(circle at 60% 45%, rgba(56, 204, 194, 0.1), transparent 55%);
   }
 
-  .hero-product-stage__status {
-    @apply shrink-0 font-display uppercase tracking-[0.13em] text-snow-500;
+  .hero-overlay-card {
+    @apply absolute border border-teal-200/35 shadow-[0_18px_40px_rgba(0,0,0,0.24)];
+    background: rgba(12, 28, 33, 0.76);
+    backdrop-filter: blur(9px);
   }
 
-  .hero-product-stage__browser-body {
-    @apply relative min-h-0 flex-1;
+  .hero-channel {
+    @apply flex items-center gap-3 rounded-[0.85rem] px-3 py-3 text-snow-50;
+    width: min(20rem, 46%);
   }
 
-  .hero-product-stage__browser-body img {
-    @apply block h-full min-h-[18rem] w-full object-cover object-top sm:min-h-[22rem];
+  .hero-channel--website {
+    left: 3%;
+    top: 13%;
   }
 
-  .hero-product-stage__browser-caption {
-    @apply absolute inset-x-0 bottom-0 flex items-center justify-between gap-4 border-t border-navy-950/40 bg-navy-950/80 px-4 py-3 text-xs text-snow-200 backdrop-blur-sm;
+  .hero-channel--whatsapp {
+    left: 3%;
+    top: 30%;
   }
 
-  .hero-product-stage__live {
-    @apply inline-flex items-center gap-1.5 font-display uppercase tracking-[0.12em] text-teal-200;
+  .hero-channel__icon {
+    @apply inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border;
   }
 
-  .hero-product-stage__live span,
-  .hero-product-stage__panel-live {
-    @apply h-1.5 w-1.5 rounded-full bg-teal-300;
+  .hero-channel__icon svg {
+    @apply h-4 w-4;
+  }
+
+  .hero-channel__icon--website {
+    @apply border-sky-300/50 bg-sky-400/15 text-sky-200;
+  }
+
+  .hero-channel__icon--whatsapp {
+    @apply border-emerald-300/55 bg-emerald-400/15 text-emerald-200;
+  }
+
+  .hero-channel__icon--appointment {
+    @apply h-8 w-8 border-teal-300/45 bg-teal-400/15 text-teal-100;
+  }
+
+  .hero-channel__copy {
+    @apply min-w-0 flex-1;
+  }
+
+  .hero-channel__copy strong {
+    @apply block truncate font-display text-sm font-medium;
+  }
+
+  .hero-channel__copy small {
+    @apply mt-0.5 block max-w-[15rem] text-xs leading-relaxed text-snow-300;
+  }
+
+  .hero-channel time {
+    @apply shrink-0 self-start pt-1 text-[0.65rem] text-snow-400;
+  }
+
+  .hero-timeline {
+    @apply absolute bottom-[10%] left-[4%] flex w-[15rem] flex-col gap-3;
+  }
+
+  .hero-timeline__step {
+    @apply relative grid grid-cols-[1.5rem_minmax(0,1fr)] items-center gap-3 text-sm text-snow-100;
+  }
+
+  .hero-timeline__step:not(:last-child)::after {
+    content: '';
+    @apply absolute left-[0.7rem] top-7 h-5 w-px bg-teal-300/55;
+  }
+
+  .hero-timeline__node {
+    @apply relative z-10 inline-flex h-6 w-6 items-center justify-center rounded-full border border-teal-300/70 bg-navy-950/80 text-teal-200;
+  }
+
+  .hero-timeline__node svg {
+    @apply h-3.5 w-3.5;
+  }
+
+  .hero-appointment {
+    @apply right-[2%] top-[36%] w-[15rem] rounded-[0.9rem] p-4 text-snow-50;
+  }
+
+  .hero-appointment__heading {
+    @apply grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 border-b border-snow-100/20 pb-3;
+  }
+
+  .hero-appointment__heading strong {
+    @apply font-display text-sm font-medium;
+  }
+
+  .hero-appointment__status {
+    @apply rounded-full border border-teal-300/45 bg-teal-400/15 px-2 py-1 text-[0.6rem] text-teal-100;
+  }
+
+  .hero-appointment__body {
+    @apply grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 gap-y-2 pt-3 text-sm;
+  }
+
+  .hero-appointment__body > span:first-child {
+    @apply col-span-2 text-snow-200;
+  }
+
+  .hero-appointment__body strong {
+    @apply font-display font-medium text-snow-50;
+  }
+
+  .hero-appointment__time {
+    @apply inline-flex items-center gap-1 text-snow-300;
+  }
+
+  .hero-appointment__time svg {
+    @apply h-3.5 w-3.5 text-teal-200;
+  }
+
+  .value-marquee {
+    @apply relative flex h-[4.75rem] items-center overflow-hidden;
+  }
+
+  .value-marquee__track {
+    @apply flex w-max min-w-max;
+    animation: marquee 34s linear infinite;
+  }
+
+  .value-marquee__group {
+    @apply flex items-center justify-around gap-8 pr-8;
+    min-width: 100vw;
+  }
+
+  .value-marquee__item {
+    @apply relative flex shrink-0 items-center whitespace-nowrap px-2 font-display text-sm font-medium text-snow-100 sm:text-base;
+  }
+
+  .value-marquee__item::after {
+    content: '';
+    @apply absolute -right-5 h-1 w-1 rounded-full bg-teal-400/75;
+  }
+
+  .value-marquee__value {
+    @apply text-snow-100;
+  }
+
+  .value-marquee__label {
+    @apply ml-2 text-snow-400;
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .hero-kicker__dot {
+    @apply h-2 w-2 rounded-full bg-teal-400;
     animation: blink 2.8s ease-in-out infinite;
-  }
-
-  .hero-product-stage__assistant,
-  .hero-product-stage__result {
-    @apply flex flex-col;
-  }
-
-  .hero-product-stage__assistant {
-    background: #f3f0e9;
-    color: #121416;
-  }
-
-  .hero-product-stage__panel-heading {
-    @apply flex items-center gap-3 border-b border-navy-700/15 px-4 py-3;
-  }
-
-  .hero-product-stage__avatar {
-    @apply flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-500 font-display text-sm font-semibold text-navy-950;
-  }
-
-  .hero-product-stage__panel-heading p {
-    @apply font-display text-sm font-semibold;
-  }
-
-  .hero-product-stage__panel-heading span:not(.hero-product-stage__panel-live) {
-    @apply mt-0.5 block text-xs text-navy-500;
-  }
-
-  .hero-product-stage__panel-live {
-    @apply ml-auto;
-  }
-
-  .hero-product-stage__messages {
-    @apply flex flex-1 flex-col gap-3 p-4;
-  }
-
-  .hero-product-stage__message {
-    @apply max-w-[88%] rounded-xl px-3 py-2.5 text-sm leading-relaxed;
-  }
-
-  .hero-product-stage__message--patient {
-    @apply self-start bg-white text-navy-900;
-  }
-
-  .hero-product-stage__message--ai {
-    @apply self-end bg-teal-500 text-navy-950;
-  }
-
-  .hero-product-stage__handoff {
-    @apply mt-auto inline-flex items-center gap-2 border-t border-navy-700/15 pt-3 text-xs font-medium text-navy-600;
-  }
-
-  .hero-product-stage__handoff svg {
-    @apply h-3.5 w-3.5 text-teal-600;
-  }
-
-  .hero-product-stage__result {
-    @apply bg-navy-800 px-4 py-4 text-snow-100;
-  }
-
-  .hero-product-stage__result-heading {
-    @apply flex items-center justify-between gap-3 border-b border-navy-600/70 pb-3 font-display text-sm font-semibold;
-  }
-
-  .hero-product-stage__result-mark {
-    @apply flex h-6 w-6 items-center justify-center rounded-full border border-teal-400/50 text-teal-300;
-  }
-
-  .hero-product-stage__result dl {
-    @apply mt-3 space-y-3;
-  }
-
-  .hero-product-stage__result dl > div {
-    @apply flex items-baseline justify-between gap-3;
-  }
-
-  .hero-product-stage__result dt {
-    @apply text-xs text-snow-500;
-  }
-
-  .hero-product-stage__result dd {
-    @apply text-right text-sm font-medium text-snow-100;
-  }
-
-  .hero-product-stage__system-detail {
-    @apply absolute bottom-4 left-4 hidden items-center gap-3 border border-navy-600/70 bg-navy-950/85 px-3 py-2 text-[0.6rem] font-display uppercase tracking-[0.14em] text-snow-500 backdrop-blur-sm lg:flex;
-  }
-
-  .hero-product-stage__system-detail img {
-    @apply h-6 w-12 object-cover object-center opacity-75;
-  }
-
-  .hero-product-stage__caption {
-    @apply mt-3 text-center text-xs uppercase tracking-[0.14em] text-snow-500;
   }
 
   .chapter {
@@ -847,6 +903,116 @@
 
   .final-cta-section {
     border-top: 1px solid rgba(58, 64, 69, 0.35);
+  }
+
+  @media (max-width: 1023px) {
+    .hero-layout {
+      grid-template-columns: minmax(0, 1fr);
+      min-height: auto;
+      padding-top: 4.5rem;
+    }
+
+    .hero-copy {
+      max-width: 48rem;
+    }
+
+    .hero-visual {
+      min-height: 37rem;
+      margin-top: -1rem;
+    }
+
+    .hero-channel--website {
+      left: 11%;
+    }
+
+    .hero-channel--whatsapp {
+      left: 11%;
+    }
+
+    .hero-timeline {
+      left: 12%;
+    }
+
+    .hero-appointment {
+      right: 8%;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .hero-section {
+      min-height: 64rem;
+    }
+
+    .hero-section__background {
+      background-position: 68% bottom;
+      background-size: auto 42rem;
+    }
+
+    .hero-section__shade {
+      background: linear-gradient(180deg, rgba(6, 14, 18, 0.99) 0%, rgba(6, 14, 18, 0.98) 34%, rgba(6, 14, 18, 0.7) 59%, rgba(6, 14, 18, 0.26) 78%, rgba(6, 14, 18, 0.72) 100%);
+    }
+
+    .hero-layout {
+      padding-top: 4.5rem;
+    }
+
+    .hero-copy {
+      padding-bottom: 0;
+      padding-top: 4rem;
+    }
+
+    .hero-benefits {
+      gap: 0.65rem;
+    }
+
+    .hero-benefit {
+      display: block;
+      font-size: 0.72rem;
+      line-height: 1.35;
+    }
+
+    .hero-benefit__icon {
+      margin-bottom: 0.5rem;
+      height: 1.9rem;
+      width: 1.9rem;
+    }
+
+    .hero-benefit__icon svg {
+      height: 0.9rem;
+      width: 0.9rem;
+    }
+
+    .hero-visual {
+      min-height: 31rem;
+      margin-top: 2rem;
+    }
+
+    .hero-channel--website,
+    .hero-appointment {
+      display: none;
+    }
+
+    .hero-channel--whatsapp {
+      left: 0;
+      top: 4%;
+      width: min(20rem, calc(100% - 1rem));
+    }
+
+    .hero-channel__copy small {
+      max-width: 12rem;
+    }
+
+    .hero-timeline {
+      bottom: auto;
+      left: 0;
+      top: 46%;
+      width: min(15rem, calc(100% - 1rem));
+      gap: 0.7rem;
+    }
+
+    .hero-timeline__step {
+      font-size: 0.78rem;
+    }
   }
 
   @media (min-width: 768px) {

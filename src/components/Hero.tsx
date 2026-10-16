@@ -1,4 +1,16 @@
-import { ArrowRight, Check, Circle } from 'lucide-react';
+import {
+  ArrowRight,
+  BarChart3,
+  CalendarCheck2,
+  CheckCircle2,
+  Clock3,
+  Globe2,
+  MessageCircle,
+  UserRound,
+  UsersRound,
+  Zap,
+} from 'lucide-react';
+import type { CSSProperties } from 'react';
 import { useLanguage } from '@/lib/i18n';
 
 interface HeroProps {
@@ -6,102 +18,135 @@ interface HeroProps {
 }
 
 export function Hero({ onCTAClick }: HeroProps) {
-  const { copy, language } = useLanguage();
-  const stage = copy.hero.stage;
+  const { copy } = useLanguage();
+  const hero = copy.hero;
 
   return (
-    <section id="anasayfa" className="hero-section relative overflow-hidden pb-16 pt-32 sm:pb-20 sm:pt-36 lg:pb-24 lg:pt-44">
+    <section id="anasayfa" className="hero-section relative overflow-hidden">
+      <div className="hero-section__background pointer-events-none absolute inset-0" aria-hidden="true" />
+      <div className="hero-section__shade pointer-events-none absolute inset-0" aria-hidden="true" />
       <div className="hero-noise pointer-events-none absolute inset-0" aria-hidden="true" />
       <div className="hero-section__rule pointer-events-none absolute inset-x-0 top-0" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto max-w-[82rem] px-5 sm:px-6">
-        <div data-reveal className="reveal mx-auto max-w-[58rem] text-center">
-          <span className="hero-kicker">
-            <span className="hero-kicker__dot" aria-hidden="true" />
-            {copy.hero.pilotBadge}
-          </span>
-          <h1 className="hero-editorial-heading mx-auto mt-7 max-w-[58rem] font-display text-[clamp(3.25rem,8vw,6.25rem)] font-semibold leading-[0.96] tracking-[-0.065em] text-snow-50">
-            <span className="block">{copy.hero.headline}</span>
-            <span className="mt-3 block text-teal-300">{copy.hero.headlineAccent}</span>
-          </h1>
-          <p className="mx-auto mt-7 max-w-[46rem] text-base leading-relaxed text-snow-300 sm:text-lg lg:text-xl">
-            {copy.hero.subheadline}
-          </p>
-          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <button onClick={onCTAClick} className="btn-primary group min-h-14 w-full sm:w-auto">
-              <span>{copy.hero.cta}</span>
-              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
-            </button>
-            <a
-              href="https://dental-teal-alpha.vercel.app/"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex min-h-14 w-full items-center justify-center rounded-xl border border-navy-600 bg-navy-900 px-6 py-4 font-display text-base font-medium text-snow-100 transition-colors duration-300 hover:border-teal-400/60 hover:text-teal-200 sm:w-auto"
-            >
-              {copy.hero.secondaryCta}
-            </a>
-          </div>
-          <p className="mt-5 text-sm text-snow-500 sm:text-base">{copy.hero.reassurance}</p>
-        </div>
+      <div className="relative z-10 mx-auto max-w-[90rem] px-5 sm:px-6 lg:px-8">
+        <div className="hero-layout">
+          <div data-reveal className="hero-copy reveal">
+            <span className="hero-kicker">
+              <span className="hero-kicker__dot" aria-hidden="true" />
+              {hero.pilotBadge}
+            </span>
 
-        <div data-reveal className="reveal mt-14 sm:mt-16 lg:mt-20" aria-label={stage.aria}>
-          <div className="hero-product-stage">
-            <div className="hero-product-stage__browser">
-              <div className="hero-product-stage__bar">
-                <div className="hero-product-stage__window-controls" aria-hidden="true">
-                  <Circle className="text-teal-300" />
-                  <Circle />
-                  <Circle />
-                </div>
-                <span className="hero-product-stage__url">{stage.browserUrl}</span>
-                <span className="hero-product-stage__status">{stage.browserStatus}</span>
-              </div>
-              <div className="hero-product-stage__browser-body">
-                <img src="/images/luma-dental-prototype-preview.png" alt={stage.browserLabel} />
-                <div className="hero-product-stage__browser-caption">
-                  <span>{stage.browserLabel}</span>
-                  <span className="hero-product-stage__live"><span aria-hidden="true" />{stage.liveLabel}</span>
-                </div>
-              </div>
+            <h1 className="hero-editorial-heading mt-7 max-w-[44rem] font-display text-[clamp(3.4rem,5.6vw,5.5rem)] font-semibold leading-[0.98] tracking-[-0.065em] text-snow-50">
+              {hero.headline.split('\n').map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </h1>
+
+            <p className="hero-accent mt-6 max-w-[38rem] font-display text-[clamp(1.5rem,2.45vw,2.35rem)] font-medium leading-tight tracking-[-0.04em] text-teal-300">
+              {hero.headlineAccent}
+            </p>
+
+            <p className="mt-5 max-w-[39rem] text-base leading-relaxed text-snow-200 sm:text-lg">
+              {hero.subheadline}
+            </p>
+
+            <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+              <button onClick={onCTAClick} className="btn-primary group min-h-14 w-full sm:w-auto">
+                <span>{hero.cta}</span>
+                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+              </button>
+              <a
+                href="https://dental-teal-alpha.vercel.app/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-xl border border-snow-100/35 bg-navy-950/35 px-6 py-4 font-display text-base font-medium text-snow-50 transition-colors duration-300 hover:border-teal-300/70 hover:bg-navy-950/60 hover:text-teal-100 sm:w-auto"
+              >
+                <span className="hero-demo-play" aria-hidden="true">▶</span>
+                {hero.secondaryCta}
+              </a>
             </div>
 
-            <article className="hero-product-stage__assistant">
-              <div className="hero-product-stage__panel-heading">
-                <div className="hero-product-stage__avatar">R</div>
-                <div>
-                  <p>{stage.assistantTitle}</p>
-                  <span>{stage.assistantStatus}</span>
-                </div>
-                <span className="hero-product-stage__panel-live" aria-hidden="true" />
-              </div>
-              <div className="hero-product-stage__messages">
-                <div className="hero-product-stage__message hero-product-stage__message--patient">{stage.patientMessage}</div>
-                <div className="hero-product-stage__message hero-product-stage__message--ai">{stage.aiMessage}</div>
-                <div className="hero-product-stage__handoff"><Check aria-hidden="true" />{stage.handoffLabel}</div>
-              </div>
-            </article>
+            <p className="mt-4 text-sm text-snow-300 sm:text-base">{hero.reassurance}</p>
 
-            <article className="hero-product-stage__result">
-              <div className="hero-product-stage__result-heading">
-                <span>{stage.resultTitle}</span>
-                <span className="hero-product-stage__result-mark" aria-hidden="true">✓</span>
-              </div>
-              <dl>
-                {stage.resultItems.map((item) => (
-                  <div key={item.label}>
-                    <dt>{item.label}</dt>
-                    <dd>{item.value}</dd>
+            <div className="hero-benefits mt-12 border-t border-snow-100/20 pt-6 sm:mt-14">
+              {hero.benefits.map((benefit, index) => {
+                const Icon = index === 0 ? Zap : index === 1 ? UsersRound : BarChart3;
+                return (
+                  <div key={benefit} className="hero-benefit">
+                    <span className="hero-benefit__icon"><Icon aria-hidden="true" /></span>
+                    <span>{benefit}</span>
                   </div>
-                ))}
-              </dl>
-            </article>
-
-            <div className="hero-product-stage__system-detail" aria-hidden="true">
-              <span>{stage.systemLabel}</span>
-              <img src="/images/richtai-signal-monolith-visual.png" alt="" />
+                );
+              })}
             </div>
           </div>
-          <p className="hero-product-stage__caption">{language === 'tr' ? 'Yeni hasta iletişimi için tek operasyonel görünüm.' : 'One operational view for new-patient communication.'}</p>
+
+          <div className="hero-visual" aria-label={hero.operational.aria}>
+            <div className="hero-visual__halo" aria-hidden="true" />
+
+            <article
+              data-reveal
+              className="hero-overlay-card hero-channel hero-channel--website reveal"
+              style={{ '--reveal-delay': '300ms' } as CSSProperties}
+            >
+              <span className="hero-channel__icon hero-channel__icon--website"><Globe2 aria-hidden="true" /></span>
+              <span className="hero-channel__copy">
+                <strong>{hero.operational.website.title}</strong>
+                <small>{hero.operational.website.subtitle}</small>
+              </span>
+              <time>{hero.operational.website.time}</time>
+            </article>
+
+            <article
+              data-reveal
+              className="hero-overlay-card hero-channel hero-channel--whatsapp reveal"
+              style={{ '--reveal-delay': '450ms' } as CSSProperties}
+            >
+              <span className="hero-channel__icon hero-channel__icon--whatsapp"><MessageCircle aria-hidden="true" /></span>
+              <span className="hero-channel__copy">
+                <strong>{hero.operational.whatsapp.title}</strong>
+                <small>{hero.operational.whatsapp.subtitle}</small>
+              </span>
+              <time>{hero.operational.whatsapp.time}</time>
+            </article>
+
+            <div className="hero-timeline" role="list" aria-label={hero.operational.timelineLabel}>
+              {hero.operational.timeline.map((item, index) => {
+                const Icon = index === 0 ? UserRound : index === 1 ? CalendarCheck2 : CheckCircle2;
+                return (
+                  <div
+                    key={item}
+                    data-reveal
+                    className="hero-timeline__step reveal"
+                    style={{ '--reveal-delay': `${650 + index * 200}ms` } as CSSProperties}
+                    role="listitem"
+                  >
+                    <span className="hero-timeline__node"><Icon aria-hidden="true" /></span>
+                    <span>{item}</span>
+                  </div>
+                );
+              })}
+            </div>
+
+            <article
+              data-reveal
+              className="hero-overlay-card hero-appointment reveal"
+              style={{ '--reveal-delay': '1050ms' } as CSSProperties}
+            >
+              <div className="hero-appointment__heading">
+                <span className="hero-channel__icon hero-channel__icon--appointment"><CalendarCheck2 aria-hidden="true" /></span>
+                <strong>{hero.operational.appointment.title}</strong>
+                <span className="hero-appointment__status">{hero.operational.appointment.status}</span>
+              </div>
+              <div className="hero-appointment__body">
+                <span>{hero.operational.appointment.service}</span>
+                <strong>{hero.operational.appointment.day}</strong>
+                <span className="hero-appointment__time"><Clock3 aria-hidden="true" /> {hero.operational.appointment.time}</span>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
     </section>
