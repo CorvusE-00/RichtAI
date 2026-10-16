@@ -73,6 +73,36 @@
     transform: translateY(-2px);
   }
 
+  .btn-primary {
+    display: inline-flex;
+    min-height: 56px;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    border: 1px solid rgba(114, 226, 215, 0.34);
+    border-radius: 0.875rem;
+    background: #348f84;
+    padding: 0.95rem 1.75rem;
+    color: #0f1113;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 650;
+    line-height: 1;
+    white-space: nowrap;
+    transition: background-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+  }
+
+  .btn-primary:hover {
+    background: #43a296;
+    box-shadow: 0 8px 18px rgba(52, 143, 132, 0.2);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:focus-visible {
+    outline: 2px solid #8de4da;
+    outline-offset: 3px;
+  }
+
   .reveal {
     --reveal-delay: 0ms;
     --reveal-distance: 24px;
@@ -111,7 +141,7 @@
   }
 
   .hero-section {
-    min-height: 56rem;
+    min-height: min(56rem, 100svh);
     background: #080f12;
     border-bottom: 1px solid rgba(58, 64, 69, 0.72);
   }
@@ -130,7 +160,7 @@
 
   .hero-layout {
     @apply grid items-center gap-8 lg:grid-cols-[minmax(0,0.96fr)_minmax(0,1.04fr)];
-    min-height: 56rem;
+    min-height: min(56rem, 100svh);
     padding-top: 4.5rem;
   }
 
@@ -155,11 +185,17 @@
   }
 
   .hero-benefits {
-    @apply grid grid-cols-3 gap-4;
+    @apply grid grid-cols-3 gap-3;
+    border-top-color: rgba(243, 240, 233, 0.15);
   }
 
   .hero-benefit {
-    @apply flex min-w-0 items-start gap-2 text-sm leading-snug text-snow-100 sm:gap-3 sm:text-base;
+    @apply flex min-w-0 items-start gap-2 text-sm leading-snug text-snow-100 sm:gap-2.5 sm:text-[0.95rem];
+  }
+
+  .hero-benefit + .hero-benefit {
+    border-left: 1px solid rgba(243, 240, 233, 0.16);
+    padding-left: 0.75rem;
   }
 
   .hero-benefit__icon {
@@ -182,24 +218,26 @@
   }
 
   .hero-overlay-card {
-    @apply absolute border border-teal-200/35 shadow-[0_18px_40px_rgba(0,0,0,0.24)];
-    background: rgba(12, 28, 33, 0.76);
-    backdrop-filter: blur(9px);
+    @apply absolute border border-teal-200/25 shadow-[0_12px_28px_rgba(0,0,0,0.2)];
+    background: rgba(8, 22, 26, 0.78);
+    backdrop-filter: blur(5px);
   }
 
   .hero-channel {
-    @apply flex items-center gap-3 rounded-[0.85rem] px-3 py-3 text-snow-50;
-    width: min(20rem, 46%);
+    @apply flex items-center gap-2.5 rounded-[0.75rem] px-3 py-2.5 text-snow-50;
+    width: min(18rem, 44%);
   }
 
   .hero-channel--website {
-    left: 3%;
-    top: 13%;
+    left: -7%;
+    top: 27%;
   }
 
   .hero-channel--whatsapp {
-    left: 3%;
-    top: 30%;
+    left: -7%;
+    top: 42%;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
   }
 
   .hero-channel__icon {
@@ -239,7 +277,7 @@
   }
 
   .hero-timeline {
-    @apply absolute bottom-[10%] left-[4%] flex w-[15rem] flex-col gap-3;
+    @apply absolute bottom-[11%] left-[-4%] flex w-[15rem] flex-col gap-3;
   }
 
   .hero-timeline__step {
@@ -260,7 +298,7 @@
   }
 
   .hero-appointment {
-    @apply right-[2%] top-[36%] w-[15rem] rounded-[0.9rem] p-4 text-snow-50;
+    @apply right-[4%] top-[40%] w-[15rem] rounded-[0.85rem] p-3.5 text-snow-50;
   }
 
   .hero-appointment__heading {
@@ -940,7 +978,7 @@
 
   @media (max-width: 639px) {
     .hero-section {
-      min-height: 64rem;
+      min-height: auto;
     }
 
     .hero-section__background {

@@ -3,9 +3,5 @@ interface MermaidMarkProps {
 }
 
 export function MermaidMark({ className = '' }: MermaidMarkProps) {
-  return (
-    <span className={`mermaid-mark ${className}`} aria-hidden="true">
-      <span className="mermaid-mark__silhouette" />
-    </span>
-  );
+  return <img src="/images/mermaid-mark.png" alt="" className={className} aria-hidden="true" />;
 }

@@ -59,10 +59,9 @@ export function Navbar({ onCTAClick }: NavbarProps) {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="group col-start-1 flex items-center gap-3 justify-self-start"
         >
-            <div className={`relative transition-transform duration-500 ${isScrolled ? 'scale-90' : ''}`}>
-            <div className="absolute inset-0 bg-teal-500/5 blur-lg group-hover:bg-teal-500/10 transition-all duration-300" />
-              <div className="relative h-10 w-10 overflow-hidden rounded-xl border border-teal-400/30">
-              <MermaidMark className="h-full w-full" />
+          <div className={`relative transition-transform duration-500 ${isScrolled ? 'scale-90' : ''}`}>
+            <div className="relative h-10 w-10">
+              <MermaidMark className="block h-full w-full object-contain" />
             </div>
           </div>
           <span className={`font-display font-semibold tracking-tight text-snow-50 transition-all duration-500 ${isScrolled ? 'text-base' : 'text-xl'}`}>
