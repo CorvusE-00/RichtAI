@@ -52,7 +52,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
     <header className={`navbar fixed left-0 right-0 top-0 z-40 transition-all duration-500 ${isScrolled ? 'py-1' : 'py-0'}`}>
       <div className={`absolute inset-0 border-b backdrop-blur-md transition-all duration-500 ${isScrolled ? 'bg-navy-950/94 border-navy-600/75 shadow-[0_10px_32px_rgba(0,0,0,0.22)]' : 'bg-navy-950/26 border-snow-100/15'}`} />
 
-      <nav className={`relative mx-auto grid max-w-[90rem] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center px-3 transition-all duration-500 sm:px-6 lg:px-8 ${isScrolled ? 'h-14' : 'h-[4.5rem]'}`}>
+      <nav className={`relative mx-auto grid max-w-[90rem] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center px-5 transition-all duration-500 sm:px-6 lg:px-8 ${isScrolled ? 'h-14' : 'h-[3.75rem] lg:h-[4.5rem]'}`}>
         {/* Logo */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
