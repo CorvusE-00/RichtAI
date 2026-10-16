@@ -129,10 +129,77 @@
   }
 
   .hero-section__background {
+    top: -10px;
+    bottom: 0;
     background-image: url('/images/richtai-dental-hero-final.png');
     background-position: 54% 58%;
     background-repeat: no-repeat;
     background-size: cover;
+  }
+
+  .hero-layout {
+    @apply flex items-center;
+    min-height: min(55rem, calc(100svh - 4.5rem));
+    padding-top: 4.5rem;
+  }
+
+  .hero-copy {
+    @apply relative z-10 w-full;
+    width: min(32rem, 31vw);
+    max-width: 32rem;
+    padding: 4rem 0 3rem;
+  }
+
+  .hero-kicker {
+    @apply inline-flex items-center gap-2 rounded-full border border-teal-300/35 bg-navy-950/35 px-4 py-2 text-xs font-display font-semibold tracking-[0.04em] text-teal-100 shadow-[0_10px_32px_rgba(0,0,0,0.12)] sm:text-sm;
+  }
+
+  .hero-kicker__dot {
+    @apply h-2 w-2 shrink-0 rounded-full bg-teal-400;
+  }
+
+  .hero-editorial-heading,
+  .hero-accent {
+    text-wrap: balance;
+  }
+
+  .hero-cta-row {
+    flex-wrap: wrap;
+  }
+
+  .hero-secondary-cta {
+    white-space: nowrap;
+  }
+
+  .hero-demo-play {
+    @apply inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-snow-100/45 text-[0.55rem] text-snow-50;
+  }
+
+  .hero-benefits {
+    @apply grid grid-cols-3 gap-3;
+    max-width: 100%;
+    border-top-color: rgba(243, 240, 233, 0.15);
+  }
+
+  .hero-benefit {
+    @apply flex min-w-0 items-start gap-2 text-sm leading-snug text-snow-100 sm:gap-2.5 sm:text-[0.95rem];
+  }
+
+  .hero-benefit + .hero-benefit {
+    border-left: 1px solid rgba(243, 240, 233, 0.16);
+    padding-left: 0.7rem;
+  }
+
+  .hero-benefit > span:last-child {
+    white-space: pre-line;
+  }
+
+  .hero-benefit__icon {
+    @apply inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-teal-300/35 bg-navy-950/35 text-teal-200;
+  }
+
+  .hero-benefit__icon svg {
+    @apply h-4 w-4;
   }
 
   .value-marquee {
@@ -748,21 +815,70 @@
 
   @media (max-width: 1179px) {
     .hero-section {
-      min-height: 42rem;
+      min-height: auto;
+      padding-bottom: 24rem;
     }
 
     .hero-section__background {
       background-position: 66% center;
+      top: auto;
+      bottom: 0;
+      height: 24rem;
+    }
+
+    .hero-layout {
+      min-height: auto;
+      align-items: flex-start;
+      padding-top: 4rem;
+    }
+
+    .hero-copy {
+      width: min(32rem, 100%);
+      padding: 3.5rem 0 2.5rem;
     }
   }
 
   @media (max-width: 639px) {
     .hero-section {
-      min-height: 38rem;
+      min-height: auto;
+      padding-bottom: 2rem;
     }
 
     .hero-section__background {
       background-position: 72% center;
+      top: -10px;
+      bottom: auto;
+      height: 38rem;
+    }
+
+    .hero-layout {
+      min-height: auto;
+      padding-top: 4.5rem;
+    }
+
+    .hero-copy {
+      max-width: 34rem;
+      padding: 2.5rem 0 1rem;
+    }
+
+    .hero-cta-row {
+      flex-direction: column;
+    }
+
+    .hero-cta-row > * {
+      width: 100%;
+    }
+
+    .hero-benefits {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    .hero-benefit + .hero-benefit {
+      border-left: 0;
+      border-top: 1px solid rgba(243, 240, 233, 0.16);
+      padding-left: 0;
+      padding-top: 0.75rem;
     }
   }
 
