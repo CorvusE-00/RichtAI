@@ -1386,35 +1386,23 @@
   }
 
   .pricing-section__pilot {
-    @apply border-y border-teal-400/45 py-5;
-  }
-
-  .pricing-section__pilot span {
-    @apply block text-xs font-display uppercase tracking-[0.15em] text-teal-300;
+    @apply py-1 lg:justify-self-end;
   }
 
   .pricing-section__pilot-title {
-    @apply mt-3 block font-display text-lg font-medium tracking-tight text-snow-100 sm:text-xl;
+    @apply block whitespace-nowrap font-display text-xs font-medium uppercase tracking-[0.12em] text-teal-200;
+  }
+
+  .pricing-section__pilot-price-row {
+    @apply mt-2 flex items-center gap-3;
   }
 
   .pricing-section__pilot-price {
-    @apply mt-1 block font-display text-3xl font-medium tracking-tight text-snow-50 sm:text-4xl;
+    @apply font-display text-3xl font-medium tracking-tight text-snow-50 sm:text-4xl;
   }
 
-  .pricing-section__pilot p {
-    @apply mt-2 max-w-sm text-sm leading-relaxed text-snow-400;
-  }
-
-  .pricing-section__launch {
-    @apply flex flex-col gap-1 border-y border-teal-400/35 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6;
-  }
-
-  .pricing-section__launch span {
-    @apply font-display text-xs font-medium uppercase tracking-[0.12em] text-teal-200;
-  }
-
-  .pricing-section__launch p {
-    @apply text-sm leading-relaxed text-snow-400 sm:text-right;
+  .pricing-section__pilot-badge {
+    @apply inline-flex rounded-full border border-teal-300/35 bg-teal-400/10 px-2.5 py-1 text-[0.65rem] font-display font-medium uppercase tracking-[0.1em] text-teal-100;
   }
 
   .pricing-section__plans {
@@ -1439,7 +1427,7 @@
   }
 
   .pricing-plan__top {
-    @apply flex items-baseline gap-4 border-b border-navy-600/70 pb-5;
+    @apply flex items-baseline gap-4;
   }
 
   .pricing-plan__index {
@@ -1452,6 +1440,10 @@
 
   .pricing-plan__audience {
     @apply mt-5 min-h-12 text-sm leading-relaxed text-snow-400;
+  }
+
+  .pricing-plan__launch-label {
+    @apply mt-4 block font-display text-[0.65rem] font-medium uppercase tracking-[0.12em] text-teal-300;
   }
 
   .pricing-plan__price-row {
@@ -1503,7 +1495,7 @@
   }
 
   .pricing-section__add-ons {
-    @apply flex flex-col gap-2 sm:flex-row sm:items-baseline sm:gap-4;
+    @apply mx-auto flex max-w-5xl flex-col gap-1 text-center sm:flex-row sm:items-baseline sm:justify-center sm:gap-4;
   }
 
   .pricing-section__add-ons span {
