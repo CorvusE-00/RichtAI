@@ -1382,23 +1382,37 @@
   }
 
   .pricing-section__intro {
-    @apply grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.5fr)] lg:items-end lg:gap-16;
+    @apply grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.65fr)] lg:items-end lg:gap-16;
   }
 
   .pricing-section__pilot {
-    @apply flex flex-col items-start py-1 lg:items-end lg:justify-self-end;
+    @apply flex items-center gap-5 py-1 lg:flex-nowrap lg:justify-self-end;
   }
 
   .pricing-section__pilot-title {
-    @apply block whitespace-nowrap font-display text-xs font-medium uppercase tracking-[0.12em] text-teal-200;
+    @apply whitespace-nowrap font-display text-base font-medium tracking-tight text-snow-100 sm:text-lg;
   }
 
   .pricing-section__pilot-price {
-    @apply mt-1 block font-display text-3xl font-medium tracking-tight text-snow-50 sm:text-4xl;
+    @apply whitespace-nowrap font-display text-4xl font-semibold tracking-tight text-snow-50 sm:text-5xl;
   }
 
   .pricing-section__pilot-badge {
-    @apply inline-flex rounded-full border border-teal-300/35 bg-teal-400/10 px-2.5 py-1 text-[0.65rem] font-display font-medium uppercase tracking-[0.1em] text-teal-100;
+    @apply inline-flex whitespace-nowrap rounded-full border border-teal-300/35 bg-teal-400/10 px-2.5 py-1 text-[0.65rem] font-display font-medium uppercase tracking-[0.1em] text-teal-100;
+  }
+
+  @media (max-width: 639px) {
+    .pricing-section__pilot {
+      display: grid;
+      grid-template-columns: auto auto;
+      column-gap: 0.75rem;
+      row-gap: 0.25rem;
+      justify-content: start;
+    }
+
+    .pricing-section__pilot-title {
+      grid-column: 1 / -1;
+    }
   }
 
   .pricing-section__plans {

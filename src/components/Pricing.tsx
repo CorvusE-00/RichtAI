@@ -20,9 +20,9 @@ export function Pricing({ onCTAClick }: PricingProps) {
             </h2>
           </div>
           <div className="pricing-section__pilot">
-            <span className="pricing-section__pilot-badge">{copy.pricing.pilotBadge}</span>
             <span className="pricing-section__pilot-title">{copy.pricing.pilotTitle}</span>
             <strong className="pricing-section__pilot-price">{copy.pricing.pilotPrice}</strong>
+            <span className="pricing-section__pilot-badge">{copy.pricing.pilotBadge}</span>
           </div>
         </div>
 
@@ -65,7 +65,11 @@ export function Pricing({ onCTAClick }: PricingProps) {
           })}
         </div>
 
-        <p data-reveal className="reveal pricing-section__add-ons mt-8 text-sm leading-relaxed text-snow-400 sm:mt-10 sm:text-base">
+        <p data-reveal className="pricing-section__scope-note reveal mx-auto mt-8 max-w-4xl text-center text-xs leading-relaxed text-snow-500 sm:mt-10 sm:text-sm">
+          {copy.pricing.scopeNote}
+        </p>
+
+        <p data-reveal className="reveal pricing-section__add-ons mt-5 text-sm leading-relaxed text-snow-400 sm:mt-6 sm:text-base">
           <span>{copy.pricing.addOnTitle}</span> — {copy.pricing.addOnDescription}
         </p>
       </div>
