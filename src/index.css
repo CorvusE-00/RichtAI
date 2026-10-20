@@ -271,18 +271,19 @@
   .clinic-pain {
     background: #121416;
     color: #121416;
+    padding-block: clamp(2.5rem, 4vw, 3rem);
   }
 
   .clinic-pain__shell {
-    width: min(100%, 82rem);
-    margin-inline: auto;
-    padding: clamp(4rem, 6vw, 5.5rem) clamp(1.25rem, 3vw, 2rem);
+    width: 100%;
+    background: #f3f0e9;
   }
 
   .clinic-pain__sheet {
+    width: min(calc(100% - 4rem), 78rem);
+    margin-inline: auto;
     overflow: hidden;
-    border: 1px solid rgba(18, 20, 22, 0.18);
-    background: #f3f0e9;
+    background: transparent;
   }
 
   .clinic-pain__intro {
@@ -675,11 +676,11 @@
 
   @media (max-width: 767px) {
     .clinic-pain__shell {
-      padding: 3rem 0.75rem;
+      padding: 0;
     }
 
     .clinic-pain__sheet {
-      border-radius: 0.2rem;
+      width: calc(100% - 1.5rem);
     }
 
     .clinic-pain__intro {
