@@ -1,10 +1,10 @@
 import { type KeyboardEvent, useState } from 'react';
-import { Bell, CalendarCheck2, Check, ExternalLink, Globe2, MessageCircle, UserRound } from 'lucide-react';
+import { Bell, CalendarCheck2, Check, Clock3, ExternalLink, Globe2, MessageCircle, UserRound } from 'lucide-react';
 
 import { useLanguage } from '@/lib/i18n';
 
 const liveDemoUrl = 'https://dental-teal-alpha.vercel.app/';
-const tabIcons = [Globe2, MessageCircle, CalendarCheck2] as const;
+const tabIcons = [Globe2, MessageCircle, CalendarCheck2, Clock3] as const;
 
 export function ProductShowcase() {
   const { copy } = useLanguage();
@@ -125,7 +125,43 @@ export function ProductShowcase() {
                   <Bell aria-hidden="true" />
                   <span>{productShowcase.lead.notification}</span>
                 </div>
-                <p className="product-showcase__feature-note">{productShowcase.lead.emailNote}</p>
+              </div>
+            )}
+
+            {activeTab === 3 && (
+              <div className="product-showcase__follow-up-visual">
+                <div className="product-showcase__follow-up-header">
+                  <Clock3 aria-hidden="true" />
+                  <span>{productShowcase.followUp.title}</span>
+                </div>
+                <div className="product-showcase__follow-up-timeline">
+                  <article className="product-showcase__follow-up-step">
+                    <span className="product-showcase__follow-up-marker"><MessageCircle aria-hidden="true" /></span>
+                    <div>
+                      <span className="product-showcase__follow-up-label">{productShowcase.followUp.firstLabel}</span>
+                      <strong>{productShowcase.followUp.firstStatus}</strong>
+                      <span className="product-showcase__follow-up-meta">{productShowcase.followUp.firstInterest}</span>
+                      <div className="product-showcase__follow-up-schedule">
+                        <Clock3 aria-hidden="true" />
+                        <span>{productShowcase.followUp.firstAction}</span>
+                        <small>{productShowcase.followUp.firstTiming}</small>
+                      </div>
+                      <p className="product-showcase__follow-up-message"><MessageCircle aria-hidden="true" />{productShowcase.followUp.firstMessage}</p>
+                    </div>
+                  </article>
+                  <article className="product-showcase__follow-up-step">
+                    <span className="product-showcase__follow-up-marker"><CalendarCheck2 aria-hidden="true" /></span>
+                    <div>
+                      <span className="product-showcase__follow-up-label">{productShowcase.followUp.secondLabel}</span>
+                      <strong>{productShowcase.followUp.secondStatus}</strong>
+                      <div className="product-showcase__follow-up-schedule">
+                        <CalendarCheck2 aria-hidden="true" />
+                        <span>{productShowcase.followUp.secondAction}</span>
+                      </div>
+                      <p className="product-showcase__follow-up-message"><MessageCircle aria-hidden="true" />{productShowcase.followUp.secondMessage}</p>
+                    </div>
+                  </article>
+                </div>
               </div>
             )}
           </div>
@@ -144,7 +180,6 @@ export function ProductShowcase() {
                     </span>
                     <ExternalLink aria-hidden="true" />
                   </a>
-                  <p className="product-showcase__demo-note">{productShowcase.web.liveDemoNote}</p>
                 </div>
               )}
             </div>
@@ -152,9 +187,6 @@ export function ProductShowcase() {
         </div>
 
         <div className="product-showcase__trust">
-          <div>
-            <p className="product-showcase__trust-line">{productShowcase.trustLine}</p>
-          </div>
           <div className="product-showcase__human-label"><UserRound aria-hidden="true" />{productShowcase.humanLabel}</div>
         </div>
       </div>
