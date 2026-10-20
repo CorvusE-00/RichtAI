@@ -4,7 +4,7 @@ export function PilotSection() {
   const { copy } = useLanguage();
 
   return (
-    <section id="nasil-calisir" className="chapter chapter--bone pilot-section overflow-hidden pb-16 pt-20 sm:pb-24 sm:pt-28 lg:pb-28 lg:pt-36">
+    <section id="nasil-calisir" className="chapter chapter--bone pilot-section overflow-hidden pb-10 pt-20 sm:pb-14 sm:pt-28 lg:pb-16 lg:pt-36">
       <div className="mx-auto max-w-[82rem] px-5 sm:px-6">
         <div className="pilot-section__intro" data-reveal>
           <div className="pilot-section__number" aria-hidden="true">14</div>
@@ -29,7 +29,7 @@ export function PilotSection() {
           ))}
         </div>
 
-        <div className="pilot-section__bottom mt-10 flex justify-end border-t border-navy-700/40 pt-5 sm:mt-12 sm:pt-6">
+        <div className="pilot-section__bottom mt-6 flex justify-end sm:mt-8">
           <p className="max-w-3xl text-left text-sm leading-relaxed text-navy-500 sm:text-right sm:text-base">{copy.pilotSection.regionLine}</p>
         </div>
       </div>
