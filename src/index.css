@@ -269,9 +269,8 @@
   }
 
   .clinic-pain {
-    background: #121416;
+    background: #f3f0e9;
     color: #121416;
-    padding-block: clamp(2.5rem, 4vw, 3rem);
   }
 
   .clinic-pain__shell {
