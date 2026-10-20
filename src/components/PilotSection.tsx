@@ -1,11 +1,10 @@
-import { ArrowRight, Check } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 
 export function PilotSection() {
   const { copy } = useLanguage();
 
   return (
-    <section id="nasil-calisir" className="chapter chapter--bone pilot-section overflow-hidden py-20 sm:py-28 lg:py-36">
+    <section id="nasil-calisir" className="chapter chapter--bone pilot-section overflow-hidden pb-16 pt-20 sm:pb-24 sm:pt-28 lg:pb-28 lg:pt-36">
       <div className="mx-auto max-w-[82rem] px-5 sm:px-6">
         <div className="pilot-section__intro" data-reveal>
           <div className="pilot-section__number" aria-hidden="true">14</div>
@@ -26,18 +25,12 @@ export function PilotSection() {
                 <h3>{step.title}</h3>
                 <p>{step.description}</p>
               </div>
-              {index < copy.pilotSection.steps.length - 1 && <ArrowRight className="pilot-section__step-arrow" aria-hidden="true" />}
             </article>
           ))}
         </div>
 
-        <div className="pilot-section__bottom mt-14 border-t border-navy-700/40 pt-7 sm:mt-20 sm:pt-9">
-          <div className="pilot-section__chips">
-            {copy.pilotSection.measurements.map((measurement) => (
-              <span key={measurement}><Check aria-hidden="true" />{measurement}</span>
-            ))}
-          </div>
-          <p className="mt-7 max-w-3xl text-sm leading-relaxed text-navy-500 sm:mt-0 sm:text-right sm:text-base">{copy.pilotSection.regionLine}</p>
+        <div className="pilot-section__bottom mt-10 flex justify-end border-t border-navy-700/40 pt-5 sm:mt-12 sm:pt-6">
+          <p className="max-w-3xl text-left text-sm leading-relaxed text-navy-500 sm:text-right sm:text-base">{copy.pilotSection.regionLine}</p>
         </div>
       </div>
     </section>

@@ -1377,26 +1377,6 @@
     @apply mt-3 max-w-2xl text-sm leading-relaxed text-navy-500 sm:text-base;
   }
 
-  .pilot-section__step-arrow {
-    @apply absolute bottom-[-0.6rem] right-0 hidden h-5 w-5 bg-[#f3f0e9] p-0.5 text-teal-700 sm:block;
-  }
-
-  .pilot-section__bottom {
-    @apply grid gap-7 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] sm:items-start sm:gap-10;
-  }
-
-  .pilot-section__chips {
-    @apply flex flex-wrap gap-2;
-  }
-
-  .pilot-section__chips span {
-    @apply inline-flex items-center gap-2 border border-navy-700/40 px-3 py-2 text-xs font-display text-navy-600 sm:text-sm;
-  }
-
-  .pilot-section__chips svg {
-    @apply h-3.5 w-3.5 text-teal-700;
-  }
-
   .pricing-section {
     border-top: 1px solid rgba(58, 64, 69, 0.72);
   }

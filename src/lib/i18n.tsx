@@ -27,7 +27,17 @@ export const translations = {
       followUp: { title: 'WhatsApp Takip Akışı', firstLabel: 'YARIDA KALAN GÖRÜŞME', firstStatus: 'İletişim bilgileri alındı', firstInterest: 'Tedavi ilgisi: İmplant', firstAction: 'Takip planlandı', firstTiming: '3 saat sonra', firstMessage: 'Merhaba, implant tedavisi hakkında konuşmamıza devam etmek isterseniz buradayız. Size yardımcı olabilirim.', secondLabel: 'RANDEVU ÖNCESİ', secondStatus: 'Yarın · 14:30', secondAction: 'Katılım teyidi', secondMessage: 'Merhaba, yarın 14:30’daki randevunuz için katılımınızı teyit etmek isteriz. Gelebilecek misiniz?' },
       humanLabel: 'İnsan + AI birlikte',
     },
-    pilotSection: { label: '14 günlük pilot', headline: '14 gün. Gerçek kullanım. Net karar.', description: 'Sistemi kliniğinizin gerçek hasta iletişiminde dener, 14 günün sonunda kendi kullanım verinizle devam edip etmeyeceğinize karar verirsiniz.', steps: [{ title: 'Kuruyoruz', description: 'Web veya WhatsApp akışını kliniğinizin onayladığı bilgilerle hazırlıyoruz.' }, { title: 'Ölçüyoruz', description: 'Mesai dışı talepleri, kaydedilen yeni hasta taleplerini ve randevuya ilerleyen görüşmeleri görünür hâle getiriyoruz.' }, { title: 'Birlikte değerlendiriyoruz', description: '14 günün sonunda sonuçlara birlikte bakıyoruz. Devam zorunluluğu yok.' }], measurements: ['Mesai dışı talepler', 'Kaydedilen yeni hasta talepleri', 'Randevuya ilerleyen görüşmeler'], regionLine: 'Pilot başvuruları Türkiye genelinde açık.' },
+    pilotSection: {
+      label: '14 günlük pilot',
+      headline: '14 gün. Gerçek kullanım. Net karar.',
+      description: 'Sistemi kliniğinizin gerçek Web veya WhatsApp akışında çalıştırıyoruz. 14 gün boyunca hangi taleplerin geldiğini, sistemin ne kadarını karşıladığını ve kaç görüşmenin randevuya ilerlediğini birlikte ölçüyoruz.',
+      steps: [
+        { title: 'Kuruyoruz', description: 'Seçtiğiniz Web veya WhatsApp kanalını kliniğinizin onayladığı bilgiler, tedaviler ve iletişim akışıyla hazırlıyoruz.' },
+        { title: 'Çalıştırıyor ve ölçüyoruz', description: 'Sistem gerçek hasta taleplerini karşılar. Mesai dışı mesajları, kaydedilen yeni hasta taleplerini ve randevuya ilerleyen görüşmeleri görünür hâle getiriyoruz.' },
+        { title: 'Sonuçlara birlikte bakıyoruz', description: '14 günün sonunda neyin işe yaradığını ve devam etmenin kliniğiniz için anlamlı olup olmadığını birlikte değerlendiriyoruz. Devam zorunluluğu yok.' },
+      ],
+      regionLine: 'Pilot başvuruları Türkiye genelinde açık.',
+    },
     pricing: {
       label: 'Paketler', headline: 'İhtiyacınız olan akışla başlayın.', headlineAccent: 'Sistem kliniğinizle birlikte büyüsün.', description: 'Pilot sırasında kullanımınızı ölçün; yalnızca değer üreten kanalları ve otomasyonları büyütün.', pilotBadge: '14 Günlük Pilot', pilotPrice: '0 – 2.500 ₺', pilotNote: 'Pilot ücreti kapsama ve seçilen pilot planına göre değişebilir. Uzun vadeli devam zorunluluğu yok.', setupLabel: 'Kurulum', monthlyLabel: 'Aylık', addOnTitle: 'Ek kapsamlar', addOnDescription: 'Web sitesi yenileme, landing page, ek entegrasyon ve özel geliştirmeler ayrıca kapsamlandırılır.', smallPrint: 'Kurulum ve aylık fiyatlar mevcut kapsam içindir. Özel entegrasyon, üçüncü taraf araç maliyetleri veya ek geliştirmeler ayrıca fiyatlandırılabilir.', packages: [
         { name: 'Starter', setup: '9.500 ₺', monthly: '2.900 ₺/ay', audience: 'Tek kanalla başlamak isteyen klinikler için', features: ['Web VEYA WhatsApp — 1 kanal', 'AI ilk yanıt', 'Yeni hasta kaydı', 'Bildirim / kayıt'], cta: '14 Günlük Pilota Başvur' },
@@ -76,7 +86,17 @@ export const translations = {
       followUp: { title: 'WhatsApp Follow-up Flow', firstLabel: 'PAUSED CONVERSATION', firstStatus: 'Contact details captured', firstInterest: 'Treatment interest: Implant', firstAction: 'Follow-up scheduled', firstTiming: 'In 3 hours', firstMessage: 'Hi, if you would like to continue our conversation about implant treatment, we are here to help.', secondLabel: 'BEFORE THE APPOINTMENT', secondStatus: 'Tomorrow · 14:30', secondAction: 'Attendance confirmation', secondMessage: 'Hi, we would like to confirm your attendance for tomorrow’s 14:30 appointment. Will you be able to make it?' },
       humanLabel: 'Human + AI together',
     },
-    pilotSection: { label: '14-day pilot', headline: '14 days. Real use. A clear decision.', description: 'Test the system in your clinic’s real patient communication flow, then decide with your own usage data after 14 days.', steps: [{ title: 'We set it up', description: 'We prepare the website or WhatsApp flow with the clinic information you approve.' }, { title: 'We measure it', description: 'We make after-hours enquiries, recorded new-patient enquiries, and conversations moving toward appointments visible.' }, { title: 'We review it together', description: 'At the end of 14 days, we review the results together. There is no obligation to continue.' }], measurements: ['After-hours enquiries', 'Recorded new-patient enquiries', 'Conversations moving toward an appointment'], regionLine: 'Pilot applications are open across Türkiye.' },
+    pilotSection: {
+      label: '14-day pilot',
+      headline: '14 days. Real use. A clear decision.',
+      description: 'We run the system in your clinic’s real Web or WhatsApp flow. Over 14 days, we measure together which enquiries arrive, how much the system handles, and how many conversations move toward an appointment.',
+      steps: [
+        { title: 'We set it up', description: 'We prepare your chosen website or WhatsApp channel with the clinic-approved information, treatments, and communication flow.' },
+        { title: 'We run and measure it', description: 'The system handles real patient enquiries. We make after-hours messages, recorded new-patient enquiries, and conversations moving toward appointments visible.' },
+        { title: 'We review the results together', description: 'At the end of 14 days, we review what worked and whether continuing is meaningful for your clinic. There is no obligation to continue.' },
+      ],
+      regionLine: 'Pilot applications are open across Türkiye.',
+    },
     pricing: {
       label: 'Pricing', headline: 'Start with the flow you need.', headlineAccent: 'Let the system grow with your clinic.', description: 'Measure your usage during the pilot; grow only the channels and automations that create value.', pilotBadge: '14-Day Pilot', pilotPrice: '0 – 2,500 ₺', pilotNote: 'Pilot pricing varies by scope and selected pilot arrangement. There is no long-term obligation to continue.', setupLabel: 'Setup', monthlyLabel: 'Monthly', addOnTitle: 'Additional scope', addOnDescription: 'Website refresh, landing pages, additional integrations, and custom development are scoped separately.', smallPrint: 'Setup and monthly prices cover the current scope. Custom integrations, third-party tool costs, and additional development may be priced separately.', packages: [
         { name: 'Starter', setup: '9,500 ₺', monthly: '2,900 ₺/month', audience: 'For clinics that want to start with one channel', features: ['Website OR WhatsApp — 1 channel', 'AI first reply', 'New-patient capture', 'Notification / record'], cta: 'Apply for the 14-Day Pilot' },
