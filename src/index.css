@@ -1290,17 +1290,29 @@
     }
 
     .product-showcase__tabs {
-      gap: 0.25rem;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0;
+      overflow-x: visible;
     }
 
     .product-showcase__tab {
+      min-width: 0;
       min-height: 3.5rem;
-      padding-inline: 0.75rem;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.3rem;
+      padding-inline: 0.25rem;
+      font-size: 0.8rem;
+      line-height: 1.15;
+      text-align: center;
+      white-space: normal;
+      overflow-wrap: anywhere;
     }
 
     .product-showcase__tab::after {
-      right: 0.75rem;
-      left: 0.75rem;
+      right: 0.25rem;
+      left: 0.25rem;
     }
 
     .product-showcase__visual {
