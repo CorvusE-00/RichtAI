@@ -186,11 +186,15 @@
 
   .value-marquee {
     @apply relative flex h-[4.75rem] items-center overflow-hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 4%, #000 96%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 4%, #000 96%, transparent 100%);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
   }
 
   .value-marquee__track {
     @apply flex w-max min-w-max;
-    animation: marquee 34s linear infinite;
+    animation: marquee 36s linear infinite;
   }
 
   .value-marquee__group {
@@ -199,12 +203,12 @@
   }
 
   .value-marquee__item {
-    @apply relative flex shrink-0 items-center whitespace-nowrap px-2 font-display text-sm font-medium text-snow-100 sm:text-base;
+    @apply relative flex shrink-0 items-center whitespace-nowrap px-2 font-display text-sm font-medium tracking-[-0.01em] text-snow-100 sm:text-base;
   }
 
   .value-marquee__item::after {
     content: '';
-    @apply absolute -right-5 h-1 w-1 rounded-full bg-teal-400/75;
+    @apply absolute -right-5 h-[3px] w-[3px] rounded-full bg-teal-400/70;
   }
 
   .value-marquee__value {
@@ -897,7 +901,16 @@
     }
 
     .value-marquee {
-      height: 4rem;
+      height: 3.75rem;
+    }
+
+    .value-marquee__group {
+      gap: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .value-marquee__item {
+      font-size: 0.8125rem;
     }
   }
 
@@ -973,6 +986,8 @@
 
   .value-marquee {
     overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
   .value-marquee__track {
