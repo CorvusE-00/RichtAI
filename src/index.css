@@ -294,9 +294,10 @@
   .clinic-pain__top-copy {
     position: absolute;
     top: calc(8.6% - 44px);
-    left: 12.2%;
-    width: min(40%, 38rem);
+    right: 8.5%;
+    width: min(30%, 30rem);
     color: #121416;
+    background: radial-gradient(ellipse at center, rgba(243, 240, 233, 0.72) 0%, rgba(243, 240, 233, 0.34) 55%, rgba(243, 240, 233, 0) 84%);
   }
 
   .clinic-pain__top-copy-heading {
