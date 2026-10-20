@@ -1,4 +1,4 @@
-import { ArrowRight, Check, Sparkles } from 'lucide-react';
+import { ArrowRight, Check, Crown, Sparkles, TrendingUp } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 
 interface PricingProps {
@@ -20,25 +20,24 @@ export function Pricing({ onCTAClick }: PricingProps) {
             </h2>
           </div>
           <div className="pricing-section__pilot">
+            <span className="pricing-section__pilot-badge">{copy.pricing.pilotBadge}</span>
             <span className="pricing-section__pilot-title">{copy.pricing.pilotTitle}</span>
-            <div className="pricing-section__pilot-price-row">
-              <strong className="pricing-section__pilot-price">{copy.pricing.pilotPrice}</strong>
-              <span className="pricing-section__pilot-badge">{copy.pricing.pilotBadge}</span>
-            </div>
+            <strong className="pricing-section__pilot-price">{copy.pricing.pilotPrice}</strong>
           </div>
         </div>
 
         <div className="pricing-section__plans mt-12 sm:mt-16">
-          {copy.pricing.packages.map((plan, index) => {
+          {copy.pricing.packages.map((plan) => {
             const isGrowth = plan.name === 'Growth';
             const isCustomPricing = 'customPricing' in plan && plan.customPricing;
             const launchLabel = 'launchLabel' in plan ? plan.launchLabel : null;
             const badge = 'badge' in plan ? plan.badge : null;
+            const PackageIcon = plan.name === 'Starter' ? Sparkles : plan.name === 'Growth' ? TrendingUp : Crown;
             return (
               <article key={plan.name} data-reveal className={`pricing-plan reveal ${isGrowth ? 'pricing-plan--growth' : ''}`}>
                 {badge && <div className="pricing-plan__badge"><Sparkles aria-hidden="true" />{badge}</div>}
                 <div className="pricing-plan__top">
-                  <span className="pricing-plan__index">0{index + 1}</span>
+                  <span className="pricing-plan__index"><PackageIcon aria-hidden="true" /></span>
                   <h3>{plan.name}</h3>
                 </div>
                 {launchLabel && <span className="pricing-plan__launch-label">{launchLabel}</span>}
