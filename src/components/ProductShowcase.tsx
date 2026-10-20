@@ -1,15 +1,17 @@
 import { type KeyboardEvent, useState } from 'react';
-import { Bell, Check, ExternalLink, MessageCircle, UserRound } from 'lucide-react';
+import { Bell, CalendarCheck2, Check, ExternalLink, Globe2, MessageCircle, UserRound } from 'lucide-react';
 
 import { useLanguage } from '@/lib/i18n';
 
 const liveDemoUrl = 'https://dental-teal-alpha.vercel.app/';
+const tabIcons = [Globe2, MessageCircle, CalendarCheck2] as const;
 
 export function ProductShowcase() {
   const { copy } = useLanguage();
   const [activeTab, setActiveTab] = useState(0);
   const productShowcase = copy.productShowcase;
   const tab = productShowcase.tabs[activeTab];
+  const ActiveTabIcon = tabIcons[activeTab];
   const activeTabId = `product-showcase-tab-${activeTab}`;
 
   const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
@@ -41,24 +43,27 @@ export function ProductShowcase() {
           <p className="product-showcase__intro-description">{productShowcase.description}</p>
         </div>
 
-        <div className="product-showcase__tabs" role="tablist" aria-label={productShowcase.label}>
-          {productShowcase.tabs.map((item, index) => (
-            <button
-              key={item.label}
-              id={`product-showcase-tab-${index}`}
-              type="button"
-              role="tab"
-              aria-selected={activeTab === index}
-              aria-controls="product-showcase-panel"
-              tabIndex={activeTab === index ? 0 : -1}
-              onClick={() => setActiveTab(index)}
-              onKeyDown={handleTabKeyDown}
-              className={`product-showcase__tab ${activeTab === index ? 'is-active' : ''}`}
-            >
-              <span>0{index + 1}</span>
-              {item.label}
-            </button>
-          ))}
+        <div className="product-showcase__tabs mt-12 sm:mt-16" role="tablist" aria-label={productShowcase.label}>
+          {productShowcase.tabs.map((item, index) => {
+            const TabIcon = tabIcons[index];
+            return (
+              <button
+                key={item.label}
+                id={`product-showcase-tab-${index}`}
+                type="button"
+                role="tab"
+                aria-selected={activeTab === index}
+                aria-controls="product-showcase-panel"
+                tabIndex={activeTab === index ? 0 : -1}
+                onClick={() => setActiveTab(index)}
+                onKeyDown={handleTabKeyDown}
+                className={`product-showcase__tab ${activeTab === index ? 'is-active' : ''}`}
+              >
+                <TabIcon className="product-showcase__tab-icon" aria-hidden="true" />
+                {item.label}
+              </button>
+            );
+          })}
         </div>
 
         <div
@@ -97,6 +102,7 @@ export function ProductShowcase() {
                     <span>{productShowcase.whatsapp.handoff}</span>
                     <small>{productShowcase.whatsapp.waiting}</small>
                   </div>
+                  <p className="product-showcase__feature-note">{productShowcase.whatsapp.followUpNote}</p>
                 </div>
               </div>
             )}
@@ -119,12 +125,13 @@ export function ProductShowcase() {
                   <Bell aria-hidden="true" />
                   <span>{productShowcase.lead.notification}</span>
                 </div>
+                <p className="product-showcase__feature-note">{productShowcase.lead.emailNote}</p>
               </div>
             )}
           </div>
 
           <aside className="product-showcase__tab-copy">
-            <span className="product-showcase__tab-count">0{activeTab + 1}</span>
+            <ActiveTabIcon className="product-showcase__tab-icon product-showcase__tab-icon--panel" aria-hidden="true" />
             <div>
               <h3>{tab.title}</h3>
               <p>{tab.description}</p>
@@ -147,9 +154,6 @@ export function ProductShowcase() {
         <div className="product-showcase__trust">
           <div>
             <p className="product-showcase__trust-line">{productShowcase.trustLine}</p>
-            <div className="product-showcase__trust-notes">
-              {productShowcase.notes.map((note) => <p key={note}>{note}</p>)}
-            </div>
           </div>
           <div className="product-showcase__human-label"><UserRound aria-hidden="true" />{productShowcase.humanLabel}</div>
         </div>
