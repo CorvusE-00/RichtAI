@@ -1465,7 +1465,7 @@
   }
 
   .pricing-plan__price-row span {
-    @apply block text-xs uppercase tracking-[0.12em] text-snow-500;
+    @apply block min-h-8 text-xs uppercase leading-tight tracking-[0.12em] text-snow-500;
   }
 
   .pricing-plan__price-row strong {
@@ -1506,14 +1506,6 @@
 
   .pricing-plan__cta svg {
     @apply h-4 w-4;
-  }
-
-  .pricing-section__add-ons {
-    @apply mx-auto flex max-w-5xl flex-col gap-1 text-center sm:flex-row sm:items-baseline sm:justify-center sm:gap-4;
-  }
-
-  .pricing-section__add-ons span {
-    @apply shrink-0 font-display font-medium text-snow-100;
   }
 
   .trust-section__grid {

@@ -9,7 +9,7 @@ export function Pricing({ onCTAClick }: PricingProps) {
   const { copy } = useLanguage();
 
   return (
-    <section id="paketler" className="chapter chapter--dark pricing-section overflow-hidden pb-16 pt-20 sm:pb-20 sm:pt-28 lg:pb-24 lg:pt-36">
+    <section id="paketler" className="chapter chapter--dark pricing-section overflow-hidden pb-10 pt-20 sm:pb-12 sm:pt-28 lg:pb-16 lg:pt-36">
       <div className="mx-auto max-w-[82rem] px-5 sm:px-6">
         <div className="pricing-section__intro" data-reveal>
           <div>
@@ -65,12 +65,8 @@ export function Pricing({ onCTAClick }: PricingProps) {
           })}
         </div>
 
-        <p data-reveal className="pricing-section__scope-note reveal mx-auto mt-8 max-w-4xl text-center text-xs leading-relaxed text-snow-500 sm:mt-10 sm:text-sm">
-          {copy.pricing.scopeNote}
-        </p>
-
-        <p data-reveal className="reveal pricing-section__add-ons mt-5 text-sm leading-relaxed text-snow-400 sm:mt-6 sm:text-base">
-          <span>{copy.pricing.addOnTitle}</span> — {copy.pricing.addOnDescription}
+        <p data-reveal className="pricing-section__commercial-note reveal mx-auto mt-8 max-w-4xl text-center text-xs leading-relaxed text-snow-500 sm:mt-10 sm:text-sm">
+          {copy.pricing.commercialNote}
         </p>
       </div>
     </section>
