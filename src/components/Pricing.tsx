@@ -21,12 +21,18 @@ export function Pricing({ onCTAClick }: PricingProps) {
           </div>
           <div className="pricing-section__pilot">
             <span>{copy.pricing.pilotBadge}</span>
-            <strong>{copy.pricing.pilotPrice}</strong>
+            <strong className="pricing-section__pilot-title">{copy.pricing.pilotTitle}</strong>
+            <strong className="pricing-section__pilot-price">{copy.pricing.pilotPrice}</strong>
             <p>{copy.pricing.pilotNote}</p>
           </div>
         </div>
 
-        <div className="pricing-section__plans mt-12 sm:mt-16">
+        <div className="pricing-section__launch mt-12 sm:mt-16">
+          <span>{copy.pricing.launchTitle}</span>
+          <p>{copy.pricing.launchDescription}</p>
+        </div>
+
+        <div className="pricing-section__plans mt-7 sm:mt-9">
           {copy.pricing.packages.map((plan, index) => {
             const isGrowth = plan.name === 'Growth';
             const isCustomPricing = 'customPricing' in plan && plan.customPricing;
@@ -63,9 +69,8 @@ export function Pricing({ onCTAClick }: PricingProps) {
         </div>
 
         <p data-reveal className="reveal pricing-section__add-ons mt-10 border-t border-navy-600/70 pt-5 text-sm leading-relaxed text-snow-400 sm:mt-14 sm:text-base">
-          <span>{copy.pricing.addOnTitle}</span>{copy.pricing.addOnDescription}
+          <span>{copy.pricing.addOnTitle}</span> — {copy.pricing.addOnDescription}
         </p>
-        <p data-reveal className="reveal mt-3 max-w-3xl text-xs leading-relaxed text-snow-500 sm:text-sm">{copy.pricing.smallPrint}</p>
       </div>
     </section>
   );
