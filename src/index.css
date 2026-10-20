@@ -285,6 +285,41 @@
     height: auto;
   }
 
+  .clinic-pain__content {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .clinic-pain__top-copy {
+    position: absolute;
+    top: 8.6%;
+    left: 12.2%;
+    width: min(40%, 38rem);
+    color: #121416;
+  }
+
+  .clinic-pain__top-copy-heading {
+    margin-top: 1.15rem;
+    font-size: clamp(2.7rem, 4vw, 4rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+  }
+
+  .clinic-pain__top-copy-description {
+    max-width: 38rem;
+    margin-top: 1.1rem;
+    font-size: clamp(0.95rem, 1.15vw, 1.2rem);
+    line-height: 1.45;
+    color: #121416;
+  }
+
+  @media (max-width: 1023px) {
+    .clinic-pain__content {
+      display: none;
+    }
+  }
+
   .product-showcase {
     border-top: 1px solid rgba(58, 64, 69, 0.68);
   }
