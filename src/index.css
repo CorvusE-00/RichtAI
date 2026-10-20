@@ -315,12 +315,6 @@
     color: #161b1f;
   }
 
-  @media (min-width: 1024px) {
-    .clinic-pain__art {
-      transform: translateY(16px);
-    }
-  }
-
   @media (max-width: 1023px) {
     .clinic-pain__content {
       display: none;
