@@ -1450,6 +1450,18 @@
     @apply mt-1 block font-display text-lg font-medium text-snow-100 sm:text-xl;
   }
 
+  .pricing-plan__price-row--custom {
+    @apply grid-cols-1;
+  }
+
+  .pricing-plan__custom-price {
+    @apply flex min-h-12 items-center;
+  }
+
+  .pricing-plan__custom-price strong {
+    @apply mt-0 text-xl text-snow-50 sm:text-2xl;
+  }
+
   .pricing-plan ul {
     @apply mt-6 flex-1 space-y-3;
   }

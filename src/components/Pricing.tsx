@@ -29,6 +29,7 @@ export function Pricing({ onCTAClick }: PricingProps) {
         <div className="pricing-section__plans mt-12 sm:mt-16">
           {copy.pricing.packages.map((plan, index) => {
             const isGrowth = plan.name === 'Growth';
+            const isCustomPricing = 'customPricing' in plan && plan.customPricing;
             const badge = 'badge' in plan ? plan.badge : null;
             return (
               <article key={plan.name} data-reveal className={`pricing-plan reveal ${isGrowth ? 'pricing-plan--growth' : ''}`}>
@@ -38,9 +39,17 @@ export function Pricing({ onCTAClick }: PricingProps) {
                   <h3>{plan.name}</h3>
                 </div>
                 <p className="pricing-plan__audience">{plan.audience}</p>
-                <div className="pricing-plan__price-row">
-                  <div><span>{copy.pricing.setupLabel}</span><strong>{plan.setup}</strong></div>
-                  <div><span>{copy.pricing.monthlyLabel}</span><strong>{plan.monthly}</strong></div>
+                <div className={`pricing-plan__price-row ${isCustomPricing ? 'pricing-plan__price-row--custom' : ''}`}>
+                  {isCustomPricing ? (
+                    <div className="pricing-plan__custom-price">
+                      <strong>{plan.setup}</strong>
+                    </div>
+                  ) : (
+                    <>
+                      <div><span>{copy.pricing.setupLabel}</span><strong>{plan.setup}</strong></div>
+                      <div><span>{copy.pricing.monthlyLabel}</span><strong>{plan.monthly}</strong></div>
+                    </>
+                  )}
                 </div>
                 <ul>
                   {plan.features.map((feature) => <li key={feature}><Check aria-hidden="true" />{feature}</li>)}
@@ -56,6 +65,7 @@ export function Pricing({ onCTAClick }: PricingProps) {
         <p data-reveal className="reveal pricing-section__add-ons mt-10 border-t border-navy-600/70 pt-5 text-sm leading-relaxed text-snow-400 sm:mt-14 sm:text-base">
           <span>{copy.pricing.addOnTitle}</span>{copy.pricing.addOnDescription}
         </p>
+        <p data-reveal className="reveal mt-3 max-w-3xl text-xs leading-relaxed text-snow-500 sm:text-sm">{copy.pricing.smallPrint}</p>
       </div>
     </section>
   );
