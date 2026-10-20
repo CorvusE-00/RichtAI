@@ -293,7 +293,7 @@
 
   .clinic-pain__top-copy {
     position: absolute;
-    top: 8.6%;
+    top: calc(8.6% - 44px);
     left: 12.2%;
     width: min(40%, 38rem);
     color: #121416;
