@@ -30,7 +30,7 @@ export const translations = {
     pilotSection: {
       label: 'Pilot süreci',
       headline: 'Gerçek kullanım. Net karar.',
-      description: 'Sistemi kliniğinizin gerçek Web veya WhatsApp akışında çalıştırıyoruz. Pilot boyunca hangi taleplerin geldiğini, sistemin ne kadarını karşıladığını ve kaç görüşmenin randevuya ilerlediğini birlikte ölçüyoruz.',
+      description: 'Sistemi kliniğinizin gerçek Web veya WhatsApp akışında 14 gün boyunca çalıştırıyoruz. Hangi taleplerin geldiğini, sistemin ne kadarını karşıladığını ve kaç görüşmenin randevuya ilerlediğini birlikte ölçüyoruz.',
       steps: [
         { title: 'Kuruyoruz', description: 'Seçtiğiniz Web veya WhatsApp kanalını kliniğinizin onayladığı bilgiler, tedaviler ve iletişim akışıyla hazırlıyoruz.' },
         { title: 'Çalıştırıyor ve ölçüyoruz', description: 'Mesai dışı mesajları, kaydedilen yeni hasta taleplerini ve randevuya ilerleyen görüşmeleri görünür hâle getiriyoruz.' },
@@ -89,7 +89,7 @@ export const translations = {
     pilotSection: {
       label: 'Pilot process',
       headline: 'Real use. Clear decision.',
-      description: 'We run the system in your clinic’s real Web or WhatsApp flow. During the pilot, we measure together which enquiries arrive, how much the system handles, and how many conversations move toward an appointment.',
+      description: 'We run the system in your clinic’s real Website or WhatsApp flow for 14 days. Together, we measure what enquiries come in, how much the system handles, and how many conversations move toward an appointment.',
       steps: [
         { title: 'We set it up', description: 'We prepare your chosen website or WhatsApp channel with the clinic-approved information, treatments, and communication flow.' },
         { title: 'We run and measure it', description: 'We make after-hours messages, recorded new-patient enquiries, and conversations moving toward appointments visible.' },
