@@ -9,7 +9,7 @@ export function FinalCTA({ onCTAClick }: FinalCTAProps) {
   const { copy } = useLanguage();
 
   return (
-    <section id="final-cta" className="chapter chapter--bone final-cta-section overflow-hidden py-24 sm:py-36 lg:py-44">
+    <section id="final-cta" className="chapter chapter--bone final-cta-section overflow-hidden py-20 sm:py-28 lg:py-36">
       <div data-reveal className="reveal mx-auto max-w-5xl px-5 text-center sm:px-6">
         <span className="chapter-kicker chapter-kicker--dark">{copy.finalCta.trust}</span>
         <h2 className="chapter-heading chapter-heading--dark mx-auto mt-7 max-w-4xl font-display text-5xl font-semibold leading-[0.9] tracking-[-0.07em] sm:text-7xl lg:text-8xl">
