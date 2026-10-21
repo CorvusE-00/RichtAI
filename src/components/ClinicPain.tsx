@@ -1,4 +1,4 @@
-import { ArrowRight, Check, Clock3, MessageCircle, MoonStar, Radar, UsersRound } from 'lucide-react';
+import { ArrowRight, BellDot, Check, Clock3, MessageCircle, MoonStar, UsersRound } from 'lucide-react';
 
 import { useLanguage } from '@/lib/i18n';
 
@@ -24,7 +24,7 @@ export function ClinicPain() {
             </div>
             <div className="clinic-pain__intro-visual">
               <p className="clinic-pain__intro-message">{clinicPain.introVisual.message}</p>
-              <Radar className="clinic-pain__intro-radar" aria-hidden="true" />
+              <BellDot className="clinic-pain__intro-bell" aria-hidden="true" />
             </div>
           </div>
 
