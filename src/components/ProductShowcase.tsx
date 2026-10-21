@@ -30,7 +30,7 @@ export function ProductShowcase() {
   };
 
   return (
-    <section id="cozum" className="chapter chapter--dark product-showcase overflow-hidden py-16 sm:py-20 lg:py-24">
+    <section id="cozum" className="chapter chapter--dark product-showcase overflow-hidden pt-16 pb-14 sm:pt-20 sm:pb-16 lg:pt-24 lg:pb-20">
       <div className="mx-auto max-w-[82rem] px-5 sm:px-6">
         <div className="product-showcase__intro" data-reveal>
           <div>

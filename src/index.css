@@ -1250,10 +1250,9 @@
 
   .product-showcase__trust {
     display: flex;
+    align-items: center;
     justify-content: flex-end;
-    margin-top: 2rem;
-    border-top: 1px solid rgba(58, 64, 69, 0.72);
-    padding-top: 1rem;
+    margin-top: 1.5rem;
   }
 
   .product-showcase__human-label {
@@ -1287,6 +1286,7 @@
   @media (max-width: 767px) {
     .product-showcase__trust {
       justify-content: flex-start;
+      margin-top: 1.25rem;
     }
 
     .product-showcase__tabs {
