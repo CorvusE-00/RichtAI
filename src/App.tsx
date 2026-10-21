@@ -11,8 +11,16 @@ import { Footer } from '@/components/Footer';
 import { ContactModal } from '@/components/ContactModal';
 import { StatisticsStrip } from '@/components/StatisticsStrip';
 import { FAQ } from '@/components/FAQ';
+import { LegalPage } from '@/components/LegalPage';
 import { useRevealObserver } from '@/hooks/useRevealObserver';
 import { useLanguage } from '@/lib/i18n';
+import type { LegalPageSlug } from '@/lib/legalContent';
+
+const legalRoutes: Record<string, LegalPageSlug> = {
+  '/gizlilik-politikasi': 'privacy',
+  '/kvkk': 'kvkk',
+  '/cerez-politikasi': 'cookies',
+};
 
 function App() {
   const { language } = useLanguage();
@@ -22,6 +30,13 @@ function App() {
 
   const openContact = useCallback(() => setIsContactOpen(true), []);
   const closeContact = useCallback(() => setIsContactOpen(false), []);
+
+  const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
+  const legalPage = legalRoutes[pathname];
+
+  if (legalPage) {
+    return <LegalPage page={legalPage} />;
+  }
 
   return (
     <div className="min-h-screen bg-navy-950 text-snow-100 font-body antialiased overflow-x-hidden">

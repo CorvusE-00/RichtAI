@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { applyLanguageMetadata } from './siteMetadata';
+import { legalCopy } from './legalContent';
 
 export type Language = 'tr' | 'en';
 
@@ -61,7 +62,8 @@ export const translations = {
       ],
     },
     finalCta: { headline: 'Yeni hasta iletişiminizi', headlineAccent: 'AI ile modernize edin.', description: 'Web ve WhatsApp’tan gelen yeni hasta taleplerini 7/24 karşılayan, bilgileri kaydeden ve randevu akışına taşıyan sistemi kliniğinizde kullanmaya başlayın.', cta: 'Pilota Başvur', secondaryCta: 'Canlı Demoyu Gör', trust: 'Richt AI ile başlayın' },
-    footer: { brandDescription: 'Diş klinikleri için Web + WhatsApp yeni hasta iletişimi ve randevu otomasyon sistemleri.', sitemap: 'Site haritası', contact: 'İletişim', location: 'Türkiye geneli', contactButton: 'İletişime geç', whatsapp: 'WhatsApp ile iletişim', rights: 'Tüm hakları saklıdır.', tagline: 'Diş klinikleri için AI hasta iletişimi ve otomasyon sistemleri' },
+    footer: { brandDescription: 'Diş klinikleri için Web + WhatsApp yeni hasta iletişimi ve randevu otomasyon sistemleri.', sitemap: 'Site haritası', social: 'Sosyal', socialLinks: { linkedin: 'LinkedIn', instagram: 'Instagram', tiktok: 'TikTok' }, comingSoon: 'Yakında', legal: 'Yasal', legalLinks: [{ label: 'Gizlilik Politikası', path: '/gizlilik-politikasi' }, { label: 'KVKK Aydınlatma Metni', path: '/kvkk' }, { label: 'Çerez Politikası', path: '/cerez-politikasi' }], contact: 'İletişim', location: 'Türkiye geneli', contactButton: 'İletişime geç', whatsapp: 'WhatsApp ile iletişim', rights: 'Tüm hakları saklıdır.' },
+    legalPages: legalCopy.tr,
     contact: { close: 'Kapat', successTitle: 'Pilot başvurunuz alındı', successDescription: 'Bilgileriniz bana ulaştı. Uygun pilot kapsamını değerlendirmek için sizinle iletişime geçeceğim.', badge: '14 Günlük Pilot', title: 'Kliniğiniz için 14 günlük pilotu planlayalım', description: 'Kısa formu bırakın. Mevcut Web/WhatsApp akışınızı değerlendirip uygun pilot kapsamını birlikte netleştirelim.', name: 'Ad Soyad', namePlaceholder: 'Adınız Soyadınız', email: 'E-posta', emailPlaceholder: 'ornek@eposta.com', phone: 'Telefon', phonePlaceholder: '05XX XXX XX XX', business: 'Klinik / İşletme Adı', optional: 'Opsiyonel', message: 'Mevcut durumunuz', messagePlaceholder: 'Web veya WhatsApp’tan yaklaşık ne kadar talep geliyor? En çok hangi noktada zaman kaybediyorsunuz?', submit: 'Pilot Başvurusunu Gönder', submitting: 'Gönderiliyor...', error: 'Bir sorun oluştu. Lütfen daha sonra tekrar deneyin.', privacy: 'Bilgileriniz gizli tutulur ve yalnızca sizinle iletişim için kullanılır.', direct: 'Başvurunuz doğrudan Emre’ye ulaşır.', whatsapp: 'WhatsApp ile iletişim' },
   },
   en: {
@@ -119,7 +121,8 @@ export const translations = {
       ],
     },
     finalCta: { headline: 'Modernize your', headlineAccent: 'new-patient communication with AI.', description: 'Bring a system into your clinic that responds to new enquiries from Web and WhatsApp 24/7, records the required information, and moves suitable patients toward an appointment.', cta: 'Apply for the Pilot', secondaryCta: 'View the Live Demo', trust: 'Start with Richt AI' },
-    footer: { brandDescription: 'Web + WhatsApp new-patient communication and appointment automation systems for dental clinics.', sitemap: 'Site map', contact: 'Contact', location: 'Across Türkiye', contactButton: 'Get in touch', whatsapp: 'Contact on WhatsApp', rights: 'All rights reserved.', tagline: 'AI patient communication and automation systems for dental clinics' },
+    footer: { brandDescription: 'Web + WhatsApp new-patient communication and appointment automation systems for dental clinics.', sitemap: 'Site map', social: 'Social', socialLinks: { linkedin: 'LinkedIn', instagram: 'Instagram', tiktok: 'TikTok' }, comingSoon: 'Coming soon', legal: 'Legal', legalLinks: [{ label: 'Privacy Policy', path: '/gizlilik-politikasi' }, { label: 'KVKK Privacy Notice', path: '/kvkk' }, { label: 'Cookie Policy', path: '/cerez-politikasi' }], contact: 'Contact', location: 'Across Türkiye', contactButton: 'Get in touch', whatsapp: 'Contact on WhatsApp', rights: 'All rights reserved.' },
+    legalPages: legalCopy.en,
     contact: { close: 'Close', successTitle: 'Your pilot application was received', successDescription: 'Your details have reached me. I will contact you to review the right pilot scope.', badge: '14-Day Pilot', title: 'Let’s plan a 14-day pilot for your clinic', description: 'Leave a short form. We will review your current Web/WhatsApp flow and define the right pilot scope together.', name: 'Full name', namePlaceholder: 'Your full name', email: 'Email', emailPlaceholder: 'you@example.com', phone: 'Phone', phonePlaceholder: '+1 (555) 000-0000', business: 'Clinic / business name', optional: 'Optional', message: 'Current situation', messagePlaceholder: 'Approximately how many enquiries come through your website or WhatsApp? Where does your team lose the most time?', submit: 'Send Pilot Application', submitting: 'Sending...', error: 'Something went wrong. Please try again later.', privacy: 'Your information is kept private and used only to contact you.', direct: 'Your application goes directly to Emre.', whatsapp: 'Contact on WhatsApp' },
   },
 } as const;

@@ -2,6 +2,7 @@ import { MapPin, Mail, MessageCircle } from 'lucide-react';
 import { MermaidMark } from './MermaidMark';
 import { useLanguage } from '@/lib/i18n';
 import { whatsappUrl } from '@/lib/whatsapp';
+import { socialLinks } from '@/lib/socialLinks';
 
 interface FooterProps {
   onCTAClick: () => void;
@@ -14,7 +15,7 @@ export function Footer({ onCTAClick }: FooterProps) {
     <footer className="section-tone section-tone--footer relative border-t border-navy-700/60">
       <div className="mx-auto max-w-6xl px-5 py-10 sm:px-6 sm:py-14">
 
-        <div className="grid grid-cols-1 gap-8 mb-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mb-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-[1.35fr_0.8fr_0.9fr_1fr]">
           {/* Brand */}
           <div className="sm:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
@@ -28,6 +29,30 @@ export function Footer({ onCTAClick }: FooterProps) {
             <p className="text-snow-500 text-sm leading-relaxed max-w-xs">
               {copy.footer.brandDescription}
             </p>
+            <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-sm" aria-label={copy.footer.social}>
+              {socialLinks.map(({ key, url }) => {
+                const label = copy.footer.socialLinks[key];
+
+                return url ? (
+                  <a
+                    key={key}
+                    href={url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-snow-500 transition-colors duration-200 hover:text-teal-400"
+                  >
+                    {label}
+                  </a>
+                ) : (
+                  <span key={key} className="inline-flex items-center gap-1.5 text-snow-600">
+                    <span>{label}</span>
+                    <span className="text-[0.6rem] uppercase tracking-[0.16em] text-snow-700">
+                      {copy.footer.comingSoon}
+                    </span>
+                  </span>
+                );
+              })}
+            </div>
           </div>
 
           {/* Links */}
@@ -48,6 +73,25 @@ export function Footer({ onCTAClick }: FooterProps) {
                   >
                     {link.label}
                   </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h4 className="mb-4 font-display text-sm font-medium text-snow-200">
+              {copy.footer.legal}
+            </h4>
+            <ul className="space-y-2.5">
+              {copy.footer.legalLinks.map((link) => (
+                <li key={link.path}>
+                  <a
+                    href={link.path}
+                    className="text-sm text-snow-500 transition-colors duration-200 hover:text-teal-400"
+                  >
+                    {link.label}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -87,12 +131,9 @@ export function Footer({ onCTAClick }: FooterProps) {
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col items-center justify-between gap-4 border-t border-navy-600/40 pt-6 sm:flex-row">
-          <p className="text-snow-500 text-xs text-center sm:text-left">
+        <div className="flex items-center border-t border-navy-600/40 pt-6">
+          <p className="text-center text-xs text-snow-500 sm:text-left">
             &copy; {new Date().getFullYear()} Richt AI. {copy.footer.rights}
-          </p>
-          <p className="text-snow-500 text-xs">
-            {copy.footer.tagline}
           </p>
         </div>
       </div>
