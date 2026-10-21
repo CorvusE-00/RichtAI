@@ -1,4 +1,4 @@
-import { MapPin, Mail, MessageCircle } from 'lucide-react';
+import { Instagram, Linkedin, MapPin, Mail, MessageCircle } from 'lucide-react';
 import { MermaidMark } from './MermaidMark';
 import { useLanguage } from '@/lib/i18n';
 import { whatsappUrl } from '@/lib/whatsapp';
@@ -8,14 +8,30 @@ interface FooterProps {
   onCTAClick: () => void;
 }
 
+type SocialKey = (typeof socialLinks)[number]['key'];
+
+function TikTokIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
+      <path d="M15.75 3.5c.28 1.55 1.19 2.49 2.75 2.7v2.54c-1.05.1-1.98-.2-2.75-.7v6.49c0 3.13-2.18 5.36-5.43 5.36-2.83 0-5.07-2.03-5.07-4.76 0-2.83 2.31-4.96 5.31-4.96.34 0 .67.03 1 .1v2.61a3.4 3.4 0 0 0-.95-.14c-1.33 0-2.5.94-2.5 2.3 0 1.23.98 2.15 2.26 2.15 1.52 0 2.39-.99 2.39-2.62V3.5h3Z" />
+    </svg>
+  );
+}
+
+function SocialIcon({ name }: { name: SocialKey }) {
+  if (name === 'linkedin') return <Linkedin className="h-4 w-4 shrink-0" aria-hidden="true" />;
+  if (name === 'instagram') return <Instagram className="h-4 w-4 shrink-0" aria-hidden="true" />;
+  return <TikTokIcon className="h-4 w-4 shrink-0" />;
+}
+
 export function Footer({ onCTAClick }: FooterProps) {
   const { copy } = useLanguage();
 
   return (
     <footer className="section-tone section-tone--footer relative border-t border-navy-700/60">
-      <div className="mx-auto max-w-6xl px-5 py-10 sm:px-6 sm:py-14">
+      <div className="mx-auto max-w-6xl px-5 pb-8 pt-10 sm:px-6 sm:pb-12 sm:pt-14">
 
-        <div className="mb-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-[1.35fr_0.8fr_0.9fr_1fr]">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-[1.35fr_0.8fr_0.9fr_1fr]">
           {/* Brand */}
           <div className="sm:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
@@ -32,6 +48,17 @@ export function Footer({ onCTAClick }: FooterProps) {
             <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-sm" aria-label={copy.footer.social}>
               {socialLinks.map(({ key, url }) => {
                 const label = copy.footer.socialLinks[key];
+                const content = (
+                  <>
+                    <SocialIcon name={key} />
+                    <span>{label}</span>
+                    {!url && (
+                      <span className="text-[0.6rem] uppercase tracking-[0.16em] text-snow-700">
+                        {copy.footer.comingSoon}
+                      </span>
+                    )}
+                  </>
+                );
 
                 return url ? (
                   <a
@@ -39,16 +66,13 @@ export function Footer({ onCTAClick }: FooterProps) {
                     href={url}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-snow-500 transition-colors duration-200 hover:text-teal-400"
+                    className="inline-flex items-center gap-1.5 text-snow-500 transition-colors duration-200 hover:text-teal-400"
                   >
-                    {label}
+                    {content}
                   </a>
                 ) : (
                   <span key={key} className="inline-flex items-center gap-1.5 text-snow-600">
-                    <span>{label}</span>
-                    <span className="text-[0.6rem] uppercase tracking-[0.16em] text-snow-700">
-                      {copy.footer.comingSoon}
-                    </span>
+                    {content}
                   </span>
                 );
               })}
@@ -131,7 +155,7 @@ export function Footer({ onCTAClick }: FooterProps) {
         </div>
 
         {/* Bottom bar */}
-        <div className="flex items-center border-t border-navy-600/40 pt-6">
+        <div className="mt-5 flex items-center">
           <p className="text-center text-xs text-snow-500 sm:text-left">
             &copy; {new Date().getFullYear()} Richt AI. {copy.footer.rights}
           </p>
