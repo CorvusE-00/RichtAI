@@ -1,9 +1,10 @@
-import { Check } from 'lucide-react';
+import { CircuitBoard, RadioTower, Workflow } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 
 export function Trust() {
   const { copy } = useLanguage();
   const { founder } = copy.trust;
+  const journeyIcons = [CircuitBoard, RadioTower, Workflow];
 
   return (
     <section id="guven" className="chapter chapter--bone trust-section overflow-hidden py-20 sm:py-28 lg:py-36">
@@ -24,11 +25,14 @@ export function Trust() {
             <div className="trust-section__founder mt-8 border-t border-navy-700/35 pt-6 sm:mt-10 sm:pt-8">
               <h3 className="font-display text-2xl font-medium tracking-tight text-navy-950 sm:text-3xl">{founder.name}</h3>
               <p className="mt-2 text-sm font-medium text-teal-700">{founder.role}</p>
-              <p className="mt-5 max-w-2xl font-display text-xl leading-relaxed tracking-tight text-navy-900 sm:text-2xl">{founder.statement}</p>
+              <p className="mt-5 max-w-2xl font-display text-lg leading-relaxed tracking-tight text-navy-900 sm:text-xl">{founder.statement}</p>
             </div>
 
-            <ul className="trust-section__principles mt-8 grid gap-3 sm:grid-cols-3 sm:gap-4">
-              {copy.trust.principles.map((principle) => <li key={principle}><Check aria-hidden="true" />{principle}</li>)}
+            <ul className="trust-section__journey mt-8 grid gap-0 sm:grid-cols-3">
+              {copy.trust.journey.map((item, index) => {
+                const JourneyIcon = journeyIcons[index];
+                return <li key={item}><JourneyIcon aria-hidden="true" /><span>{item}</span></li>;
+              })}
             </ul>
           </div>
         </div>

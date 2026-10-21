@@ -1532,12 +1532,12 @@
     text-wrap: balance;
   }
 
-  .trust-section__principles li {
-    @apply flex items-start gap-2 text-sm leading-relaxed text-navy-600;
+  .trust-section__journey li {
+    @apply flex items-start gap-3 border-t border-navy-700/20 py-3 text-sm leading-relaxed text-navy-600 first:border-t-0 sm:border-t-0 sm:border-l sm:px-4 sm:py-1 sm:first:border-l-0;
   }
 
-  .trust-section__principles svg {
-    @apply mt-0.5 h-4 w-4 shrink-0 text-teal-700;
+  .trust-section__journey svg {
+    @apply mt-0.5 h-5 w-5 shrink-0 text-teal-700;
   }
 
   .faq-section {
