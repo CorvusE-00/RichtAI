@@ -1,6 +1,9 @@
-import { ArrowRight, Check, Clock3, MessageCircle } from 'lucide-react';
+import { ArrowRight, Check, Clock3, Globe2, MessageCircle, MoonStar, UsersRound } from 'lucide-react';
 
 import { useLanguage } from '@/lib/i18n';
+
+const channelIcons = { web: Globe2, whatsapp: MessageCircle } as const;
+const driverIcons = [Clock3, MoonStar, UsersRound] as const;
 
 export function ClinicPain() {
   const { copy } = useLanguage();
@@ -20,7 +23,23 @@ export function ClinicPain() {
                 {clinicPain.headlineAccent}
               </span>
             </div>
-            <p className="clinic-pain__intro-description">{clinicPain.description}</p>
+            <div className="clinic-pain__intro-visual">
+              <div className="clinic-pain__intro-channels">
+                {clinicPain.introVisual.channels.map((channel) => {
+                  const ChannelIcon = channelIcons[channel.key];
+
+                  return (
+                    <span key={channel.key} className="clinic-pain__intro-channel">
+                      <ChannelIcon aria-hidden="true" />
+                      {channel.label}
+                    </span>
+                  );
+                })}
+              </div>
+              <strong className="clinic-pain__intro-anchor">{clinicPain.introVisual.anchor}</strong>
+              <p className="clinic-pain__intro-message">{clinicPain.introVisual.message}</p>
+              <p className="clinic-pain__intro-support">{clinicPain.introVisual.supporting}</p>
+            </div>
           </div>
 
           <div className="clinic-pain__scenario" aria-label={clinicPain.scenario.label}>
@@ -93,16 +112,20 @@ export function ClinicPain() {
           </div>
 
           <div className="clinic-pain__drivers">
-            {clinicPain.drivers.map((driver, index) => (
-              <article key={driver.label} className="clinic-pain__driver">
-                <div className="clinic-pain__driver-meta">
-                  <span>0{index + 1}</span>
-                  <span>{driver.label}</span>
-                </div>
-                <h3>{driver.title}</h3>
-                <p>{driver.description}</p>
-              </article>
-            ))}
+            {clinicPain.drivers.map((driver, index) => {
+              const DriverIcon = driverIcons[index] ?? Clock3;
+
+              return (
+                <article key={driver.label} className="clinic-pain__driver">
+                  <div className="clinic-pain__driver-meta">
+                    <DriverIcon aria-hidden="true" />
+                    <span>{driver.label}</span>
+                  </div>
+                  <h3>{driver.title}</h3>
+                  <p>{driver.description}</p>
+                </article>
+              );
+            })}
           </div>
         </div>
       </div>

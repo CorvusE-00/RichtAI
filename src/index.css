@@ -313,13 +313,68 @@
     letter-spacing: -0.055em;
   }
 
-  .clinic-pain__intro-description {
+  .clinic-pain__intro-visual {
     align-self: end;
-    max-width: 34rem;
+    max-width: 25rem;
     margin-bottom: 0.35rem;
-    color: #4b4b47;
-    font-size: clamp(1rem, 1.3vw, 1.2rem);
-    line-height: 1.55;
+    border-left: 1px solid rgba(52, 143, 132, 0.5);
+    padding-left: clamp(1.25rem, 2.5vw, 2rem);
+  }
+
+  .clinic-pain__intro-channels {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+    color: #5e5c55;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .clinic-pain__intro-channel {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .clinic-pain__intro-channel svg {
+    width: 1rem;
+    height: 1rem;
+    color: #348f84;
+    stroke-width: 1.7;
+  }
+
+  .clinic-pain__intro-anchor {
+    display: block;
+    margin-top: clamp(1.25rem, 2.5vw, 2rem);
+    color: #348f84;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: clamp(4rem, 7vw, 6.5rem);
+    font-weight: 600;
+    letter-spacing: -0.09em;
+    line-height: 0.82;
+  }
+
+  .clinic-pain__intro-message {
+    max-width: 24rem;
+    margin-top: 0.8rem;
+    color: #202428;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: clamp(1.25rem, 2vw, 1.8rem);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+  }
+
+  .clinic-pain__intro-support {
+    max-width: 20rem;
+    margin-top: 0.65rem;
+    color: #6c6961;
+    font-size: 0.95rem;
+    line-height: 1.45;
   }
 
   .clinic-pain__scenario {
@@ -594,14 +649,16 @@
 
   .clinic-pain__driver-meta {
     display: flex;
-    align-items: baseline;
-    gap: 0.65rem;
+    align-items: center;
+    gap: 0.5rem;
     color: #348f84;
   }
 
-  .clinic-pain__driver-meta > span:first-child {
-    font-size: 0.9rem;
-    letter-spacing: 0.1em;
+  .clinic-pain__driver-meta svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    flex: 0 0 auto;
+    stroke-width: 1.7;
   }
 
   .clinic-pain__driver h3 {
@@ -643,9 +700,13 @@
       gap: 2rem;
     }
 
-    .clinic-pain__intro-description {
+    .clinic-pain__intro-visual {
       max-width: 42rem;
       margin-bottom: 0;
+      border-top: 1px solid rgba(52, 143, 132, 0.32);
+      border-left: 0;
+      padding-top: 1.5rem;
+      padding-left: 0;
     }
 
     .clinic-pain__scenario,
@@ -696,10 +757,6 @@
       font-size: clamp(1.8rem, 7vw, 2.7rem);
     }
 
-    .clinic-pain__intro-description {
-      font-size: 1rem;
-    }
-
     .clinic-pain__scenario,
     .clinic-pain__drivers {
       margin-inline: 1.5rem;
@@ -721,6 +778,14 @@
 
     .clinic-pain__incoming-message p {
       font-size: 1.1rem;
+    }
+
+    .clinic-pain__intro-visual {
+      padding-top: 1.25rem;
+    }
+
+    .clinic-pain__intro-anchor {
+      font-size: clamp(3.75rem, 20vw, 5.5rem);
     }
 
     .clinic-pain__drivers {
