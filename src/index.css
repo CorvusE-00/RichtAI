@@ -352,29 +352,21 @@
     margin-top: clamp(1.25rem, 2.5vw, 2rem);
     color: #348f84;
     font-family: 'Space Grotesk', system-ui, sans-serif;
-    font-size: clamp(4rem, 7vw, 6.5rem);
+    font-size: clamp(1.25rem, 1.8vw, 1.55rem);
     font-weight: 600;
-    letter-spacing: -0.09em;
-    line-height: 0.82;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
   }
 
   .clinic-pain__intro-message {
     max-width: 24rem;
-    margin-top: 0.8rem;
+    margin-top: 0.65rem;
     color: #202428;
     font-family: 'Space Grotesk', system-ui, sans-serif;
     font-size: clamp(1.25rem, 2vw, 1.8rem);
     font-weight: 600;
     letter-spacing: -0.04em;
     line-height: 1.1;
-  }
-
-  .clinic-pain__intro-support {
-    max-width: 20rem;
-    margin-top: 0.65rem;
-    color: #6c6961;
-    font-size: 0.95rem;
-    line-height: 1.45;
   }
 
   .clinic-pain__scenario {
@@ -782,10 +774,6 @@
 
     .clinic-pain__intro-visual {
       padding-top: 1.25rem;
-    }
-
-    .clinic-pain__intro-anchor {
-      font-size: clamp(3.75rem, 20vw, 5.5rem);
     }
 
     .clinic-pain__drivers {

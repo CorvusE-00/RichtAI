@@ -38,7 +38,6 @@ export function ClinicPain() {
               </div>
               <strong className="clinic-pain__intro-anchor">{clinicPain.introVisual.anchor}</strong>
               <p className="clinic-pain__intro-message">{clinicPain.introVisual.message}</p>
-              <p className="clinic-pain__intro-support">{clinicPain.introVisual.supporting}</p>
             </div>
           </div>
 
