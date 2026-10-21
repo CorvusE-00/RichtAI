@@ -508,6 +508,17 @@
     line-height: 1.625;
   }
 
+  .clinic-pain__intro-line {
+    display: block;
+    white-space: nowrap;
+  }
+
+  @media (min-width: 640px) {
+    .clinic-pain__intro-message {
+      font-size: 1.125rem;
+    }
+  }
+
   .clinic-pain__scenario {
     display: grid;
     grid-template-columns: minmax(0, 1.38fr) minmax(20rem, 1fr);
@@ -909,7 +920,11 @@
     }
 
     .clinic-pain__intro-visual {
-      max-width: 18rem;
+      max-width: 100%;
+    }
+
+    .clinic-pain__intro-message {
+      font-size: 0.95rem;
     }
 
     .clinic-pain__drivers {

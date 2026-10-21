@@ -24,8 +24,11 @@ export function ClinicPain() {
             </div>
             <div className="clinic-pain__intro-visual">
               <p className="clinic-pain__intro-message">
-                {clinicPain.introVisual.message}{' '}
-                <Bell className="clinic-pain__intro-bell" aria-hidden="true" />
+                <span className="clinic-pain__intro-line">{clinicPain.introVisual.lineOne}</span>
+                <span className="clinic-pain__intro-line">
+                  {clinicPain.introVisual.lineTwo}
+                  <Bell className="clinic-pain__intro-bell" aria-hidden="true" />
+                </span>
               </p>
             </div>
           </div>
