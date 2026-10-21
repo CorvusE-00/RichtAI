@@ -1,8 +1,7 @@
-import { ArrowRight, Check, Clock3, Globe2, MessageCircle, MoonStar, UsersRound } from 'lucide-react';
+import { ArrowRight, BellRing, Check, Clock3, MessageCircle, MoonStar, UsersRound } from 'lucide-react';
 
 import { useLanguage } from '@/lib/i18n';
 
-const channelIcons = { web: Globe2, whatsapp: MessageCircle } as const;
 const driverIcons = [Clock3, MoonStar, UsersRound] as const;
 
 export function ClinicPain() {
@@ -24,19 +23,7 @@ export function ClinicPain() {
               </span>
             </div>
             <div className="clinic-pain__intro-visual">
-              <div className="clinic-pain__intro-channels">
-                {clinicPain.introVisual.channels.map((channel) => {
-                  const ChannelIcon = channelIcons[channel.key];
-
-                  return (
-                    <span key={channel.key} className="clinic-pain__intro-channel">
-                      <ChannelIcon aria-hidden="true" />
-                      {channel.label}
-                    </span>
-                  );
-                })}
-              </div>
-              <strong className="clinic-pain__intro-anchor">{clinicPain.introVisual.anchor}</strong>
+              <BellRing className="clinic-pain__intro-bell" aria-hidden="true" />
               <p className="clinic-pain__intro-message">{clinicPain.introVisual.message}</p>
             </div>
           </div>

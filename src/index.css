@@ -314,6 +314,10 @@
   }
 
   .clinic-pain__intro-visual {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 1rem;
     align-self: end;
     max-width: 25rem;
     margin-bottom: 0.35rem;
@@ -321,52 +325,23 @@
     padding-left: clamp(1.25rem, 2.5vw, 2rem);
   }
 
-  .clinic-pain__intro-channels {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1.25rem;
-    color: #5e5c55;
-    font-family: 'Space Grotesk', system-ui, sans-serif;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-
-  .clinic-pain__intro-channel {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-  }
-
-  .clinic-pain__intro-channel svg {
-    width: 1rem;
-    height: 1rem;
+  .clinic-pain__intro-bell {
+    width: clamp(2.5rem, 4vw, 3.25rem);
+    height: clamp(2.5rem, 4vw, 3.25rem);
     color: #348f84;
-    stroke-width: 1.7;
-  }
-
-  .clinic-pain__intro-anchor {
-    display: block;
-    margin-top: clamp(1.25rem, 2.5vw, 2rem);
-    color: #348f84;
-    font-family: 'Space Grotesk', system-ui, sans-serif;
-    font-size: clamp(1.25rem, 1.8vw, 1.55rem);
-    font-weight: 600;
-    letter-spacing: -0.035em;
-    line-height: 1.1;
+    stroke-width: 1.45;
   }
 
   .clinic-pain__intro-message {
     max-width: 24rem;
-    margin-top: 0.65rem;
-    color: #202428;
+    margin-top: 0;
+    color: #348f84;
     font-family: 'Space Grotesk', system-ui, sans-serif;
-    font-size: clamp(1.25rem, 2vw, 1.8rem);
+    font-size: clamp(1.35rem, 2.15vw, 1.9rem);
     font-weight: 600;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.045em;
     line-height: 1.1;
+    white-space: pre-line;
   }
 
   .clinic-pain__scenario {
@@ -693,6 +668,7 @@
     }
 
     .clinic-pain__intro-visual {
+      grid-template-columns: auto minmax(0, 1fr);
       max-width: 42rem;
       margin-bottom: 0;
       border-top: 1px solid rgba(52, 143, 132, 0.32);
@@ -773,7 +749,13 @@
     }
 
     .clinic-pain__intro-visual {
+      gap: 0.8rem;
       padding-top: 1.25rem;
+    }
+
+    .clinic-pain__intro-bell {
+      width: 2.4rem;
+      height: 2.4rem;
     }
 
     .clinic-pain__drivers {
