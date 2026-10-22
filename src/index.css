@@ -609,12 +609,30 @@
   }
 
   .contact-modal__context {
+    position: relative;
+    isolation: isolate;
     display: flex;
     min-width: 0;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
     background: linear-gradient(160deg, #122326 0%, #111719 100%);
     padding: 2.5rem 2.25rem 2.1rem;
+  }
+
+  .contact-modal__context::after {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    content: '';
+    background-image:
+      linear-gradient(180deg, rgba(16, 27, 29, 0.96) 0%, rgba(16, 27, 29, 0.76) 42%, rgba(16, 27, 29, 0.3) 100%),
+      url('/images/richtai-hero-v2.png');
+    background-position: center, 78% 88%;
+    background-repeat: no-repeat;
+    background-size: cover, auto 112%;
+    opacity: 0.34;
+    pointer-events: none;
   }
 
   .contact-modal__context-main {
@@ -664,7 +682,23 @@
     padding: 0.34rem 0;
   }
 
-  .contact-modal__step > span {
+  .contact-modal__step-icon {
+    display: inline-flex;
+    width: 1.25rem;
+    height: 1.25rem;
+    flex: 0 0 1.25rem;
+    align-items: center;
+    justify-content: center;
+    color: rgba(93, 181, 168, 0.82);
+  }
+
+  .contact-modal__step-icon svg {
+    width: 0.9rem;
+    height: 0.9rem;
+    stroke-width: 1.65;
+  }
+
+  .contact-modal__step > span:not(.contact-modal__step-icon) {
     flex: 0 0 auto;
     color: #5db5a8;
     font-family: 'Space Grotesk', system-ui, sans-serif;
@@ -812,9 +846,16 @@
   }
 
   .contact-privacy {
-    margin: -0.1rem 0 0;
+    max-width: 34rem;
+    margin: -0.1rem auto 0;
     font-size: 0.69rem;
-    text-align: left;
+    line-height: 1.4;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .contact-privacy a {
+    white-space: nowrap;
   }
 
   .contact-secondary {
@@ -886,6 +927,12 @@
       padding: 1.55rem 1.25rem 1.45rem;
     }
 
+    .contact-modal__context::after {
+      background-position: center, 78% 80%;
+      background-size: cover, auto 128%;
+      opacity: 0.23;
+    }
+
     .contact-modal__context-main {
       padding-right: 2.45rem;
     }
@@ -926,6 +973,11 @@
 
     .contact-textarea {
       min-height: 6.35rem;
+    }
+
+    .contact-privacy {
+      max-width: 19rem;
+      font-size: 0.67rem;
     }
 
     .contact-modal__success {

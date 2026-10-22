@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Check, MessageCircle, Sparkles, X } from 'lucide-react';
+import { CalendarDays, Check, Layers, MessageCircle, Search, Sparkles, X, type LucideIcon } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useLanguage } from '@/lib/i18n';
 import { whatsappUrl } from '@/lib/whatsapp';
@@ -134,9 +134,9 @@ export function ContactModal({ isOpen, intent, source, onClose }: ContactModalPr
 
               <div className="contact-modal__steps" aria-label={copy.contact.nextStep}>
                 <p className="contact-modal__steps-title">{copy.contact.nextStep}</p>
-                <Step number="01" label={copy.contact.steps.first} />
-                <Step number="02" label={copy.contact.steps.second} />
-                <Step number="03" label={copy.contact.steps[intent]} />
+                <Step icon={Search} label={copy.contact.steps.first} />
+                <Step icon={Layers} label={copy.contact.steps.second} />
+                <Step icon={CalendarDays} label={copy.contact.steps[intent]} />
               </div>
             </aside>
 
@@ -217,10 +217,10 @@ export function ContactModal({ isOpen, intent, source, onClose }: ContactModalPr
   );
 }
 
-function Step({ number, label }: { number: string; label: string }) {
+function Step({ icon: Icon, label }: { icon: LucideIcon; label: string }) {
   return (
     <div className="contact-modal__step">
-      <span>{number}</span>
+      <span className="contact-modal__step-icon"><Icon aria-hidden="true" /></span>
       <p>{label}</p>
     </div>
   );
