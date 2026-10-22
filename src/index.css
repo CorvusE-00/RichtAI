@@ -1840,24 +1840,24 @@
 
   @media (max-width: 767px) {
     .hero-section {
-      min-height: min(48rem, calc(100svh - 4.5rem));
+      min-height: min(42rem, calc(100svh - 4.5rem));
       padding-bottom: 0;
     }
 
     .hero-section__background {
       background-image: linear-gradient(90deg, rgba(8, 15, 18, 0.9) 0%, rgba(8, 15, 18, 0.72) 42%, rgba(8, 15, 18, 0.28) 68%, rgba(8, 15, 18, 0.02) 100%), url('/images/richtai-hero-v2.png');
       background-position: 64% 0;
-      background-size: cover, auto 108%;
+      background-size: cover, auto 112%;
     }
 
     .hero-layout {
-      min-height: min(48rem, calc(100svh - 4.5rem));
-      padding-top: 3.75rem;
+      min-height: min(42rem, calc(100svh - 4.5rem));
+      padding-top: 3.25rem;
     }
 
     .hero-copy {
       max-width: none;
-      padding: 1.25rem 0 2rem;
+      padding: 1rem 0 1.5rem;
     }
 
     .hero-editorial-heading {
