@@ -134,7 +134,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
           className="group col-start-1 flex items-center gap-[0.45rem] justify-self-start"
         >
           <div className={`relative transition-transform duration-500 ${isScrolled ? 'scale-90' : ''}`}>
-            <div className="navbar__mermaid-wrap relative h-[1.875rem] w-[1.875rem] shrink-0 translate-y-px">
+            <div className="navbar__mermaid-wrap relative h-[1.8125rem] w-[1.8125rem] shrink-0 translate-y-px">
               <span className="navbar__mermaid-mark block h-full w-full" aria-hidden="true" />
             </div>
           </div>
