@@ -40,10 +40,8 @@ export function Footer({ onCTAClick }: FooterProps) {
         <div className="footer__grid">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-9 h-9 rounded-lg overflow-hidden border border-teal-400/25">
-                <MermaidMark className="h-full w-full" />
-              </div>
+            <div className="mb-4 flex items-center gap-2">
+              <MermaidMark className="block h-8 w-8 shrink-0 translate-y-px object-contain" />
               <span className="font-display text-lg font-semibold tracking-tight text-snow-50">
                 Richt<span className="text-teal-400"> AI</span>
               </span>

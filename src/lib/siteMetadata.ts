@@ -1,6 +1,6 @@
 export const siteMetadata = {
   imagePath: '/images/og-richtai.png',
-  logoPath: '/images/mermaid-mark.png',
+  logoPath: '/images/mermaid-mark-transparent.png',
   themeColor: '#121416',
 };
 
@@ -78,7 +78,7 @@ export function applyLanguageMetadata({
         {
           '@type': 'Organization',
           '@id': `${pageUrl}#organization`,
-          name: 'Richt Ai',
+          name: 'Richt AI',
           url: pageUrl,
           logo: getAbsoluteSiteUrl(siteMetadata.logoPath),
           description,
@@ -88,7 +88,7 @@ export function applyLanguageMetadata({
         {
           '@type': 'WebSite',
           '@id': `${pageUrl}#website`,
-          name: 'Richt Ai',
+          name: 'Richt AI',
           url: pageUrl,
           description,
           publisher: { '@id': `${pageUrl}#organization` },

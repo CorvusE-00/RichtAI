@@ -1,6 +1,6 @@
 {
-  "name": "Richt Ai",
-  "short_name": "Richt Ai",
+  "name": "Richt AI",
+  "short_name": "Richt AI",
   "description": "Modern web ve yapay zekâ çözümleri.",
   "lang": "tr",
   "dir": "ltr",
@@ -10,12 +10,12 @@
   "theme_color": "#121416",
   "icons": [
     {
-      "src": "/images/mermaid-mark.png",
+      "src": "/images/richt-ai-icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/images/mermaid-mark.png",
+      "src": "/images/richt-ai-icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
