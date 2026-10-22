@@ -626,12 +626,12 @@
     z-index: -1;
     content: '';
     background-image:
-      linear-gradient(180deg, rgba(16, 27, 29, 0.96) 0%, rgba(16, 27, 29, 0.76) 42%, rgba(16, 27, 29, 0.3) 100%),
+      linear-gradient(180deg, rgba(16, 27, 29, 0.97) 0%, rgba(16, 27, 29, 0.78) 38%, rgba(16, 27, 29, 0.22) 100%),
       url('/images/richtai-hero-v2.png');
-    background-position: center, 78% 88%;
+    background-position: center, 78% 8%;
     background-repeat: no-repeat;
-    background-size: cover, auto 112%;
-    opacity: 0.34;
+    background-size: cover, auto 126%;
+    opacity: 0.42;
     pointer-events: none;
   }
 
@@ -928,9 +928,12 @@
     }
 
     .contact-modal__context::after {
-      background-position: center, 78% 80%;
-      background-size: cover, auto 128%;
-      opacity: 0.23;
+      background-image:
+        linear-gradient(180deg, rgba(16, 27, 29, 0.95) 0%, rgba(16, 27, 29, 0.68) 46%, rgba(16, 27, 29, 0.18) 100%),
+        url('/images/richtai-hero-v2.png');
+      background-position: center, 78% 10%;
+      background-size: cover, auto 136%;
+      opacity: 0.32;
     }
 
     .contact-modal__context-main {
