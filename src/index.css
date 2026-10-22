@@ -1894,6 +1894,25 @@
     }
   }
 
+  @media (min-width: 1100px) {
+    .hero-copy {
+      width: min(38rem, 36vw);
+      max-width: 38rem;
+    }
+
+    .hero-editorial-heading {
+      font-size: clamp(3.55rem, 4vw, 4.8rem);
+    }
+
+    .hero-accent {
+      font-size: clamp(1.9rem, 2.15vw, 2.25rem);
+    }
+
+    .hero-copy > p.mt-4 {
+      max-width: 35rem;
+    }
+  }
+
   @media (min-width: 768px) {
     .pilot-section__step {
       grid-template-columns: 4rem minmax(0, 1fr);
