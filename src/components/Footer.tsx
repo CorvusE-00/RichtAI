@@ -41,7 +41,7 @@ export function Footer({ onCTAClick }: FooterProps) {
           {/* Brand */}
           <div>
             <div className="mb-4 flex items-center gap-2">
-              <MermaidMark className="block h-8 w-8 shrink-0 translate-y-px object-contain" />
+              <MermaidMark className="block h-[1.875rem] w-[1.875rem] shrink-0 translate-y-px object-contain" />
               <span className="font-display text-lg font-semibold tracking-tight text-snow-50">
                 Richt<span className="text-teal-400"> AI</span>
               </span>
