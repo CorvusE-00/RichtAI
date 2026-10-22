@@ -33,10 +33,6 @@ export function Hero({ onCTAClick }: HeroProps) {
               {hero.headlineAccent}
             </p>
 
-            <div className="hero-mobile-artwork" aria-hidden="true">
-              <img src="/images/richtai-dental-mobile-hero.png" alt="" />
-            </div>
-
             <p className="mt-4 max-w-[31rem] text-base leading-relaxed text-snow-200 sm:text-lg">
               {hero.subheadline}
             </p>
