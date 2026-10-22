@@ -313,7 +313,7 @@
     top: 0;
     bottom: 0;
     background-image: url('/images/richtai-hero-v2.png');
-    background-position: 56% top;
+    background-position: 56% 8%;
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -1845,8 +1845,9 @@
     }
 
     .hero-section__background {
-      background-image: linear-gradient(90deg, rgba(8, 15, 18, 0.84) 0%, rgba(8, 15, 18, 0.62) 44%, rgba(8, 15, 18, 0.14) 78%, rgba(8, 15, 18, 0) 100%), url('/images/richtai-hero-v2.png');
-      background-position: 72% top;
+      background-image: linear-gradient(90deg, rgba(8, 15, 18, 0.9) 0%, rgba(8, 15, 18, 0.72) 42%, rgba(8, 15, 18, 0.28) 68%, rgba(8, 15, 18, 0.02) 100%), url('/images/richtai-hero-v2.png');
+      background-position: 64% 0;
+      background-size: cover, auto 108%;
     }
 
     .hero-layout {
@@ -1857,6 +1858,10 @@
     .hero-copy {
       max-width: none;
       padding: 1.25rem 0 2rem;
+    }
+
+    .hero-editorial-heading {
+      font-size: clamp(2.35rem, 9.2vw, 2.6rem);
     }
 
     .hero-kicker {
