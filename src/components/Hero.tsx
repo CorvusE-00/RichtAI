@@ -29,13 +29,13 @@ export function Hero({ onCTAClick }: HeroProps) {
                   </span>
                 ))}
               </h1>
-            </div>
 
-            <div className="hero-mobile-bottom">
               <p className="hero-accent mt-5 font-display text-[clamp(1.75rem,2vw,2.05rem)] font-medium leading-tight tracking-[-0.04em] text-teal-300 max-[767px]:text-[clamp(1.4rem,6.6vw,1.65rem)] max-[767px]:leading-[1.1]">
                 {hero.headlineAccent}
               </p>
+            </div>
 
+            <div className="hero-mobile-bottom">
               <p className="hero-subheadline mt-4 max-w-[31rem] text-base leading-relaxed text-snow-200 sm:text-lg">
                 {hero.subheadline}
               </p>

@@ -1852,16 +1852,16 @@
     .hero-section__background {
       background-image: linear-gradient(
         180deg,
-        rgba(4, 13, 19, 0.78) 0%,
-        rgba(4, 13, 19, 0.52) 24%,
+        rgba(4, 13, 19, 0.68) 0%,
+        rgba(4, 13, 19, 0.4) 24%,
         rgba(4, 13, 19, 0.05) 54%,
         rgba(4, 13, 19, 0.14) 72%,
-        rgba(4, 13, 19, 0.62) 100%
+        rgba(4, 13, 19, 0.54) 100%
       ), linear-gradient(
         90deg,
-        rgba(4, 13, 19, 0.48) 0%,
-        rgba(4, 13, 19, 0.12) 58%,
-        rgba(4, 13, 19, 0.22) 100%
+        rgba(4, 13, 19, 0.34) 0%,
+        rgba(4, 13, 19, 0.08) 58%,
+        rgba(4, 13, 19, 0.16) 100%
       ), url('/images/richtai-hero-mobile-v2.png');
       background-position: center top, center top, center top;
       background-size: cover, cover, auto 112%;
