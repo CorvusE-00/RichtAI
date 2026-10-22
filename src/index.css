@@ -173,12 +173,13 @@
 
   .navbar__mermaid-mark {
     background-color: #43a296;
-    mask-image: url('/images/mermaid-mark.png');
-    mask-mode: luminance;
+    mask-image: url('/images/mermaid-mark-transparent.png');
+    mask-mode: alpha;
     mask-position: center;
     mask-repeat: no-repeat;
     mask-size: contain;
-    -webkit-mask-image: url('/images/mermaid-mark.png');
+    -webkit-mask-image: url('/images/mermaid-mark-transparent.png');
+    -webkit-mask-mode: alpha;
     -webkit-mask-position: center;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-size: contain;

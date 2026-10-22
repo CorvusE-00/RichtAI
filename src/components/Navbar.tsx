@@ -131,10 +131,10 @@ export function Navbar({ onCTAClick }: NavbarProps) {
         {/* Logo */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="group col-start-1 flex items-center gap-3 justify-self-start"
+          className="group col-start-1 flex items-center gap-[0.45rem] justify-self-start"
         >
           <div className={`relative transition-transform duration-500 ${isScrolled ? 'scale-90' : ''}`}>
-            <div className="relative h-10 w-10">
+            <div className="navbar__mermaid-wrap relative h-9 w-9 shrink-0 translate-y-px">
               <span className="navbar__mermaid-mark block h-full w-full" aria-hidden="true" />
             </div>
           </div>
