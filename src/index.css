@@ -1869,7 +1869,7 @@
 
     .hero-layout {
       min-height: calc(100svh - 4.5rem);
-      padding-top: 1.25rem;
+      padding-top: 4rem;
       padding-bottom: 1.5rem;
     }
 
@@ -1879,7 +1879,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 1rem 0 1.25rem;
+      padding: 0 0 1.25rem;
     }
 
     .hero-mobile-top,
@@ -1905,9 +1905,16 @@
 
     .hero-kicker {
       gap: 0.45rem;
-      padding: 0.4rem 0.75rem;
-      font-size: 0.6875rem;
+      width: fit-content;
+      max-width: 100%;
+      padding: 0.32rem 0.65rem;
+      font-size: 0.625rem;
       line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .hero-kicker + .hero-editorial-heading {
+      margin-top: 1rem;
     }
 
     .hero-kicker__dot {
