@@ -15,6 +15,7 @@ import { LegalPage } from '@/components/LegalPage';
 import { useRevealObserver } from '@/hooks/useRevealObserver';
 import { useLanguage } from '@/lib/i18n';
 import type { LegalPageSlug } from '@/lib/legalContent';
+import type { ContactIntent, ContactModalState, ContactSource } from '@/types/contact';
 
 const legalRoutes: Record<string, LegalPageSlug> = {
   '/gizlilik-politikasi': 'privacy',
@@ -24,12 +25,20 @@ const legalRoutes: Record<string, LegalPageSlug> = {
 
 function App() {
   const { language } = useLanguage();
-  const [isContactOpen, setIsContactOpen] = useState(false);
+  const [contactModal, setContactModal] = useState<ContactModalState>({
+    isOpen: false,
+    intent: 'pilot',
+    source: 'navbar',
+  });
 
   useRevealObserver(language);
 
-  const openContact = useCallback(() => setIsContactOpen(true), []);
-  const closeContact = useCallback(() => setIsContactOpen(false), []);
+  const openContact = useCallback((intent: ContactIntent, source: ContactSource) => {
+    setContactModal({ isOpen: true, intent, source });
+  }, []);
+  const closeContact = useCallback(() => {
+    setContactModal((current) => ({ ...current, isOpen: false }));
+  }, []);
 
   const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
   const legalPage = legalRoutes[pathname];
@@ -53,7 +62,12 @@ function App() {
         <FinalCTA onCTAClick={openContact} />
       </main>
       <Footer onCTAClick={openContact} />
-      <ContactModal isOpen={isContactOpen} onClose={closeContact} />
+      <ContactModal
+        isOpen={contactModal.isOpen}
+        intent={contactModal.intent}
+        source={contactModal.source}
+        onClose={closeContact}
+      />
     </div>
   );
 }

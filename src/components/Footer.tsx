@@ -3,9 +3,10 @@ import { MermaidMark } from './MermaidMark';
 import { useLanguage } from '@/lib/i18n';
 import { whatsappUrl } from '@/lib/whatsapp';
 import { socialLinks } from '@/lib/socialLinks';
+import type { ContactIntent, ContactSource } from '@/types/contact';
 
 interface FooterProps {
-  onCTAClick: () => void;
+  onCTAClick: (intent: ContactIntent, source: ContactSource) => void;
 }
 
 type SocialKey = (typeof socialLinks)[number]['key'];
@@ -138,7 +139,7 @@ export function Footer({ onCTAClick }: FooterProps) {
                 </li>
                 <li className="flex items-center gap-2 text-sm text-snow-500">
                   <Mail className="h-4 w-4 shrink-0 text-teal-400" />
-                  <button onClick={onCTAClick} className="transition-colors duration-200 hover:text-teal-400">
+                  <button onClick={() => onCTAClick('general', 'footer')} className="transition-colors duration-200 hover:text-teal-400">
                     {copy.footer.contactButton}
                   </button>
                 </li>

@@ -1,9 +1,10 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
+import type { ContactIntent, ContactSource } from '@/types/contact';
 
 interface NavbarProps {
-  onCTAClick: () => void;
+  onCTAClick: (intent: ContactIntent, source: ContactSource) => void;
 }
 
 type NavbarTheme = 'dark' | 'light';
@@ -52,7 +53,7 @@ export function Navbar({ onCTAClick }: NavbarProps) {
   };
 
   const handleCTA = useCallback(() => {
-    onCTAClick();
+    onCTAClick('pilot', 'navbar');
   }, [onCTAClick]);
 
   const toggleMenu = () => {

@@ -1,8 +1,9 @@
 import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
+import type { ContactIntent, ContactSource } from '@/types/contact';
 
 interface HeroProps {
-  onCTAClick: () => void;
+  onCTAClick: (intent: ContactIntent, source: ContactSource) => void;
 }
 
 export function Hero({ onCTAClick }: HeroProps) {
@@ -41,7 +42,7 @@ export function Hero({ onCTAClick }: HeroProps) {
               </p>
 
               <div className="hero-mobile-cta">
-                <button onClick={onCTAClick} className="btn-primary group mt-7 min-h-[62px] px-6 text-[1.02rem] max-[767px]:mt-0 max-[767px]:min-h-[58px] max-[767px]:w-full max-[767px]:px-4 max-[767px]:text-base">
+                <button onClick={() => onCTAClick('pilot', 'hero')} className="btn-primary group mt-7 min-h-[62px] px-6 text-[1.02rem] max-[767px]:mt-0 max-[767px]:min-h-[58px] max-[767px]:w-full max-[767px]:px-4 max-[767px]:text-base">
                   <span>{hero.cta}</span>
                   <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
                 </button>

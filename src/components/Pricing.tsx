@@ -1,8 +1,9 @@
 import { ArrowRight, Check, Crown, Sparkles, TrendingUp } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
+import type { ContactIntent, ContactSource } from '@/types/contact';
 
 interface PricingProps {
-  onCTAClick: () => void;
+  onCTAClick: (intent: ContactIntent, source: ContactSource) => void;
 }
 
 export function Pricing({ onCTAClick }: PricingProps) {
@@ -57,7 +58,19 @@ export function Pricing({ onCTAClick }: PricingProps) {
                 <ul>
                   {plan.features.map((feature) => <li key={feature}><Check aria-hidden="true" />{feature}</li>)}
                 </ul>
-                <button type="button" onClick={onCTAClick} className="pricing-plan__cta group">
+                <button
+                  type="button"
+                  onClick={() => {
+                    const mapping: Record<string, { intent: ContactIntent; source: ContactSource }> = {
+                      Starter: { intent: 'starter', source: 'pricing-starter' },
+                      Growth: { intent: 'pilot', source: 'pricing-growth' },
+                      Pro: { intent: 'pro', source: 'pricing-pro' },
+                    };
+                    const contact = mapping[plan.name];
+                    onCTAClick(contact.intent, contact.source);
+                  }}
+                  className="pricing-plan__cta group"
+                >
                   {plan.cta}<ArrowRight aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
               </article>
