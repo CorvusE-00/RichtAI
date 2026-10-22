@@ -45,6 +45,14 @@ export function Hero({ onCTAClick }: HeroProps) {
             </div>
 
           </div>
+
+          <div className="hero-mobile-visual" aria-hidden="true">
+            <img
+              src="/images/richtai-hero-mobile-v2.png"
+              alt=""
+              loading="eager"
+            />
+          </div>
         </div>
       </div>
     </section>
