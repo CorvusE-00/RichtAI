@@ -184,7 +184,7 @@ function buildEmail(lead: ValidatedLead, submissionId: string, submittedAt: stri
   return { subject, html, text };
 }
 
-export default async function handler(request: Request): Promise<Response> {
+export async function POST(request: Request): Promise<Response> {
   if (request.method !== 'POST') {
     return jsonResponse({ ok: false, error: 'Method Not Allowed' }, 405);
   }
