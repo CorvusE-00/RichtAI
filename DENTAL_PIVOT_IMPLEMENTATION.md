@@ -1,9 +1,9 @@
-# Richt Ai — Dental-First Sales Pivot
+# Richt AI — Dental-First Sales Pivot
 
 ## Positioning decisions
 
 - Current target offer: dental clinics.
-- Richt Ai remains broad enough to expand into healthcare tourism, other clinics, and other industries.
+- Richt AI remains broad enough to expand into healthcare tourism, other clinics, and other industries.
 - Hero wording uses “Diş Klinikleri İçin...” rather than “Diş Kliniklerine Özel...”.
 - Pilot applications are open across Türkiye; first field rollout focus is Kuşadası & Aydın.
 - Starter is one channel: Website or WhatsApp.
@@ -133,4 +133,26 @@ F1 audit completed against the requested component set.
 - Run 4 App order: Navbar → Hero → StatisticsStrip → ClinicPain → ProductShowcase → PilotSection → Pricing → Trust → FAQ → FinalCTA → Footer → ContactModal.
 - Run 4 changed files: `DENTAL_PIVOT_IMPLEMENTATION.md`, `src/App.tsx`, `src/components/Hero.tsx`, `src/components/ClinicPain.tsx`, `src/components/ProductShowcase.tsx`, `src/components/PilotSection.tsx`, `src/components/Pricing.tsx`, `src/components/Trust.tsx`, `src/components/FAQ.tsx`, `src/components/FinalCTA.tsx`, `src/index.css`, and `src/lib/i18n.tsx`; deleted `src/components/Problem.tsx`, `src/components/WhyBuy.tsx`, `src/components/Solution.tsx`, `src/components/HumanAI.tsx`, `src/components/HowItWorks.tsx`, `src/components/PilotMeasurement.tsx`, and `src/components/AIWorkflow.tsx`.
 - Run 4 screenshot status: V11 remains intentionally unchecked for user review. No commit or push is authorized in this run.
+
+## Phase 1 — Dental outreach readiness
+
+- [x] F1. Add visible `hello@getrichtai.com` mailto contact and preserve the existing contact-form button.
+- [x] F2. Hide unconfigured social platforms while preserving configured external links.
+- [x] F3. Normalize targeted Turkish client-facing wording and brand spelling without changing prices, pilot terms, or claims.
+- [x] F4. Align static and runtime homepage metadata with absolute production URLs and the dental-clinic AI assistant positioning.
+- [x] F5. Add route-aware runtime metadata and canonical URLs for `/gizlilik-politikasi`, `/kvkk`, and `/cerez-politikasi`.
+- [x] F6. Remove the outdated generic Service JSON-LD and keep static/runtime Organization and WebSite structured data aligned.
+- [x] F7. Preserve the existing robots/sitemap generation path and document the SPA legal-route indexing limitation.
+- [x] F8. Verify typecheck, lint, production build, metadata output, lead payload preservation, and local UI interactions.
+
+### Phase 1 implementation and QA notes
+
+- Footer now shows `hello@getrichtai.com` as a mailto link, keeps the contact-form action, uses “Türkiye genelindeki kliniklere hizmet veriyoruz” / “Serving clinics across Türkiye”, and renders no social item when its URL environment variable is empty.
+- Turkish FAQ copy uses “canlı kullanım akışı” and “sistem canlıya alınırken”; client-facing lead labels were narrowed to new-patient enquiry/record wording. Internal API/schema names remain unchanged.
+- `index.html` now uses `https://getrichtai.com/` for canonical and Open Graph/Twitter image URLs, with dental-clinic AI assistant alt text. Static and runtime JSON-LD use the same Organization/WebSite graph; no registrations, addresses, ratings, reviews, certifications, or invented Service claims were added.
+- Runtime legal-route metadata uses page-specific title, description, and self-canonical URL. Because this is a Vite SPA with a Vercel catch-all rewrite, the static HTML shell remains homepage metadata before hydration; legal pages are not added to the generated sitemap. Prerendering or route-specific static HTML should be considered before treating legal routes as independently crawlable SEO landing pages.
+- The mobile hero subheadline remains intentionally hidden below 768px. The H1, supporting accent, artwork, and CTA remain clear in the narrow local preview; no copy/layout change was necessary.
+- Local preview verified the mobile hero, Turkish/English legal route metadata, footer mailto link, social hiding behavior with empty env values, modal open/close accessibility tree, and existing lead payload shape. Browser-control constraints prevented separate pixel screenshots at every requested desktop width; the responsive code audit covered the 375, 390, 768, and 1440px breakpoint paths.
+- Lighthouse is unavailable in this repository/environment (`lighthouse`, Playwright, and Puppeteer are not installed), so no performance scores or LCP/FCP/CLS/TBT numbers are reported. Primary hero PNGs remain unchanged to preserve visual quality; the largest active hero assets are approximately 2.1 MB each and should be revisited with an approved image-encoding workflow.
+- Phase 1 validation: `pnpm.cmd run typecheck`, `pnpm.cmd run lint`, `pnpm.cmd run build`, and `git diff --check` pass. No production lead was submitted, and no Supabase/API contract, migration, Resend flow, pricing, hero artwork, ProductShowcase structure, or founder content was changed.
 

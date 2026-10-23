@@ -1,4 +1,5 @@
 export const siteMetadata = {
+  siteUrl: 'https://getrichtai.com',
   imagePath: '/images/og-richtai.png',
   logoPath: '/images/mermaid-mark-transparent.png',
   themeColor: '#121416',
@@ -12,7 +13,7 @@ export function getSiteUrl() {
   const configuredUrl = configuredSiteUrl();
   if (configuredUrl) return configuredUrl;
   if (typeof window !== 'undefined') return window.location.origin;
-  return '';
+  return siteMetadata.siteUrl;
 }
 
 export function getAbsoluteSiteUrl(path: string) {
@@ -44,14 +45,22 @@ export function applyLanguageMetadata({
   title,
   description,
   language,
+  pathname = '/',
+  structuredDataDescription = description,
 }: {
   title: string;
   description: string;
   language: 'tr' | 'en';
+  pathname?: string;
+  structuredDataDescription?: string;
 }) {
   const imageUrl = getAbsoluteSiteUrl(siteMetadata.imagePath);
-  const pageUrl = getAbsoluteSiteUrl('/');
+  const siteRootUrl = getAbsoluteSiteUrl('/');
+  const pageUrl = getAbsoluteSiteUrl(pathname);
   const locale = language === 'tr' ? 'tr_TR' : 'en_US';
+  const imageAlt = language === 'tr'
+    ? 'Richt AI — diş klinikleri için yapay zekâ hasta iletişim asistanı'
+    : 'Richt AI — AI patient communication assistant for dental clinics';
 
   document.documentElement.lang = language;
   document.title = title;
@@ -64,11 +73,13 @@ export function applyLanguageMetadata({
   setMeta('property', 'og:url', pageUrl);
   setMeta('property', 'og:image', imageUrl);
   setMeta('property', 'og:image:secure_url', imageUrl);
+  setMeta('property', 'og:image:alt', imageAlt);
   setMeta('property', 'og:locale', locale);
   setMeta('property', 'og:locale:alternate', language === 'tr' ? 'en_US' : 'tr_TR');
   setMeta('name', 'twitter:title', title);
   setMeta('name', 'twitter:description', description);
   setMeta('name', 'twitter:image', imageUrl);
+  setMeta('name', 'twitter:image:alt', imageAlt);
 
   const structuredData = document.getElementById('richt-ai-structured-data');
   if (structuredData) {
@@ -77,21 +88,21 @@ export function applyLanguageMetadata({
       '@graph': [
         {
           '@type': 'Organization',
-          '@id': `${pageUrl}#organization`,
+          '@id': `${siteRootUrl}#organization`,
           name: 'Richt AI',
-          url: pageUrl,
+          url: siteRootUrl,
           logo: getAbsoluteSiteUrl(siteMetadata.logoPath),
-          description,
+          description: structuredDataDescription,
           founder: { '@type': 'Person', name: 'Emre Kocaaliler' },
           knowsLanguage: ['tr', 'en'],
         },
         {
           '@type': 'WebSite',
-          '@id': `${pageUrl}#website`,
+          '@id': `${siteRootUrl}#website`,
           name: 'Richt AI',
-          url: pageUrl,
-          description,
-          publisher: { '@id': `${pageUrl}#organization` },
+          url: siteRootUrl,
+          description: structuredDataDescription,
+          publisher: { '@id': `${siteRootUrl}#organization` },
           inLanguage: language,
         },
       ],

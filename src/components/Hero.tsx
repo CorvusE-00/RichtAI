@@ -23,7 +23,7 @@ export function Hero({ onCTAClick }: HeroProps) {
                 {hero.pilotBadge}
               </span>
 
-              <h1 id="hero-title" className="hero-editorial-heading mt-6 font-display text-[clamp(3.25rem,3.6vw,4.4rem)] font-semibold leading-[1] tracking-[-0.06em] text-snow-50 max-[767px]:text-[clamp(2.5rem,9.8vw,2.75rem)] max-[767px]:leading-[0.98]">
+              <h1 id="hero-title" aria-label={hero.headline.replace(/\n/g, ' ')} className="hero-editorial-heading mt-6 font-display text-[clamp(3.25rem,3.6vw,4.4rem)] font-semibold leading-[1] tracking-[-0.06em] text-snow-50 max-[767px]:text-[clamp(2.5rem,9.8vw,2.75rem)] max-[767px]:leading-[0.98]">
                 {hero.headline.split('\n').map((line) => (
                   <span key={line} className="block">
                     {line}

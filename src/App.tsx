@@ -14,14 +14,8 @@ import { FAQ } from '@/components/FAQ';
 import { LegalPage } from '@/components/LegalPage';
 import { useRevealObserver } from '@/hooks/useRevealObserver';
 import { useLanguage } from '@/lib/i18n';
-import type { LegalPageSlug } from '@/lib/legalContent';
+import { legalRoutes } from '@/lib/legalContent';
 import type { ContactIntent, ContactModalState, ContactSource } from '@/types/contact';
-
-const legalRoutes: Record<string, LegalPageSlug> = {
-  '/gizlilik-politikasi': 'privacy',
-  '/kvkk': 'kvkk',
-  '/cerez-politikasi': 'cookies',
-};
 
 function App() {
   const { language } = useLanguage();

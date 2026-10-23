@@ -1,11 +1,19 @@
 export type LegalPageSlug = 'privacy' | 'kvkk' | 'cookies';
 
+export const legalRoutes: Record<string, LegalPageSlug> = {
+  '/gizlilik-politikasi': 'privacy',
+  '/kvkk': 'kvkk',
+  '/cerez-politikasi': 'cookies',
+};
+
 export const legalCopy = {
   tr: {
     backHome: 'Ana sayfaya dön',
     lastUpdated: 'Son güncelleme: 23 Ekim 2026',
     privacy: {
       title: 'Gizlilik Politikası',
+      metaTitle: 'Gizlilik Politikası | Richt AI',
+      metaDescription: 'Richt AI web sitesi ve iletişim formunda kişisel bilgilerin nasıl işlendiği, saklandığı ve taleplerin nasıl iletileceği hakkında bilgi.',
       intro: 'Bu politika, Richt AI markası altında Emre Kocaaliler tarafından işletilen getrichtai.com web sitesindeki mevcut iletişim ve pilot başvuru akışında kişisel bilgilerin nasıl işlendiğini açıklar.',
       sections: [
         { heading: 'Veri sorumlusu ve iletişim', paragraphs: ['Veri sorumlusu: Richt AI markası altında faaliyet gösteren Emre Kocaaliler. Bu sayfada şu an bir şirket tüzel kişiliği veya posta adresi beyan edilmemektedir. Gizlilik ve kişisel veri talepleri için privacy@getrichtai.com adresini kullanın. Genel iletişim için hello@getrichtai.com adresi kullanılabilir.'] },
@@ -19,6 +27,8 @@ export const legalCopy = {
     },
     kvkk: {
       title: 'KVKK Aydınlatma Metni',
+      metaTitle: 'KVKK Aydınlatma Metni | Richt AI',
+      metaDescription: 'Richt AI iletişim ve pilot başvuru formu kapsamında kişisel verilerin işlenmesi, saklanması ve ilgili kişi hakları hakkında KVKK bilgilendirmesi.',
       intro: 'Bu aydınlatma metni, getrichtai.com üzerindeki iletişim ve pilot başvuru formu bakımından mevcut veri işleme akışını açıklar. Veri sorumlusu, Richt AI markası altında faaliyet gösteren Emre Kocaaliler’dir. Bu sayfada şu an bir şirket tüzel kişiliği veya posta adresi beyan edilmemektedir.',
       sections: [
         { heading: 'Veri kategorileri ve toplama yöntemi', paragraphs: ['Form aracılığıyla kimlik ve iletişim bilgileri (ad soyad, e-posta, telefon), klinik veya işletme bilgisi, seçilen iletişim kanalı, dil tercihi ve başvuru mesajı alınabilir. Veriler, sizin web sitesindeki formu doldurmanızla elektronik ortamda toplanır. Mesaj alanına hasta adı, sağlık bilgisi veya üçüncü kişilere ait hassas bilgi yazmayın.'] },
@@ -31,6 +41,8 @@ export const legalCopy = {
     },
     cookies: {
       title: 'Çerez Politikası',
+      metaTitle: 'Çerez Politikası | Richt AI',
+      metaDescription: 'Richt AI web sitesinin yerel depolama, Google Fonts ve mevcut analitik/reklam izleme davranışı hakkında bilgi.',
       intro: 'Bu politika, mevcut Richt AI web sitesinin tarayıcı depolaması ve bilinen üçüncü taraf yazı tipi isteğini açıklar.',
       sections: [
         { heading: 'Dil tercihi', paragraphs: ['Site, seçtiğiniz dil tercihini çerez yerine tarayıcının yerel depolama alanında saklar. Bu tercih, sonraki ziyaretlerde sayfanın aynı dilde açılmasına yardımcı olur.'] },
@@ -45,6 +57,8 @@ export const legalCopy = {
     lastUpdated: 'Last updated: October 23, 2026',
     privacy: {
       title: 'Privacy Policy',
+      metaTitle: 'Privacy Policy | Richt AI',
+      metaDescription: 'How Richt AI handles personal information submitted through its website and contact form, including retention and privacy requests.',
       intro: 'This policy explains how personal information is handled in the current contact and pilot-application flow on getrichtai.com, operated by Emre Kocaaliler under the Richt AI brand.',
       sections: [
         { heading: 'Controller and contact', paragraphs: ['Controller: Emre Kocaaliler operating under the Richt AI brand. No company legal entity or postal address is stated on this page at present. Use privacy@getrichtai.com for privacy and personal-data requests. hello@getrichtai.com is available for general enquiries.'] },
@@ -58,6 +72,8 @@ export const legalCopy = {
     },
     kvkk: {
       title: 'KVKK Privacy Notice',
+      metaTitle: 'KVKK Privacy Notice | Richt AI',
+      metaDescription: 'KVKK information about personal-data processing, retention, and data-subject rights for the Richt AI contact and pilot-application form.',
       intro: 'This notice describes the current data-processing flow for the contact and pilot-application form on getrichtai.com. The controller is Emre Kocaaliler operating under the Richt AI brand. No company legal entity or postal address is stated on this page at present.',
       sections: [
         { heading: 'Data categories and collection method', paragraphs: ['Through the form, we may collect identity and contact details (name, email, phone), clinic or business information, selected communication channel, language preference, and the application message. The information is collected electronically when you complete the website form. Please do not include patient names, health information, or other sensitive information about third parties in the message field.'] },
@@ -70,6 +86,8 @@ export const legalCopy = {
     },
     cookies: {
       title: 'Cookie Policy',
+      metaTitle: 'Cookie Policy | Richt AI',
+      metaDescription: 'How the current Richt AI website uses browser local storage, Google Fonts, and analytics or advertising technologies.',
       intro: 'This policy explains the current Richt AI website’s browser storage and known third-party font request behavior.',
       sections: [
         { heading: 'Language preference', paragraphs: ['The site stores your selected language preference in browser local storage rather than a cookie. This helps the page open in the same language on later visits.'] },

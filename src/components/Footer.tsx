@@ -50,22 +50,18 @@ export function Footer({ onCTAClick }: FooterProps) {
             <p className="text-snow-500 text-sm leading-relaxed max-w-xs">
               {copy.footer.brandDescription}
             </p>
-            <div className="footer__social mt-5 flex flex-wrap gap-x-4 gap-y-2 text-sm" aria-label={copy.footer.social}>
-              {socialLinks.map(({ key, url }) => {
+            {socialLinks.some(({ url }) => url) && (
+              <div className="footer__social mt-5 flex flex-wrap gap-x-4 gap-y-2 text-sm" aria-label={copy.footer.social}>
+                {socialLinks.filter(({ url }) => url).map(({ key, url }) => {
                 const label = copy.footer.socialLinks[key];
                 const content = (
                   <>
                     <SocialIcon name={key} />
                     <span className="font-medium text-snow-300">{label}</span>
-                    {!url && (
-                      <span className="text-[0.6rem] uppercase tracking-[0.16em] text-snow-500">
-                        {copy.footer.comingSoon}
-                      </span>
-                    )}
                   </>
                 );
 
-                return url ? (
+                return (
                   <a
                     key={key}
                     href={url}
@@ -75,13 +71,10 @@ export function Footer({ onCTAClick }: FooterProps) {
                   >
                     {content}
                   </a>
-                ) : (
-                  <span key={key} className="footer__social-item inline-flex items-center gap-1.5 text-snow-600">
-                    {content}
-                  </span>
                 );
-              })}
-            </div>
+                })}
+              </div>
+            )}
           </div>
 
           <div className="footer__utility-grid">
@@ -139,6 +132,12 @@ export function Footer({ onCTAClick }: FooterProps) {
                 </li>
                 <li className="flex items-center gap-2 text-sm text-snow-500">
                   <Mail className="h-4 w-4 shrink-0 text-teal-400" />
+                  <a href="mailto:hello@getrichtai.com" className="transition-colors duration-200 hover:text-teal-400">
+                    {copy.footer.email}
+                  </a>
+                </li>
+                <li className="flex items-center gap-2 text-sm text-snow-500">
+                  <MessageCircle className="h-4 w-4 shrink-0 text-teal-400" />
                   <button onClick={() => onCTAClick('general', 'footer')} className="transition-colors duration-200 hover:text-teal-400">
                     {copy.footer.contactButton}
                   </button>

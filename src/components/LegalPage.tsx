@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { MermaidMark } from './MermaidMark';
 import { useLanguage } from '@/lib/i18n';
 import type { LegalPageSlug } from '@/lib/legalContent';
@@ -6,10 +5,6 @@ import type { LegalPageSlug } from '@/lib/legalContent';
 export function LegalPage({ page }: { page: LegalPageSlug }) {
   const { copy, language, toggleLanguage } = useLanguage();
   const content = copy.legalPages[page];
-
-  useEffect(() => {
-    document.title = `${content.title} | Richt AI`;
-  }, [content.title]);
 
   return (
     <div className="min-h-screen bg-navy-950 text-snow-100 font-body antialiased">
