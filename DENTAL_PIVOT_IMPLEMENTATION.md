@@ -156,3 +156,18 @@ F1 audit completed against the requested component set.
 - Lighthouse is unavailable in this repository/environment (`lighthouse`, Playwright, and Puppeteer are not installed), so no performance scores or LCP/FCP/CLS/TBT numbers are reported. Primary hero PNGs remain unchanged to preserve visual quality; the largest active hero assets are approximately 2.1 MB each and should be revisited with an approved image-encoding workflow.
 - Phase 1 validation: `pnpm.cmd run typecheck`, `pnpm.cmd run lint`, `pnpm.cmd run build`, and `git diff --check` pass. No production lead was submitted, and no Supabase/API contract, migration, Resend flow, pricing, hero artwork, ProductShowcase structure, or founder content was changed.
 
+## Mobile footer layout fix
+
+- [x] M1. Change the mobile footer utility area to a balanced Site Map / Legal two-column row with a full-width Contact row below it.
+- [x] M2. Keep the desktop footer layout unchanged at 768px and above while improving mobile contact spacing, readable 14px utility text, icon alignment, and non-wrapping email/action labels.
+- [x] M3. Preserve TR/EN copy, mailto behavior, contact-modal behavior, optional WhatsApp behavior, and all existing footer link targets.
+- [x] M4. Run typecheck, lint, production build, responsive code audit, and local footer interaction checks.
+
+### Mobile footer QA notes
+
+- At mobile widths below 768px, `.footer__utility-grid` now uses two columns and `.footer__contact` spans both columns. The existing `display: contents` behavior at 768px and the existing four-column desktop layout at 1024px were not changed.
+- The contact email and form action use semantic classes with `white-space: nowrap`, `overflow-wrap: normal`, and `word-break: normal`; the generic `overflow-wrap:anywhere` rule was removed from the footer utility links/buttons. The Turkish location label is now the compact `Türkiye genelindeki kliniklere` while the English copy remains `Serving clinics across Türkiye`.
+- Local preview at the available approximately 378px CSS viewport (363px layout client width) confirmed two balanced utility columns, a full-width contact block, one-line `hello@getrichtai.com`, no horizontal overflow (`scrollWidth === clientWidth`), and a readable footer screenshot. The browser environment did not expose a viewport override, so exact 320, 375, 390, 430, 768, and 1440px screenshots were not available; the breakpoint paths were audited statically for those widths.
+- TR and EN footer accessibility trees expose the expected Site Map, Legal, Contact, mailto, and contact-form controls. The contact modal opened and closed successfully, the Privacy Policy link navigated to `/gizlilik-politikasi`, and no production lead was submitted.
+- Validation: `pnpm.cmd run typecheck`, `pnpm.cmd run lint`, `pnpm.cmd run build`, and `git diff --check` pass. No API, form, Supabase, Resend, SEO, or other-section changes were made.
+

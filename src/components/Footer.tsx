@@ -121,29 +121,29 @@ export function Footer({ onCTAClick }: FooterProps) {
             </div>
 
             {/* Contact */}
-            <div>
+            <div className="footer__contact">
               <h4 className="mb-4 font-display text-sm font-medium text-snow-200">
                 {copy.footer.contact}
               </h4>
-              <ul className="space-y-3">
-                <li className="flex items-center gap-2 text-sm text-snow-500">
+              <ul className="footer__contact-list space-y-3">
+                <li className="footer__contact-item footer__contact-item--location flex items-center gap-2 text-sm text-snow-500">
                   <MapPin className="h-4 w-4 shrink-0 text-teal-400" />
                   {copy.footer.location}
                 </li>
-                <li className="flex items-center gap-2 text-sm text-snow-500">
+                <li className="footer__contact-item flex items-center gap-2 text-sm text-snow-500">
                   <Mail className="h-4 w-4 shrink-0 text-teal-400" />
-                  <a href="mailto:hello@getrichtai.com" className="transition-colors duration-200 hover:text-teal-400">
+                  <a href="mailto:hello@getrichtai.com" className="footer__contact-email transition-colors duration-200 hover:text-teal-400">
                     {copy.footer.email}
                   </a>
                 </li>
-                <li className="flex items-center gap-2 text-sm text-snow-500">
+                <li className="footer__contact-item flex items-center gap-2 text-sm text-snow-500">
                   <MessageCircle className="h-4 w-4 shrink-0 text-teal-400" />
-                  <button onClick={() => onCTAClick('general', 'footer')} className="transition-colors duration-200 hover:text-teal-400">
+                  <button onClick={() => onCTAClick('general', 'footer')} className="footer__contact-action transition-colors duration-200 hover:text-teal-400">
                     {copy.footer.contactButton}
                   </button>
                 </li>
                 {whatsappUrl && (
-                  <li>
+                  <li className="footer__contact-item">
                     <a
                       href={whatsappUrl}
                       target="_blank"

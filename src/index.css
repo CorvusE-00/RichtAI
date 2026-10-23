@@ -64,7 +64,6 @@
   .footer__utility-grid a,
   .footer__utility-grid button {
     min-width: 0;
-    overflow-wrap: anywhere;
   }
 
   .footer__copyright {
@@ -73,6 +72,16 @@
   }
 
   @media (max-width: 767px) {
+    .footer__utility-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 1.5rem;
+      row-gap: 1.75rem;
+    }
+
+    .footer__contact {
+      grid-column: 1 / -1;
+    }
+
     .footer__utility-grid h4 {
       margin-bottom: 0.75rem;
       font-size: 0.8125rem;
@@ -86,8 +95,28 @@
     .footer__utility-grid li,
     .footer__utility-grid a,
     .footer__utility-grid button {
-      font-size: 0.75rem;
+      font-size: 0.875rem;
       line-height: 1.45;
+    }
+
+    .footer__contact-list {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .footer__contact-item {
+      align-items: flex-start;
+    }
+
+    .footer__contact-item > svg {
+      margin-top: 0.2rem;
+    }
+
+    .footer__utility-grid .footer__contact-email,
+    .footer__utility-grid .footer__contact-action {
+      white-space: nowrap;
+      overflow-wrap: normal;
+      word-break: normal;
     }
 
     .footer__social {
