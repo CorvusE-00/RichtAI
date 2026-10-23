@@ -136,7 +136,11 @@ function intentLabel(intent: ContactIntent): string {
 }
 
 function safeErrorMessage(error: unknown): string {
-  const message = error instanceof Error ? error.message : 'Unknown notification error';
+  const message = error instanceof Error
+    ? error.message
+    : typeof error === 'object' && error !== null && 'message' in error && typeof error.message === 'string'
+      ? error.message
+      : 'Unknown provider error';
   return message.replace(/\s+/g, ' ').trim().slice(0, 300) || 'Unknown notification error';
 }
 
@@ -238,7 +242,7 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   if (insertError) {
-    console.error('[lead] database insert failed', { submissionId, intent: lead.intent, category: 'database_insert', error: insertError });
+    console.error('[lead] database insert failed', { submissionId, intent: lead.intent, category: 'database_insert', error: safeErrorMessage(insertError) });
     return jsonResponse({ ok: false, error: 'Unable to submit your request.' }, 500);
   }
 
@@ -250,9 +254,9 @@ export async function POST(request: Request): Promise<Response> {
         .from('leads')
         .update({ notification_status: 'failed', notification_error: error })
         .eq('submission_id', submissionId);
-      if (updateError) console.error('[lead] notification status update failed', { submissionId, intent: lead.intent, category: 'notification_status_update', error: updateError });
+      if (updateError) console.error('[lead] notification status update failed', { submissionId, intent: lead.intent, category: 'notification_status_update', error: safeErrorMessage(updateError) });
     } catch (updateError) {
-      console.error('[lead] notification status update failed', { submissionId, intent: lead.intent, category: 'notification_status_update', error: updateError });
+      console.error('[lead] notification status update failed', { submissionId, intent: lead.intent, category: 'notification_status_update', error: safeErrorMessage(updateError) });
     }
     return jsonResponse({ ok: true, submissionId, notification: 'failed' });
   }
@@ -271,24 +275,24 @@ export async function POST(request: Request): Promise<Response> {
         .from('leads')
         .update({ notification_status: 'notified', notified_at: new Date().toISOString(), notification_error: null })
         .eq('submission_id', submissionId);
-      if (updateError) console.error('[lead] notification status update failed', { submissionId, intent: lead.intent, category: 'notification_status_update', error: updateError });
+      if (updateError) console.error('[lead] notification status update failed', { submissionId, intent: lead.intent, category: 'notification_status_update', error: safeErrorMessage(updateError) });
     } catch (updateError) {
-      console.error('[lead] notification status update failed', { submissionId, intent: lead.intent, category: 'notification_status_update', error: updateError });
+      console.error('[lead] notification status update failed', { submissionId, intent: lead.intent, category: 'notification_status_update', error: safeErrorMessage(updateError) });
     }
 
     console.info('[lead] notification sent', { submissionId, intent: lead.intent, result: 'notified' });
     return jsonResponse({ ok: true, submissionId, notification: 'sent' });
   } catch (error) {
     const notificationError = `resend_error: ${safeErrorMessage(error)}`;
-    console.error('[lead] notification failed', { submissionId, intent: lead.intent, category: 'notification_send', error });
+    console.error('[lead] notification failed', { submissionId, intent: lead.intent, category: 'notification_send', error: safeErrorMessage(error) });
     try {
       const { error: updateError } = await supabase
         .from('leads')
         .update({ notification_status: 'failed', notification_error: notificationError })
         .eq('submission_id', submissionId);
-      if (updateError) console.error('[lead] notification status update failed', { submissionId, intent: lead.intent, category: 'notification_status_update', error: updateError });
+      if (updateError) console.error('[lead] notification status update failed', { submissionId, intent: lead.intent, category: 'notification_status_update', error: safeErrorMessage(updateError) });
     } catch (updateError) {
-      console.error('[lead] notification status update failed', { submissionId, intent: lead.intent, category: 'notification_status_update', error: updateError });
+      console.error('[lead] notification status update failed', { submissionId, intent: lead.intent, category: 'notification_status_update', error: safeErrorMessage(updateError) });
     }
 
     return jsonResponse({ ok: true, submissionId, notification: 'failed' });

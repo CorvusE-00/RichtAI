@@ -191,6 +191,8 @@ export function ContactModal({ isOpen, intent, source, onClose }: ContactModalPr
                   />
                 </div>
 
+                <p className="contact-privacy">{copy.contact.sensitiveDataWarning}</p>
+
                 {state === 'error' && (
                   <p className="contact-form__error" role="alert" aria-live="polite">
                     {errorMessage}
