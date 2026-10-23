@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { CalendarDays, Check, Layers, MessageCircle, Search, Sparkles, X, type LucideIcon } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
 import { useLanguage } from '@/lib/i18n';
 import { whatsappUrl } from '@/lib/whatsapp';
 import type { ContactChannel, ContactIntent, ContactSource } from '@/types/contact';
@@ -21,6 +20,7 @@ export function ContactModal({ isOpen, intent, source, onClose }: ContactModalPr
   const [state, setState] = useState<SubmitState>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
+  const submitInFlightRef = useRef(false);
   const variant = copy.contact.variants[intent];
 
   useEffect(() => {
@@ -47,36 +47,47 @@ export function ContactModal({ isOpen, intent, source, onClose }: ContactModalPr
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (submitInFlightRef.current) return;
+
+    submitInFlightRef.current = true;
     setState('submitting');
     setErrorMessage('');
 
     const formData = new FormData(e.currentTarget);
     const channelInterest = formData.get('channelInterest') as ContactChannel | null;
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 15_000);
 
     try {
-      if (!supabase) {
-        throw new Error('Supabase is not configured for this local preview.');
-      }
-
-      const { error } = await supabase.from('leads').insert({
-        name: String(formData.get('name') || ''),
-        email: String(formData.get('email') || ''),
-        phone: String(formData.get('phone') || '') || null,
-        business_name: String(formData.get('businessName') || '') || null,
-        message: String(formData.get('message') || '') || null,
-        intent,
-        source,
-        channel_interest: channelInterest || null,
-        locale: language,
+      const response = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
+        body: JSON.stringify({
+          name: String(formData.get('name') || ''),
+          email: String(formData.get('email') || ''),
+          phone: String(formData.get('phone') || ''),
+          businessName: String(formData.get('businessName') || ''),
+          message: String(formData.get('message') || ''),
+          intent,
+          source,
+          channelInterest: channelInterest || null,
+          locale: language,
+          website: String(formData.get('website') || ''),
+        }),
       });
 
-      if (error) throw error;
+      if (!response.ok) throw new Error('Lead submission failed.');
 
       formRef.current?.reset();
       setState('success');
     } catch {
       setState('error');
       setErrorMessage(copy.contact.error);
+    } finally {
+      window.clearTimeout(timeout);
+      submitInFlightRef.current = false;
     }
   };
 
@@ -147,6 +158,14 @@ export function ContactModal({ isOpen, intent, source, onClose }: ContactModalPr
               </div>
 
               <form ref={formRef} onSubmit={handleSubmit} className="contact-form">
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={{ position: 'absolute', left: '-10000px', width: '1px', height: '1px', opacity: 0 }}
+                />
                 <div className="contact-form__grid">
                   <Field label={copy.contact.name} name="name" type="text" required autoComplete="name" placeholder={copy.contact.namePlaceholder} />
                   <Field label={copy.contact.business} name="businessName" type="text" required autoComplete="organization" placeholder={copy.contact.businessPlaceholder} />
