@@ -171,25 +171,15 @@ F1 audit completed against the requested component set.
 - TR and EN footer accessibility trees expose the expected Site Map, Legal, Contact, mailto, and contact-form controls. The contact modal opened and closed successfully, the Privacy Policy link navigated to `/gizlilik-politikasi`, and no production lead was submitted.
 - Validation: `pnpm.cmd run typecheck`, `pnpm.cmd run lint`, `pnpm.cmd run build`, and `git diff --check` pass. No API, form, Supabase, Resend, SEO, or other-section changes were made.
 
-## Phase 2 — Web Assistant product demo presentation
+## Phase 2 — Web Assistant presentation reverted
 
-- [x] P2.1. Add a focused HTML/CSS assistant conversation preview to the existing Web Assistant tab while preserving the Luma Dental preview as contextual background.
-- [x] P2.2. Keep the four-tab navigation, ARIA tab/tabpanel relationships, existing description, and live demo CTA unchanged; do not alter the other three tab visuals.
-- [x] P2.3. Add responsible TR/EN sample conversation copy with explicit example/static-preview labels and no fake input or send control.
-- [x] P2.4. Crop the existing fictional clinic prototype before its illustrative statistics so it is not presented as Richt AI proof or a real clinic result.
-- [x] P2.5. Complete responsive, interaction, link, typecheck, lint, build, and diff validation without submitting a production lead or pushing.
+- [x] P2-R1. Revert only commit `1b044313121fe4bc3c9cb399c0ce8cc22eaf84b8` (`Improve Web Assistant product demo`).
+- [x] P2-R2. Restore the original Luma Dental website preview in the first ProductShowcase tab and remove the added HTML/CSS chat overlay and Phase 2 translation fields.
+- [x] P2-R3. Preserve the mobile footer fix, Phase 1 metadata/content/legal work, contact pipeline, pricing, other ProductShowcase tabs, and dental prototype integration.
 
-### Phase 2 implementation and QA notes
+### Phase 2 reversion notes
 
-- The Web Assistant visual now combines the existing Luma Dental browser context with a readable `aside` conversation preview built from semantic HTML elements: assistant header, patient message, AI reply, sample-conversation label, and static-preview indicator. There is no fake interactive input or send button.
-- Desktop uses a restrained overlap composition so the assistant is visually primary while the clinic site remains legible context. Below 1024px the visual stacks the clinic context and chat panel; below 768px the panel becomes full-width with readable bubbles and no absolute overlap.
-- The existing Luma image is reused with a `16 / 7` cropped context treatment using `object-fit: cover` and top positioning. This keeps the clinic context while excluding the lower illustrative figures (`8,000+`, `14+ years`, `4.9 / 5`) from the presentation.
-- Live browser review confirmed the wide composition at approximately 1280px CSS width and the stacked narrow composition at approximately 378px viewport / 363px layout client width. Narrow Turkish bubbles measured 259.8px wide and remained inside a 297px chat panel; document `scrollWidth` equaled `clientWidth`. Exact 375, 390, 768, 1024, and 1440px viewport overrides were unavailable in the browser tool, so those breakpoint paths were additionally audited statically: mobile stacking at `max-width: 767px`, one-column workspace through `1023px`, desktop overlap from `1024px`, and the unchanged section container at wide desktop widths.
-- TR and EN switching exposed the requested patient and assistant copy. WhatsApp remained unchanged when selected, and returning to Web Assistant restored the new preview. The existing live demo CTA still points to `https://dental-teal-alpha.vercel.app/`, which returned HTTP 200 during validation.
-- Validation: `pnpm.cmd run typecheck`, `pnpm.cmd run lint`, `pnpm.cmd run build`, and `git diff --check` pass. The build reports only the existing expected unset `VITE_SITE_URL` note. No new dependency or image asset was added; no Hero, Navbar, Pricing, Trust, FAQ, Footer, ContactModal, legal, SEO, API, Supabase, Resend, prototype, or workflow file was changed.
-
-### Remaining Phase 2 concerns
-
-- Important: exact-pixel visual screenshots at every requested viewport still require a browser environment with viewport emulation; the available local browser exposed only its current wide/narrow surface sizes.
-- Optional: before release, review the live demo target manually as part of the sales-outreach QA pass; this phase only verified its URL and HTTP availability.
+- The redesign was intentionally reverted to prioritize the simpler sales presentation: the first tab again shows the original Luma Dental preview with the existing description and live demo CTA.
+- The revert was applied as a no-commit inverse of the target commit; no reset, force push, API/form change, or unrelated file overwrite was used. The revert remains local for review and has not been pushed.
+- Validation after the local revert: typecheck, lint, production build, and `git diff --check` pass. The ProductShowcase tab structure remains intact, and the previously completed mobile footer styles and copy remain present.
 

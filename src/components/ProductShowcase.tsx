@@ -75,7 +75,7 @@ export function ProductShowcase() {
           <div className="product-showcase__visual" key={activeTab}>
             {activeTab === 0 && (
               <div className="product-showcase__web-visual">
-                <div className="product-showcase__mini-browser product-showcase__mini-browser--context">
+                <div className="product-showcase__mini-browser">
                   <div className="product-showcase__mini-browser-bar">
                     <span />
                     <span />
@@ -84,29 +84,6 @@ export function ProductShowcase() {
                   </div>
                   <img src="/images/luma-dental-prototype-preview.png" alt={productShowcase.web.browserLabel} />
                 </div>
-                <aside className="product-showcase__web-chat" aria-label={productShowcase.web.chatAriaLabel}>
-                  <header className="product-showcase__web-chat-header">
-                    <div className="product-showcase__web-chat-title">
-                      <MessageCircle aria-hidden="true" />
-                      <strong>{productShowcase.web.chatTitle}</strong>
-                    </div>
-                    <span className="product-showcase__web-chat-sample">{productShowcase.web.sampleLabel}</span>
-                  </header>
-                  <div className="product-showcase__web-chat-body">
-                    <div className="product-showcase__web-message product-showcase__web-message--patient">
-                      <span>{productShowcase.web.patientLabel}</span>
-                      <p>{productShowcase.web.patientMessage}</p>
-                    </div>
-                    <div className="product-showcase__web-message product-showcase__web-message--assistant">
-                      <span>{productShowcase.web.assistantLabel}</span>
-                      <p>{productShowcase.web.assistantMessage}</p>
-                    </div>
-                  </div>
-                  <footer className="product-showcase__web-chat-footer">
-                    <span className="product-showcase__web-chat-indicator" aria-hidden="true" />
-                    <span>{productShowcase.web.demoIndicator}</span>
-                  </footer>
-                </aside>
               </div>
             )}
 
